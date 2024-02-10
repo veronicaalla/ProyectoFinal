@@ -1,0 +1,15 @@
+1º Creación de la base de datos
+
+2º Añadir los Triggers para la automatizacion
+
+3º Añadir datos para la prueba de la base de datos 
+
+4º Creación de la api 
+
+5º Comprobacion el funcionamiento de la Api 
+	5.1. Ver los datos de una tabla 
+	5.2. Ver los datos especificos de una tabla
+	5.3. Ver si se añaden datos a una tabla 
+	5.4. Ver si se modifican los datos de una tabla 
+	5.5. Ver si se eliminan los datos de una tabla 
+
