@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#0000FF</color>
+    <color name="red">#f80000</color>
+    <color name="transparente">#00FFFFFF</color>
+    <color name="tema1">#94b9ff</color>
+    <color name="tema2">#56FF7B</color>
+    <color name= "oscurecer">#80000000</color>
+    <color name= "gris_buscar">#80AAAAAA</color>
+</resources>
