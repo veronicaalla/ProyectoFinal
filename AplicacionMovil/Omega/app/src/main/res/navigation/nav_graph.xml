@@ -10,19 +10,22 @@
         android:id="@+id/logginFragment"
         android:name="es.veronica.alvarez.omega.LogginFragment"
         android:label="fragment_loggin"
-        tools:layout="@layout/fragment_loggin" >
+        tools:layout="@layout/fragment_loggin">
         <action
             android:id="@+id/action_logginFragment_to_passwordRecoveryFragment"
             app:destination="@id/passwordRecoveryFragment" />
         <action
             android:id="@+id/action_logginFragment_to_joinFragment"
             app:destination="@id/joinFragment" />
+        <action
+            android:id="@+id/action_logginFragment_to_startAppFragment"
+            app:destination="@id/startAppFragment" />
     </fragment>
     <fragment
         android:id="@+id/passwordRecoveryFragment"
         android:name="es.veronica.alvarez.omega.PasswordRecovery.PasswordRecoveryFragment"
         android:label="fragment_password_recovery"
-        tools:layout="@layout/fragment_password_recovery" >
+        tools:layout="@layout/fragment_password_recovery">
         <action
             android:id="@+id/action_passwordRecoveryFragment_to_codeRecoveryFragment"
             app:destination="@id/codeRecoveryFragment" />
@@ -31,7 +34,7 @@
         android:id="@+id/codeRecoveryFragment"
         android:name="es.veronica.alvarez.omega.PasswordRecovery.CodeRecoveryFragment"
         android:label="fragment_code_recovery"
-        tools:layout="@layout/fragment_code_recovery" >
+        tools:layout="@layout/fragment_code_recovery">
         <action
             android:id="@+id/action_codeRecoveryFragment_to_newPasswordFragment"
             app:destination="@id/newPasswordFragment" />
@@ -40,7 +43,7 @@
         android:id="@+id/newPasswordFragment"
         android:name="es.veronica.alvarez.omega.PasswordRecovery.NewPasswordFragment"
         android:label="fragment_new_password"
-        tools:layout="@layout/fragment_new_password" >
+        tools:layout="@layout/fragment_new_password">
         <action
             android:id="@+id/action_newPasswordFragment_to_logginFragment"
             app:destination="@id/logginFragment" />
@@ -49,16 +52,19 @@
         android:id="@+id/joinFragment"
         android:name="es.veronica.alvarez.omega.CreateUser.JoinFragment"
         android:label="fragment_join"
-        tools:layout="@layout/fragment_join" >
+        tools:layout="@layout/fragment_join">
         <action
             android:id="@+id/action_joinFragment_to_registrationNameFragment"
             app:destination="@id/registrationNameFragment" />
+        <action
+            android:id="@+id/action_joinFragment_to_logginFragment"
+            app:destination="@id/logginFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationNameFragment"
         android:name="es.veronica.alvarez.omega.CreateUser.RegistrationNameFragment"
         android:label="fragment_registration_name"
-        tools:layout="@layout/fragment_registration_name" >
+        tools:layout="@layout/fragment_registration_name">
         <action
             android:id="@+id/action_registrationNameFragment_to_registrationGenderFragment"
             app:destination="@id/registrationGenderFragment" />
@@ -67,7 +73,7 @@
         android:id="@+id/registrationGenderFragment"
         android:name="es.veronica.alvarez.omega.CreateUser.RegistrationGenderFragment"
         android:label="fragment_registration_gender"
-        tools:layout="@layout/fragment_registration_gender" >
+        tools:layout="@layout/fragment_registration_gender">
         <action
             android:id="@+id/action_registrationGenderFragment_to_birthRegistrationFragment"
             app:destination="@id/birthRegistrationFragment" />
@@ -76,7 +82,7 @@
         android:id="@+id/birthRegistrationFragment"
         android:name="es.veronica.alvarez.omega.CreateUser.BirthRegistrationFragment"
         android:label="fragment_birth_registration"
-        tools:layout="@layout/fragment_birth_registration" >
+        tools:layout="@layout/fragment_birth_registration">
         <action
             android:id="@+id/action_birthRegistrationFragment_to_usernameRegistrationFragment"
             app:destination="@id/usernameRegistrationFragment" />
@@ -85,7 +91,7 @@
         android:id="@+id/usernameRegistrationFragment"
         android:name="es.veronica.alvarez.omega.CreateUser.UsernameRegistrationFragment"
         android:label="fragment_username_registration"
-        tools:layout="@layout/fragment_username_registration" >
+        tools:layout="@layout/fragment_username_registration">
         <action
             android:id="@+id/action_usernameRegistrationFragment_to_passwordRegistrationFragment"
             app:destination="@id/passwordRegistrationFragment" />
@@ -94,7 +100,7 @@
         android:id="@+id/passwordRegistrationFragment"
         android:name="es.veronica.alvarez.omega.CreateUser.PasswordRegistrationFragment"
         android:label="fragment_password_registration"
-        tools:layout="@layout/fragment_password_registration" >
+        tools:layout="@layout/fragment_password_registration">
         <action
             android:id="@+id/action_passwordRegistrationFragment_to_literarySelectionFragment"
             app:destination="@id/literarySelectionFragment" />
@@ -104,4 +110,9 @@
         android:name="es.veronica.alvarez.omega.CreateUser.LiterarySelectionFragment"
         android:label="fragment_literary_selection"
         tools:layout="@layout/fragment_literary_selection" />
+    <fragment
+        android:id="@+id/startAppFragment"
+        android:name="es.veronica.alvarez.omega.StartAppFragment"
+        android:label="fragment_start_app"
+        tools:layout="@layout/fragment_start_app" />
 </navigation>

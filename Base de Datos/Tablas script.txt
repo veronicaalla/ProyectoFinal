@@ -1,0 +1,25 @@
+CREATE TABLE comentarios(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  id_libro INT NOT NULL,
+  id_usuario INT NOT NULL,
+  comentario TEXT NOT NULL,
+  fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_libro) REFERENCES libros(id),
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+);
+
+CREATE TABLE comentarios_reportados (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  id_comentario INT NOT NULL,
+  id_reportante INT NOT NULL,
+  ofensivo BOOLEAN,
+  FOREIGN KEY (id_comentario) REFERENCES comentarios(id),
+  FOREIGN KEY (id_reportante) REFERENCES usuarios(id)
+);
+
+
+
+//---------- CREAR -----------------
+USUARIO ADMINISTRADOR
+INSERT INTO `omega`.`usuarios` (`user`, `nombre`, `apellidos`, `fecha_nacimiento`, `correo`, `clave`, `telefono`, `fecha_alta`, `administrador`) 
+VALUES ('adminOmega1', 'administrador', 'admi', '2000-10-05', 'administrador@example.com', '12345', '567510244', now(), 1)

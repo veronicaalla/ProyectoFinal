@@ -45,6 +45,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.annotation:annotation:1.7.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -52,4 +53,14 @@ dependencies {
     //Navegacion
     implementation ("androidx.navigation:navigation-fragment:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    //Coil -> para descargar las imagenes directamente en la web
+    implementation("io.coil-kt:coil:1.2.2")
+
+    // LiveData
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    // ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    //Fragments
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
 }

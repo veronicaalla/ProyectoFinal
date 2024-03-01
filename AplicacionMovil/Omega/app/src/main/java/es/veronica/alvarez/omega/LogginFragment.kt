@@ -45,6 +45,8 @@ class LogginFragment : Fragment() {
                     }
 
 
+                    view.findNavController()
+                        .navigate(R.id.action_logginFragment_to_startAppFragment)
                 } else {
                     Toast.makeText(context, "Introduce la contraseña", Toast.LENGTH_LONG).show()
                 }
@@ -62,5 +64,9 @@ class LogginFragment : Fragment() {
 
 
         //------------------- CREAR CUENTA ------------------
+        binding.btnCrearCuenta.setOnClickListener {
+            view.findNavController()
+                .navigate(R.id.action_logginFragment_to_joinFragment)
+        }
     }
 }
