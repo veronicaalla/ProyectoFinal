@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
+import java.security.MessageDigest
+import java.math.BigInteger
 import es.veronica.alvarez.omega.databinding.FragmentLogginBinding
 
 
@@ -36,6 +38,8 @@ class LogginFragment : Fragment() {
                     //Almacenamos las variables
                     val usuario = binding.txtNombreUsuario.text
                     val clave = binding.txtPassword.text
+                    //La clave (contraseña) la enviamos encriptada
+                    val claveEncriptada = encryptToMD5(clave.toString())
 
                     //Comprobamos si el usuario ha introducido un correo o el numero de telefono
                     if (usuario.contains('@')) {
@@ -68,5 +72,16 @@ class LogginFragment : Fragment() {
             view.findNavController()
                 .navigate(R.id.action_logginFragment_to_joinFragment)
         }
+
+
+    }
+    //Método auxiliar
+    fun encryptToMD5(text: String): String {
+        val md = MessageDigest.getInstance("MD5")
+        val byteArray = md.digest(text.toByteArray())
+        val bigInt = BigInteger(1, byteArray)
+        val hashText = bigInt.toString(16)
+        // Completa el hash con ceros a la izquierda si es necesario
+        return hashText.padStart(32, '0')
     }
 }

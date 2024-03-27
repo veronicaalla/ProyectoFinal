@@ -13,6 +13,8 @@ import androidx.navigation.findNavController
 import es.veronica.alvarez.omega.R
 import es.veronica.alvarez.omega.databinding.FragmentCodeRecoveryBinding
 import es.veronica.alvarez.omega.databinding.FragmentNewPasswordBinding
+import java.math.BigInteger
+import java.security.MessageDigest
 
 
 class NewPasswordFragment : Fragment() {
@@ -38,6 +40,8 @@ class NewPasswordFragment : Fragment() {
             if (binding.editTxtPassword.text.isNotEmpty() || binding.editTxtPassword2.text.isEmpty()) {
 
                 if (binding.editTxtPassword.text.contentEquals(binding.editTxtPassword2.text)) {
+                    //Enviamos la contraseña encriptada con MD5
+                    val clave = encryptToMD5(binding.editTxtPassword2.text.toString())
                     //Hacemos una llamada a la Api y actualizamos la nueva contraseña
 
                     view.findNavController()
@@ -52,5 +56,14 @@ class NewPasswordFragment : Fragment() {
 
     }
 
+    //Método auxiliar
+    fun encryptToMD5(text: String): String {
+        val md = MessageDigest.getInstance("MD5")
+        val byteArray = md.digest(text.toByteArray())
+        val bigInt = BigInteger(1, byteArray)
+        val hashText = bigInt.toString(16)
+        // Completa el hash con ceros a la izquierda si es necesario
+        return hashText.padStart(32, '0')
+    }
 
 }
