@@ -7,7 +7,7 @@ import es.veronica.alvarez.omega.R
 
 class BookAdapter(
     var listaLibros: List<BookResponse> = emptyList(),
-    private val onItemSelect: (BookResponse) -> Unit
+    private val onItemSelected: (BookResponse) -> Unit
 ): RecyclerView.Adapter<BookViewHolder>() {
 
     fun updateBooks(list: List<BookResponse>){
@@ -22,7 +22,7 @@ class BookAdapter(
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-        holder.bind(listaLibros[position], onItemSelect)
+        holder.bind(listaLibros[position], onItemSelected)
     }
 
     override fun getItemCount() = listaLibros.size
