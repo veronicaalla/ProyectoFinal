@@ -3,10 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#0000FF</color>
+    <color name="blue_medium">#5656D6</color>
     <color name="red">#f80000</color>
     <color name="transparente">#00FFFFFF</color>
     <color name="tema1">#94b9ff</color>
-    <color name="tema2">#3DCA5C</color>
+    <color name="tema2">#5B9E6A</color>
     <color name= "oscurecer">#80000000</color>
     <color name= "gris_buscar">#80AAAAAA</color>
 </resources>

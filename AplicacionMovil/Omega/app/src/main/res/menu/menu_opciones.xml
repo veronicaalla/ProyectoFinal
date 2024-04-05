@@ -10,7 +10,7 @@
 
         <item
             android:id="@+id/menu_record"
-            android:icon="@drawable/baseline_menu_24"
+            android:icon="@drawable/baseline_menu_white"
             android:title="opcion2" />
 
 

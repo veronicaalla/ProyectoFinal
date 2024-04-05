@@ -18,50 +18,44 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:title=" "
-                android:background="?attr/colorPrimary">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/toolbar_title"
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginStart="8dp"
-                    android:fontFamily="@font/dancing_script"
-                    android:text="Omega"
-                    android:textColor="#FFFFFF"
-                    android:textSize="35dp" />
+                    android:layout_height="match_parent"
+                    app:iconifiedByDefault="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                </androidx.appcompat.widget.SearchView>
+
 
                 <ImageView
-                    android:id="@+id/menuChat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:paddingRight="20dp"
-                    android:src="@drawable/baseline_supervisor_account_24" />
+                    android:id="@+id/imgTipoResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/baseline_more_horiz_black" />
 
-                <ImageView
-                    android:id="@+id/menuNotificaciones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:paddingRight="20dp"
-                    android:src="@drawable/baseline_favorite_border_24" />
-
-            </androidx.appcompat.widget.Toolbar>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvLibros"
+                android:id="@+id/rvBusqueda"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
         </LinearLayout>
 
@@ -80,4 +74,3 @@
         app:menu="@menu/menu_inferior" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
