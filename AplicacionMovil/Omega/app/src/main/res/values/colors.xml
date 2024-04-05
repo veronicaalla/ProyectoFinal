@@ -10,4 +10,5 @@
     <color name="tema2">#5B9E6A</color>
     <color name= "oscurecer">#80000000</color>
     <color name= "gris_buscar">#80AAAAAA</color>
+    <color name= "gris">#804E4E4E</color>
 </resources>
