@@ -16,5 +16,40 @@ namespace Omega
         {
             InitializeComponent();
         }
+
+        private void tsmiNuevo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvwUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvwUsuarios_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmsNuevo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmsVer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmsEliminar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFiltrado_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

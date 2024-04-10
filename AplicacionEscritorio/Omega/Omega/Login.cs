@@ -16,5 +16,10 @@ namespace Omega
         {
             InitializeComponent();
         }
+
+        private void btnIniciarSesion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

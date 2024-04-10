@@ -16,5 +16,20 @@ namespace Omega
         {
             InitializeComponent();
         }
+
+        private void btnFiltrado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvwComentarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lvwComentarios_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
