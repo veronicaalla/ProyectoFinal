@@ -40,12 +40,12 @@
             this.chCorreo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chTelefono = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chTipoUsuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.txtFiltrado = new System.Windows.Forms.TextBox();
-            this.btnFiltrado = new System.Windows.Forms.Button();
             this.cmsUsuarios = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsNuevo = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsVer = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEliminar = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtFiltrado = new System.Windows.Forms.TextBox();
+            this.btnFiltrado = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.cmsUsuarios.SuspendLayout();
@@ -137,6 +137,36 @@
             this.chTipoUsuario.Text = "Tipo Usuario";
             this.chTipoUsuario.Width = 102;
             // 
+            // cmsUsuarios
+            // 
+            this.cmsUsuarios.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsNuevo,
+            this.cmsVer,
+            this.cmsEliminar});
+            this.cmsUsuarios.Name = "cmsUsuarios";
+            this.cmsUsuarios.Size = new System.Drawing.Size(118, 70);
+            // 
+            // cmsNuevo
+            // 
+            this.cmsNuevo.Name = "cmsNuevo";
+            this.cmsNuevo.Size = new System.Drawing.Size(117, 22);
+            this.cmsNuevo.Text = "Nuevo";
+            this.cmsNuevo.Click += new System.EventHandler(this.cmsNuevo_Click);
+            // 
+            // cmsVer
+            // 
+            this.cmsVer.Name = "cmsVer";
+            this.cmsVer.Size = new System.Drawing.Size(117, 22);
+            this.cmsVer.Text = "Ver";
+            this.cmsVer.Click += new System.EventHandler(this.cmsVer_Click);
+            // 
+            // cmsEliminar
+            // 
+            this.cmsEliminar.Name = "cmsEliminar";
+            this.cmsEliminar.Size = new System.Drawing.Size(117, 22);
+            this.cmsEliminar.Text = "Eliminar";
+            this.cmsEliminar.Click += new System.EventHandler(this.cmsEliminar_Click);
+            // 
             // txtFiltrado
             // 
             this.txtFiltrado.Location = new System.Drawing.Point(56, 44);
@@ -153,36 +183,6 @@
             this.btnFiltrado.Text = "Filtrado";
             this.btnFiltrado.UseVisualStyleBackColor = true;
             this.btnFiltrado.Click += new System.EventHandler(this.btnFiltrado_Click);
-            // 
-            // cmsUsuarios
-            // 
-            this.cmsUsuarios.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsNuevo,
-            this.cmsVer,
-            this.cmsEliminar});
-            this.cmsUsuarios.Name = "cmsUsuarios";
-            this.cmsUsuarios.Size = new System.Drawing.Size(118, 70);
-            // 
-            // cmsNuevo
-            // 
-            this.cmsNuevo.Name = "cmsNuevo";
-            this.cmsNuevo.Size = new System.Drawing.Size(180, 22);
-            this.cmsNuevo.Text = "Nuevo";
-            this.cmsNuevo.Click += new System.EventHandler(this.cmsNuevo_Click);
-            // 
-            // cmsVer
-            // 
-            this.cmsVer.Name = "cmsVer";
-            this.cmsVer.Size = new System.Drawing.Size(180, 22);
-            this.cmsVer.Text = "Ver";
-            this.cmsVer.Click += new System.EventHandler(this.cmsVer_Click);
-            // 
-            // cmsEliminar
-            // 
-            this.cmsEliminar.Name = "cmsEliminar";
-            this.cmsEliminar.Size = new System.Drawing.Size(180, 22);
-            this.cmsEliminar.Text = "Eliminar";
-            this.cmsEliminar.Click += new System.EventHandler(this.cmsEliminar_Click);
             // 
             // pictureBox2
             // 
@@ -204,6 +204,7 @@
             this.Controls.Add(this.txtFiltrado);
             this.Controls.Add(this.lvwUsuarios);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ListOfUsers";
             this.Text = "Mantenimiento de Usuarios";
             this.menuStrip1.ResumeLayout(false);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnFiltrado = new System.Windows.Forms.Button();
             this.txtFiltrado = new System.Windows.Forms.TextBox();
             this.lvwComentarios = new System.Windows.Forms.ListView();
@@ -35,7 +36,10 @@
             this.chComentario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOfensivo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cmsComentarios = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsVer = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.cmsComentarios.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnFiltrado
@@ -61,6 +65,7 @@
             this.chUsuario,
             this.chComentario,
             this.chOfensivo});
+            this.lvwComentarios.ContextMenuStrip = this.cmsComentarios;
             this.lvwComentarios.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lvwComentarios.FullRowSelect = true;
             this.lvwComentarios.GridLines = true;
@@ -100,6 +105,20 @@
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
+            // cmsComentarios
+            // 
+            this.cmsComentarios.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsVer});
+            this.cmsComentarios.Name = "cmsComentarios";
+            this.cmsComentarios.Size = new System.Drawing.Size(181, 48);
+            // 
+            // cmsVer
+            // 
+            this.cmsVer.Name = "cmsVer";
+            this.cmsVer.Size = new System.Drawing.Size(180, 22);
+            this.cmsVer.Text = "Ver";
+            this.cmsVer.Click += new System.EventHandler(this.cmsVer_Click);
+            // 
             // ListOfReportedCommets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -109,9 +128,11 @@
             this.Controls.Add(this.btnFiltrado);
             this.Controls.Add(this.txtFiltrado);
             this.Controls.Add(this.lvwComentarios);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ListOfReportedCommets";
             this.Text = "Mantenimiento de Comentarios Reportados";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.cmsComentarios.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,5 +147,7 @@
         private System.Windows.Forms.ColumnHeader chComentario;
         private System.Windows.Forms.ColumnHeader chOfensivo;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ContextMenuStrip cmsComentarios;
+        private System.Windows.Forms.ToolStripMenuItem cmsVer;
     }
 }

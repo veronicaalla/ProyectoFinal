@@ -8,3 +8,10 @@ C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.csproj.CoreCompileInputs.cache
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.exe
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.pdb
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.InfoReportedBook.resources
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.InfoReportedComment.resources
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.InfoUser.resources
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.ListOfReportedBooks.resources
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.ListOfReportedCommets.resources
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.ListOfUsers.resources
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.MainActivity.resources

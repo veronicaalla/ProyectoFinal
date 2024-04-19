@@ -30,9 +30,9 @@
         {
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.txtApellidos = new System.Windows.Forms.TextBox();
+            this.txtComentario = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -63,13 +63,13 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // txtApellidos
+            // txtComentario
             // 
-            this.txtApellidos.Location = new System.Drawing.Point(134, 165);
-            this.txtApellidos.Multiline = true;
-            this.txtApellidos.Name = "txtApellidos";
-            this.txtApellidos.Size = new System.Drawing.Size(391, 101);
-            this.txtApellidos.TabIndex = 23;
+            this.txtComentario.Location = new System.Drawing.Point(134, 165);
+            this.txtComentario.Multiline = true;
+            this.txtComentario.Name = "txtComentario";
+            this.txtComentario.Size = new System.Drawing.Size(391, 101);
+            this.txtComentario.TabIndex = 23;
             // 
             // label3
             // 
@@ -81,12 +81,12 @@
             this.label3.TabIndex = 22;
             this.label3.Text = "Comentario";
             // 
-            // txtNombre
+            // txtUsuario
             // 
-            this.txtNombre.Location = new System.Drawing.Point(133, 131);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(153, 20);
-            this.txtNombre.TabIndex = 21;
+            this.txtUsuario.Location = new System.Drawing.Point(133, 131);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(153, 20);
+            this.txtUsuario.TabIndex = 21;
             // 
             // label2
             // 
@@ -149,9 +149,9 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
-            this.Controls.Add(this.txtApellidos);
+            this.Controls.Add(this.txtComentario);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -167,9 +167,9 @@
 
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
-        private System.Windows.Forms.TextBox txtApellidos;
+        private System.Windows.Forms.TextBox txtComentario;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
