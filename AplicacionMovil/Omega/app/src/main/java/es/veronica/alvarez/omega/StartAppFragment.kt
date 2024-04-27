@@ -52,45 +52,9 @@ class StartAppFragment : Fragment() {
         }
 
 
-        val listaPost = binding.listaPost
-        //Creamos los valores
-        val valores = arrayOf(
-            "C",
-            "Java",
-            "C++",
-            "Python",
-            "Per1",
-            "PHP",
-            "Haskell",
-            "Eiffel",
-            "Lisp",
-            "Pascal",
-            "Cobol",
-            "Swift",
-            "Kotlin",
-            "Eiffel",
-            "Lisp",
-            "Pascal",
-            "Cobol",
-            "Swift",
-            "Kotlin"
-        )
-
-
-        val adaptador = ArrayAdapter(
-            requireActivity(), R.layout.simple_list_item_1, valores
-        )
-        //Le asignamos a la lista, el adaptador creado
-        listaPost.adapter = adaptador
-
 
         //---------------   El valor i = posicion   ---------------
 
-        listaPost.setOnItemClickListener { adapterView, view, i, l ->
-            val elemento = adaptador.getItem(i) as String
-
-            Toast.makeText(context, "$elemento seleccionado", Toast.LENGTH_LONG).show()
-        }
 
         /* binding.bottomNavigationView.setOnNavigationItemSelectedListener {
              when(it.itemId){

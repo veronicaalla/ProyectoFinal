@@ -3,6 +3,7 @@ package es.veronica.alvarez.omega.RecyclerBook
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import es.veronica.alvarez.omega.Model.BookResponse
 import es.veronica.alvarez.omega.R
 
 class BookAdapter(

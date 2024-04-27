@@ -2,6 +2,7 @@ package es.veronica.alvarez.omega.RecyclerLibrary
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import es.veronica.alvarez.omega.Model.LibraryResponse
 import es.veronica.alvarez.omega.databinding.ItemLibraryBinding
 
 class LibraryViewHolder (view: View) : RecyclerView.ViewHolder(view) {

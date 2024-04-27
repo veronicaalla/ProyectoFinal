@@ -68,7 +68,7 @@ class LogginFragment : Fragment() {
 
 
         //------------------- CREAR CUENTA ------------------
-        binding.btnCrearCuenta.setOnClickListener {
+        binding.txtRegistrarse.setOnClickListener {
             view.findNavController()
                 .navigate(R.id.action_logginFragment_to_joinFragment)
         }

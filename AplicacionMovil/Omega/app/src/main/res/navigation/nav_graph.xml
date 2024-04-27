@@ -66,34 +66,7 @@
         android:label="fragment_registration_name"
         tools:layout="@layout/fragment_registration_name">
         <action
-            android:id="@+id/action_registrationNameFragment_to_registrationGenderFragment"
-            app:destination="@id/registrationGenderFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/registrationGenderFragment"
-        android:name="es.veronica.alvarez.omega.CreateUser.RegistrationGenderFragment"
-        android:label="fragment_registration_gender"
-        tools:layout="@layout/fragment_registration_gender">
-        <action
-            android:id="@+id/action_registrationGenderFragment_to_birthRegistrationFragment"
-            app:destination="@id/birthRegistrationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/birthRegistrationFragment"
-        android:name="es.veronica.alvarez.omega.CreateUser.BirthRegistrationFragment"
-        android:label="fragment_birth_registration"
-        tools:layout="@layout/fragment_birth_registration">
-        <action
-            android:id="@+id/action_birthRegistrationFragment_to_usernameRegistrationFragment"
-            app:destination="@id/usernameRegistrationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/usernameRegistrationFragment"
-        android:name="es.veronica.alvarez.omega.CreateUser.UsernameRegistrationFragment"
-        android:label="fragment_username_registration"
-        tools:layout="@layout/fragment_username_registration">
-        <action
-            android:id="@+id/action_usernameRegistrationFragment_to_passwordRegistrationFragment"
+            android:id="@+id/action_registrationNameFragment_to_passwordRegistrationFragment"
             app:destination="@id/passwordRegistrationFragment" />
     </fragment>
     <fragment

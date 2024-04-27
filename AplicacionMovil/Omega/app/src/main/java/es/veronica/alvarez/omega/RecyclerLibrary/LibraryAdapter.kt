@@ -3,6 +3,7 @@ package es.veronica.alvarez.omega.RecyclerLibrary
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import es.veronica.alvarez.omega.Model.LibraryResponse
 import es.veronica.alvarez.omega.R
 
 class LibraryAdapter (
