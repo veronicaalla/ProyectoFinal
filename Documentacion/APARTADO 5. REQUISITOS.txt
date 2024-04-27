@@ -52,3 +52,11 @@ REQUISITOS NO FUNCIONALES
 30. El tiempo de respuesta debe ser inferior a 5 seg
 31. Las aplicaciones deben contar con las leyes de privacidad del usuario.
 
+
+
+ALTER TABLE `omega`.`libros` 
+ADD COLUMN `audit_created` TIMESTAMP NOT NULL DEFAULT now() AFTER `id`,
+ADD COLUMN `audit_creator` VARCHAR(45) NOT NULL DEFAULT 'admi' AFTER `audit_created`,
+ADD COLUMN `audit_updated` TIMESTAMP NOT NULL DEFAULT now() AFTER `audit_creator`,
+ADD COLUMN `audit_updater` VARCHAR(45) NOT NULL DEFAULT 'admi' AFTER `audit_updated`;
+

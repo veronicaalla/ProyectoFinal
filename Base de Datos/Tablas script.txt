@@ -18,6 +18,26 @@ CREATE TABLE comentarios_reportados (
 );
 
 
+CREATE TABLE `omega`.`grupos` (
+  `AUDIT_CREATED` TIMESTAMP NULL,
+  `AUDIT_CREATOR` VARCHAR(64) NOT NULL,
+  `AUDIT_UPDATED` TIMESTAMP NULL,
+  `AUDIT_UPDATER` VARCHAR(64) NOT NULL,
+  `ID` INT NOT NULL,
+  `NOMBRE` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID`));
+
+
+CREATE TABLE `omega`.`grupos` (
+  `audit_created` TIMESTAMP NULL,
+  `audit_creator` VARCHAR(45) NOT NULL,
+  `audit_updated` TIMESTAMP NULL,
+  `audir_updater` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+   FOREIGN KEY (audit_creator) REFERENCES usuarios(user),
+  FOREIGN KEY (audir_updater) REFERENCES usuarios(user),
+  PRIMARY KEY (`ID`));
 
 //---------- CREAR -----------------
 USUARIO ADMINISTRADOR
