@@ -16,6 +16,10 @@ import jakarta.persistence.Table;
 @Table(name="valoracion_libros")
 public class ValoracionLibro {
 
+	@Id
+    @Column(name = "id_libro", nullable = false)
+    private Integer id;
+	
 	//@Id
 	@MapsId
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
