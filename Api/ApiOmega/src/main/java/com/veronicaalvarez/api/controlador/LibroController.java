@@ -130,7 +130,7 @@ public class LibroController {
     	libro.setAutor(editarLibro.getAutor());
     	libro.setDescripcion(editarLibro.getDescripcion());
     	libro.setGenero(editarLibro.getGenero());
-    	libro.setFecha_publicacion(editarLibro.getFecha_publicacion());
+    	libro.setFechaPublicacion(editarLibro.getFechaPublicacion());
     	libro.setPaginas(editarLibro.getPaginas());
     	
     	return ResponseEntity.ok(libroRepositorio.save(libro));

@@ -139,11 +139,11 @@ public class Libro {
         this.auditUpdater = auditUpdater;
     }
 
-    public String getIsbn() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setIsbn(String isbn) {
+    public void setISBN(String isbn) {
         this.ISBN = isbn;
     }
 
