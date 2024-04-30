@@ -60,6 +60,7 @@
         android:ems="10"
         android:hint="FechaNacimiento"
         android:inputType="date"
+        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
@@ -97,7 +98,7 @@
         android:id="@+id/btnSiguiente"
         android:layout_width="318dp"
         android:layout_height="43dp"
-        android:text="SIguiente"
+        android:text="Siguiente"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.602"
@@ -107,11 +108,15 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="267dp"
-        android:layout_height="143dp"
+        android:layout_width="164dp"
+        android:layout_height="131dp"
         android:src="@drawable/smalllogo"
-        tools:layout_editor_absoluteX="202dp"
-        tools:layout_editor_absoluteY="2dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
