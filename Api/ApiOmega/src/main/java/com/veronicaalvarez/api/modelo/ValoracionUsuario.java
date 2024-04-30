@@ -59,7 +59,7 @@ public class ValoracionUsuario {
     @Column(name = "puntuacion", nullable = false)
     private Double puntuacion;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
+    //@ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "fechaValoracion")
     private LocalDateTime fechaValoracion;
 	

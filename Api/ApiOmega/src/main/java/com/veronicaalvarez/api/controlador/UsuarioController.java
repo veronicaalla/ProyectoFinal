@@ -46,7 +46,7 @@ public class UsuarioController {
 	}
 
 	
-	@GetMapping("/{id}")
+	@GetMapping("usuario/{id}")
 	public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable int id){
 		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
 		
@@ -70,29 +70,6 @@ public class UsuarioController {
 		}
 	}
 	
-	@GetMapping("/login")
-	public ResponseEntity<?> loginPorCorreo (@RequestParam String correo, @RequestParam String clave){
-		//Buscamos el usuario
-		Usuario usuario = usuarioRepositorio.findByUserAndClave(correo, clave);
-		//Comprobamos que no sea nulo
-		if (usuario != null) {
-			return ResponseEntity.ok(usuario);
-		}else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o contraseña incorrectos");
-		}
-	}
-	
-	@GetMapping("/login")
-	public ResponseEntity<?> loginPorTelefono (@RequestParam String telefono, @RequestParam String clave){
-		//Buscamos el usuario
-		Usuario usuario = usuarioRepositorio.findByUserAndClave(telefono, clave);
-		//Comprobamos que no sea nulo
-		if (usuario != null) {
-			return ResponseEntity.ok(usuario);
-		}else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o contraseña incorrectos");
-		}
-	}
 	
 	@PostMapping
 	public ResponseEntity<Usuario> nuevoUsuario (@RequestBody Usuario nuevoUsuario){
@@ -100,7 +77,7 @@ public class UsuarioController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("editar/{id}")
 	public ResponseEntity<?> editarUsuario (@RequestBody Usuario editarUsuario, @PathVariable Integer id){
 		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
 		if (usuario==null) {
@@ -119,7 +96,7 @@ public class UsuarioController {
 	}
 	
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("borrar/{id}")
 	public ResponseEntity<?> borrarUsuario (@PathVariable Integer id){
 		usuarioRepositorio.deleteById(id);
 		return ResponseEntity.noContent().build();
@@ -181,10 +158,4 @@ public class UsuarioController {
 		
 		return ResponseEntity.ok(usuario);
 	}
-	
-	
-	
-	
-	
-	
 }

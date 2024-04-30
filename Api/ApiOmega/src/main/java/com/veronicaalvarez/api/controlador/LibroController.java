@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.veronicaalvarez.api.modelo.Libro;
 import com.veronicaalvarez.api.repositorio.LibroRepositorio;
 
 @RestController
+@RequestMapping("/omega/libros")
 public class LibroController {
 	
 	private final LibroRepositorio libroRepositorio;
@@ -35,7 +37,7 @@ public class LibroController {
 	}
 	
 	
-	@GetMapping
+	@GetMapping("/id/{id}")
 	public ResponseEntity<?> obtenerLibrosPorId(@PathVariable int id){
 		Libro libro = libroRepositorio.findById(id).orElse(null);
 		
@@ -47,7 +49,7 @@ public class LibroController {
 	}
 	
 	
-	@GetMapping
+	@GetMapping("/genero/{genero}")
 	public ResponseEntity<?> obtenerLibrosPorGenero(@PathVariable String genero){
 		List <Libro> libros = libroRepositorio.findByGenero(genero);
 		
@@ -59,7 +61,7 @@ public class LibroController {
 	}
 	
 	
-	@GetMapping
+	@GetMapping("/isbn/{isbn}")
 	public ResponseEntity<?> obtenerLibrosPorISBN(@PathVariable String ISBN){
 		List<Libro> libros = libroRepositorio.findByISBN(ISBN);
 		
@@ -70,7 +72,7 @@ public class LibroController {
 		return ResponseEntity.ok(libros);
 	}
 	
-	@GetMapping
+	@GetMapping("/titulo/{titulo}")
 	public ResponseEntity<?> obtenerLibrosPorTitulo (@PathVariable String titulo){
 		List <Libro> libros = libroRepositorio.findByTitulo(titulo);
 		
@@ -80,7 +82,7 @@ public class LibroController {
 		return ResponseEntity.ok(libros);
 	}
 	
-	@GetMapping
+	@GetMapping("/autor/{autor}")
 	public ResponseEntity<?> obtenerLibrosPorAutor (@PathVariable String autor){
 		List <Libro> libros = libroRepositorio.findByAutor(autor);
 		
@@ -90,25 +92,6 @@ public class LibroController {
 		return ResponseEntity.ok(libros);
 	}
 	
-	
-	// Método para obtener una lista de libros cuyas páginas estén dentro de un rango dado
-    @GetMapping("/librosPorPaginas/{paginaMin}/{paginaMax}")
-    public List<Libro> obtenerLibrosPorRangoDePaginas(@PathVariable int paginaMin, @PathVariable int paginaMax) {
-        return libroRepositorio.findByPaginasEntre(paginaMin, paginaMax);
-    }
-
-    // Método para obtener libros por valoración
-    @GetMapping("/librosPorValoracion/{valoracion}")
-    public List<Libro> obtenerLibrosPorValoracion(@PathVariable int valoracion) {
-        return libroRepositorio.findByValoracion(valoracion);
-    }
-
-    // Método para obtener los libros mejor valorados
-    @GetMapping("/librosMejorValorados")
-    public List<Libro> obtenerLibrosMejorValorados() {
-        return libroRepositorio.findTop20ByOrderByValoracionDesc();
-    }
-    
     
     @PostMapping
     public ResponseEntity<Libro> crearLibro(@RequestBody Libro nuevoLibro){
