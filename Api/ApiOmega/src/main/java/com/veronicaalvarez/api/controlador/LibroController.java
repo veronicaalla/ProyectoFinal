@@ -37,7 +37,7 @@ public class LibroController {
 	}
 	
 	
-	@GetMapping("/id/{id}")
+	/*@GetMapping("/id/{id}")
 	public ResponseEntity<?> obtenerLibrosPorId(@PathVariable int id){
 		Libro libro = libroRepositorio.findById(id).orElse(null);
 		
@@ -124,6 +124,6 @@ public class LibroController {
     public ResponseEntity<?> borrarLibro(@PathVariable Integer id){
     	libroRepositorio.deleteById(id);
     	return ResponseEntity.noContent().build();
-    }
+    }*/
 	
 }

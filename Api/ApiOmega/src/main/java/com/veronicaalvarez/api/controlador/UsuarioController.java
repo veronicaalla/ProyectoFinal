@@ -30,11 +30,7 @@ public class UsuarioController {
 		this.usuarioRepositorio = usuarioRepositorio;
 	}
 	
-	//Usamos un método GetMapping para obtener toda la lista de los usuarios
-	/*@GetMapping
-	public List<Usuario> obtenerUsuarios(){
-		return usuarioRepositorio.findAll();
-	}*/
+
 	
 	@GetMapping
 	public ResponseEntity<?> obtenerUsuario(){
@@ -57,7 +53,7 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuario);
 	}
 	
-	//Verigicar las credenciales 
+	/*Verigicar las credenciales
 	@GetMapping("/login")
 	public ResponseEntity<?> loginPorUser (@RequestParam String user, @RequestParam String clave){
 		//Buscamos el usuario
@@ -157,5 +153,5 @@ public class UsuarioController {
 		}
 		
 		return ResponseEntity.ok(usuario);
-	}
+	}*/
 }

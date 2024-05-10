@@ -35,7 +35,7 @@ public class ComentarioReportadoController {
 	}
 	
 	
-	@GetMapping("/{id}")
+	/*@GetMapping("/{id}")
 	public ResponseEntity<?> obtenerReportadoPorId(@PathVariable int id){
 		ComentarioReportado reportado = reportadoRepositorio.findById(id).orElse(null);
 		
@@ -63,6 +63,6 @@ public class ComentarioReportadoController {
 		ComentarioReportado nuevo = reportadoRepositorio.save(reportado);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
-	}
+	}*/
 	
 }

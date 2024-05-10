@@ -44,19 +44,7 @@ public class Genero {
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
 
-	//Tabla terciaria
-	//@ManyToMany(mappedBy = "generosFavoritos", fetch = FetchType.LAZY)
-	//private Set<Usuario> usuarios = new HashSet<>();
-	
-	//Constructor
-	public Genero() {
-		
-	}
-	
-	public Genero(String nombre) {
-		super();
-		this.nombre = nombre;
-	}
+
 
 	
 	//Metodos getter

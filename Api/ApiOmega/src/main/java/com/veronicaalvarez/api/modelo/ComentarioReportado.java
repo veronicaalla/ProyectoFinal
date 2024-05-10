@@ -8,12 +8,10 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,39 +40,20 @@ public class ComentarioReportado {
 	
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_comentario", nullable = false)
-	private Comentario comentario;
+	private int idComentario;
 	
-	
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+
+	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_reportante", nullable = false)
-	private Usuario reportante;
+	private int idUsuario;
 	
 	@Column(name = "ofensivo")
 	private boolean ofensivo;
-	
-	//Constructor 
-	public ComentarioReportado() {
-		super();
-	}
 
-	public ComentarioReportado(Comentario comentario, Usuario reportante) {
-		super();
-		this.comentario = comentario;
-		this.reportante = reportante;
-	}
-
-	public ComentarioReportado(int id, Comentario comentario, Usuario reportante, boolean ofensivo) {
-		super();
-		this.id = id;
-		this.comentario = comentario;
-		this.reportante = reportante;
-		this.ofensivo = ofensivo;
-	}
 
 	
 	//Métodos setter y getts
@@ -119,21 +98,20 @@ public class ComentarioReportado {
         this.auditUpdater = auditUpdater;
     }
 
-
-	public Comentario getComentario() {
-		return comentario;
+	public int getIdComentario() {
+		return idComentario;
 	}
 
-	public void setComentario(Comentario comentario) {
-		this.comentario = comentario;
+	public void setIdComentario(int idComentario) {
+		this.idComentario = idComentario;
 	}
 
-	public Usuario getReportante() {
-		return reportante;
+	public int getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setReportante(Usuario reportante) {
-		this.reportante = reportante;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public boolean isOfensivo() {

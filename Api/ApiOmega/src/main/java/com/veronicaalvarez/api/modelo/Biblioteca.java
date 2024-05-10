@@ -23,10 +23,10 @@ public class Biblioteca {
 	private int id;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "id_usuario", nullable = false)
-	private Usuario usuario;
+	private int id_usuario;
 	
 	
 	@Column(name = "nombre", nullable = false, length = 100)
@@ -36,29 +36,7 @@ public class Biblioteca {
 	@ColumnDefault("0")
     @Column(name = "publica", nullable = false)
 	private Boolean publica; 
-	
-	
-	//Contructores
-	public Biblioteca() {
-		super();
-	}
 
-
-	public Biblioteca(Usuario usuario, String nombre, Boolean publica) {
-		super();
-		this.usuario = usuario;
-		this.nombre = nombre;
-		this.publica = publica;
-	}
-
-
-	public Biblioteca(int id, Usuario usuario, String nombre, Boolean publica) {
-		super();
-		this.id = id;
-		this.usuario = usuario;
-		this.nombre = nombre;
-		this.publica = publica;
-	}
 
 
 	//Métodos Setter y Getters
@@ -72,13 +50,13 @@ public class Biblioteca {
 	}
 
 
-	public Usuario getUsuario() {
-		return usuario;
+	public int getUsuario() {
+		return id_usuario;
 	}
 
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 

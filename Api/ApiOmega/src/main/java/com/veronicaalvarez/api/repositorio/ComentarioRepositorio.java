@@ -10,6 +10,6 @@ import com.veronicaalvarez.api.modelo.Usuario;
 
 public interface ComentarioRepositorio extends JpaRepository<Comentario, Integer>  {
 
-	List<Comentario> findByLibro (Libro libro);
-	List<Comentario> findByUsuario (Usuario usuario);
+	/*List<Comentario> findByLibro (Libro libro);
+	List<Comentario> findByUsuario (Usuario usuario);*/
 }

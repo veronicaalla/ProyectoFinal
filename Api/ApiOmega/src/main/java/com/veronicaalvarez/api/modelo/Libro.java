@@ -38,7 +38,6 @@ public class Libro {
 	@Column(name = "audit_updater", nullable = false, length = 45)
 	private String auditUpdater;
 	    
-	    
 	
 	@Column(name = "ISBN", nullable = false, unique = true, length = 45)
 	private String ISBN;
@@ -60,40 +59,6 @@ public class Libro {
 
 	@Column(name = "paginas", nullable = false)
 	private Integer paginas;
-	
-	//Constructor
-	public Libro () {
-		super();
-	}
-	
-
-	public Libro(String iSBN, String titulo, String autor, String descripcion, String genero, LocalDate fecha_publicacion,
-			int paginas) {
-		super();
-		ISBN = iSBN;
-		this.titulo = titulo;
-		this.autor = autor;
-		this.descripcion = descripcion;
-		this.genero = genero;
-		this.fechaPublicacion = fecha_publicacion;
-		this.paginas = paginas;
-	}
-
-
-	public Libro(int id, String iSBN, String titulo, String autor, String descripcion, String genero,
-			LocalDate fecha_publicacion, int paginas) {
-		super();
-		this.id = id;
-		ISBN = iSBN;
-		this.titulo = titulo;
-		this.autor = autor;
-		this.descripcion = descripcion;
-		this.genero = genero;
-		this.fechaPublicacion = fecha_publicacion;
-		this.paginas = paginas;
-	}
-
-
 
 
 

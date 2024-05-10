@@ -38,7 +38,7 @@ public class ComentarioController {
 		return ResponseEntity.ok(comentarios);
 	}
 	
-	@GetMapping("/{id}")
+	/*@GetMapping("/{id}")
 	public ResponseEntity<?> obtenerComentarioPorId(@PathVariable int id){
 		Comentario comentario = comentarioRepositorio.findById(id).orElse(null);
 		
@@ -100,6 +100,6 @@ public class ComentarioController {
 	public ResponseEntity<?> borrarComentario (@PathVariable Integer id){
 		comentarioRepositorio.deleteById(id);
 		return ResponseEntity.noContent().build();
-	}
+	}*/
 	
 }

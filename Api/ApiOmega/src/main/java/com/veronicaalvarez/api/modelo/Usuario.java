@@ -65,12 +65,10 @@ public class Usuario {
 	@Column(name = "telefono", length = 45)
 	    private String telefono;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@ColumnDefault("3")
+	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "tipo", nullable = false)
-	private Grupo tipo;
+	private int tipo;
 
-	@ColumnDefault("0")
 	@Column(name = "publico")
 	private Boolean publico;
 
@@ -184,11 +182,11 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public Grupo getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(Grupo tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 

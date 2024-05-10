@@ -53,18 +53,18 @@ public class BibliotecaController {
 	
 	
 	
-	@GetMapping("/usuario/{usuario}")
-	public ResponseEntity<?> obtenerBibliotecasPorUsuario(@RequestBody Usuario usuario){
-		List<Biblioteca> bibliotecasUsuario = bibliotecaRepositorio.findByUsuario(usuario);
+	/*@GetMapping("/usuario/{id_usuario}")
+	public ResponseEntity<?> obtenerBibliotecasPorUsuario(@RequestBody int id_usuario){
+		List<Biblioteca> bibliotecasUsuario = bibliotecaRepositorio.findByUsuario(id_usuario);
 		
 		if (bibliotecasUsuario.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
 		
 		return ResponseEntity.ok(bibliotecasUsuario);
-	}
+	}*/
 	
-	@GetMapping("nombre/{nombre}")
+	/*@GetMapping("nombre/{nombre}")
 	public ResponseEntity<?> obtenerBibliotecaPorNombre (@PathVariable String nombre){
 		Biblioteca biblioteca = bibliotecaRepositorio.findByNombre(nombre);
 		
@@ -109,6 +109,6 @@ public class BibliotecaController {
 	public ResponseEntity<?> borrarBiblioteca (@PathVariable Integer id){
 		bibliotecaRepositorio.deleteById(id);
 		return ResponseEntity.noContent().build();
-	}
+	}*/
 	
 }

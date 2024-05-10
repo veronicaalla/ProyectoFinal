@@ -5,7 +5,6 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -38,10 +37,10 @@ public class PerfilUsuario {
     @Column(name = "informacion", length = 100)
     private String informacion;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "idUsuario", nullable = false)
-    private Usuario usuario;
+    private int idUsuario;
 
     @Column(name = "username", nullable = false, length = 45)
     private String username;
@@ -102,12 +101,12 @@ public class PerfilUsuario {
         this.informacion = informacion;
     }
 
-    public Usuario getIdUsuario() {
-        return usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.usuario = idUsuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getUsername() {
