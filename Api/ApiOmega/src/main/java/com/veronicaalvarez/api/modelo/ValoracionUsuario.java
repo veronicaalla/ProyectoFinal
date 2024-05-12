@@ -1,6 +1,7 @@
 package com.veronicaalvarez.api.modelo;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
@@ -24,47 +25,49 @@ public class ValoracionUsuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn(name = "id_libro", referencedColumnName = "id", foreignKey = @ForeignKey(name="valoraciones_usuarios_ibfk_2"))
+
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name = "id_libro", referencedColumnName = "id", foreignKey = @ForeignKey(name = "valoraciones_usuarios_ibfk_2"))
 	private Libro libro;
-	
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
+
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id", foreignKey = @ForeignKey(name = "valoraciones_usuarios_ibfk_2"))
 	private Usuario usuario;
-	
-	
+
+
 	@Column(name = "playList", length = 100)
-    private String playList;
+	private String playList;
 
-    @Column(name = "personaje_fav", length = 45)
-    private String personajeFav;
+	@Column(name = "personaje_fav", length = 45)
+	private String personajeFav;
 
-    @Column(name = "personaje_odiado", length = 45)
-    private String personajeOdiado;
+	@Column(name = "personaje_odiado", length = 45)
+	private String personajeOdiado;
 
-    @ColumnDefault("1")
-    @Column(name = "recomendacion", nullable = false)
-    private Boolean recomendacion;
+	@ColumnDefault("1")
+	@Column(name = "recomendacion", nullable = false)
+	private Boolean recomendacion;
 
-    @Column(name = "frase_iconica", length = 45)
-    private String fraseIconica;
+	@Column(name = "frase_iconica", length = 45)
+	private String fraseIconica;
 
-    @Column(name = "opinion", length = 100)
-    private String opinion;
+	@Column(name = "opinion", length = 100)
+	private String opinion;
 
-    @Column(name = "puntuacion", nullable = false)
-    private Double puntuacion;
+	@Column(name = "puntuacion", nullable = false)
+	private Double puntuacion;
 
-    //@ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "fechaValoracion")
-    private LocalDateTime fechaValoracion;
-	
-	
+	//@ColumnDefault("CURRENT_TIMESTAMP")
+	@Column(name = "fechaValoracion")
+	private LocalDateTime fechaValoracion;
+
+
 	//Métodos Setters y Getters
+
+
 	public int getId() {
 		return id;
 	}
@@ -97,20 +100,20 @@ public class ValoracionUsuario {
 		this.playList = playList;
 	}
 
-	public String getPersonaje_fav() {
+	public String getPersonajeFav() {
 		return personajeFav;
 	}
 
-	public void setPersonaje_fav(String personaje_fav) {
-		this.personajeFav = personaje_fav;
+	public void setPersonajeFav(String personajeFav) {
+		this.personajeFav = personajeFav;
 	}
 
-	public String getPersonaje_odiado() {
+	public String getPersonajeOdiado() {
 		return personajeOdiado;
 	}
 
-	public void setPersonaje_odiado(String personaje_odiado) {
-		this.personajeOdiado = personaje_odiado;
+	public void setPersonajeOdiado(String personajeOdiado) {
+		this.personajeOdiado = personajeOdiado;
 	}
 
 	public Boolean getRecomendacion() {
@@ -121,11 +124,11 @@ public class ValoracionUsuario {
 		this.recomendacion = recomendacion;
 	}
 
-	public String getFrase_iconica() {
+	public String getFraseIconica() {
 		return fraseIconica;
 	}
 
-	public void setFrase_iconica(String fraseIconica) {
+	public void setFraseIconica(String fraseIconica) {
 		this.fraseIconica = fraseIconica;
 	}
 
@@ -137,11 +140,11 @@ public class ValoracionUsuario {
 		this.opinion = opinion;
 	}
 
-	public double getPuntuacion() {
+	public Double getPuntuacion() {
 		return puntuacion;
 	}
 
-	public void setPuntuacion(double puntuacion) {
+	public void setPuntuacion(Double puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 
@@ -152,6 +155,4 @@ public class ValoracionUsuario {
 	public void setFechaValoracion(LocalDateTime fechaValoracion) {
 		this.fechaValoracion = fechaValoracion;
 	}
-	
-	
 }

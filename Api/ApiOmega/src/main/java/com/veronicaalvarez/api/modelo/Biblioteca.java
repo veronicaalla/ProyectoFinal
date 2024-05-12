@@ -1,5 +1,6 @@
 package com.veronicaalvarez.api.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -22,20 +23,23 @@ public class Biblioteca {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	
-	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "id_usuario", nullable = false)
-	private int id_usuario;
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Usuario usuario;
 	
 	
 	@Column(name = "nombre", nullable = false, length = 100)
 	private String nombre;
 	
 	
-	@ColumnDefault("0")
+
     @Column(name = "publica", nullable = false)
-	private Boolean publica; 
+	private Boolean publica;
+
+
 
 
 
@@ -47,16 +51,6 @@ public class Biblioteca {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-
-	public int getUsuario() {
-		return id_usuario;
-	}
-
-
-	public void setUsuario(int id_usuario) {
-		this.id_usuario = id_usuario;
 	}
 
 
@@ -78,9 +72,13 @@ public class Biblioteca {
 	public void setPublica(Boolean publica) {
 		this.publica = publica;
 	}
-	
-	
-	
-	
-	
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

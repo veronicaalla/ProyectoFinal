@@ -5,6 +5,7 @@ import com.veronicaalvarez.api.modelo.Grupo;
 import com.veronicaalvarez.api.repositorio.GrupoRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +29,14 @@ public class GrupoController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(grupos);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?>  obtenerGrupo(@PathVariable Integer id) {
+        Grupo grupo = grupoRepository.findById(id).orElse(null);
+        if (grupo == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(grupo);
     }
 }

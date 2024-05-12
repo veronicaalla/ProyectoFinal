@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "perfil_usuario")
 public class PerfilUsuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idperfil", nullable = false)
-    private Integer id;
+    private Integer idperfil;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "audit_created", nullable = false)
@@ -37,20 +38,23 @@ public class PerfilUsuario {
     @Column(name = "informacion", length = 100)
     private String informacion;
 
-    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "idUsuario", nullable = false)
+    @Column(name = "idusuario", nullable = false)
     private int idUsuario;
 
     @Column(name = "username", nullable = false, length = 45)
     private String username;
 
-    public Integer getId() {
-        return id;
+
+
+    //Métodos
+
+
+    public Integer getIdperfil() {
+        return idperfil;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdperfil(Integer idperfil) {
+        this.idperfil = idperfil;
     }
 
     public LocalDateTime getAuditCreated() {
@@ -116,5 +120,4 @@ public class PerfilUsuario {
     public void setUsername(String username) {
         this.username = username;
     }
-
 }

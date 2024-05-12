@@ -1,19 +1,15 @@
 package com.veronicaalvarez.api.controlador;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.veronicaalvarez.api.modelo.Biblioteca;
+import com.veronicaalvarez.api.repositorio.BibliotecaRepositorio;
+import com.veronicaalvarez.api.repositorio.LibrosBibliotecaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.veronicaalvarez.api.modelo.Usuario;
 import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
@@ -25,10 +21,13 @@ import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
 public class UsuarioController {
 
 	private final UsuarioRepositorio usuarioRepositorio;
-	
+
+
+
 	public UsuarioController(UsuarioRepositorio usuarioRepositorio) {
 		this.usuarioRepositorio = usuarioRepositorio;
 	}
+
 	
 
 	
@@ -52,7 +51,81 @@ public class UsuarioController {
 		
 		return ResponseEntity.ok(usuario);
 	}
-	
+
+	@PostMapping("/usuario")
+	public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) {
+		usuario.setAuditCreated(LocalDateTime.now());
+		usuario.setAuditUpdated(LocalDateTime.now());
+		usuario.setAuditCreator(usuario.getUser());
+		usuario.setAuditUpdater(usuario.getUser());
+
+		Usuario nuevoUsuario = usuarioRepositorio.save(usuario);
+		return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
+	}
+
+
+
+	@PutMapping("modificar/{id}")
+	public ResponseEntity<?> modificarUsuario(@PathVariable int id, @RequestBody Usuario usuarioModificado) {
+		Usuario usuarioExistente = usuarioRepositorio.findById(id).orElse(null);
+
+		if (usuarioExistente == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		// Actualizar los campos del usuario existente con los datos del usuario modificado
+		usuarioExistente.setUser(usuarioModificado.getUser());
+		usuarioExistente.setNombre(usuarioModificado.getNombre());
+		usuarioExistente.setApellidos(usuarioModificado.getApellidos());
+		usuarioExistente.setFechaNacimiento(usuarioModificado.getFechaNacimiento());
+		usuarioExistente.setCorreo(usuarioModificado.getCorreo());
+		usuarioExistente.setClave(usuarioModificado.getClave());
+		usuarioExistente.setTelefono(usuarioModificado.getTelefono());
+		usuarioExistente.setTipo(usuarioModificado.getTipo());
+		usuarioExistente.setPublico(usuarioModificado.getPublico());
+
+		// Guardar los cambios en la base de datos
+		usuarioRepositorio.save(usuarioExistente);
+
+		return ResponseEntity.ok(usuarioExistente);
+	}
+
+	@DeleteMapping("/usuario/{id}")
+	public ResponseEntity<?> eliminarUsuario(@PathVariable int id) {
+		// Verificar si el usuario existe en la base de datos
+		boolean existeUsuario = usuarioRepositorio.existsById(id);
+
+		if (!existeUsuario) {
+			return ResponseEntity.notFound().build(); // Si el usuario no existe, devolver una respuesta de estado 404 (no encontrado)
+		}
+
+		// Eliminar el usuario de la base de datos
+		usuarioRepositorio.deleteById(id);
+
+		// Devolver una respuesta con un mensaje de éxito
+		return ResponseEntity.ok("Usuario eliminado correctamente");
+	}
+
+
+	@PostMapping("/login")
+	public ResponseEntity<?> loginUsuario(@RequestParam String usuarioOEmail, @RequestParam String clave) {
+		// Buscar al usuario por nombre de usuario o correo electrónico
+		Usuario usuario = usuarioRepositorio.findByUserOrCorreo(usuarioOEmail, usuarioOEmail);
+
+		// Verificar si se encontró un usuario
+		if (usuario == null) {
+			return ResponseEntity.notFound().build(); // Si no se encuentra el usuario, devolver una respuesta de estado 404 (no encontrado)
+		}
+
+		// Verificar si la contraseña proporcionada coincide con la contraseña del usuario
+		if (!usuario.getClave().equals(clave)) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas"); // Si las contraseñas no coinciden, devolver una respuesta de estado 401 (no autorizado)
+		}
+
+		// Devolver una respuesta exitosa con los detalles del usuario (excluyendo la contraseña)
+		return ResponseEntity.ok(usuario);
+	}
+
 	/*Verigicar las credenciales
 	@GetMapping("/login")
 	public ResponseEntity<?> loginPorUser (@RequestParam String user, @RequestParam String clave){

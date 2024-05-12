@@ -52,7 +52,7 @@ public class Libro {
 	private String descripcion;
 
 	@Column(name = "genero", nullable = false, length = 45)
-	private String genero;
+	private int genero;
 
 	@Column(name = "fecha_publicacion")
 	private LocalDate fechaPublicacion;
@@ -63,12 +63,11 @@ public class Libro {
 
 
 	//Métodos setter y getters
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -108,8 +107,8 @@ public class Libro {
         return ISBN;
     }
 
-    public void setISBN(String isbn) {
-        this.ISBN = isbn;
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
     }
 
     public String getTitulo() {
@@ -136,11 +135,11 @@ public class Libro {
         this.descripcion = descripcion;
     }
 
-    public String getGenero() {
+    public int getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(int genero) {
         this.genero = genero;
     }
 
@@ -158,6 +157,5 @@ public class Libro {
 
     public void setPaginas(Integer paginas) {
         this.paginas = paginas;
-    }	
-
+    }
 }

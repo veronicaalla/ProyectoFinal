@@ -4,17 +4,8 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import com.veronicaalvarez.api.modelo.Biblioteca;
-import com.veronicaalvarez.api.modelo.Usuario;
 import com.veronicaalvarez.api.repositorio.BibliotecaRepositorio;
 
 @RestController
@@ -40,7 +31,7 @@ public class BibliotecaController {
 	}
 	
 	
-	@GetMapping("/{id}")
+	/*@GetMapping("/{id}")
 	public ResponseEntity<?> obtenerBibliotecaPorId (@PathVariable int id) {
 		Biblioteca biblioteca = bibliotecaRepositorio.findById(id).orElse(null);
 		
@@ -49,46 +40,29 @@ public class BibliotecaController {
 		}
 		
 		return ResponseEntity.ok(biblioteca);
-	}
-	
-	
-	
-	/*@GetMapping("/usuario/{id_usuario}")
-	public ResponseEntity<?> obtenerBibliotecasPorUsuario(@RequestBody int id_usuario){
-		List<Biblioteca> bibliotecasUsuario = bibliotecaRepositorio.findByUsuario(id_usuario);
-		
-		if (bibliotecasUsuario.isEmpty()) {
+	}*/
+
+
+
+	@GetMapping("/usuario/{usuarioId}")
+	public ResponseEntity<?> getBibliotecasByUsuario(@PathVariable int usuarioId) {
+
+		List <Biblioteca> bibliotecas =  bibliotecaRepositorio.findByUsuario_Id(usuarioId);
+
+		if (bibliotecas.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		
-		return ResponseEntity.ok(bibliotecasUsuario);
-	}*/
-	
-	/*@GetMapping("nombre/{nombre}")
-	public ResponseEntity<?> obtenerBibliotecaPorNombre (@PathVariable String nombre){
-		Biblioteca biblioteca = bibliotecaRepositorio.findByNombre(nombre);
-		
-		if (biblioteca == null)
-			return ResponseEntity.notFound().build();
-		
-		return ResponseEntity.ok(biblioteca);
+		return ResponseEntity.ok(bibliotecas);
 	}
-	
-	
-	//Obtener bibliotecas por User, pero solo aquellas que son publicas
-	
-	
-	
-	
-	
+
 	@PostMapping
-	public ResponseEntity<Biblioteca> nuevaBiblioteca (@RequestBody Biblioteca nuevaBibliocata){
-		Biblioteca nueva = bibliotecaRepositorio.save(nuevaBibliocata);
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(nueva);
+	public ResponseEntity<Biblioteca> crearBiblioteca(@RequestBody Biblioteca biblioteca) {
+		Biblioteca guardado = bibliotecaRepositorio.save(biblioteca);
+		return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
 	}
+
 	
-	@PutMapping("/{id}")
+	@PutMapping("/editar/{id}")
 	public ResponseEntity<?> editarBiblioteca (@RequestBody Biblioteca editarBiblioteca, @PathVariable Integer id){
 		Biblioteca biblioteca = bibliotecaRepositorio.findById(id).orElse(null);
 		
@@ -105,10 +79,10 @@ public class BibliotecaController {
 	}
 	
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> borrarBiblioteca (@PathVariable Integer id){
+	@DeleteMapping("/borrar/{id}")
+	public ResponseEntity<?> borrarBiblioteca (@PathVariable int id){
 		bibliotecaRepositorio.deleteById(id);
 		return ResponseEntity.noContent().build();
-	}*/
+	}
 	
 }

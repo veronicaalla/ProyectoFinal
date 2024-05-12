@@ -1,6 +1,7 @@
 package com.veronicaalvarez.api.controlador;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import com.veronicaalvarez.api.repositorio.LibroRepositorio;
 public class LibroController {
 	
 	private final LibroRepositorio libroRepositorio;
-	
+
 	public LibroController(LibroRepositorio libroRepositorio) {
 		this.libroRepositorio = libroRepositorio;
 	}
@@ -37,7 +38,7 @@ public class LibroController {
 	}
 	
 	
-	/*@GetMapping("/id/{id}")
+	@GetMapping("/id/{id}")
 	public ResponseEntity<?> obtenerLibrosPorId(@PathVariable int id){
 		Libro libro = libroRepositorio.findById(id).orElse(null);
 		
@@ -47,83 +48,71 @@ public class LibroController {
 		
 		return ResponseEntity.ok(libro);
 	}
-	
-	
-	@GetMapping("/genero/{genero}")
-	public ResponseEntity<?> obtenerLibrosPorGenero(@PathVariable String genero){
-		List <Libro> libros = libroRepositorio.findByGenero(genero);
-		
-		if (libros.isEmpty()) {
-			return ResponseEntity.notFound().build();
+
+
+	@GetMapping("/genero/{generoId}")
+	public ResponseEntity<?> obtenerLibrosPorGenero(@PathVariable("generoId") int generoId) {
+		List<Libro> librosPorGenero = libroRepositorio.findByGenero(generoId);
+
+		if (librosPorGenero.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron libros para el género especificado.");
+		} else {
+			return ResponseEntity.ok(librosPorGenero);
 		}
-		
-		return ResponseEntity.ok(libros);
 	}
-	
-	
-	@GetMapping("/isbn/{isbn}")
-	public ResponseEntity<?> obtenerLibrosPorISBN(@PathVariable String ISBN){
-		List<Libro> libros = libroRepositorio.findByISBN(ISBN);
-		
-		if (libros.isEmpty()) {
-			return ResponseEntity.notFound().build();
+
+	@PostMapping
+	public ResponseEntity<?> crearLibro(@RequestBody Libro nuevoLibro) {
+		try {
+			Libro libroCreado = libroRepositorio.save(nuevoLibro);
+			return ResponseEntity.status(HttpStatus.CREATED).body(libroCreado);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el libro. Por favor, inténtalo de nuevo más tarde.");
 		}
-		
-		return ResponseEntity.ok(libros);
 	}
-	
-	@GetMapping("/titulo/{titulo}")
-	public ResponseEntity<?> obtenerLibrosPorTitulo (@PathVariable String titulo){
-		List <Libro> libros = libroRepositorio.findByTitulo(titulo);
-		
-		if (libros.isEmpty())
-			return ResponseEntity.notFound().build();
-		
-		return ResponseEntity.ok(libros);
+
+	@PutMapping("/{id}")
+	public ResponseEntity<?> editarLibro(@PathVariable("id") int id, @RequestBody Libro libroActualizado) {
+		try {
+			Optional<Libro> libroExistenteOptional = libroRepositorio.findById(id);
+
+			if (!libroExistenteOptional.isPresent()) {
+				return ResponseEntity.notFound().build();
+			}
+
+			Libro libroExistente = libroExistenteOptional.get();
+			// Actualizar los campos del libro existente con los datos del libro actualizado
+			libroExistente.setTitulo(libroActualizado.getTitulo());
+			libroExistente.setAutor(libroActualizado.getAutor());
+			libroExistente.setDescripcion(libroActualizado.getDescripcion());
+			libroExistente.setGenero(libroActualizado.getGenero());
+			libroExistente.setFechaPublicacion(libroActualizado.getFechaPublicacion());
+			libroExistente.setPaginas(libroActualizado.getPaginas());
+			libroExistente.setISBN(libroActualizado.getISBN());
+
+			Libro libroEditado = libroRepositorio.save(libroExistente);
+
+			return ResponseEntity.ok(libroEditado);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al editar el libro. Por favor, inténtalo de nuevo más tarde.");
+		}
 	}
-	
-	@GetMapping("/autor/{autor}")
-	public ResponseEntity<?> obtenerLibrosPorAutor (@PathVariable String autor){
-		List <Libro> libros = libroRepositorio.findByAutor(autor);
-		
-		if (libros.isEmpty())
-			return ResponseEntity.notFound().build();
-		
-		return ResponseEntity.ok(libros);
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> eliminarLibro(@PathVariable("id") int id) {
+		try {
+			Optional<Libro> libroOptional = libroRepositorio.findById(id);
+
+			if (!libroOptional.isPresent()) {
+				return ResponseEntity.notFound().build();
+			}
+
+			libroRepositorio.deleteById(id);
+
+			return ResponseEntity.ok().build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el libro. Por favor, inténtalo de nuevo más tarde.");
+		}
 	}
-	
-    
-    @PostMapping
-    public ResponseEntity<Libro> crearLibro(@RequestBody Libro nuevoLibro){
-    	Libro nuevo = libroRepositorio.save(nuevoLibro);
-    	
-    	return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
-    }
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<?> editarLibro (@RequestBody Libro editarLibro, @PathVariable Integer id){
-    	Libro libro = libroRepositorio.findById(id).orElse(null);
-    	
-    	if (libro == null)
-    		return ResponseEntity.notFound().build();
-    	
-    	
-    	libro.setISBN(editarLibro.getISBN());
-    	libro.setTitulo(editarLibro.getTitulo());
-    	libro.setAutor(editarLibro.getAutor());
-    	libro.setDescripcion(editarLibro.getDescripcion());
-    	libro.setGenero(editarLibro.getGenero());
-    	libro.setFechaPublicacion(editarLibro.getFechaPublicacion());
-    	libro.setPaginas(editarLibro.getPaginas());
-    	
-    	return ResponseEntity.ok(libroRepositorio.save(libro));
-    }
-    
-	
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> borrarLibro(@PathVariable Integer id){
-    	libroRepositorio.deleteById(id);
-    	return ResponseEntity.noContent().build();
-    }*/
 	
 }
