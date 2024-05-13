@@ -31,7 +31,7 @@ public class BibliotecaController {
 	}
 	
 	
-	/*@GetMapping("/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> obtenerBibliotecaPorId (@PathVariable int id) {
 		Biblioteca biblioteca = bibliotecaRepositorio.findById(id).orElse(null);
 		
@@ -40,7 +40,7 @@ public class BibliotecaController {
 		}
 		
 		return ResponseEntity.ok(biblioteca);
-	}*/
+	}
 
 
 

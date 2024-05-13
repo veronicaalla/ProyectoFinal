@@ -1,15 +1,16 @@
 package com.veronicaalvarez.api.controlador;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
+import com.veronicaalvarez.api.modelo.Comentario;
+import com.veronicaalvarez.api.modelo.Usuario;
+import com.veronicaalvarez.api.repositorio.ComentarioRepositorio;
+import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.veronicaalvarez.api.modelo.ComentarioReportado;
 import com.veronicaalvarez.api.repositorio.ComentarioReportadoRepositorio;
@@ -19,50 +20,74 @@ import com.veronicaalvarez.api.repositorio.ComentarioReportadoRepositorio;
 public class ComentarioReportadoController {
 
 	public ComentarioReportadoRepositorio reportadoRepositorio;
-	
-	public ComentarioReportadoController (ComentarioReportadoRepositorio reportadoRepositorio) {
+	private ComentarioRepositorio comentarioRepository;
+	private UsuarioRepositorio usuarioRepository;
+
+	public ComentarioReportadoController (ComentarioReportadoRepositorio reportadoRepositorio, ComentarioRepositorio comentarioRepository, UsuarioRepositorio usuarioRepository) {
 		this.reportadoRepositorio = reportadoRepositorio;
+		this.comentarioRepository = comentarioRepository;
+		this.usuarioRepository = usuarioRepository;
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<?> obtenerReportados(){
-		List<ComentarioReportado> reportados = reportadoRepositorio.findAll();
-		
-		if (reportados.isEmpty())
-			return ResponseEntity.notFound().build();
-		
-		return ResponseEntity.ok(reportados);
+	public ResponseEntity<?> obtenerComentariosReportados() {
+		List<ComentarioReportado> comentariosReportados = reportadoRepositorio.findAll();
+		if (comentariosReportados.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(comentariosReportados);
+
 	}
-	
-	
-	/*@GetMapping("/{id}")
-	public ResponseEntity<?> obtenerReportadoPorId(@PathVariable int id){
-		ComentarioReportado reportado = reportadoRepositorio.findById(id).orElse(null);
-		
-		if (reportado == null) {
+
+	@PostMapping("/crear")
+	public ResponseEntity<ComentarioReportado> reportarComentario(@RequestParam int comentarioId, @RequestParam int usuarioId) {
+		Comentario comentario = comentarioRepository.findById(comentarioId).orElse(null);
+		Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
+
+		if (comentario == null || usuario == null) {
+			return ResponseEntity.badRequest().build(); // O cualquier otro manejo de error
+		}
+
+		ComentarioReportado nuevoReporte = new ComentarioReportado();
+		nuevoReporte.setAuditCreated(LocalDateTime.now());
+		nuevoReporte.setAuditUpdated(LocalDateTime.now());
+
+		nuevoReporte.setAuditCreator(usuario.getUser());
+		nuevoReporte.setAuditUpdater(usuario.getUser());
+
+		nuevoReporte.setIdComentario(comentario.getId());
+		nuevoReporte.setIdReportante(usuario.getId());
+
+		reportadoRepositorio.save(nuevoReporte);
+		return ResponseEntity.ok(nuevoReporte);
+	}
+
+	@PutMapping("/editar/{id}")
+	public ResponseEntity<ComentarioReportado> editarComentarioReportado(@RequestParam int idComentarioReportado,
+																		 @RequestParam int usuarioId,
+																		 @RequestBody ComentarioReportado comentarioReportado) {
+
+		Optional<ComentarioReportado> optionalReporte = reportadoRepositorio.findById(idComentarioReportado);
+		if (!optionalReporte.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		
-		return ResponseEntity.ok(reportado);
+
+		ComentarioReportado reporte = optionalReporte.get();
+
+		Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
+		if (usuario == null) {
+			return ResponseEntity.badRequest().build();
+		}
+
+		// Actualizar los campos del reporte
+		reporte.setOfensivo(comentarioReportado.getOfensivo());
+		reporte.setAuditUpdated(LocalDateTime.now()); // Actualizar la fecha de actualización
+		reporte.setAuditUpdater(usuario.getUser());
+
+		// Guardar los cambios en la base de datos
+		reporte = reportadoRepositorio.save(reporte);
+
+		return ResponseEntity.ok(reporte);
 	}
-	
-	
-	@GetMapping("/sinValorar")
-    public ResponseEntity<?> obtenerComentariosSinValorar() {
-		List<ComentarioReportado> reportados = reportadoRepositorio.findByOfensivoIsNull();
-		
-		if (reportados.isEmpty())
-			return ResponseEntity.notFound().build();
-		
-		return ResponseEntity.ok(reportados);
-    }
-	
-	
-	@PostMapping
-	public ResponseEntity<ComentarioReportado> nuevoReporte(@RequestBody ComentarioReportado reportado){
-		ComentarioReportado nuevo = reportadoRepositorio.save(reportado);
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
-	}*/
-	
+
 }

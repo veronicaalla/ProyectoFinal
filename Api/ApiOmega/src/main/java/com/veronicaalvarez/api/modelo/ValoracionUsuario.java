@@ -38,7 +38,7 @@ public class ValoracionUsuario {
 	private Usuario usuario;
 
 
-	@Column(name = "playList", length = 100)
+	@Column(name = "play_list", length = 100)
 	private String playList;
 
 	@Column(name = "personaje_fav", length = 45)
@@ -47,7 +47,7 @@ public class ValoracionUsuario {
 	@Column(name = "personaje_odiado", length = 45)
 	private String personajeOdiado;
 
-	@ColumnDefault("1")
+
 	@Column(name = "recomendacion", nullable = false)
 	private Boolean recomendacion;
 
@@ -61,13 +61,11 @@ public class ValoracionUsuario {
 	private Double puntuacion;
 
 	//@ColumnDefault("CURRENT_TIMESTAMP")
-	@Column(name = "fechaValoracion")
+	@Column(name = "fecha_valoracion")
 	private LocalDateTime fechaValoracion;
 
 
 	//Métodos Setters y Getters
-
-
 	public int getId() {
 		return id;
 	}

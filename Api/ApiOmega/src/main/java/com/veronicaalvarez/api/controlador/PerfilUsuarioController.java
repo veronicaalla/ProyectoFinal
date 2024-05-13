@@ -17,7 +17,7 @@ public class PerfilUsuarioController {
         this.perfilUsuarioRepository = perfilUsuarioRepository;
     }
 
-    @GetMapping
+   /* @GetMapping
     public ResponseEntity<?> obtenerPerfilesUsuarios() {
         List<PerfilUsuario> perfiles = perfilUsuarioRepository.findAll();
 
@@ -25,7 +25,7 @@ public class PerfilUsuarioController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(perfiles);
-    }
+    }*/
 
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<?> obtenerPerfilPorIdUsuario(@PathVariable int idUsuario) {

@@ -22,15 +22,11 @@ public class UsuarioController {
 
 	private final UsuarioRepositorio usuarioRepositorio;
 
-
-
 	public UsuarioController(UsuarioRepositorio usuarioRepositorio) {
 		this.usuarioRepositorio = usuarioRepositorio;
 	}
 
-	
 
-	
 	@GetMapping
 	public ResponseEntity<?> obtenerUsuario(){
 		List <Usuario> usuarios = usuarioRepositorio.findAll();

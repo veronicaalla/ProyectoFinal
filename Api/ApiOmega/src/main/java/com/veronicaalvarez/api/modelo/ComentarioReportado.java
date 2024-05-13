@@ -49,14 +49,16 @@ public class ComentarioReportado {
 	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_reportante", nullable = false)
-	private int idUsuario;
+	private int idReportante;
 	
 	@Column(name = "ofensivo")
-	private boolean ofensivo;
+	private Boolean ofensivo;
 
 
 	
 	//Métodos setter y getts
+
+
 	public int getId() {
 		return id;
 	}
@@ -64,39 +66,38 @@ public class ComentarioReportado {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
 
-    public LocalDateTime getAuditCreated() {
-        return auditCreated;
-    }
+	public LocalDateTime getAuditCreated() {
+		return auditCreated;
+	}
 
-    public void setAuditCreated(LocalDateTime auditCreated) {
-        this.auditCreated = auditCreated;
-    }
+	public void setAuditCreated(LocalDateTime auditCreated) {
+		this.auditCreated = auditCreated;
+	}
 
-    public String getAuditCreator() {
-        return auditCreator;
-    }
+	public String getAuditCreator() {
+		return auditCreator;
+	}
 
-    public void setAuditCreator(String auditCreator) {
-        this.auditCreator = auditCreator;
-    }
+	public void setAuditCreator(String auditCreator) {
+		this.auditCreator = auditCreator;
+	}
 
-    public LocalDateTime getAuditUpdated() {
-        return auditUpdated;
-    }
+	public LocalDateTime getAuditUpdated() {
+		return auditUpdated;
+	}
 
-    public void setAuditUpdated(LocalDateTime auditUpdated) {
-        this.auditUpdated = auditUpdated;
-    }
+	public void setAuditUpdated(LocalDateTime auditUpdated) {
+		this.auditUpdated = auditUpdated;
+	}
 
-    public String getAuditUpdater() {
-        return auditUpdater;
-    }
+	public String getAuditUpdater() {
+		return auditUpdater;
+	}
 
-    public void setAuditUpdater(String auditUpdater) {
-        this.auditUpdater = auditUpdater;
-    }
+	public void setAuditUpdater(String auditUpdater) {
+		this.auditUpdater = auditUpdater;
+	}
 
 	public int getIdComentario() {
 		return idComentario;
@@ -106,21 +107,19 @@ public class ComentarioReportado {
 		this.idComentario = idComentario;
 	}
 
-	public int getIdUsuario() {
-		return idUsuario;
+	public int getIdReportante() {
+		return idReportante;
 	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdReportante(int idReportante) {
+		this.idReportante = idReportante;
 	}
 
-	public boolean isOfensivo() {
+	public Boolean getOfensivo() {
 		return ofensivo;
 	}
 
-	public void setOfensivo(boolean ofensivo) {
+	public void setOfensivo(Boolean ofensivo) {
 		this.ofensivo = ofensivo;
 	}
-	
-	
 }
