@@ -41,8 +41,6 @@ public class PerfilUsuario {
     @Column(name = "idusuario", nullable = false)
     private int idUsuario;
 
-    @Column(name = "username", nullable = false, length = 45)
-    private String username;
 
 
 
@@ -113,11 +111,5 @@ public class PerfilUsuario {
         this.idUsuario = idUsuario;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }

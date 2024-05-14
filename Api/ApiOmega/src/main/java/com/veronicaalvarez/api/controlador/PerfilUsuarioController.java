@@ -1,10 +1,13 @@
 package com.veronicaalvarez.api.controlador;
 
 import com.veronicaalvarez.api.modelo.PerfilUsuario;
+import com.veronicaalvarez.api.modelo.Usuario;
 import com.veronicaalvarez.api.repositorio.PerfilUsuarioRepository;
+import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -12,9 +15,11 @@ import java.util.List;
 public class PerfilUsuarioController {
 
     private final PerfilUsuarioRepository perfilUsuarioRepository;
+    private final UsuarioRepositorio usuarioRepositorio;
 
-    public PerfilUsuarioController(PerfilUsuarioRepository perfilUsuarioRepository) {
+    public PerfilUsuarioController(PerfilUsuarioRepository perfilUsuarioRepository, UsuarioRepositorio usuarioRepositorio) {
         this.perfilUsuarioRepository = perfilUsuarioRepository;
+        this.usuarioRepositorio = usuarioRepositorio;
     }
 
    /* @GetMapping
@@ -29,7 +34,6 @@ public class PerfilUsuarioController {
 
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<?> obtenerPerfilPorIdUsuario(@PathVariable int idUsuario) {
-
         PerfilUsuario perfil = perfilUsuarioRepository.findByIdUsuario(idUsuario);
 
         if (perfil == null) {
@@ -40,20 +44,27 @@ public class PerfilUsuarioController {
 
 
     @PutMapping("modificar/{idUsuario}")
-    public ResponseEntity<?> modificarPerfil(@PathVariable int idUsuario, @RequestBody PerfilUsuario perfilUsuario) {
+    public ResponseEntity<?> modificarPerfil(@PathVariable int idUsuario, @RequestBody PerfilUsuario perfilUsuarioNuevo) {
+
+        //Buscamos el usuario
+        Usuario usuario = usuarioRepositorio.findById(idUsuario).orElse(null);
         PerfilUsuario perfilExistente = perfilUsuarioRepository.findByIdUsuario(idUsuario);
 
-        if (perfilExistente == null) {
+        if (usuario == null || perfilExistente == null) {
             return ResponseEntity.notFound().build();
         }
 
-        perfilExistente.setNombre(perfilUsuario.getNombre());
-        perfilExistente.setInformacion(perfilUsuario.getInformacion());
+
+        //Modificamos la auditoria
+        perfilExistente.setAuditUpdated(LocalDateTime.now());
+        perfilExistente.setAuditUpdater(String.valueOf(usuario.getId()));
+
+        perfilExistente.setNombre(perfilUsuarioNuevo.getNombre());
+        perfilExistente.setInformacion(perfilUsuarioNuevo.getInformacion());
 
 
-        perfilExistente.setNombre(perfilUsuario.getNombre());
-        PerfilUsuario perfilActualizado = perfilUsuarioRepository.save(perfilExistente);
-        return ResponseEntity.ok(perfilActualizado);
+       perfilUsuarioRepository.save(perfilExistente);
+        return ResponseEntity.ok("Perfil actualizado correctamente");
     }
 
 }

@@ -50,10 +50,12 @@ public class UsuarioController {
 
 	@PostMapping("/usuario")
 	public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) {
+
+		//Asignamos la auditoria
 		usuario.setAuditCreated(LocalDateTime.now());
 		usuario.setAuditUpdated(LocalDateTime.now());
-		usuario.setAuditCreator(usuario.getUser());
-		usuario.setAuditUpdater(usuario.getUser());
+		usuario.setAuditCreator(String.valueOf(usuario.getId()));
+		usuario.setAuditUpdater(String.valueOf(usuario.getId()));
 
 		Usuario nuevoUsuario = usuarioRepositorio.save(usuario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
@@ -63,7 +65,8 @@ public class UsuarioController {
 
 	@PutMapping("modificar/{id}")
 	public ResponseEntity<?> modificarUsuario(@PathVariable int id, @RequestBody Usuario usuarioModificado) {
-		Usuario usuarioExistente = usuarioRepositorio.findById(id).orElse(null);
+
+		Usuario usuarioExistente = usuarioRepositorio.findById(usuarioModificado.getId()).orElse(null);
 
 		if (usuarioExistente == null) {
 			return ResponseEntity.notFound().build();
@@ -79,6 +82,10 @@ public class UsuarioController {
 		usuarioExistente.setTelefono(usuarioModificado.getTelefono());
 		usuarioExistente.setTipo(usuarioModificado.getTipo());
 		usuarioExistente.setPublico(usuarioModificado.getPublico());
+
+		//Actualizamos los campos de auditoria
+		usuarioExistente.setAuditUpdated(LocalDateTime.now());
+		usuarioExistente.setAuditUpdater(String.valueOf(usuarioModificado.getId()));
 
 		// Guardar los cambios en la base de datos
 		usuarioRepositorio.save(usuarioExistente);

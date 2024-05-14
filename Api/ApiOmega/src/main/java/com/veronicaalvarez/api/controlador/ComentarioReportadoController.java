@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.veronicaalvarez.api.modelo.Comentario;
+import com.veronicaalvarez.api.modelo.LibroErroneo;
 import com.veronicaalvarez.api.modelo.Usuario;
 import com.veronicaalvarez.api.repositorio.ComentarioRepositorio;
 import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
@@ -23,7 +24,7 @@ public class ComentarioReportadoController {
 	private ComentarioRepositorio comentarioRepository;
 	private UsuarioRepositorio usuarioRepository;
 
-	public ComentarioReportadoController (ComentarioReportadoRepositorio reportadoRepositorio, ComentarioRepositorio comentarioRepository, UsuarioRepositorio usuarioRepository) {
+	public ComentarioReportadoController (ComentarioReportadoRepositorio reportadoRepositorio, ComentarioRepositorio comentarioRepository, UsuarioRepositorio usuarioRepository, ComentarioReportadoRepositorio comentarioReportadoRepositorio) {
 		this.reportadoRepositorio = reportadoRepositorio;
 		this.comentarioRepository = comentarioRepository;
 		this.usuarioRepository = usuarioRepository;
@@ -39,8 +40,19 @@ public class ComentarioReportadoController {
 
 	}
 
+	@GetMapping("/sin-resolver")
+	public ResponseEntity<?> obtenerComentariosReportadosSinResolver() {
+
+		List<ComentarioReportado> librosErroneosSinResolver = reportadoRepositorio.findByOfensivoIsNull();
+		if (librosErroneosSinResolver.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(librosErroneosSinResolver);
+	}
+
 	@PostMapping("/crear")
-	public ResponseEntity<ComentarioReportado> reportarComentario(@RequestParam int comentarioId, @RequestParam int usuarioId) {
+	public ResponseEntity<?> reportarComentario(@RequestParam int comentarioId, @RequestParam int usuarioId) {
+
 		Comentario comentario = comentarioRepository.findById(comentarioId).orElse(null);
 		Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
 
@@ -59,35 +71,32 @@ public class ComentarioReportadoController {
 		nuevoReporte.setIdReportante(usuario.getId());
 
 		reportadoRepositorio.save(nuevoReporte);
-		return ResponseEntity.ok(nuevoReporte);
+		return ResponseEntity.ok("Comentario reportado creado correctamente");
 	}
 
 	@PutMapping("/editar/{id}")
-	public ResponseEntity<ComentarioReportado> editarComentarioReportado(@RequestParam int idComentarioReportado,
+	public ResponseEntity<?> editarComentarioReportado(@RequestParam int idComentarioReportado,
 																		 @RequestParam int usuarioId,
-																		 @RequestBody ComentarioReportado comentarioReportado) {
+																		 @RequestBody ComentarioReportado comentarioReportadoNuevo) {
 
-		Optional<ComentarioReportado> optionalReporte = reportadoRepositorio.findById(idComentarioReportado);
-		if (!optionalReporte.isPresent()) {
-			return ResponseEntity.notFound().build();
-		}
-
-		ComentarioReportado reporte = optionalReporte.get();
-
+		ComentarioReportado comentarioReportado = reportadoRepositorio.findById(comentarioReportadoNuevo.getId()).orElse(null);
+		Comentario comentario = comentarioRepository.findById(idComentarioReportado).orElse(null);
 		Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
-		if (usuario == null) {
+
+		if (comentario == null || usuario == null) {
 			return ResponseEntity.badRequest().build();
 		}
 
+
 		// Actualizar los campos del reporte
-		reporte.setOfensivo(comentarioReportado.getOfensivo());
-		reporte.setAuditUpdated(LocalDateTime.now()); // Actualizar la fecha de actualización
-		reporte.setAuditUpdater(usuario.getUser());
+		comentarioReportado.setOfensivo(comentarioReportadoNuevo.getOfensivo());
+		comentarioReportado.setAuditUpdated(LocalDateTime.now()); // Actualizar la fecha de actualización
+		comentarioReportado.setAuditUpdater(usuario.getUser());
 
 		// Guardar los cambios en la base de datos
-		reporte = reportadoRepositorio.save(reporte);
+		reportadoRepositorio.save(comentarioReportado);
 
-		return ResponseEntity.ok(reporte);
+		return ResponseEntity.ok("Comentario reportado actualizado correctamente");
 	}
 
 }
