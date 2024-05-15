@@ -37,8 +37,8 @@ public class Usuario {
 	@Column(name = "audit_updater", nullable = false, length = 45)
 	private String auditUpdater;
 
-	@Column(name = "user", nullable = false, length = 45)
-	private String user;
+	@Column(name = "username", nullable = false, length = 45)
+	private String username;
 
 	@Column(name = "nombre", nullable = false, length = 45)
 	private String nombre;
@@ -58,7 +58,6 @@ public class Usuario {
 	@Column(name = "telefono", length = 45)
 	    private String telefono;
 
-	//@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "tipo", nullable = false)
 	private int tipo;
 
@@ -112,12 +111,12 @@ public class Usuario {
         this.auditUpdater = auditUpdater;
     }
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNombre() {
@@ -182,5 +181,25 @@ public class Usuario {
 
     public void setPublico(Boolean publico) {
         this.publico = publico;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", auditCreated=" + auditCreated +
+                ", auditCreator='" + auditCreator + '\'' +
+                ", auditUpdated=" + auditUpdated +
+                ", auditUpdater='" + auditUpdater + '\'' +
+                ", username='" + username + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", correo='" + correo + '\'' +
+                ", clave='" + clave + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", tipo=" + tipo +
+                ", publico=" + publico +
+                '}';
     }
 }

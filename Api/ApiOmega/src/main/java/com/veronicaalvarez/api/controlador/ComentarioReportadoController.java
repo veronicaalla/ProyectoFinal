@@ -2,14 +2,11 @@ package com.veronicaalvarez.api.controlador;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import com.veronicaalvarez.api.modelo.Comentario;
-import com.veronicaalvarez.api.modelo.LibroErroneo;
 import com.veronicaalvarez.api.modelo.Usuario;
 import com.veronicaalvarez.api.repositorio.ComentarioRepositorio;
 import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,8 +61,8 @@ public class ComentarioReportadoController {
 		nuevoReporte.setAuditCreated(LocalDateTime.now());
 		nuevoReporte.setAuditUpdated(LocalDateTime.now());
 
-		nuevoReporte.setAuditCreator(usuario.getUser());
-		nuevoReporte.setAuditUpdater(usuario.getUser());
+		nuevoReporte.setAuditCreator(usuario.getUsername());
+		nuevoReporte.setAuditUpdater(usuario.getUsername());
 
 		nuevoReporte.setIdComentario(comentario.getId());
 		nuevoReporte.setIdReportante(usuario.getId());
@@ -91,7 +88,7 @@ public class ComentarioReportadoController {
 		// Actualizar los campos del reporte
 		comentarioReportado.setOfensivo(comentarioReportadoNuevo.getOfensivo());
 		comentarioReportado.setAuditUpdated(LocalDateTime.now()); // Actualizar la fecha de actualización
-		comentarioReportado.setAuditUpdater(usuario.getUser());
+		comentarioReportado.setAuditUpdater(usuario.getUsername());
 
 		// Guardar los cambios en la base de datos
 		reportadoRepositorio.save(comentarioReportado);

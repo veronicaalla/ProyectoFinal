@@ -3,10 +3,8 @@ package com.veronicaalvarez.api.controlador;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.veronicaalvarez.api.modelo.Biblioteca;
-import com.veronicaalvarez.api.repositorio.BibliotecaRepositorio;
-import com.veronicaalvarez.api.repositorio.LibrosBibliotecaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.veronicaalvarez.api.ImplementacionSeguridad.Seguridad;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,26 +38,39 @@ public class UsuarioController {
 	@GetMapping("usuario/{id}")
 	public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable int id){
 		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
-		
+
+		Seguridad seguridad = new Seguridad();
+
 		if (usuario==null) {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(seguridad.estructura("Error al obtener el usuario", ""));
 		}
-		
-		return ResponseEntity.ok(usuario);
+
+		String datosEncriptados = seguridad.estructura("", usuario.toString());
+
+		return ResponseEntity.ok(datosEncriptados);
 	}
 
-	@PostMapping("/usuario")
-	public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) {
+	@GetMapping("/usuarios/{user}")
+	public ResponseEntity<Usuario> buscarUsuarioPorUser(@PathVariable String user) {
+		Usuario usuario = usuarioRepositorio.findByUsername(user);
+		if (usuario != null) {
+			return ResponseEntity.ok(usuario);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
+	@PostMapping("/crearUsuario")
+	public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) {
 		//Asignamos la auditoria
 		usuario.setAuditCreated(LocalDateTime.now());
 		usuario.setAuditUpdated(LocalDateTime.now());
 		usuario.setAuditCreator(String.valueOf(usuario.getId()));
 		usuario.setAuditUpdater(String.valueOf(usuario.getId()));
-
-		Usuario nuevoUsuario = usuarioRepositorio.save(usuario);
-		return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
+		usuarioRepositorio.save(usuario);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Usuario creado correctamente");
 	}
+
 
 
 
@@ -73,7 +84,7 @@ public class UsuarioController {
 		}
 
 		// Actualizar los campos del usuario existente con los datos del usuario modificado
-		usuarioExistente.setUser(usuarioModificado.getUser());
+		usuarioExistente.setUsername(usuarioModificado.getUsername());
 		usuarioExistente.setNombre(usuarioModificado.getNombre());
 		usuarioExistente.setApellidos(usuarioModificado.getApellidos());
 		usuarioExistente.setFechaNacimiento(usuarioModificado.getFechaNacimiento());
@@ -113,7 +124,7 @@ public class UsuarioController {
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUsuario(@RequestParam String usuarioOEmail, @RequestParam String clave) {
 		// Buscar al usuario por nombre de usuario o correo electrónico
-		Usuario usuario = usuarioRepositorio.findByUserOrCorreo(usuarioOEmail, usuarioOEmail);
+		Usuario usuario = usuarioRepositorio.findByUsernameOrCorreo(usuarioOEmail, usuarioOEmail);
 
 		// Verificar si se encontró un usuario
 		if (usuario == null) {

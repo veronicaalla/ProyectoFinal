@@ -7,6 +7,7 @@ import com.veronicaalvarez.api.modelo.Usuario;
 
 //Es un integer, debido a que el id es un int
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
-    Usuario findByUserOrCorreo(String user, String correo);
+    Usuario findByUsernameOrCorreo(String username, String correo);
+    Usuario findByUsername(String username);
 
 }

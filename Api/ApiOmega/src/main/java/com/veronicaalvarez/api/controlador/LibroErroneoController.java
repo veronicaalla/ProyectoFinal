@@ -1,6 +1,5 @@
 package com.veronicaalvarez.api.controlador;
 
-import com.veronicaalvarez.api.modelo.ComentarioReportado;
 import com.veronicaalvarez.api.modelo.Libro;
 import com.veronicaalvarez.api.modelo.LibroErroneo;
 import com.veronicaalvarez.api.modelo.Usuario;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/omega/libroerroneno")
@@ -61,8 +59,8 @@ public class LibroErroneoController {
         libroErroneo.setAuditCreated(LocalDateTime.now());
         libroErroneo.setAuditUpdated(LocalDateTime.now());
 
-        libroErroneo.setAuditCreator(usuario.getUser());
-        libroErroneo.setAuditUpdater(usuario.getUser());
+        libroErroneo.setAuditCreator(usuario.getUsername());
+        libroErroneo.setAuditUpdater(usuario.getUsername());
 
 
         libroErroneo.setIdLibro(libro.getId());
@@ -92,7 +90,7 @@ public class LibroErroneoController {
 
         //Modificamos la auditoria
         libroErroneo.setAuditCreated(LocalDateTime.now());
-        libroErroneo.setAuditUpdater(usuario.getUser());
+        libroErroneo.setAuditUpdater(usuario.getUsername());
 
         libroErroneoRepositorio.save(libroErroneo);
 

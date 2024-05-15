@@ -1,6 +1,7 @@
 package es.veronica.alvarez.omega
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,10 @@ import androidx.navigation.findNavController
 import java.security.MessageDigest
 import java.math.BigInteger
 import es.veronica.alvarez.omega.databinding.FragmentLogginBinding
+import es.veronica.alvarez.omega.DataApi.Api
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Callback
 
 
 class LogginFragment : Fragment() {
@@ -28,6 +33,33 @@ class LogginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        context?.let { Api.initialize(it.applicationContext) }
+        context?.applicationContext?.let {
+            //Le enviamos el token
+            val id = 1 // Aquí debes proporcionar el ID del usuario que deseas obtener
+            Api.retrofitService.obtenerUsuarioPorId(id).enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.isSuccessful) {
+                        val responseData = response.body()
+                        // Aquí puedes manejar la respuesta recibida desde el servidor
+                        Log.i("Respuesta del servidor:" , responseData.toString())
+                        var seguridad = Seguridad()
+                        var resultado = seguridad.desencriptado(responseData.toString())
+                        Log.i("Resultado token ", resultado)
+
+                    } else {
+                        println("Error al realizar la solicitud. Código de respuesta: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
+        }
+
+
 
         //------------------- INICIO DE SESIÓN ------------------
         binding.btnIniciarSesion.setOnClickListener {
