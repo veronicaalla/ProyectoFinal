@@ -8,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
+import com.google.gson.Gson
 import java.security.MessageDigest
 import java.math.BigInteger
 import es.veronica.alvarez.omega.databinding.FragmentLogginBinding
 import es.veronica.alvarez.omega.DataApi.Api
+import es.veronica.alvarez.omega.Model.DatosUsuarioResponse
+import es.veronica.alvarez.omega.Model.UsuarioResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
@@ -34,36 +37,45 @@ class LogginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.i("prueba inicio", "prueba")
         context?.let { Api.initialize(it.applicationContext) }
-        context?.applicationContext?.let {
-            //Le enviamos el token
-            val id = 1 // Aquí debes proporcionar el ID del usuario que deseas obtener
-            Api.retrofitService.obtenerUsuarioPorId(id).enqueue(object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    if (response.isSuccessful) {
-                        val responseData = response.body()
-                        // Aquí puedes manejar la respuesta recibida desde el servidor
-                        Log.i("Respuesta del servidor:" , responseData.toString())
-                        var seguridad = Seguridad()
-                        var resultado = seguridad.desencriptado(responseData.toString())
-                        Log.i("Resultado token ", resultado)
-
-                    } else {
-                        println("Error al realizar la solicitud. Código de respuesta: ${response.code()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<String>, t: Throwable) {
-                    t.printStackTrace()
-                }
-            })
-        }
-
 
 
         //------------------- INICIO DE SESIÓN ------------------
         binding.btnIniciarSesion.setOnClickListener {
-            //Comprobamos que los campos no esten vacios
+            Log.i("Clic login", "btnLogin")
+            context?.applicationContext?.let {
+                //Le enviamos el token
+                val id = 1 // Aquí debes proporcionar el ID del usuario que deseas obtener
+                Log.i("Id usuario", id.toString())
+                Api.retrofitService.obtenerUsuarioPorId(id).enqueue(object : Callback<String> {
+                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                        if (response.isSuccessful) {
+                            val responseData = response.body()
+                            // Aquí puedes manejar la respuesta recibida desde el servidor
+                            Log.i("Token:" , responseData.toString())
+                            var seguridad = Seguridad()
+                            var resultado = seguridad.desencriptado(responseData.toString())
+
+                            Log.i("Datos Usuario", resultado)
+                            var informacionUsuario = Gson().fromJson(resultado, DatosUsuarioResponse::class.java)
+                            Log.i("Username", informacionUsuario.username)
+
+                            //Log.i("username ", informacionUsuario.usuarioResponse.username)
+
+                        } else {
+                           Log.i( "respuesta ", "la respuesta no es satisfactoria")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        Log.i("onFailure", "Error de conexion")
+                        Log.i("Error ", t.message.toString())
+                    }
+                })
+            }
+
+            /*Comprobamos que los campos no esten vacios
             if (binding.txtNombreUsuario.text.isNotEmpty()) {
                 if (binding.txtPassword.text.isNotEmpty()) {
 
@@ -88,7 +100,7 @@ class LogginFragment : Fragment() {
                 }
             } else {
                 Toast.makeText(context, "Introduce el nombre", Toast.LENGTH_LONG).show()
-            }
+            }*/
 
         }
 

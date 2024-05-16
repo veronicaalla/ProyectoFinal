@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import java.lang.reflect.Type
 import java.util.Properties
 
+
 class RetrofitBuilder {
 
     fun getApiEndpoint(context: Context): String {

@@ -41,6 +41,10 @@ android {
 }
 
 dependencies {
+    implementation ("com.fasterxml.jackson.core:jackson-databind:2.15.3")
+    implementation ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3")
+    implementation ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -51,26 +55,28 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    //Navegacion
+    //---------------- Fragments & Navegacion -------------------
     implementation ("androidx.navigation:navigation-fragment:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
 
-    //Coil -> para descargar las imagenes directamente en la web
-    implementation("io.coil-kt:coil:1.2.2")
+    //Retrofit2
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.google.code.gson:gson:2.10")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
 
     // LiveData
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation ("androidx.activity:activity-ktx:1.8.2")
     // ViewModel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    //Fragments
-    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0")
 
-    //Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    //Picasso
+    //-------- IMAGENES -------------
     implementation ("com.squareup.picasso:picasso:2.8")
+    implementation("io.coil-kt:coil:1.2.2")
 
-    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+
 }

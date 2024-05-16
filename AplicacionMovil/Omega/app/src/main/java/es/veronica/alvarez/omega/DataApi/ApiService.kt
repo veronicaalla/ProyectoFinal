@@ -7,6 +7,6 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("usuario/{id}")
+    @GET("usuarios/usuario/{id}")
     fun obtenerUsuarioPorId(@Path("id") id: Int): Call<String>
 }

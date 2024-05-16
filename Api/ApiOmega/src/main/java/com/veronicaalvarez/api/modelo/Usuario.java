@@ -183,7 +183,7 @@ public class Usuario {
         this.publico = publico;
     }
 
-    @Override
+  /*  @Override
     public String toString() {
         return "Usuario{" +
                 "id=" + id +
@@ -201,5 +201,5 @@ public class Usuario {
                 ", tipo=" + tipo +
                 ", publico=" + publico +
                 '}';
-    }
+    }*/
 }

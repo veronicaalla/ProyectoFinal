@@ -1,8 +1,11 @@
 package com.veronicaalvarez.api.controlador;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.veronicaalvarez.api.ImplementacionSeguridad.Seguridad;
 import org.springframework.http.HttpStatus;
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.veronicaalvarez.api.modelo.Usuario;
 import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
-
+import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
@@ -42,13 +45,27 @@ public class UsuarioController {
 		Seguridad seguridad = new Seguridad();
 
 		if (usuario==null) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(seguridad.estructura("Error al obtener el usuario", ""));
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Credenciales inválidas");
 		}
 
-		String datosEncriptados = seguridad.estructura("", usuario.toString());
+		Map<String, Object> map = new HashMap<>();
+		map.put("usuario", usuario);
+
+        String datosEncriptados = seguridad.encriptado(map);
 
 		return ResponseEntity.ok(datosEncriptados);
 	}
+
+	/*@GetMapping("usuario/{id}")
+	public ResponseEntity<String> obtenerUsuarioPorId(@PathVariable int id) throws JsonProcessingException {
+		Usuario usuario = usuarioRepositorio.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+		ObjectMapper objectMapper = new ObjectMapper();
+		String usuarioJson = objectMapper.writeValueAsString(usuario);
+
+		String encryptedData = new Seguridad().encriptado(usuarioJson);
+
+		return ResponseEntity.ok(encryptedData);
+	}*/
 
 	@GetMapping("/usuarios/{user}")
 	public ResponseEntity<Usuario> buscarUsuarioPorUser(@PathVariable String user) {

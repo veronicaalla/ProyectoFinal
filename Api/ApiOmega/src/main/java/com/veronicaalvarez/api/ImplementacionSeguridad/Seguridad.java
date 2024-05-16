@@ -3,15 +3,45 @@ package com.veronicaalvarez.api.ImplementacionSeguridad;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.lang.reflect.Field;
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 public class Seguridad {
     private static final String key = "Dcnpzt5dJqcYXu7X";
 
-    public String encrypt(String strToEncrypt, String encryptKey) {
+    /*
+    Object value = entry.getValue();
+    Field[] fields = value.getClass().getDeclaredFields();
+    for (Field field : fields) {
+        field.setAccessible(true);
+        String fieldName = field.getName();
+        Object fieldValue = field.get(value);
+        System.out.println("Field: " + fieldName + " = " + fieldValue);
+    }
+     */
+    public String encrypt(Map<String, Object> data, String encryptKey) {
         try {
+            StringBuilder objeto = new StringBuilder();
+            for (Map.Entry<String, Object> entry : data.entrySet()) {
+                Object value = entry.getValue();
+                Field[] fields = value.getClass().getDeclaredFields();
+                for (Field field : fields) {
+                    field.setAccessible(true);
+                    String fieldName = field.getName();
+                    Object fieldValue = field.get(value);
+                    objeto.append("\"").append(fieldName).append("\"").append(":").append("\"").append(fieldValue).append("\"").append(", ");
+                }
+            }
+            // Remove the last comma and add curly braces
+            objeto.setLength(objeto.length() - 2);
+            objeto.insert(0, "{");
+            objeto.append("}");
+
+            String strToEncrypt = objeto.toString();
+
             byte[] plainText = strToEncrypt.getBytes("UTF-8");
             SecretKeySpec key = generateKey(encryptKey);
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
@@ -62,8 +92,7 @@ public class Seguridad {
         return decrypt(codigo, key);
     }
 
-    public String estructura (String error, String resultado){
-        String valor = "{Response= {" + resultado + " } Error= { " +error+ " }}";
-        return encrypt(valor, key);
+    public String encriptado (Map<String, Object> map){
+        return encrypt( map, key);
     }
 }
