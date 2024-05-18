@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiService\Controlador.cs" />
+    <Compile Include="ApiService\Seguridad.cs" />
     <Compile Include="InfoReportedBook.cs">
       <SubType>Form</SubType>
     </Compile>

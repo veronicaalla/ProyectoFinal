@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Omega.Model
 {
-    internal class Usuario
+    public class Usuario
     {
         //Campos de auditoria
         public DateTime AuditCreated { get; set; }

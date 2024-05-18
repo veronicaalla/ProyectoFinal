@@ -187,8 +187,10 @@
             this.cmbTipoUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoUsuario.FormattingEnabled = true;
             this.cmbTipoUsuario.Items.AddRange(new object[] {
+            "SuperAdmi",
+            "Administrador",
             "Usuario",
-            "Administrador"});
+            "Escritor"});
             this.cmbTipoUsuario.Location = new System.Drawing.Point(440, 169);
             this.cmbTipoUsuario.Name = "cmbTipoUsuario";
             this.cmbTipoUsuario.Size = new System.Drawing.Size(171, 21);

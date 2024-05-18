@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Omega.ApiService;
+using Omega.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,19 +14,21 @@ namespace Omega
 {
     public partial class ListOfUsers : Form
     {
+
+        //Llamamos al método API
+        Controlador controlador;
+
         public ListOfUsers()
         {
             InitializeComponent();
-            //actualizarLista();
+            controlador = new Controlador();
+            actualizarLista();
         }
 
         private void tsmiNuevo_Click(object sender, EventArgs e)
         {
             crearUsuario();
-             
         }
-
-
 
         private void lvwUsuarios_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -47,10 +51,10 @@ namespace Omega
             {
                 verUsuario();
             }
-            
+
         }
 
-        
+
 
         private void cmsNuevo_Click(object sender, EventArgs e)
         {
@@ -72,7 +76,7 @@ namespace Omega
                 {
                     //Eliminamos el elemento
                     int idItem = (int)item.Tag;
-                    
+
                     //llamamos al método api que elimina el usuario
                 }
             }
@@ -100,25 +104,75 @@ namespace Omega
 
         }
 
-        private void verUsuario()
+        private async void verUsuario()
         {
-             //Buscamos cual es el elemento seleccionado
+            //Buscamos cual es el elemento seleccionado
             foreach (ListViewItem item in lvwUsuarios.SelectedItems)
             {
+               
                 int idItem = (int)item.Tag;
 
-                //Usuario usuarioSeleccionado = método api q devuelva su informacion por id
-                //InfoUser infoUsuario = new InfoUser(usuarioSeleccionado);
-                //infoUsuario.ShowDialog();
+                Usuario usuarioSeleccionado =  await controlador.ObtenerUsuarioPorIdAsync(idItem);
+                InfoUser infoUsuario = new InfoUser(usuarioSeleccionado);
+                infoUsuario.ShowDialog();
 
+            }
+        }
+
+
+        private async void actualizarLista()
+        {
+            List<Usuario> usuarios = await controlador.GetPerfiles();
+
+            if (usuarios != null)
+            {
+                lvwUsuarios.Items.Clear();
+
+                //Recorremos la lista
+                foreach (Usuario u in usuarios)
+                {
+                    ListViewItem nuevoItem = new ListViewItem();
+                    nuevoItem = lvwUsuarios.Items.Add(u.Alias);
+                    nuevoItem.SubItems.Add(u.Nombre);
+                    nuevoItem.SubItems.Add(u.Apellidos);
+                    nuevoItem.SubItems.Add(formatoFecha(u.FechaNacimiento.ToString()));
+                    nuevoItem.SubItems.Add(u.Correo);
+                    nuevoItem.SubItems.Add(u.Telefono);
+                    nuevoItem.SubItems.Add(obtenerTipoUsuario(u.Tipo));
+                    nuevoItem.Tag = u.Id;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay ningun usuario", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
         }
 
-        private void actualizarLista()
+        private string obtenerTipoUsuario(int tipo)
         {
-            //Método api que devuelve el listado de usuarios
-            //y se asigna a el ListView
+            switch (tipo)
+            {
+                case 1: return "superadmi";
+                case 2: return "administrador";
+                case 3: return "usuario";
+                case 4: return "escritor";
+            }
+            return "";
         }
+
+        private string formatoFecha (string fecha)
+        {
+            bool exito = DateTime.TryParse(fecha, out DateTime fechaFormateada);
+
+            if (exito)
+            {
+                string fechaFinal = fechaFormateada.ToString("dd/MM/yyyy");
+                return fechaFinal;
+            }
+            return null;
+        }
+
+
     }
 }
