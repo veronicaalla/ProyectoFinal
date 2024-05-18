@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Omega.ApiService;
+using Omega.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,11 +19,55 @@ namespace Omega
             InitializeComponent();
         }
 
-        private void btnIniciarSesion_Click(object sender, EventArgs e)
+        private async void btnIniciarSesion_Click(object sender, EventArgs e)
         {
             if (validarDatos())
             {
-                //Realizamos la llamada a la api
+
+                //Recogemlos los datos del formulario
+                var usuario = txtUsuario.Text;
+                var password = txtPassword.Text;
+
+                //Llamamos al método API
+                Controlador controlador = new Controlador();
+
+                Usuario usuarioAcceso = await controlador.LoginUsuario(usuario, password);
+
+                if (usuarioAcceso != null)
+                {
+
+                    textBox1.Text = $"{usuarioAcceso.Id} {usuarioAcceso.Tipo} {usuarioAcceso.Nombre}";
+                    //Comprobamos que el usuario sea de tipo administrador 
+                    if (usuarioAcceso.Tipo == 1 || usuarioAcceso.Tipo == 2) {
+                        //Vamos a comprobar que la ventana, no este ya activa
+                        foreach (Form form in Application.OpenForms)
+                        {
+                            if (typeof(MainActivity) == form.GetType())
+                            {
+                                form.Activate(); //Nos muestra por formulario (nos lo superpone)
+                                return;
+                            }
+                        }
+
+                        //Si no esta activo, lo instanciamos y mostramos
+                        MainActivity mainActivity = new MainActivity();
+                        this.Hide(); //Ocultamos la ventana del login 
+                        mainActivity.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El usuario no tiene acceso a esta aplicación", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("El usuario introducido no existe", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+
+                /*Realizamos la llamada a la api
 
                 //Realizamos prueba 
                 if (txtUsuario.Text.Equals("veronica") && txtPassword.Text.Equals("Va@12345"))
@@ -40,7 +86,8 @@ namespace Omega
                     MainActivity mainActivity = new MainActivity();
                     this.Hide(); //Ocultamos la ventana del login 
                     mainActivity.Show();
-                }
+                }*/
+
             }
         }
 
