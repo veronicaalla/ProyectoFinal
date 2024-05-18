@@ -59,8 +59,8 @@ public class LibroErroneoController {
         libroErroneo.setAuditCreated(LocalDateTime.now());
         libroErroneo.setAuditUpdated(LocalDateTime.now());
 
-        libroErroneo.setAuditCreator(usuario.getUsername());
-        libroErroneo.setAuditUpdater(usuario.getUsername());
+        libroErroneo.setAuditCreator(usuario.getAlias());
+        libroErroneo.setAuditUpdater(usuario.getAlias());
 
 
         libroErroneo.setIdLibro(libro.getId());
@@ -90,7 +90,7 @@ public class LibroErroneoController {
 
         //Modificamos la auditoria
         libroErroneo.setAuditCreated(LocalDateTime.now());
-        libroErroneo.setAuditUpdater(usuario.getUsername());
+        libroErroneo.setAuditUpdater(usuario.getAlias());
 
         libroErroneoRepositorio.save(libroErroneo);
 

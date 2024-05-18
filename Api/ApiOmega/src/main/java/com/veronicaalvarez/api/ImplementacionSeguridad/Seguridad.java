@@ -13,13 +13,46 @@ public class Seguridad {
     private static final String key = "Dcnpzt5dJqcYXu7X";
 
     /*
-    Object value = entry.getValue();
-    Field[] fields = value.getClass().getDeclaredFields();
-    for (Field field : fields) {
-        field.setAccessible(true);
-        String fieldName = field.getName();
-        Object fieldValue = field.get(value);
-        System.out.println("Field: " + fieldName + " = " + fieldValue);
+   private static String readPrivateKeyFromFile() throws IOException {
+   Path currentPath = Paths.get("").toAbsolutePath();
+   Path path = Paths.get(currentPath+"\\src\\main\\java\\com\\diego\\fernandez\\proyectofinal\\Contrasenia_privada.txt");
+   if (!Files.exists(path) || !Files.isRegularFile(path)) {
+   throw new IllegalArgumentException("El archivo especificado no existe.");
+   }
+    try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) { return reader.readLine();
+    // Se espera que la clave privada esté en la primera línea del archivo } }
+    // Método para obtener la clave privada a partir de una cadena Base64
+
+    private static PrivateKey getPrivateKeyFromString(String privateKeyStr) throws NoSuchAlgorithmException, InvalidKeySpecException
+    { byte[] privateKeyBytes = Base64.getDecoder().decode(privateKeyStr);
+    PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyBytes);
+    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    return keyFactory.generatePrivate(keySpec); }
+
+    private static byte[] serializeObject(Object obj) throws IOException
+    {
+    try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    ObjectOutputStream oos = new ObjectOutputStream(baos))
+    { oos.writeObject(obj);
+    return baos.toByteArray(); } }
+
+    // Método para cifrar datos utilizando una clave privada RSA
+    public static String encryptData(Object data)
+    {
+    try {
+        String privateKeyStr = readPrivateKeyFromFile();
+        PrivateKey privateKey = getPrivateKeyFromString(privateKeyStr);
+        // Inicializar el cifrado RSA Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding"); c
+        ipher.init(Cipher.ENCRYPT_MODE, privateKey);
+        // Serializar el objeto a bytes
+        byte[] objectBytes = serializeObject(data);
+        // Cifrar los bytes del objeto
+        byte[] encryptedBytes = cipher.doFinal(objectBytes);
+        // Devolver los bytes cifrados como una cadena Base64
+        return Base64.getEncoder().encodeToString(encryptedBytes);
+        } catch (IOException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | InvalidKeySpecException e) {
+            throw new RuntimeException("Error al cifrar los datos", e);
+        }
     }
      */
     public String encrypt(Map<String, Object> data, String encryptKey) {

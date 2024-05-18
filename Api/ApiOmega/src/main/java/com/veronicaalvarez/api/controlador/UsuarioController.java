@@ -1,25 +1,29 @@
 package com.veronicaalvarez.api.controlador;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.veronicaalvarez.api.ImplementacionSeguridad.Seguridad;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.veronicaalvarez.api.modelo.Usuario;
 import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
-import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
 @RequestMapping("/omega/usuarios")
 public class UsuarioController {
+
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	private final UsuarioRepositorio usuarioRepositorio;
 
@@ -69,7 +73,7 @@ public class UsuarioController {
 
 	@GetMapping("/usuarios/{user}")
 	public ResponseEntity<Usuario> buscarUsuarioPorUser(@PathVariable String user) {
-		Usuario usuario = usuarioRepositorio.findByUsername(user);
+		Usuario usuario = usuarioRepositorio.findByAlias(user);
 		if (usuario != null) {
 			return ResponseEntity.ok(usuario);
 		} else {
@@ -77,18 +81,55 @@ public class UsuarioController {
 		}
 	}
 
-	@PostMapping("/crearUsuario")
+	/*@PostMapping("/crearUsuario")
 	public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) {
-		//Asignamos la auditoria
-		usuario.setAuditCreated(LocalDateTime.now());
-		usuario.setAuditUpdated(LocalDateTime.now());
-		usuario.setAuditCreator(String.valueOf(usuario.getId()));
-		usuario.setAuditUpdater(String.valueOf(usuario.getId()));
-		usuarioRepositorio.save(usuario);
+		try {
+			Usuario nuevoUsuario = new Usuario();
+			nuevoUsuario.setNombre("Alvaro");
+			nuevoUsuario.setApellidos("Castañeda");
+			nuevoUsuario.setAlias("AlvaroCa");
+			nuevoUsuario.setClave("123456");
+			nuevoUsuario.setCorreo("alvaro@veronicaalvarez.com");
+			nuevoUsuario.setTipo(3);
+			nuevoUsuario.setPublico(true);
+			nuevoUsuario.setFechaNacimiento(LocalDate.now());
+			nuevoUsuario.setTelefono("684520126");
+
+			//Asignamos la auditoria
+			nuevoUsuario.setAuditCreated(LocalDateTime.now());
+			nuevoUsuario.setAuditUpdated(LocalDateTime.now());
+			nuevoUsuario.setAuditCreator("admi");
+			nuevoUsuario.setAuditUpdater("admi");
+
+
+			usuarioRepositorio.save(nuevoUsuario);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
 		return ResponseEntity.status(HttpStatus.CREATED).body("Usuario creado correctamente");
+	}*/
+
+	@PostMapping
+	public ResponseEntity<String> createUsuario(@RequestBody Usuario usuario) {
+		LocalDateTime now = LocalDateTime.now();
+		usuarioRepositorio.insertUsuario(
+				now,
+				"admi", // or fetch the actual creator dynamically
+				now,
+				"admi", // or fetch the actual updater dynamically
+				usuario.getAlias(),
+				usuario.getNombre(),
+				usuario.getApellidos(),
+				usuario.getFechaNacimiento(),
+				usuario.getCorreo(),
+				usuario.getClave(),
+				usuario.getTelefono(),
+				usuario.getTipo(),
+				usuario.getPublico()
+		);
+		return ResponseEntity.ok("Usuario created successfully");
 	}
-
-
 
 
 	@PutMapping("modificar/{id}")
@@ -101,7 +142,7 @@ public class UsuarioController {
 		}
 
 		// Actualizar los campos del usuario existente con los datos del usuario modificado
-		usuarioExistente.setUsername(usuarioModificado.getUsername());
+		usuarioExistente.setAlias(usuarioModificado.getAlias());
 		usuarioExistente.setNombre(usuarioModificado.getNombre());
 		usuarioExistente.setApellidos(usuarioModificado.getApellidos());
 		usuarioExistente.setFechaNacimiento(usuarioModificado.getFechaNacimiento());
@@ -141,7 +182,7 @@ public class UsuarioController {
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUsuario(@RequestParam String usuarioOEmail, @RequestParam String clave) {
 		// Buscar al usuario por nombre de usuario o correo electrónico
-		Usuario usuario = usuarioRepositorio.findByUsernameOrCorreo(usuarioOEmail, usuarioOEmail);
+		Usuario usuario = usuarioRepositorio.findByAliasOrCorreo(usuarioOEmail, usuarioOEmail);
 
 		// Verificar si se encontró un usuario
 		if (usuario == null) {

@@ -17,9 +17,6 @@ import jakarta.persistence.Table;
 @Table(name = "usuarios")
 public class Usuario {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
 
 	@ColumnDefault("CURRENT_TIMESTAMP")
 	@Column(name = "audit_created", nullable = false)
@@ -37,8 +34,12 @@ public class Usuario {
 	@Column(name = "audit_updater", nullable = false, length = 45)
 	private String auditUpdater;
 
-	@Column(name = "username", nullable = false, length = 45)
-	private String username;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+	@Column(name = "alias", length = 45)
+	private String alias;
 
 	@Column(name = "nombre", nullable = false, length = 45)
 	private String nombre;
@@ -111,12 +112,12 @@ public class Usuario {
         this.auditUpdater = auditUpdater;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAlias() {
+        return alias;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public String getNombre() {
@@ -183,23 +184,4 @@ public class Usuario {
         this.publico = publico;
     }
 
-  /*  @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", auditCreated=" + auditCreated +
-                ", auditCreator='" + auditCreator + '\'' +
-                ", auditUpdated=" + auditUpdated +
-                ", auditUpdater='" + auditUpdater + '\'' +
-                ", username='" + username + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", correo='" + correo + '\'' +
-                ", clave='" + clave + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", tipo=" + tipo +
-                ", publico=" + publico +
-                '}';
-    }*/
 }

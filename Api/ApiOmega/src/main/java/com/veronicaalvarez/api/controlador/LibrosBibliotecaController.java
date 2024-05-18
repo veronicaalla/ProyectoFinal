@@ -109,30 +109,5 @@ public class LibrosBibliotecaController {
         }
     }
 
-    /*@GetMapping
-    public ResponseEntity<?> obtenerLibrosBiblioteca() {
-        List<LibrosBiblioteca> libros = librosBibliotecaRepository.findAll();
-
-        if (libros.isEmpty())
-            return ResponseEntity.notFound().build();
-
-        return ResponseEntity.ok(libros);
-    }
-
-    @GetMapping("/biblioteca/{bibliotecaId}")
-    public ResponseEntity<?> obtenerLibrosPorBiblioteca(@PathVariable int bibliotecaId) {
-        List<LibrosBiblioteca> librosBiblioteca = librosBibliotecaRepository.findByBibliotecaId(bibliotecaId);
-
-        if (librosBiblioteca.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // Extraer la lista de libros de los objetos LibrosBiblioteca
-        List<Libro> libros = librosBiblioteca.stream()
-                .map(LibrosBiblioteca::getLibro)
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(libros);
-    }*/
 
 }

@@ -61,8 +61,8 @@ public class ComentarioReportadoController {
 		nuevoReporte.setAuditCreated(LocalDateTime.now());
 		nuevoReporte.setAuditUpdated(LocalDateTime.now());
 
-		nuevoReporte.setAuditCreator(usuario.getUsername());
-		nuevoReporte.setAuditUpdater(usuario.getUsername());
+		nuevoReporte.setAuditCreator(usuario.getAlias());
+		nuevoReporte.setAuditUpdater(usuario.getAlias());
 
 		nuevoReporte.setIdComentario(comentario.getId());
 		nuevoReporte.setIdReportante(usuario.getId());
@@ -88,7 +88,7 @@ public class ComentarioReportadoController {
 		// Actualizar los campos del reporte
 		comentarioReportado.setOfensivo(comentarioReportadoNuevo.getOfensivo());
 		comentarioReportado.setAuditUpdated(LocalDateTime.now()); // Actualizar la fecha de actualización
-		comentarioReportado.setAuditUpdater(usuario.getUsername());
+		comentarioReportado.setAuditUpdater(usuario.getAlias());
 
 		// Guardar los cambios en la base de datos
 		reportadoRepositorio.save(comentarioReportado);
