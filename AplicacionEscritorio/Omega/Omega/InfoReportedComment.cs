@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Omega.ApiService;
+using Omega.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,18 +15,38 @@ namespace Omega
     public partial class InfoReportedComment : Form
     {
 
-        //Comentario _comentario;
+        ComentarioReportado comentarioReportado;
+        Controlador controlador;
         public InfoReportedComment()
         {
             InitializeComponent();
-
+            controlador = new Controlador();
             //los campos no se pueden modificar, solo visualizar
             txtUsuario.Enabled = false;
             txtComentario.Enabled = false;
 
             //Inicializamos el comentario
-            //_comentario = new Comentario();
+            comentarioReportado = new ComentarioReportado();
         }
+
+        public InfoReportedComment(ComentarioReportado comentario) : this()
+        {
+            asignamosValores(comentario);
+        }
+
+
+        public async void asignamosValores(ComentarioReportado comentario)
+        {
+            txtUsuario.Text = (await controlador.ObtenerUsuarioPorIdAsync(comentario.IdReportante)).Alias;
+            txtComentario.Text = (await controlador.ObtenerComentarioPorId(comentario.IdComentario)).comentario;
+           
+            if (comentario.Ofensivo != null)
+            {
+                string esOfensivo = comentarioReportado.Ofensivo.HasValue && comentarioReportado.Ofensivo.Value ? "SI" : "NO";
+                cmbOfensivo.Text = esOfensivo;
+            }
+        }
+
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {

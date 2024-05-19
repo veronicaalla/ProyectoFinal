@@ -35,6 +35,7 @@ namespace Omega
             //Comprobamos si el usuario es nuevo o no
             if (usuario.Id == 0)
             {
+                btnAceptar.Text = "Agregar";
                 return;
             }
 
@@ -50,6 +51,8 @@ namespace Omega
             //La fecha de nacimiento y el tipo de usuario no se pueden modificar
             cmbTipoUsuario.Enabled = false;
             dtpFechaNac.Enabled = false;
+
+            btnAceptar.Text = "Modificar";
 
         }
 
@@ -84,6 +87,7 @@ namespace Omega
                     {
                         MessageBox.Show("Error: " + ex.Message);
                     }
+                    return;
                 }
 
                 // Llamar al método de la API para modificar el usuario

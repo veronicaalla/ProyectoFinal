@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Omega.ApiService;
+using Omega.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,12 @@ namespace Omega
 {
     public partial class ListOfReportedCommets : Form
     {
+
+        Controlador controlador;
         public ListOfReportedCommets()
         {
             InitializeComponent();
+            controlador = new Controlador();
             actualizarLista();
         }
 
@@ -38,22 +43,51 @@ namespace Omega
         }
 
         
-        private void actualizarLista()
+        private async void actualizarLista()
         {
             //Método api que devuelve el listado de usuarios
             //y se asigna a el ListView
+
+            List<ComentarioReportado> comentarios = await controlador.getComentariosReportados();
+
+            if (comentarios != null)
+            {
+                //Limpiamos la lista
+                lvwComentarios.Items.Clear();
+
+                //Recorremos la lista 
+                foreach (ComentarioReportado c in comentarios)
+                {
+                    ListViewItem nuevoItem = new ListViewItem();
+
+                    //Necesitamos obtener el usuario
+                    string aliasUsuario = (await controlador.ObtenerUsuarioPorIdAsync(c.IdReportante)).Alias;
+                    nuevoItem = lvwComentarios.Items.Add(aliasUsuario);
+
+                    //Necesitamos obtener el comentario
+                    string comentario = (await controlador.ObtenerComentarioPorId(c.IdComentario)).comentario;
+                    nuevoItem.SubItems.Add(comentario);
+
+                    nuevoItem.SubItems.Add(c.Ofensivo.ToString());
+                    nuevoItem.Tag = c.Id;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay ningun comentario", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
-        private void verComentario()
+        private async void verComentario()
         {
             //Buscamos cual es el elemento seleccionado
             foreach (ListViewItem item in lvwComentarios.SelectedItems)
             {
                 int idItem = (int)item.Tag;
 
-                //Comentario comentarioSeleccionado = método api q devuelva su informacion por id
-                //InfoReportedComment infoComentario = new InfoUser(comentarioSeleccionado);
-                //infoComentario.ShowDialog();
+                ComentarioReportado comentarioReportado = await controlador.ObtenerComentarioReportadoPorId(idItem);
+                InfoReportedComment infoComentario = new InfoReportedComment(comentarioReportado);
+                infoComentario.ShowDialog();
 
             }
         }

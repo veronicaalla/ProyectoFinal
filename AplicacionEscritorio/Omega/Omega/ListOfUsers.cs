@@ -66,7 +66,7 @@ namespace Omega
             verUsuario();
         }
 
-        private void cmsEliminar_Click(object sender, EventArgs e)
+        private async void cmsEliminar_Click(object sender, EventArgs e)
         {
             //Buscamos cual es el elemento seleccinado
             foreach (ListViewItem item in lvwUsuarios.SelectedItems)
@@ -78,6 +78,8 @@ namespace Omega
                     int idItem = (int)item.Tag;
 
                     //llamamos al método api que elimina el usuario
+                    string result = await controlador.EliminarUsuario(idItem);
+                    MessageBox.Show(result, "ELIMMINAR", MessageBoxButtons.OK);
                 }
             }
 

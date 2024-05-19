@@ -127,6 +127,8 @@
     <Compile Include="MainActivity.Designer.cs">
       <DependentUpon>MainActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Comentario.cs" />
+    <Compile Include="Model\ComentarioReportado.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

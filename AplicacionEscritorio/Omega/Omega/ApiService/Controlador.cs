@@ -15,8 +15,8 @@ namespace Omega.ApiService
 {
     internal class Controlador
     {
-        private  HttpClient client;
-        private  string rutaBasica = "http://172.20.10.3:8080/omega/";
+        private HttpClient client;
+        private string rutaBasica = "http://172.20.10.3:8080/omega/";
         public Seguridad seguridad;
 
         public Controlador()
@@ -25,7 +25,7 @@ namespace Omega.ApiService
             seguridad = new Seguridad();
         }
 
-        //region CLASE USUARIO
+    
         public async Task<Usuario> LoginUsuario(string usuarioOEmail, string clave)
         {
 
@@ -134,30 +134,97 @@ namespace Omega.ApiService
             return false;
         }
 
-        public async Task<string> LlamarMetodoEliminarUsuario(int usuarioId)
+        public async Task<string> EliminarUsuario(int usuarioId)
         {
-            string url = $"{rutaBasica}usuario/{usuarioId}";
+            string url = $"{rutaBasica}usuarios/usuario/{usuarioId}";
 
-            try
+            HttpResponseMessage response = await client.DeleteAsync(url);
+
+            if (response.IsSuccessStatusCode)
             {
-                HttpResponseMessage response = await client.DeleteAsync(url); 
-
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                   return $"Respuesta del servidor: {responseBody}";
-                }
-                else
-                {
-                    return $"Error: {response.StatusCode}";
-                }
+                string responseBody = await response.Content.ReadAsStringAsync();
+                return $"{responseBody}";
             }
-            catch (Exception e)
+            else
             {
-                return $"Error al realizar la solicitud: {e.Message}";
+                return $"Error: {response.StatusCode}";
             }
         }
 
-        //endregion
+
+        public async Task<List<ComentarioReportado>> getComentariosReportados()
+        {
+            string url = $"{rutaBasica}comentarioreportado";
+
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                List<ComentarioReportado> comentariosReportados = JsonConvert.DeserializeObject<List<ComentarioReportado>>(jsonResponse);
+                return comentariosReportados;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            {
+                Console.WriteLine("No hay comentarios reportados.");
+            }
+            else
+            {
+                Console.WriteLine($"Error al obtener comentarios reportados: {response.StatusCode}");
+            }
+
+            return null;
+        }
+
+        public async Task<Comentario> ObtenerComentarioPorId(int id)
+        {
+            string url = $"{rutaBasica}comentarios/comentario/{id}";
+
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                Comentario comentario = JsonConvert.DeserializeObject<Comentario>(jsonResponse);
+                return comentario;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                Console.WriteLine("Comentario no encontrado.");
+            }
+            else
+            {
+                Console.WriteLine($"Error al obtener el comentario: {response.StatusCode}");
+            }
+
+            return null;
+        }
+
+        // Método para obtener un comentario reportado por ID
+        public async Task<ComentarioReportado> ObtenerComentarioReportadoPorId(int id)
+        {
+            string url = $"{rutaBasica}comentarioreportado/comentario/{id}";
+
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                ComentarioReportado comentarioReportado = JsonConvert.DeserializeObject<ComentarioReportado>(jsonResponse);
+                return comentarioReportado;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                Console.WriteLine("Comentario reportado no encontrado.");
+            }
+            else
+            {
+                Console.WriteLine($"Error al obtener el comentario reportado: {response.StatusCode}");
+            }
+
+            return null;
+        }
     }
+
 }
+

@@ -1,5 +1,8 @@
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Omega.exe.config
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Omega.exe
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Omega.pdb
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\System.Buffers.dll
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\System.Memory.dll
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\System.Numerics.Vectors.dll
@@ -7,8 +10,6 @@ C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\System.Text.Encodings.Web.dll
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\System.Text.Json.dll
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\System.Threading.Tasks.Extensions.dll
-C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Omega.exe.config
-C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\System.ValueTuple.dll
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Newtonsoft.Json.xml
@@ -35,4 +36,3 @@ C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.csproj.Up2Date
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.exe
 C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\obj\Debug\Omega.pdb
-C:\Users\Alumno\Desktop\ProyectoFinal\AplicacionEscritorio\Omega\Omega\bin\Debug\Omega.pdb
