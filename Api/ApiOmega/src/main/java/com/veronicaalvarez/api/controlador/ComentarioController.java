@@ -33,6 +33,17 @@ public class ComentarioController {
 		return ResponseEntity.ok(comentarios);
 	}
 
+	@GetMapping("/comentario/{id}")
+	public ResponseEntity<?> obtenerComentarioPorId(@PathVariable int id){
+		Comentario comentario = comentarioRepositorio.findById(id).orElse(null);
+
+		if (comentario == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(comentario);
+	}
+
 	@GetMapping("/libro/{idLibro}")
 	public ResponseEntity<?> obtenerComentariosPorLibro(@PathVariable("idLibro") int idLibro) {
 		List<Comentario> comentarios = comentarioRepositorio.findByIdLibro(idLibro);

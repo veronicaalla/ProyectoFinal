@@ -47,6 +47,17 @@ public class ComentarioReportadoController {
 		return ResponseEntity.ok(librosErroneosSinResolver);
 	}
 
+	@GetMapping("/comentario/{id}")
+	public ResponseEntity<?> obtenerComentarioReportadoPorId(@PathVariable int id){
+		ComentarioReportado comentarioReportado = reportadoRepositorio.findById(id).orElse(null);
+
+		if (comentarioReportado == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(comentarioReportado);
+	}
+
 	@PostMapping("/crear")
 	public ResponseEntity<?> reportarComentario(@RequestParam int comentarioId, @RequestParam int usuarioId) {
 
