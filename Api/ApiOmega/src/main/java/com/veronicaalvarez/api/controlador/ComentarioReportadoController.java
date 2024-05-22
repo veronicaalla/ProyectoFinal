@@ -84,22 +84,22 @@ public class ComentarioReportadoController {
 
 	@PutMapping("/editar/{id}")
 	public ResponseEntity<?> editarComentarioReportado(@RequestParam int idComentarioReportado,
-																		 @RequestParam int usuarioId,
-																		 @RequestBody ComentarioReportado comentarioReportadoNuevo) {
+														@RequestBody ComentarioReportado comentarioReportadoNuevo) {
 
-		ComentarioReportado comentarioReportado = reportadoRepositorio.findById(comentarioReportadoNuevo.getId()).orElse(null);
-		Comentario comentario = comentarioRepository.findById(idComentarioReportado).orElse(null);
-		Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
+		ComentarioReportado comentarioReportado = null;
 
-		if (comentario == null || usuario == null) {
-			return ResponseEntity.badRequest().build();
+		//Comprobamos que el id sea el mismo
+		if (idComentarioReportado == comentarioReportadoNuevo.getIdComentario()) {
+			comentarioReportado  = reportadoRepositorio.findById(idComentarioReportado).orElse(null);
 		}
 
+		if (comentarioReportado == null ) {
+			return ResponseEntity.badRequest().build();
+		}
 
 		// Actualizar los campos del reporte
 		comentarioReportado.setOfensivo(comentarioReportadoNuevo.getOfensivo());
 		comentarioReportado.setAuditUpdated(LocalDateTime.now()); // Actualizar la fecha de actualización
-		comentarioReportado.setAuditUpdater(usuario.getAlias());
 
 		// Guardar los cambios en la base de datos
 		reportadoRepositorio.save(comentarioReportado);
