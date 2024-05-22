@@ -124,7 +124,7 @@ namespace Omega
 
         private async void actualizarLista()
         {
-            List<Usuario> usuarios = await controlador.GetPerfiles();
+            List<Usuario> usuarios = await controlador.GetUsuarios();
 
             if (usuarios != null)
             {

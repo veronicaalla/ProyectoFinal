@@ -1,42 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\",
+  "WorkspaceRootPath": "C:\\Users\\Alumno\\Desktop\\Omega\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\proyectofinal\\aplicacionescritorio\\omega\\omega\\inforeportedcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\omega\\omega\\inforeportedcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\inforeportedcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\proyectofinal\\aplicacionescritorio\\omega\\omega\\listofusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\listofusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\proyectofinal\\aplicacionescritorio\\omega\\omega\\listofreportedcommets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\listofreportedcommets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\proyectofinal\\aplicacionescritorio\\omega\\omega\\inforeportedcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\inforeportedcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\proyectofinal\\aplicacionescritorio\\omega\\omega\\listofreportedcommets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\listofreportedcommets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\omega\\apiservice\\controlador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|C:\\Users\\Alumno\\Desktop\\Omega\\omega\\apiservice\\controlador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\apiservice\\controlador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\proyectofinal\\aplicacionescritorio\\omega\\omega\\model\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\model\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\omega\\omega\\model\\comentarioreportado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\model\\comentarioreportado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\proyectofinal\\aplicacionescritorio\\omega\\omega\\apiservice\\seguridad.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\apiservice\\seguridad.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\proyectofinal\\aplicacionescritorio\\omega\\omega\\model\\comentario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\model\\comentario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|C:\\Users\\Alumno\\Desktop\\Omega\\omega\\inforeportedcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\inforeportedcomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 182,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
@@ -106,13 +86,39 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ComentarioReportado.cs",
+              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\Model\\ComentarioReportado.cs",
+              "RelativeDocumentMoniker": "Omega\\Model\\ComentarioReportado.cs",
+              "ToolTip": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\Model\\ComentarioReportado.cs",
+              "RelativeToolTip": "Omega\\Model\\ComentarioReportado.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T18:45:57.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Controlador.cs",
+              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\ApiService\\Controlador.cs",
+              "RelativeDocumentMoniker": "Omega\\ApiService\\Controlador.cs",
+              "ToolTip": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\ApiService\\Controlador.cs",
+              "RelativeToolTip": "Omega\\ApiService\\Controlador.cs",
+              "ViewState": "AQIAAN0AAAAAAAAAAAAYwOcAAABNAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-22T18:03:23.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "InfoReportedComment.cs",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\InfoReportedComment.cs",
+              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\InfoReportedComment.cs",
               "RelativeDocumentMoniker": "Omega\\InfoReportedComment.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\InfoReportedComment.cs",
+              "ToolTip": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\InfoReportedComment.cs",
               "RelativeToolTip": "Omega\\InfoReportedComment.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAkwCAAAAAJAAAA",
+              "ViewState": "AQIAAEcAAAAAAAAAAAAIwF0AAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-19T11:19:37.292Z",
               "EditorCaption": ""
@@ -121,96 +127,19 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "InfoReportedComment.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\InfoReportedComment.cs",
+              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\InfoReportedComment.cs",
               "RelativeDocumentMoniker": "Omega\\InfoReportedComment.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\InfoReportedComment.cs [Dise\u00F1o]",
+              "ToolTip": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\InfoReportedComment.cs [Dise\u00F1o]",
               "RelativeToolTip": "Omega\\InfoReportedComment.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-19T11:19:31.618Z",
               "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Seguridad.cs",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ApiService\\Seguridad.cs",
-              "RelativeDocumentMoniker": "Omega\\ApiService\\Seguridad.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ApiService\\Seguridad.cs",
-              "RelativeToolTip": "Omega\\ApiService\\Seguridad.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T11:10:07.002Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ListOfReportedCommets.cs",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ListOfReportedCommets.cs",
-              "RelativeDocumentMoniker": "Omega\\ListOfReportedCommets.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ListOfReportedCommets.cs",
-              "RelativeToolTip": "Omega\\ListOfReportedCommets.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAQwFkAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T10:20:31.304Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ListOfReportedCommets.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ListOfReportedCommets.cs",
-              "RelativeDocumentMoniker": "Omega\\ListOfReportedCommets.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ListOfReportedCommets.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Omega\\ListOfReportedCommets.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T10:20:21.221Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\Model\\Usuario.cs",
-              "RelativeDocumentMoniker": "Omega\\Model\\Usuario.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\Model\\Usuario.cs",
-              "RelativeToolTip": "Omega\\Model\\Usuario.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T10:10:58.156Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Controlador.cs",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ApiService\\Controlador.cs",
-              "RelativeDocumentMoniker": "Omega\\ApiService\\Controlador.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ApiService\\Controlador.cs",
-              "RelativeToolTip": "Omega\\ApiService\\Controlador.cs",
-              "ViewState": "AQIAAMsAAAAAAAAAAAAAAMsAAABOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T14:58:35.557Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Comentario.cs",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\Model\\Comentario.cs",
-              "RelativeDocumentMoniker": "Omega\\Model\\Comentario.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\Model\\Comentario.cs",
-              "RelativeToolTip": "Omega\\Model\\Comentario.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAiwAwAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T11:10:05.822Z",
-              "EditorCaption": ""
             }
           ]
         },
         {
           "DockedWidth": 118,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -223,19 +152,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ListOfUsers.cs",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ListOfUsers.cs",
-              "RelativeDocumentMoniker": "Omega\\ListOfUsers.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ProyectoFinal\\AplicacionEscritorio\\Omega\\Omega\\ListOfUsers.cs",
-              "RelativeToolTip": "Omega\\ListOfUsers.cs",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAAwF8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-18T18:41:58.882Z",
-              "EditorCaption": ""
             }
           ]
         },

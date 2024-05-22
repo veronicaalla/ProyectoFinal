@@ -37,24 +37,56 @@ namespace Omega
 
         public async void asignamosValores(ComentarioReportado comentario)
         {
+            this.comentarioReportado = comentario;
+
             txtUsuario.Text = (await controlador.ObtenerUsuarioPorIdAsync(comentario.IdReportante)).Alias;
             txtComentario.Text = (await controlador.ObtenerComentarioPorId(comentario.IdComentario)).comentario;
-           
+
             if (comentario.Ofensivo != null)
             {
-                string esOfensivo = comentarioReportado.Ofensivo.HasValue && comentarioReportado.Ofensivo.Value ? "SI" : "NO";
-                cmbOfensivo.Text = esOfensivo;
+                if ((bool)comentario.Ofensivo)
+                {
+                    cmbOfensivo.Text = "SI";
+                }
+                else
+                {
+                    cmbOfensivo.Text = "NO";
+                }
             }
         }
 
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            //Recogemos el valor del ComboBox 
+            //Recogemos el valor del ComboBox (lo unico a modificar)
+            if (cmbOfensivo.Text == "SI")
+            {
+                comentarioReportado.Ofensivo = true;
+            }
+            else
+            {
+                comentarioReportado.Ofensivo = false;
+            }
 
-            //Llamamos a la api para realizar la modificacion
-            //y si es "SI" ponerle al usuario que ha realizado un comentario ofensivo
+            //Le debemos asignar el id del usuario que se ha logueado 
+            //comentarioReportado.AuditUpdater = 
 
+            actualizarComentario();
+
+        }
+
+        private async void actualizarComentario()
+        {
+            var cambioEfectuado = await controlador.EditarComentarioReportado(comentarioReportado.Id, comentarioReportado);
+
+            if (cambioEfectuado)
+            {
+                MessageBox.Show("Se ha modificado correctamente", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido realizar la modificación", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

@@ -16,7 +16,7 @@ namespace Omega.ApiService
     internal class Controlador
     {
         private HttpClient client;
-        private string rutaBasica = "http://172.20.10.3:8080/omega/";
+        private string rutaBasica = "http://10.0.2.2:8080/omega/";
         public Seguridad seguridad;
 
         public Controlador()
@@ -58,7 +58,7 @@ namespace Omega.ApiService
         }
 
 
-        public async Task<List<Usuario>> GetPerfiles()
+        public async Task<List<Usuario>> GetUsuarios()
         {
             string url = rutaBasica + "usuarios";
 
@@ -223,6 +223,28 @@ namespace Omega.ApiService
             }
 
             return null;
+        }
+
+
+        public async Task<bool> EditarComentarioReportado(int idComentarioReportado, ComentarioReportado comentarioReportadoNuevo)
+        {
+            var url = $"{rutaBasica}comentarioreportado/editar/{idComentarioReportado}";
+            var json = JsonConvert.SerializeObject(comentarioReportadoNuevo);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync(url, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                string responseContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine("Comentario reportado actualizado correctamente: " + responseContent);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Error al actualizar el comentario reportado: " + response.StatusCode);
+                return false;
+            }
         }
     }
 
