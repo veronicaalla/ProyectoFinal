@@ -44,6 +44,16 @@ public class LibroErroneoController {
         return ResponseEntity.ok(librosErroneosSinResolver);
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> obtenerLibrosErroneosId(@PathVariable Integer id) {
+        LibroErroneo erroneo = libroErroneoRepositorio.findById(id).orElse(null);
+
+        if(erroneo == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(erroneo);
+    }
+
     @PostMapping("/crear")
     public ResponseEntity<?> crearLibroErroneo(@RequestParam("idLibro") int idLibro,
                                                @RequestParam("idReportante") int idReportante) {

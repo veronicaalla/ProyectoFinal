@@ -2,7 +2,9 @@ package com.veronicaalvarez.api.controlador;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,17 @@ public class GeneroController {
 	@GetMapping
 	public List<Genero> obtenerGeneros(){
 		return generoRepositorio.findAll();
+	}
+
+	@GetMapping("id/{id}")
+	public ResponseEntity<?> obtenerGeneroPorId(@PathVariable int id){
+		Genero genero = generoRepositorio.findById(id).orElse(null);
+
+		if (genero == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(genero);
 	}
 	
 }
