@@ -32,19 +32,12 @@
             this.btnFiltrado = new System.Windows.Forms.Button();
             this.txtFiltrado = new System.Windows.Forms.TextBox();
             this.lvwLibros = new System.Windows.Forms.ListView();
-            this.chISBN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chTitulo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chAutor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chDescripcion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chGenero = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.tsmiLibros = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiNuevo = new System.Windows.Forms.ToolStripMenuItem();
+            this.chLibro = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chUsuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chResuelto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmsLibros = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsNuevo = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsVer = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.cmsLibros.SuspendLayout();
             this.SuspendLayout();
@@ -69,11 +62,9 @@
             // lvwLibros
             // 
             this.lvwLibros.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chISBN,
-            this.chTitulo,
-            this.chAutor,
-            this.chDescripcion,
-            this.chGenero});
+            this.chLibro,
+            this.chUsuario,
+            this.chResuelto});
             this.lvwLibros.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lvwLibros.FullRowSelect = true;
             this.lvwLibros.GridLines = true;
@@ -88,60 +79,25 @@
             this.lvwLibros.SelectedIndexChanged += new System.EventHandler(this.lvwLibros_SelectedIndexChanged);
             this.lvwLibros.DoubleClick += new System.EventHandler(this.lvwLibros_DoubleClick);
             // 
-            // chISBN
+            // chLibro
             // 
-            this.chISBN.Text = "ISBN";
-            this.chISBN.Width = 189;
+            this.chLibro.Text = "Libro";
+            this.chLibro.Width = 409;
             // 
-            // chTitulo
+            // chUsuario
             // 
-            this.chTitulo.Text = "Titulo";
-            this.chTitulo.Width = 198;
+            this.chUsuario.Text = "Usuario Reportante";
+            this.chUsuario.Width = 373;
             // 
-            // chAutor
+            // chResuelto
             // 
-            this.chAutor.Text = "Autor";
-            this.chAutor.Width = 157;
-            // 
-            // chDescripcion
-            // 
-            this.chDescripcion.Text = "Descripción";
-            this.chDescripcion.Width = 233;
-            // 
-            // chGenero
-            // 
-            this.chGenero.Text = "Género";
-            this.chGenero.Width = 141;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiLibros});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(973, 24);
-            this.menuStrip1.TabIndex = 12;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // tsmiLibros
-            // 
-            this.tsmiLibros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiNuevo});
-            this.tsmiLibros.Name = "tsmiLibros";
-            this.tsmiLibros.Size = new System.Drawing.Size(51, 20);
-            this.tsmiLibros.Text = "Libros";
-            // 
-            // tsmiNuevo
-            // 
-            this.tsmiNuevo.Name = "tsmiNuevo";
-            this.tsmiNuevo.Size = new System.Drawing.Size(180, 22);
-            this.tsmiNuevo.Text = "Nuevo";
-            this.tsmiNuevo.Click += new System.EventHandler(this.tsmiNuevo_Click);
+            this.chResuelto.Text = "Resuelto";
+            this.chResuelto.Width = 156;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Omega.Properties.Resources.Logo_Omega_PC;
-            this.pictureBox1.Location = new System.Drawing.Point(850, 27);
+            this.pictureBox1.Location = new System.Drawing.Point(838, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(123, 62);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -151,22 +107,14 @@
             // cmsLibros
             // 
             this.cmsLibros.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsNuevo,
             this.cmsVer});
             this.cmsLibros.Name = "cmsLibros";
-            this.cmsLibros.Size = new System.Drawing.Size(110, 48);
-            // 
-            // cmsNuevo
-            // 
-            this.cmsNuevo.Name = "cmsNuevo";
-            this.cmsNuevo.Size = new System.Drawing.Size(109, 22);
-            this.cmsNuevo.Text = "Nuevo";
-            this.cmsNuevo.Click += new System.EventHandler(this.cmsNuevo_Click);
+            this.cmsLibros.Size = new System.Drawing.Size(91, 26);
             // 
             // cmsVer
             // 
             this.cmsVer.Name = "cmsVer";
-            this.cmsVer.Size = new System.Drawing.Size(109, 22);
+            this.cmsVer.Size = new System.Drawing.Size(90, 22);
             this.cmsVer.Text = "Ver";
             this.cmsVer.Click += new System.EventHandler(this.cmsVer_Click);
             // 
@@ -179,11 +127,8 @@
             this.Controls.Add(this.btnFiltrado);
             this.Controls.Add(this.txtFiltrado);
             this.Controls.Add(this.lvwLibros);
-            this.Controls.Add(this.menuStrip1);
             this.Name = "ListOfReportedBooks";
             this.Text = "Mantenimiento de Libros Reportados";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.cmsLibros.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -197,16 +142,10 @@
         private System.Windows.Forms.Button btnFiltrado;
         private System.Windows.Forms.TextBox txtFiltrado;
         private System.Windows.Forms.ListView lvwLibros;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem tsmiLibros;
-        private System.Windows.Forms.ToolStripMenuItem tsmiNuevo;
-        private System.Windows.Forms.ColumnHeader chISBN;
-        private System.Windows.Forms.ColumnHeader chTitulo;
-        private System.Windows.Forms.ColumnHeader chAutor;
-        private System.Windows.Forms.ColumnHeader chDescripcion;
-        private System.Windows.Forms.ColumnHeader chGenero;
         private System.Windows.Forms.ContextMenuStrip cmsLibros;
-        private System.Windows.Forms.ToolStripMenuItem cmsNuevo;
         private System.Windows.Forms.ToolStripMenuItem cmsVer;
+        private System.Windows.Forms.ColumnHeader chLibro;
+        private System.Windows.Forms.ColumnHeader chUsuario;
+        private System.Windows.Forms.ColumnHeader chResuelto;
     }
 }

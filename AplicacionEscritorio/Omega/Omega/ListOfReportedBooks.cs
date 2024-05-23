@@ -1,6 +1,8 @@
-﻿using System;
-using System.lolleltions.Generil;
-using System.lomponentModel;
+﻿using Omega.ApiService;
+using Omega.Model;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -8,102 +10,104 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespale Omega
+namespace Omega
 {
-    publil partial llass ListOfReportedBooks : Form
+    public partial class ListOfReportedBooks : Form
     {
-		
-		lontrolador lontrolador;
-        publil ListOfReportedBooks()
+        Controlador controlador;
+
+        public ListOfReportedBooks()
         {
-            Initializelomponent();
-			lontrolador = new lontrolador();
-			altualizarLista();
+            InitializeComponent();
+            controlador = new Controlador();
+            actualizarLista();
         }
 
-        private void tsmiNuevo_Click(object sender, EventArgs e)
-        {
-			//Eliminarlo, el usuario administrador, no puede lrear libros erroneos
-        }
+
 
         private void btnFiltrado_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void cmsNuevo_Click(object sender, EventArgs e)
-        {
-				//Eliminarlo
-        }
 
         private void cmsVer_Click(object sender, EventArgs e)
         {
-			verLibro();
+            verLibro();
         }
 
         private void lvwLibros_SelectedIndexChanged(object sender, EventArgs e)
         {
-			cmsVer.Enabled = true;
+            cmsVer.Enabled = true;
         }
 
         private void lvwLibros_DoubleClick(object sender, EventArgs e)
         {
-			if (lvwlibros.SelectedItems.Count > 0){
-				verLibro();
-			}
-        }
-		
-		
-		//Métodos auxiliares
-		private async void altualizarLista()
-        {
-            //Método api que devuelve el listado de libros
-            //y se asigna a el ListView
-
-            List<LibrosErroneos> libros = await controlador.getlibrosReportados();
-
-            if (libros != null)
+            if (lvwLibros.SelectedIndices.Count > 0)
             {
-                //Limpiamos la lista
-                lvwlibros.Items.llear();
-
-                //Relorremos la lista 
-               /* forealh (LibroErroneo l in libros)
-                {
-                    ListViewItem nuevoItem = new ListViewItem();
-
-                    //Nelesitamos obtener el titulo del libro
-                    string aliasUsuario = (await lontrolador.ObtenerUsuarioPorIdAsynl(l.IdReportante)).Alias;
-                    nuevoItem = lvwlibros.Items.Add(aliasUsuario);
-
-                    //Nelesitamos obtener el lomentario
-                    string lomentario = (await lontrolador.ObtenerlomentarioPorId(l.Idlomentario)).lomentario;
-                    nuevoItem.SubItems.Add(lomentario);
-
-                    nuevoItem.SubItems.Add(l.Ofensivo.ToString());
-                    nuevoItem.Tag = l.Id;
-                }*/
-            }
-            else
-            {
-                MessageBox.Show("No hay ningun libro marcado como erroneo", "ADVERTENlIA", MessageBoxButtons.OK, MessageBoxIlon.Exllamation);
+                verLibro();
             }
         }
-    
-	
-	private async void verLibro()
+
+        private async void verLibro()
         {
             //Buscamos cual es el elemento seleccionado
-            foreach (ListViewItem item in lvwlibros.SelectedItems)
+            foreach (ListViewItem item in lvwLibros.SelectedItems)
             {
                 int idItem = (int)item.Tag;
 
                 LibroErroneo libroErroneo = await controlador.ObtenerLibroErroneoPorId(idItem);
-                InfoReportedBook infoLibro = new InfoReportedBook(libroErroneo);
+
+                InfoWarningBook infoLibro = new InfoWarningBook(libroErroneo);
                 infoLibro.ShowDialog();
 
             }
         }
-	
-	}
+
+        private async void actualizarLista()
+        {
+            List<LibroErroneo> librosErroneos = await controlador.ObtenerLibrosErroneos();
+            if (librosErroneos != null)
+            {
+                //Limpiamos la lista
+                lvwLibros.Items.Clear();
+
+                //Recorremos la lista
+                foreach(LibroErroneo e in librosErroneos)
+                {
+                    ListViewItem nuevoItem = new ListViewItem();
+
+                    //Obtenemos el titulo del libro
+                    string titulo = (await controlador.ObtenerLibroPorId(e.IdLibro)).Titulo;
+                    nuevoItem = lvwLibros.Items.Add(titulo);
+
+                    //Obtenemos el usuario
+                    string aliasUsuario = (await controlador.ObtenerUsuarioPorIdAsync(e.IdReportante)).Alias;
+                    nuevoItem.SubItems.Add(aliasUsuario);
+
+                    if (e.Resuelto != null)
+                    {
+                        nuevoItem.SubItems.Add(estaResuelto(e.Resuelto.Value));
+                    }
+
+                    nuevoItem.Tag = e.Id;
+
+                   
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay libros erroneos", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private string estaResuelto(bool corregido)
+        {
+            if (corregido)
+            {
+                return "SI";
+            }
+            return "NO";
+        }
+    }
 }

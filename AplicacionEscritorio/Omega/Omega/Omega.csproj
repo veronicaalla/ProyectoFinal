@@ -79,11 +79,11 @@
   <ItemGroup>
     <Compile Include="ApiService\Controlador.cs" />
     <Compile Include="ApiService\Seguridad.cs" />
-    <Compile Include="InfoReportedBook.cs">
+    <Compile Include="InfoBook.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InfoReportedBook.Designer.cs">
-      <DependentUpon>InfoReportedBook.cs</DependentUpon>
+    <Compile Include="InfoBook.Designer.cs">
+      <DependentUpon>InfoBook.cs</DependentUpon>
     </Compile>
     <Compile Include="InfoReportedComment.cs">
       <SubType>Form</SubType>
@@ -96,6 +96,12 @@
     </Compile>
     <Compile Include="InfoUser.Designer.cs">
       <DependentUpon>InfoUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InfoWarningBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoWarningBook.Designer.cs">
+      <DependentUpon>InfoWarningBook.cs</DependentUpon>
     </Compile>
     <Compile Include="ListOfReportedBooks.cs">
       <SubType>Form</SubType>
@@ -129,17 +135,23 @@
     </Compile>
     <Compile Include="Model\Comentario.cs" />
     <Compile Include="Model\ComentarioReportado.cs" />
+    <Compile Include="Model\Genero.cs" />
+    <Compile Include="Model\Libro.cs" />
+    <Compile Include="Model\LibroErroneo.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="InfoReportedBook.resx">
-      <DependentUpon>InfoReportedBook.cs</DependentUpon>
+    <EmbeddedResource Include="InfoBook.resx">
+      <DependentUpon>InfoBook.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoReportedComment.resx">
       <DependentUpon>InfoReportedComment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoUser.resx">
       <DependentUpon>InfoUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InfoWarningBook.resx">
+      <DependentUpon>InfoWarningBook.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListOfReportedBooks.resx">
       <DependentUpon>ListOfReportedBooks.cs</DependentUpon>

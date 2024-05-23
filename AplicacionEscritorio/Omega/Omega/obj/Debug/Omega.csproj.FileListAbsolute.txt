@@ -60,7 +60,6 @@ C:\Users\Alumno\Desktop\Omega\Omega\bin\Debug\System.Text.Json.xml
 C:\Users\Alumno\Desktop\Omega\Omega\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Alumno\Desktop\Omega\Omega\bin\Debug\System.ValueTuple.xml
 C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.csproj.AssemblyReference.cache
-C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.InfoReportedBook.resources
 C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.InfoReportedComment.resources
 C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.InfoUser.resources
 C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.ListOfReportedBooks.resources
@@ -74,3 +73,5 @@ C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.csproj.CoreCompileInputs.cac
 C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.csproj.Up2Date
 C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.exe
 C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.pdb
+C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.InfoBook.resources
+C:\Users\Alumno\Desktop\Omega\Omega\obj\Debug\Omega.infoWarningBook.resources

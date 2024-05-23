@@ -68,7 +68,10 @@ namespace Omega
                     string comentario = (await controlador.ObtenerComentarioPorId(c.IdComentario)).comentario;
                     nuevoItem.SubItems.Add(comentario);
 
-                    nuevoItem.SubItems.Add(c.Ofensivo.ToString());
+                    if (c.Ofensivo != null)
+                    {
+                        nuevoItem.SubItems.Add(esOfensivo(c.Ofensivo.Value));
+                    }
                     nuevoItem.Tag = c.Id;
                 }
             }
@@ -76,6 +79,15 @@ namespace Omega
             {
                 MessageBox.Show("No hay ningun comentario", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private string esOfensivo(bool corregido)
+        {
+            if (corregido)
+            {
+                return "SI";
+            }
+            return "NO";
         }
 
         private async void verComentario()

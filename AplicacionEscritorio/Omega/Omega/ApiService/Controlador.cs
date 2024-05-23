@@ -246,6 +246,79 @@ namespace Omega.ApiService
                 return false;
             }
         }
+
+        public async Task<List<LibroErroneo>> ObtenerLibrosErroneos()
+        {
+            var url = $"{rutaBasica}libroerroneno";
+            HttpResponseMessage response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            List<LibroErroneo> librosErroneos = JsonConvert.DeserializeObject<List<LibroErroneo>>(responseBody);
+
+            return librosErroneos;
+        }
+
+        public async Task<LibroErroneo> ObtenerLibroErroneoPorId(int id)
+        {
+            var url = $"{rutaBasica}libroerroneno/id/{id}";
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            LibroErroneo libroErroneo = JsonConvert.DeserializeObject<LibroErroneo>(responseBody);
+
+            return libroErroneo;
+        }
+
+
+        public async Task<Libro> ObtenerLibroPorId(int id)
+        {
+            var url = $"{rutaBasica}libros/id/{id}";
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Libro libro = JsonConvert.DeserializeObject<Libro>(responseBody);
+
+            return libro;
+        }
+
+        public async Task<List<Genero>> ObtenerGeneros()
+        {
+            var url = $"{rutaBasica}generos";
+            HttpResponseMessage response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            List<Genero> generos = JsonConvert.DeserializeObject<List<Genero>>(responseBody);
+
+            return generos;
+        }
+
+        public async Task<Genero> ObtenerGeneroPorId(int id)
+        {
+            var url = $"{rutaBasica}generos/id/{id}";
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Genero genero = JsonConvert.DeserializeObject<Genero>(responseBody);
+
+            return genero;
+        }
     }
 
 }
