@@ -84,10 +84,6 @@ namespace Omega
             listaComentarios.Show();
         }
 
-   
-
-
-
 
         private void tsmiCascada_Click(object sender, EventArgs e)
         {
@@ -104,7 +100,9 @@ namespace Omega
             this.LayoutMdi(MdiLayout.TileVertical);
         }
 
-       
-
+        private void MainActivity_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
+    }
     }

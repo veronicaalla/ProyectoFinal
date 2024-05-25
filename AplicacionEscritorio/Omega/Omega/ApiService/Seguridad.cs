@@ -9,6 +9,12 @@ namespace Omega.ApiService
     {
         private static readonly string Key = "Dcnpzt5dJqcYXu7X";
 
+        /// <summary>
+        /// Encripta una cadena utilizando una clave de cifrado especificada.
+        /// </summary>
+        /// <param name="strToEncrypt">La cadena a encriptar.</param>
+        /// <param name="encryptKey">La clave de cifrado.</param>
+        /// <returns>La cadena encriptada en formato Base64.</returns>
         public string Encrypt(string strToEncrypt, string encryptKey)
         {
             try
@@ -38,6 +44,11 @@ namespace Omega.ApiService
             }
         }
 
+        /// <summary>
+        /// Genera una clave hash SHA-256 a partir de una contraseña.
+        /// </summary>
+        /// <param name="password">La contraseña para generar la clave.</param>
+        /// <returns>Un arreglo de bytes representando la clave hash.</returns>
         private byte[] GenerateKey(string password)
         {
             using (var sha256 = SHA256.Create())
@@ -46,6 +57,12 @@ namespace Omega.ApiService
             }
         }
 
+        /// <summary>
+        /// Desencripta una cadena encriptada utilizando una clave de cifrado especificada.
+        /// </summary>
+        /// <param name="strToDecrypt">La cadena a desencriptar.</param>
+        /// <param name="encryptKey">La clave de cifrado.</param>
+        /// <returns>La cadena desencriptada.</returns>
         public string Decrypt(string strToDecrypt, string encryptKey)
         {
             try
@@ -76,11 +93,21 @@ namespace Omega.ApiService
             }
         }
 
+        /// <summary>
+        /// Encripta una cadena utilizando una clave predefinida.
+        /// </summary>
+        /// <param name="payload">La cadena a encriptar.</param>
+        /// <returns>La cadena encriptada en formato Base64.</returns>
         public string Encriptado(string payload)
         {
             return Encrypt(payload, Key);
         }
 
+        /// <summary>
+        /// Desencripta una cadena encriptada utilizando una clave predefinida.
+        /// </summary>
+        /// <param name="codigo">La cadena encriptada a desencriptar.</param>
+        /// <returns>La cadena desencriptada.</returns>
         public string Desencriptado(string codigo)
         {
             return Decrypt(codigo, Key);

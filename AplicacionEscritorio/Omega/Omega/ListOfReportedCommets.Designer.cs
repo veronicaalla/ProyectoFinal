@@ -35,11 +35,11 @@
             this.chUsuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chComentario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chOfensivo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmsComentarios = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVer = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cmsComentarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFiltrado
@@ -73,7 +73,7 @@
             this.lvwComentarios.Location = new System.Drawing.Point(0, 63);
             this.lvwComentarios.MultiSelect = false;
             this.lvwComentarios.Name = "lvwComentarios";
-            this.lvwComentarios.Size = new System.Drawing.Size(973, 403);
+            this.lvwComentarios.Size = new System.Drawing.Size(962, 403);
             this.lvwComentarios.TabIndex = 8;
             this.lvwComentarios.UseCompatibleStateImageBehavior = false;
             this.lvwComentarios.View = System.Windows.Forms.View.Details;
@@ -95,6 +95,20 @@
             this.chOfensivo.Text = "Ofensivo";
             this.chOfensivo.Width = 191;
             // 
+            // cmsComentarios
+            // 
+            this.cmsComentarios.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsVer});
+            this.cmsComentarios.Name = "cmsComentarios";
+            this.cmsComentarios.Size = new System.Drawing.Size(91, 26);
+            // 
+            // cmsVer
+            // 
+            this.cmsVer.Name = "cmsVer";
+            this.cmsVer.Size = new System.Drawing.Size(90, 22);
+            this.cmsVer.Text = "Ver";
+            this.cmsVer.Click += new System.EventHandler(this.cmsVer_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Omega.Properties.Resources.Logo_Omega_PC;
@@ -105,25 +119,11 @@
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
-            // cmsComentarios
-            // 
-            this.cmsComentarios.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsVer});
-            this.cmsComentarios.Name = "cmsComentarios";
-            this.cmsComentarios.Size = new System.Drawing.Size(181, 48);
-            // 
-            // cmsVer
-            // 
-            this.cmsVer.Name = "cmsVer";
-            this.cmsVer.Size = new System.Drawing.Size(180, 22);
-            this.cmsVer.Text = "Ver";
-            this.cmsVer.Click += new System.EventHandler(this.cmsVer_Click);
-            // 
             // ListOfReportedCommets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 466);
+            this.ClientSize = new System.Drawing.Size(962, 466);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFiltrado);
             this.Controls.Add(this.txtFiltrado);
@@ -131,8 +131,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ListOfReportedCommets";
             this.Text = "Mantenimiento de Comentarios Reportados";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.cmsComentarios.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

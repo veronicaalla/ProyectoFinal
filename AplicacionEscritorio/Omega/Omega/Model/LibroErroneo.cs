@@ -8,14 +8,14 @@ namespace Omega.Model
 {
     public class LibroErroneo
     {
-        public int Id { get; set; }
-        public DateTime AuditCreated { get; set; }
-        public string AuditCreator { get; set; }
-        public DateTime AuditUpdated { get; set; }
+        public int id { get; set; }
+        public DateTime auditCreated { get; set; }
+        public string auditCreator { get; set; }
+        public DateTime auditUpdated { get; set; }
 
-        public string AuditUpdater { get; set; }
-        public int IdLibro { get; set; }
-        public int IdReportante { get; set; }
-        public bool? Resuelto { get; set; }
+        public string auditUpdater { get; set; }
+        public int idLibro { get; set; }
+        public int idReportante { get; set; }
+        public bool? resuelto { get; set; }
     }
 }

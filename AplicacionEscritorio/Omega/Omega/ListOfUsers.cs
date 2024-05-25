@@ -12,12 +12,18 @@ using System.Windows.Forms;
 
 namespace Omega
 {
+    /// <summary>
+    /// Formulario para mostrar la lista de usuarios y realizar operaciones CRUD sobre ellos.
+    /// </summary>
     public partial class ListOfUsers : Form
     {
 
         //Llamamos al método API
         Controlador controlador;
 
+        /// <summary>
+        /// Constructor por defecto de la clase ListOfUsers.
+        /// </summary>
         public ListOfUsers()
         {
             InitializeComponent();
@@ -25,11 +31,17 @@ namespace Omega
             actualizarLista();
         }
 
+        /// <summary>
+        /// Evento que se dispara al hacer clic en el elemento del menú contextual "Nuevo". Abre el formulario para crear un nuevo usuario.
+        /// </summary>
         private void tsmiNuevo_Click(object sender, EventArgs e)
         {
             crearUsuario();
         }
 
+        /// <summary>
+        /// Evento que se dispara cuando se selecciona un usuario en la lista. Habilita las opciones de ver, editar y eliminar mediante el menú contextual.
+        /// </summary>
         private void lvwUsuarios_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lvwUsuarios.SelectedItems.Count != 0)
@@ -45,6 +57,10 @@ namespace Omega
             }
         }
 
+
+        /// <summary>
+        /// Evento que se dispara al hacer doble clic en un usuario en la lista. Muestra información detallada del usuario seleccionado.
+        /// </summary>
         private void lvwUsuarios_DoubleClick(object sender, EventArgs e)
         {
             if (lvwUsuarios.SelectedIndices.Count > 0)
@@ -55,17 +71,27 @@ namespace Omega
         }
 
 
-
+        /// <summary>
+        /// Evento que se dispara al hacer clic en el elemento del menú contextual "Nuevo". Abre el formulario para crear un nuevo usuario.
+        /// </summary>
         private void cmsNuevo_Click(object sender, EventArgs e)
         {
             crearUsuario();
         }
 
+
+        /// <summary>
+        /// Evento que se dispara al hacer clic en el elemento del menú contextual "Ver". Muestra información detallada del usuario seleccionado.
+        /// </summary>
         private void cmsVer_Click(object sender, EventArgs e)
         {
             verUsuario();
         }
 
+
+        /// <summary>
+        /// Evento que se dispara al hacer clic en el elemento del menú contextual "Eliminar". Elimina el usuario seleccionado de la lista.
+        /// </summary>
         private async void cmsEliminar_Click(object sender, EventArgs e)
         {
             //Buscamos cual es el elemento seleccinado
@@ -93,6 +119,10 @@ namespace Omega
 
 
         // ---------------- Métodos auxiliares ------------
+
+        /// <summary>
+        /// Método para abrir el formulario para crear un nuevo usuario.
+        /// </summary>
         private void crearUsuario()
         {
             //Creamos un usuario vacio y se lo pasamos como parametro
@@ -106,6 +136,10 @@ namespace Omega
 
         }
 
+
+        /// <summary>
+        /// Método para mostrar información detallada de un usuario seleccionado.
+        /// </summary>
         private async void verUsuario()
         {
             //Buscamos cual es el elemento seleccionado
@@ -119,9 +153,13 @@ namespace Omega
                 infoUsuario.ShowDialog();
 
             }
+            actualizarLista();
         }
 
 
+        /// <summary>
+        /// Método para actualizar la lista de usuarios.
+        /// </summary>
         private async void actualizarLista()
         {
             List<Usuario> usuarios = await controlador.GetUsuarios();
@@ -134,14 +172,14 @@ namespace Omega
                 foreach (Usuario u in usuarios)
                 {
                     ListViewItem nuevoItem = new ListViewItem();
-                    nuevoItem = lvwUsuarios.Items.Add(u.Alias);
-                    nuevoItem.SubItems.Add(u.Nombre);
-                    nuevoItem.SubItems.Add(u.Apellidos);
-                    nuevoItem.SubItems.Add(formatoFecha(u.FechaNacimiento.ToString()));
-                    nuevoItem.SubItems.Add(u.Correo);
-                    nuevoItem.SubItems.Add(u.Telefono);
-                    nuevoItem.SubItems.Add(obtenerTipoUsuario(u.Tipo));
-                    nuevoItem.Tag = u.Id;
+                    nuevoItem = lvwUsuarios.Items.Add(u.alias);
+                    nuevoItem.SubItems.Add(u.nombre);
+                    nuevoItem.SubItems.Add(u.apellidos);
+                    nuevoItem.SubItems.Add(formatoFecha(u.fechaNacimiento.ToString()));
+                    nuevoItem.SubItems.Add(u.correo);
+                    nuevoItem.SubItems.Add(u.telefono);
+                    nuevoItem.SubItems.Add(obtenerTipoUsuario(u.tipo));
+                    nuevoItem.Tag = u.id;
                 }
             }
             else
@@ -151,6 +189,9 @@ namespace Omega
 
         }
 
+        /// <summary>
+        /// Método para obtener el tipo de usuario según el valor numérico.
+        /// </summary>
         private string obtenerTipoUsuario(int tipo)
         {
             switch (tipo)
@@ -163,6 +204,10 @@ namespace Omega
             return "";
         }
 
+
+        /// <summary>
+        /// Método para formatear la fecha en formato "dd/MM/yyyy".
+        /// </summary>
         private string formatoFecha (string fecha)
         {
             bool exito = DateTime.TryParse(fecha, out DateTime fechaFormateada);

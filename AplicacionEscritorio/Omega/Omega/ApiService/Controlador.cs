@@ -25,7 +25,12 @@ namespace Omega.ApiService
             seguridad = new Seguridad();
         }
 
-    
+        /// <summary>
+        /// Autentica un usuario mediante su nombre de usuario o correo electrónico y su clave.
+        /// </summary>
+        /// <param name="usuarioOEmail">El nombre de usuario o correo electrónico.</param>
+        /// <param name="clave">La clave del usuario.</param>
+        /// <returns>Un objeto Usuario si la autenticación es exitosa; null en caso contrario.</returns>
         public async Task<Usuario> LoginUsuario(string usuarioOEmail, string clave)
         {
 
@@ -57,7 +62,10 @@ namespace Omega.ApiService
             return null;
         }
 
-
+        /// <summary>
+        /// Obtiene una lista de todos los usuarios.
+        /// </summary>
+        /// <returns>Una lista de objetos Usuario.</returns>
         public async Task<List<Usuario>> GetUsuarios()
         {
             string url = rutaBasica + "usuarios";
@@ -72,7 +80,11 @@ namespace Omega.ApiService
 
         }
 
-
+        /// <summary>
+        /// Obtiene un usuario por su ID.
+        /// </summary>
+        /// <param name="id">El ID del usuario.</param>
+        /// <returns>Un objeto Usuario si se encuentra; lanza una excepción en caso de error.</returns>
         public async Task<Usuario> ObtenerUsuarioPorIdAsync(int id)
         {
             string url = rutaBasica + $"usuarios/usuario/{id}";
@@ -93,6 +105,11 @@ namespace Omega.ApiService
         }
 
 
+        /// <summary>
+        /// Crea un nuevo usuario.
+        /// </summary>
+        /// <param name="usuario">El objeto Usuario a crear.</param>
+        /// <returns>El contenido de la respuesta de la API si la creación es exitosa; lanza una excepción en caso de error.</returns>
         public async Task<string> CreateUsuarioAsync(Usuario usuario)
         {
             string url = $"{rutaBasica}usuarios"; // Cambia esto a la URL correcta de tu API
@@ -114,6 +131,12 @@ namespace Omega.ApiService
             }
         }
 
+        /// <summary>
+        /// Modifica un usuario existente.
+        /// </summary>
+        /// <param name="id">El ID del usuario a modificar.</param>
+        /// <param name="usuarioModificado">El objeto Usuario con los datos modificados.</param>
+        /// <returns>true si la modificación es exitosa; false en caso contrario.</returns>
         public async Task<bool> ModificarUsuarioAsync(int id, Usuario usuarioModificado)
         {
             string url = $"{rutaBasica}usuarios/modificar/{id}";
@@ -134,6 +157,12 @@ namespace Omega.ApiService
             return false;
         }
 
+
+        /// <summary>
+        /// Elimina un usuario por su ID.
+        /// </summary>
+        /// <param name="usuarioId">El ID del usuario a eliminar.</param>
+        /// <returns>El contenido de la respuesta de la API si la eliminación es exitosa; un mensaje de error en caso contrario.</returns>
         public async Task<string> EliminarUsuario(int usuarioId)
         {
             string url = $"{rutaBasica}usuarios/usuario/{usuarioId}";
@@ -151,7 +180,10 @@ namespace Omega.ApiService
             }
         }
 
-
+        /// <summary>
+        /// Obtiene una lista de todos los comentarios reportados.
+        /// </summary>
+        /// <returns>Una lista de objetos ComentarioReportado.</returns>
         public async Task<List<ComentarioReportado>> getComentariosReportados()
         {
             string url = $"{rutaBasica}comentarioreportado";
@@ -176,6 +208,11 @@ namespace Omega.ApiService
             return null;
         }
 
+        /// <summary>
+        /// Obtiene un comentario por su ID.
+        /// </summary>
+        /// <param name="id">El ID del comentario.</param>
+        /// <returns>Un objeto Comentario si se encuentra; null en caso contrario.</returns>
         public async Task<Comentario> ObtenerComentarioPorId(int id)
         {
             string url = $"{rutaBasica}comentarios/comentario/{id}";
@@ -200,7 +237,12 @@ namespace Omega.ApiService
             return null;
         }
 
-        // Método para obtener un comentario reportado por ID
+
+        /// <summary>
+        /// Obtiene un comentario reportado por su ID.
+        /// </summary>
+        /// <param name="id">El ID del comentario reportado.</param>
+        /// <returns>Un objeto ComentarioReportado si se encuentra; null en caso contrario.</returns>
         public async Task<ComentarioReportado> ObtenerComentarioReportadoPorId(int id)
         {
             string url = $"{rutaBasica}comentarioreportado/comentario/{id}";
@@ -225,28 +267,35 @@ namespace Omega.ApiService
             return null;
         }
 
-
-        public async Task<bool> EditarComentarioReportado(int idComentarioReportado, ComentarioReportado comentarioReportadoNuevo)
+        public  async Task<string> EditarComentarioReportadoAsync(int idUsuario, ComentarioReportado comentarioReportadoNuevo)
         {
-            var url = $"{rutaBasica}comentarioreportado/editar/{idComentarioReportado}";
-            var json = JsonConvert.SerializeObject(comentarioReportadoNuevo);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PutAsync(url, content);
+            string url = $"{rutaBasica}comentarioreportado/editar/{idUsuario}";
 
-            if (response.IsSuccessStatusCode)
+            // Convertir el objeto a JSON
+            string jsonBody = JsonConvert.SerializeObject(comentarioReportadoNuevo);
+
+           
+            // Crear la solicitud HTTP
+            var request = new HttpRequestMessage
             {
-                string responseContent = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("Comentario reportado actualizado correctamente: " + responseContent);
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("Error al actualizar el comentario reportado: " + response.StatusCode);
-                return false;
-            }
+                Method = HttpMethod.Put,
+                RequestUri = new Uri(url),
+                Content = new StringContent(jsonBody, Encoding.UTF8, "application/json")
+            };
+
+            // Enviar la solicitud y obtener la respuesta
+            var response = await client.SendAsync(request);
+
+            // Leer y devolver la respuesta como cadena
+            return await response.Content.ReadAsStringAsync();
         }
 
+
+        /// <summary>
+        /// Obtiene una lista de todos los libros erróneos.
+        /// </summary>
+        /// <returns>Una lista de objetos LibroErroneo.</returns>
         public async Task<List<LibroErroneo>> ObtenerLibrosErroneos()
         {
             var url = $"{rutaBasica}libroerroneno";
@@ -259,6 +308,11 @@ namespace Omega.ApiService
             return librosErroneos;
         }
 
+        /// <summary>
+        /// Obtiene un libro erróneo por su ID.
+        /// </summary>
+        /// <param name="id">El ID del libro erróneo.</param>
+        /// <returns>Un objeto LibroErroneo si se encuentra; null en caso contrario.</returns>
         public async Task<LibroErroneo> ObtenerLibroErroneoPorId(int id)
         {
             var url = $"{rutaBasica}libroerroneno/id/{id}";
@@ -275,7 +329,11 @@ namespace Omega.ApiService
             return libroErroneo;
         }
 
-
+        /// <summary>
+        /// Obtiene un libro por su ID.
+        /// </summary>
+        /// <param name="id">El ID del libro.</param>
+        /// <returns>Un objeto Libro si se encuentra; null en caso contrario.</returns>
         public async Task<Libro> ObtenerLibroPorId(int id)
         {
             var url = $"{rutaBasica}libros/id/{id}";
@@ -292,6 +350,10 @@ namespace Omega.ApiService
             return libro;
         }
 
+        /// <summary>
+        /// Obtiene una lista de todos los géneros.
+        /// </summary>
+        /// <returns>Una lista de objetos Genero.</returns>
         public async Task<List<Genero>> ObtenerGeneros()
         {
             var url = $"{rutaBasica}generos";
@@ -304,6 +366,11 @@ namespace Omega.ApiService
             return generos;
         }
 
+        /// <summary>
+        /// Obtiene un género por su ID.
+        /// </summary>
+        /// <param name="id">El ID del género.</param>
+        /// <returns>Un objeto Genero si se encuentra; null en caso contrario.</returns>
         public async Task<Genero> ObtenerGeneroPorId(int id)
         {
             var url = $"{rutaBasica}generos/id/{id}";
@@ -318,6 +385,106 @@ namespace Omega.ApiService
             Genero genero = JsonConvert.DeserializeObject<Genero>(responseBody);
 
             return genero;
+        }
+
+
+        public async Task<int?> ObtenerIdGeneroPorNombreAsync(string nombre)
+        {
+            try
+            {
+                var url = $"{rutaBasica}generos/nombre/{nombre}";
+
+                var response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    int idGenero = JsonConvert.DeserializeObject<int>(result);
+                    return idGenero;
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    Console.WriteLine($"Genero con nombre '{nombre}' no encontrado.");
+                    return null;
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode}");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// Edita un libro.
+        /// </summary>
+        /// <param name="userId">El ID del usuario que edita el libro.</param>
+        /// <param name="libroActualizado">El objeto Libro con los datos actualizados.</param>
+        /// <returns>Un mensaje indicando el resultado de la operación.</returns>
+        public async Task<string> EditarLibroAsync(int userId, Libro libroActualizado)
+        {
+            try
+            {
+                var url = $"{rutaBasica}libros/{userId}";
+                // Serializar el objeto libro a JSON
+                var json = JsonConvert.SerializeObject(libroActualizado);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // Realizar la solicitud PUT
+                HttpResponseMessage response = await client.PutAsync(url, content);
+
+                // Verificar la respuesta
+                if (response.IsSuccessStatusCode)
+                {
+                    return "El libro se ha modificado correctamente";
+                }
+                else
+                {
+                    return $"Error: {response.StatusCode}";
+                }
+            }
+            catch (Exception ex)
+            {
+               return $"Excepción: {ex.Message}";
+            }
+        }
+
+        public async Task<string> EditarLibroErroneoAsync(LibroErroneo libroErroneo, int idUsuario)
+        {
+            try
+            {
+                var url = $"{rutaBasica}libroerroneno/editar/{libroErroneo.id}?idUsuario={idUsuario}";
+
+                var jsonContent = JsonConvert.SerializeObject(libroErroneo);
+                var contentString = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                var response = await client.PutAsync(url, contentString);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    return "Resultado: " + result;
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    return $"Error: {response.StatusCode}, {result}";
+                }
+                else
+                {
+                    return $"Error: {response.StatusCode}";
+                }
+            }
+            catch (Exception ex)
+            {
+                return $"Exception: {ex.Message}";
+            }
         }
     }
 

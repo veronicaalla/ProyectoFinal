@@ -12,11 +12,18 @@ using System.Windows.Forms;
 
 namespace Omega
 {
+    /// <summary>
+    /// Formulario para mostrar y modificar un comentario reportado.
+    /// </summary>
     public partial class InfoReportedComment : Form
     {
 
         ComentarioReportado comentarioReportado;
         Controlador controlador;
+
+        /// <summary>
+        /// Constructor por defecto de la clase InfoReportedComment.
+        /// </summary>
         public InfoReportedComment()
         {
             InitializeComponent();
@@ -29,22 +36,29 @@ namespace Omega
             comentarioReportado = new ComentarioReportado();
         }
 
+        /// <summary>
+        /// Constructor sobrecargado de la clase InfoReportedComment que recibe un comentario reportado para mostrar su información.
+        /// </summary>
+        /// <param name="comentario">El comentario reportado a mostrar.</param>
         public InfoReportedComment(ComentarioReportado comentario) : this()
         {
             asignamosValores(comentario);
         }
 
-
+        /// <summary>
+        /// Asigna los valores del comentario reportado a los controles del formulario.
+        /// </summary>
+        /// <param name="comentario">El comentario reportado.</param>
         public async void asignamosValores(ComentarioReportado comentario)
         {
             this.comentarioReportado = comentario;
 
-            txtUsuario.Text = (await controlador.ObtenerUsuarioPorIdAsync(comentario.IdReportante)).Alias;
-            txtComentario.Text = (await controlador.ObtenerComentarioPorId(comentario.IdComentario)).comentario;
+            txtUsuario.Text = (await controlador.ObtenerUsuarioPorIdAsync(comentario.idReportante)).alias;
+            txtComentario.Text = (await controlador.ObtenerComentarioPorId(comentario.idComentario)).comentario;
 
-            if (comentario.Ofensivo != null)
+            if (comentario.ofensivo != null)
             {
-                if ((bool)comentario.Ofensivo)
+                if ((bool)comentario.ofensivo)
                 {
                     cmbOfensivo.Text = "SI";
                 }
@@ -55,40 +69,43 @@ namespace Omega
             }
         }
 
-
+        /// <summary>
+        /// Evento que se dispara al hacer clic en el botón "Aceptar". Actualiza el comentario reportado.
+        /// </summary>
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             //Recogemos el valor del ComboBox (lo unico a modificar)
             if (cmbOfensivo.Text == "SI")
             {
-                comentarioReportado.Ofensivo = true;
+                comentarioReportado.ofensivo = true;
             }
             else
             {
-                comentarioReportado.Ofensivo = false;
+                comentarioReportado.ofensivo = false;
             }
 
             //Le debemos asignar el id del usuario que se ha logueado 
             //comentarioReportado.AuditUpdater = 
 
             actualizarComentario();
+            this.Close();
 
         }
 
+        /// <summary>
+        /// Actualiza el listView donde se ven los comentarios reportados almacenados en la base de datos.
+        /// </summary>
         private async void actualizarComentario()
         {
-            var cambioEfectuado = await controlador.EditarComentarioReportado(comentarioReportado.Id, comentarioReportado);
+            var cambioEfectuado = await controlador.EditarComentarioReportadoAsync(2, comentarioReportado);
 
-            if (cambioEfectuado)
-            {
-                MessageBox.Show("Se ha modificado correctamente", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                MessageBox.Show("No se ha podido realizar la modificación", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            MessageBox.Show(cambioEfectuado, "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
         }
 
+        /// <summary>
+        /// Evento que se dispara al hacer clic en el botón "Cancelar". Cierra el formulario.
+        /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();

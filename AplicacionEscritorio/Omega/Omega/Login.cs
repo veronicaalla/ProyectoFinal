@@ -36,7 +36,7 @@ namespace Omega
                 if (usuarioAcceso != null)
                 {
                     //Comprobamos que el usuario sea de tipo administrador 
-                    if (usuarioAcceso.Tipo == 1 || usuarioAcceso.Tipo == 2) {
+                    if (usuarioAcceso.tipo == 1 || usuarioAcceso.tipo == 2) {
                         //Vamos a comprobar que la ventana, no este ya activa
                         foreach (Form form in Application.OpenForms)
                         {

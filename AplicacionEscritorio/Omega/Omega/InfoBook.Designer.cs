@@ -138,6 +138,7 @@
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(240, 20);
             this.txtISBN.TabIndex = 21;
+            this.txtISBN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtISBN_KeyPress);
             // 
             // label2
             // 
@@ -202,6 +203,7 @@
             this.txtPaginas.Name = "txtPaginas";
             this.txtPaginas.Size = new System.Drawing.Size(171, 20);
             this.txtPaginas.TabIndex = 40;
+            this.txtPaginas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaginas_KeyPress);
             // 
             // label7
             // 

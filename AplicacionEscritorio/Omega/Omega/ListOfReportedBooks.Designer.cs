@@ -72,7 +72,7 @@
             this.lvwLibros.Location = new System.Drawing.Point(0, 89);
             this.lvwLibros.MultiSelect = false;
             this.lvwLibros.Name = "lvwLibros";
-            this.lvwLibros.Size = new System.Drawing.Size(973, 377);
+            this.lvwLibros.Size = new System.Drawing.Size(962, 377);
             this.lvwLibros.TabIndex = 13;
             this.lvwLibros.UseCompatibleStateImageBehavior = false;
             this.lvwLibros.View = System.Windows.Forms.View.Details;
@@ -122,7 +122,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 466);
+            this.ClientSize = new System.Drawing.Size(962, 466);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFiltrado);
             this.Controls.Add(this.txtFiltrado);

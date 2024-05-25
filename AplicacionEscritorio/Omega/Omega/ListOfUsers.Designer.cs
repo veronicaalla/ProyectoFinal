@@ -58,7 +58,7 @@
             this.tsmiUsuarios});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(973, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(962, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -73,7 +73,7 @@
             // tsmiNuevo
             // 
             this.tsmiNuevo.Name = "tsmiNuevo";
-            this.tsmiNuevo.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNuevo.Size = new System.Drawing.Size(109, 22);
             this.tsmiNuevo.Text = "Nuevo";
             this.tsmiNuevo.Click += new System.EventHandler(this.tsmiNuevo_Click);
             // 
@@ -95,7 +95,7 @@
             this.lvwUsuarios.Location = new System.Drawing.Point(0, 86);
             this.lvwUsuarios.MultiSelect = false;
             this.lvwUsuarios.Name = "lvwUsuarios";
-            this.lvwUsuarios.Size = new System.Drawing.Size(973, 380);
+            this.lvwUsuarios.Size = new System.Drawing.Size(962, 380);
             this.lvwUsuarios.TabIndex = 4;
             this.lvwUsuarios.UseCompatibleStateImageBehavior = false;
             this.lvwUsuarios.View = System.Windows.Forms.View.Details;
@@ -198,7 +198,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 466);
+            this.ClientSize = new System.Drawing.Size(962, 466);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnFiltrado);
             this.Controls.Add(this.txtFiltrado);

@@ -14,12 +14,18 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Omega
 {
+    /// <summary>
+    /// Formulario para mostrar y modificar la información de un usuario.
+    /// </summary>
     public partial class InfoUser : Form
     {
 
         Usuario usuario;
         Controlador controlador;
 
+        /// <summary>
+        /// Constructor por defecto de la clase InfoUser.
+        /// </summary>
         public InfoUser()
         {
             InitializeComponent();
@@ -27,26 +33,29 @@ namespace Omega
             controlador = new Controlador();
         }
 
-
+        /// <summary>
+        /// Constructor sobrecargado de la clase InfoUser que recibe la información de un usuario para mostrarla.
+        /// </summary>
+        /// <param name="infoUsuario">El usuario cuya información se va a mostrar.</param>
         public InfoUser(Usuario infoUsuario) : this()
         {
             this.usuario = infoUsuario;
 
             //Comprobamos si el usuario es nuevo o no
-            if (usuario.Id == 0)
+            if (usuario.id == 0)
             {
                 btnAceptar.Text = "Agregar";
                 return;
             }
 
             //Le asignamos a los campos la informacion de usuario
-            txtNombre.Text = usuario.Nombre;
-            txtApellidos.Text = usuario.Apellidos;
-            txtUsuario.Text = usuario.Alias;
-            dtpFechaNac.Text = usuario.FechaNacimiento.ToString();
-            txtCorreo.Text = usuario.Correo;
-            txtTelefono.Text = usuario.Telefono;
-            cmbTipoUsuario.Text = obtenerTipoUsuario(usuario.Tipo);
+            txtNombre.Text = usuario.nombre;
+            txtApellidos.Text = usuario.apellidos;
+            txtUsuario.Text = usuario.alias;
+            dtpFechaNac.Text = usuario.fechaNacimiento.ToString();
+            txtCorreo.Text = usuario.correo;
+            txtTelefono.Text = usuario.telefono;
+            cmbTipoUsuario.Text = obtenerTipoUsuario(usuario.tipo);
 
             //La fecha de nacimiento y el tipo de usuario no se pueden modificar
             cmbTipoUsuario.Enabled = false;
@@ -57,41 +66,48 @@ namespace Omega
         }
 
 
-
+        /// <summary>
+        /// Evento que se dispara al hacer clic en el botón "Aceptar". Agrega o modifica la información del usuario.
+        /// </summary>
         private async void btnAceptar_Click(object sender, EventArgs e)
         {
             if (validarDatos())
             {
                 //asignamos los datos al usuario pasado por parametro
-                this.usuario.Alias = txtUsuario.Text;
-                this.usuario.Nombre = txtNombre.Text;
-                this.usuario.Apellidos = txtApellidos.Text;
-                this.usuario.Correo = txtCorreo.Text;
-                this.txtTelefono.Text = txtTelefono.Text;
+                this.usuario.alias = txtUsuario.Text;
+                this.usuario.nombre = txtNombre.Text;
+                this.usuario.apellidos = txtApellidos.Text;
+                this.usuario.correo = txtCorreo.Text;
+                this.usuario.telefono= txtTelefono.Text;
 
                 //La fecha de nacimiento no se puede modificar por terminos legales a futuro.
                 //El tipo de usuario tampoco, seria de forma automatica en un futuro caso. 
-                if (usuario.Id == 0)
+                if (usuario.id == 0)
                 {
                     //Se le debe asignar la fecha de nacimiento y su tipo de usuario
-                    this.usuario.FechaNacimiento = dtpFechaNac.Value;
-                    this.usuario.Tipo = tipoUsuario(cmbTipoUsuario.Text);
+
+                    DateTime fechaSeleccionada = dtpFechaNac.Value;
+                    this.usuario.fechaNacimiento = fechaSeleccionada.Date;
+                 
+                    this.usuario.clave = "1234567890";
+                    this.usuario.tipo = tipoUsuario(cmbTipoUsuario.Text);
 
                     try
                     {
                         //Creamos usuario
                         string result = await controlador.CreateUsuarioAsync(this.usuario);
-                        MessageBox.Show(result);
+                        MessageBox.Show("Usuario creado exitosamente, su contraseña es 1234567890");
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Error: " + ex.Message);
                     }
+                    this.Close();
                     return;
                 }
 
                 // Llamar al método de la API para modificar el usuario
-                bool resultado = await controlador.ModificarUsuarioAsync(usuario.Id, usuario);
+                bool resultado = await controlador.ModificarUsuarioAsync(usuario.id, usuario);
 
                 if (resultado)
                 {
@@ -106,13 +122,20 @@ namespace Omega
             }
         }
 
-
+        /// <summary>
+        /// Evento que se dispara al hacer clic en el botón "Cancelar". Cierra el formulario.
+        /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         //Métodos auxiliares
+
+        /// <summary>
+        /// Valida los datos ingresados por el usuario en los campos del formulario.
+        /// </summary>
+        /// <returns>True si los datos son válidos, False en caso contrario.</returns>
         private bool validarDatos()
         {
             if (string.IsNullOrEmpty(txtNombre.Text))
@@ -181,6 +204,11 @@ namespace Omega
         }
 
 
+        /// <summary>
+        /// Valida que una cadena de texto no contenga números.
+        /// </summary>
+        /// <param name="cad">La cadena de texto a validar.</param>
+        /// <returns>True si la cadena no contiene números, False en caso contrario.</returns>
         private bool noNumeros(string cad)
         {
             string pattern = @"^[a-zA-ZÀ-ÿ\s]+$";
@@ -196,7 +224,10 @@ namespace Omega
             }
         }
 
-
+        /// <summary>
+        /// Valida el formato de una dirección de correo electrónico.
+        /// </summary>
+        /// <returns>True si el formato del correo es válido, False en caso contrario.</returns>
         private bool correoValido()
         {
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|es)$";
@@ -212,11 +243,18 @@ namespace Omega
             }
         }
 
+        /// <summary>
+        /// Muestra un mensaje de error en una ventana emergente.
+        /// </summary>
+        /// <param name="mensaje">El mensaje de error a mostrar.</param>
         public void mensajeError(string mensaje)
         {
             MessageBox.Show(mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        /// <summary>
+        /// Evento que se dispara al presionar una tecla en el campo de teléfono. Permite solo la entrada de dígitos.
+        /// </summary>
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -225,7 +263,11 @@ namespace Omega
             }
         }
 
-
+        /// <summary>
+        /// Obtiene el tipo de usuario en formato de texto a partir de su valor numérico.
+        /// </summary>
+        /// <param name="tipo">El valor numérico del tipo de usuario.</param>
+        /// <returns>El tipo de usuario en formato de texto.</returns>
         private string obtenerTipoUsuario(int tipo)
         {
             switch (tipo)
@@ -238,6 +280,11 @@ namespace Omega
             return "";
         }
 
+        /// <summary>
+        /// Obtiene el valor numérico del tipo de usuario a partir de su descripción en texto.
+        /// </summary>
+        /// <param name="tipo">El tipo de usuario en texto.</param>
+        /// <returns>El valor numérico del tipo de usuario.</returns>
         private int tipoUsuario(string tipo)
         {
             switch (tipo)

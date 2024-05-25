@@ -30,13 +30,13 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiArchivo = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMantenimiento = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiVentanas = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSalir = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMantenimiento = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiLibrosR = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiComentariosR = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiVentanas = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCascada = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHorizontal = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiVertical = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +63,13 @@
             this.tsmiArchivo.Size = new System.Drawing.Size(60, 20);
             this.tsmiArchivo.Text = "Archivo";
             // 
+            // tsmiSalir
+            // 
+            this.tsmiSalir.Name = "tsmiSalir";
+            this.tsmiSalir.Size = new System.Drawing.Size(96, 22);
+            this.tsmiSalir.Text = "Salir";
+            this.tsmiSalir.Click += new System.EventHandler(this.tsmiSalir_Click);
+            // 
             // tsmiMantenimiento
             // 
             this.tsmiMantenimiento.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -73,23 +80,6 @@
             this.tsmiMantenimiento.Name = "tsmiMantenimiento";
             this.tsmiMantenimiento.Size = new System.Drawing.Size(101, 20);
             this.tsmiMantenimiento.Text = "Mantenimiento";
-            // 
-            // tsmiVentanas
-            // 
-            this.tsmiVentanas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCascada,
-            this.tsmiHorizontal,
-            this.tsmiVertical});
-            this.tsmiVentanas.Name = "tsmiVentanas";
-            this.tsmiVentanas.Size = new System.Drawing.Size(66, 20);
-            this.tsmiVentanas.Text = "Ventanas";
-            // 
-            // tsmiSalir
-            // 
-            this.tsmiSalir.Name = "tsmiSalir";
-            this.tsmiSalir.Size = new System.Drawing.Size(180, 22);
-            this.tsmiSalir.Text = "Salir";
-            this.tsmiSalir.Click += new System.EventHandler(this.tsmiSalir_Click);
             // 
             // tsmiUsuarios
             // 
@@ -117,24 +107,34 @@
             this.tsmiComentariosR.Text = "Comentarios Reportados";
             this.tsmiComentariosR.Click += new System.EventHandler(this.tsmiComentariosR_Click);
             // 
+            // tsmiVentanas
+            // 
+            this.tsmiVentanas.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCascada,
+            this.tsmiHorizontal,
+            this.tsmiVertical});
+            this.tsmiVentanas.Name = "tsmiVentanas";
+            this.tsmiVentanas.Size = new System.Drawing.Size(66, 20);
+            this.tsmiVentanas.Text = "Ventanas";
+            // 
             // tsmiCascada
             // 
             this.tsmiCascada.Name = "tsmiCascada";
-            this.tsmiCascada.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCascada.Size = new System.Drawing.Size(129, 22);
             this.tsmiCascada.Text = "Cascada";
             this.tsmiCascada.Click += new System.EventHandler(this.tsmiCascada_Click);
             // 
             // tsmiHorizontal
             // 
             this.tsmiHorizontal.Name = "tsmiHorizontal";
-            this.tsmiHorizontal.Size = new System.Drawing.Size(180, 22);
+            this.tsmiHorizontal.Size = new System.Drawing.Size(129, 22);
             this.tsmiHorizontal.Text = "Horizontal";
             this.tsmiHorizontal.Click += new System.EventHandler(this.tsmiHorizontal_Click);
             // 
             // tsmiVertical
             // 
             this.tsmiVertical.Name = "tsmiVertical";
-            this.tsmiVertical.Size = new System.Drawing.Size(180, 22);
+            this.tsmiVertical.Size = new System.Drawing.Size(129, 22);
             this.tsmiVertical.Text = "Vertical";
             this.tsmiVertical.Click += new System.EventHandler(this.tsmiVertical_Click);
             // 
@@ -148,6 +148,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainActivity";
             this.Text = "OMEGA";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainActivity_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
