@@ -7,5 +7,5 @@ import com.veronicaalvarez.api.modelo.Genero;
 import java.util.Optional;
 
 public interface GeneroRepositorio extends JpaRepository<Genero, Integer>{
-    Optional<Genero> findByNombreIgnoreCase(String nombre);
+    Genero findByNombre(String nombre);
 }

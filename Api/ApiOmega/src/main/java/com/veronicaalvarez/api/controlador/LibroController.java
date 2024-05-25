@@ -95,7 +95,7 @@ public class LibroController {
         libro.setGenero(libroActualizado.getGenero());
         libro.setFechaPublicacion(libroActualizado.getFechaPublicacion());
         libro.setPaginas(libroActualizado.getPaginas());
-        libro.setISBN(libroActualizado.getISBN());
+        libro.setIsbn(libroActualizado.getIsbn());
 
         //Modificamos la auditoria
 		libro.setAuditUpdated(LocalDateTime.now());

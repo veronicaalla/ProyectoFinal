@@ -37,5 +37,15 @@ public class GeneroController {
 
 		return ResponseEntity.ok(genero);
 	}
-	
+
+	@GetMapping("/nombre/{nombre}")
+	public ResponseEntity<?> obtenerIdGeneroPorNombre(@PathVariable String nombre) {
+		Genero genero = generoRepositorio.findByNombre(nombre);
+
+		if (genero == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		return ResponseEntity.ok(genero.getId());
+	}
 }

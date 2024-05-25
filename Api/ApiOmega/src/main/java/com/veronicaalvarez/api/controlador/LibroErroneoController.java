@@ -6,6 +6,7 @@ import com.veronicaalvarez.api.modelo.Usuario;
 import com.veronicaalvarez.api.repositorio.LibroErroneoRepositorio;
 import com.veronicaalvarez.api.repositorio.LibroRepositorio;
 import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,28 +84,32 @@ public class LibroErroneoController {
 
     @PutMapping("/editar/{id}")
     public ResponseEntity<?> editarLibroErroneo(@RequestBody LibroErroneo libroErroneoNuevo,
-                                                @RequestParam("idLibro") int idLibro,
-                                                @RequestParam("idReportante") int idReportante) {
+                                                @RequestParam("idUsuario") int idUsuario) {
 
         LibroErroneo libroErroneo = libroErroneoRepositorio.findById(libroErroneoNuevo.getId()).orElse(null);
-        Libro libro = libroRepositorio.findById(idLibro).orElse(null);
-        Usuario usuario = usuarioRepositorio.findById(idReportante).orElse(null);
+        Usuario usuario = usuarioRepositorio.findById(idUsuario).orElse(null);
 
-        if (libro == null || usuario == null) {
-            return ResponseEntity.notFound().build();
+        // Verificar si el usuario existe
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
         }
 
-        libroErroneo.setIdLibro(libro.getId());
-        libroErroneo.setIdReportante(usuario.getId());
+        // Verificar si el libro erroneo existe
+        if (libroErroneo == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Libro erroneo no encontrado");
+        }
+
+
         libroErroneo.setResuelto(libroErroneoNuevo.getResuelto());
 
         //Modificamos la auditoria
-        libroErroneo.setAuditCreated(LocalDateTime.now());
-        libroErroneo.setAuditUpdater(usuario.getAlias());
+        libroErroneo.setAuditUpdated(LocalDateTime.now());
+        String id= usuario.getId() + "";
+        libroErroneo.setAuditUpdater(id);
 
         libroErroneoRepositorio.save(libroErroneo);
 
-        return ResponseEntity.ok("LibroErroneo actualizado correctamente");
+        return ResponseEntity.ok("Libro Erroneo actualizado correctamente");
     }
 
 

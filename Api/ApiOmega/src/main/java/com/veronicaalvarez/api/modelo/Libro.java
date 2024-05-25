@@ -1,6 +1,5 @@
 package com.veronicaalvarez.api.modelo;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -40,7 +39,7 @@ public class Libro {
 	    
 	
 	@Column(name = "ISBN", nullable = false, unique = true, length = 45)
-	private String ISBN;
+	private String isbn;
 
 	@Column(name = "titulo", nullable = false, length = 45)
 	private String titulo;
@@ -103,12 +102,12 @@ public class Libro {
         this.auditUpdater = auditUpdater;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getTitulo() {
