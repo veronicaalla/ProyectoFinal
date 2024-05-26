@@ -22,17 +22,13 @@ class StartAppFragment : Fragment() {
 
     private lateinit var binding: FragmentStartAppBinding
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_start_app, container, false)
+
         binding = FragmentStartAppBinding.inflate(inflater, container, false)
         return binding.root
-
-        // opcionesMenu()
     }
 
 
@@ -51,16 +47,6 @@ class StartAppFragment : Fragment() {
 
         }
 
-
-
-        //---------------   El valor i = posicion   ---------------
-
-
-        /* binding.bottomNavigationView.setOnNavigationItemSelectedListener {
-             when(it.itemId){
-                 R.id.opc
-             }
-         }*/
 
     }
 

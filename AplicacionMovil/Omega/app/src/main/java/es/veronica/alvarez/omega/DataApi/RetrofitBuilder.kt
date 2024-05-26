@@ -5,6 +5,7 @@ import android.content.res.Resources
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
 import java.util.Properties
 
@@ -27,9 +28,7 @@ class RetrofitBuilder {
 
     // Crea una implementación de Converter.Factory para manejar el string directamente
     class StringConverterFactory : Converter.Factory() {
-        override fun responseBodyConverter(
-            type: Type,
-            annotations: Array<Annotation>,
+        override fun responseBodyConverter(type: Type,annotations: Array<Annotation>,
             retrofit: Retrofit
         ): Converter<ResponseBody, *>? {
             if (type == String::class.java) {
@@ -50,8 +49,10 @@ class RetrofitBuilder {
     fun build(context: Context): Retrofit =
         Retrofit.Builder()
             .baseUrl(getApiEndpoint(context))
-            .addConverterFactory(StringConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+
 }
 
 

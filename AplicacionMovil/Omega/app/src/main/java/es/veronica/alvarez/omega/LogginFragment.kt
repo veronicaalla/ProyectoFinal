@@ -6,15 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.findNavController
-import com.google.gson.Gson
-import java.security.MessageDigest
-import java.math.BigInteger
 import es.veronica.alvarez.omega.databinding.FragmentLogginBinding
 import es.veronica.alvarez.omega.DataApi.Api
-import es.veronica.alvarez.omega.Model.DatosUsuarioResponse
 import es.veronica.alvarez.omega.Model.UsuarioResponse
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
@@ -25,11 +21,9 @@ class LogginFragment : Fragment() {
     private lateinit var binding: FragmentLogginBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_loggin, container, false)
+
         binding = FragmentLogginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,95 +31,131 @@ class LogginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.i("prueba inicio", "prueba")
-        context?.let { Api.initialize(it.applicationContext) }
-
+        //Comprobamos si el usuario esta logeado
+        var userPreferences = context?.let { UserPreferences(it) }
+        if (userPreferences != null) {
+            if (userPreferences.isLoggedIn){
+                //Navegamos hasta la página principal
+                view?.findNavController()
+                    ?.navigate(R.id.action_logginFragment_to_startAppFragment)
+            }
+        }
 
         //------------------- INICIO DE SESIÓN ------------------
         binding.btnIniciarSesion.setOnClickListener {
-            Log.i("Clic login", "btnLogin")
-            context?.applicationContext?.let {
-                //Le enviamos el token
-                val id = 1 // Aquí debes proporcionar el ID del usuario que deseas obtener
-                Log.i("Id usuario", id.toString())
-                Api.retrofitService.obtenerUsuarioPorId(id).enqueue(object : Callback<String> {
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
-                        if (response.isSuccessful) {
-                            val responseData = response.body()
-                            // Aquí puedes manejar la respuesta recibida desde el servidor
-                            Log.i("Token:" , responseData.toString())
-                            var seguridad = Seguridad()
-                            var resultado = seguridad.desencriptado(responseData.toString())
-
-                            Log.i("Datos Usuario", resultado)
-                            var informacionUsuario = Gson().fromJson(resultado, DatosUsuarioResponse::class.java)
-                            Log.i("Username", informacionUsuario.username)
-
-                            //Log.i("username ", informacionUsuario.usuarioResponse.username)
-
-                        } else {
-                           Log.i( "respuesta ", "la respuesta no es satisfactoria")
-                        }
-                    }
-
-                    override fun onFailure(call: Call<String>, t: Throwable) {
-                        Log.i("onFailure", "Error de conexion")
-                        Log.i("Error ", t.message.toString())
-                    }
-                })
+            if (ValidarDatos()) {
+                comprobarCredenciales()
             }
-
-            /*Comprobamos que los campos no esten vacios
-            if (binding.txtNombreUsuario.text.isNotEmpty()) {
-                if (binding.txtPassword.text.isNotEmpty()) {
-
-                    //Almacenamos las variables
-                    val usuario = binding.txtNombreUsuario.text
-                    val clave = binding.txtPassword.text
-                    //La clave (contraseña) la enviamos encriptada
-                    val claveEncriptada = encryptToMD5(clave.toString())
-
-                    //Comprobamos si el usuario ha introducido un correo o el numero de telefono
-                    if (usuario.contains('@')) {
-                        //Método api que comprueba por correo
-                    } else {
-                        //Método api que comprueba por telefono
-                    }
-
-
-                    view.findNavController()
-                        .navigate(R.id.action_logginFragment_to_startAppFragment)
-                } else {
-                    Toast.makeText(context, "Introduce la contraseña", Toast.LENGTH_LONG).show()
-                }
-            } else {
-                Toast.makeText(context, "Introduce el nombre", Toast.LENGTH_LONG).show()
-            }*/
 
         }
 
-        //------------------- SE HA OLVIDADO LA CONTRASEÑA ------------------
+
+        //region CONTRASEÑA OLVIDADA
         binding.txtOlvidoPassword.setOnClickListener {
             view.findNavController()
                 .navigate(R.id.action_logginFragment_to_passwordRecoveryFragment)
         }
 
+        //endregion
 
-        //------------------- CREAR CUENTA ------------------
+
+        //region CREAR CUENETA
         binding.txtRegistrarse.setOnClickListener {
-            view.findNavController()
-                .navigate(R.id.action_logginFragment_to_joinFragment)
+            view.findNavController().navigate(R.id.action_logginFragment_to_joinFragment)
         }
 
+        //endregion
 
     }
-    //Método auxiliar
-    fun encryptToMD5(text: String): String {
-        val md = MessageDigest.getInstance("MD5")
-        val byteArray = md.digest(text.toByteArray())
-        val bigInt = BigInteger(1, byteArray)
-        val hashText = bigInt.toString(16)
-        // Completa el hash con ceros a la izquierda si es necesario
-        return hashText.padStart(32, '0')
+
+    private fun comprobarCredenciales() {
+        //Obtenemos los datos
+        val usuario = binding.txtNombreUsuario.text.toString()
+        Log.i("Usuario", usuario)
+        val password = binding.txtPassword.text.toString()
+        Log.i("Contraseña", password)
+
+        context?.let { Api.initialize(it.applicationContext) }
+        context?.applicationContext?.let {
+            //Le enviamos el token
+            Api.retrofitService.login(usuario, password)
+                .enqueue(object : Callback<UsuarioResponse> {
+                    override fun onResponse(
+                        call: Call<UsuarioResponse>,
+                        response: Response<UsuarioResponse>
+                    ) {
+
+                        if (response.isSuccessful) {
+                            Log.i("Login succesful", response.body().toString());
+                            //Debemos comprobar que el usuario no sea administrador
+                            var tipoUsuario = response.body()?.tipo
+
+                            if (tipoUsuario == 3 || tipoUsuario == 4) {
+                                almacenamosUsuario(response.body())
+                                //Navegamos hasta la página principal
+                                view?.findNavController()
+                                    ?.navigate(R.id.action_logginFragment_to_startAppFragment)
+                            } else {
+                                MensajeValidaciones("No tienes acceso, para iniciar, registrese como usuario")
+                            }
+
+                        }
+                    }
+
+                    override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
+                        Log.i("Error login", t.toString())
+                        Log.i("error", t.printStackTrace().toString())
+                    }
+                })
+        }
+
     }
+
+    private fun almacenamosUsuario(usuario: UsuarioResponse?) {
+        val userPreferences = context?.let { UserPreferences(it) }
+
+        if (userPreferences != null && usuario != null) {
+            userPreferences.isLoggedIn = true
+            userPreferences.userId = usuario.id
+            userPreferences._username = usuario.alias
+        }
+    }
+
+    private fun ValidarDatos(): Boolean {
+        val usuario = binding.txtNombreUsuario.text
+        val password = binding.txtPassword.text
+
+        //Comprobamos que los datos no esten vacios
+        if (usuario.isEmpty()) {
+            MensajeValidaciones("Por favor, introduzca el usuario")
+            return false
+        }
+
+        if (password.isEmpty()) {
+            MensajeValidaciones("Por favor, introduzca la contraseña")
+            return false
+        }
+
+        return true
+    }
+
+
+    private fun MensajeValidaciones(mensaje: String) {
+        // Creamos la ventana emergente
+        val dialog = context?.let {
+            MaterialAlertDialogBuilder(it).setTitle("ERROR").setMessage(mensaje)
+                .setNegativeButton("OK", null).create()
+
+        }
+        if (dialog != null) {
+            dialog.show()
+        }
+    }
+
+    /*region MÉTODOS AUXILIARES
+    private fun loginUsuario(usuario: String, clave: String) {
+
+    }
+   endregion*/
+
 }

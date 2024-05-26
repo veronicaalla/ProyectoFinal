@@ -9,6 +9,7 @@ class UserPreferences (context : Context) {
     private val isLoggedInKey = "isLoggedIn"
 
     private val userIdKey = "idUsuario"
+    private val username = "usuario"
 
     private val prefs: SharedPreferences =
         context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
@@ -20,4 +21,8 @@ class UserPreferences (context : Context) {
     var userId: Int
         get() = prefs.getInt(userIdKey, -1)
         set(value) = prefs.edit().putInt(userIdKey, value).apply()
+
+    var _username: String?
+        get() = prefs.getString(username, "")
+        set(value) = prefs.edit().putString(username, value).apply()
 }
