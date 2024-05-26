@@ -10,6 +10,7 @@ import com.veronicaalvarez.api.ImplementacionSeguridad.Seguridad;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,8 +46,6 @@ public class UsuarioController {
 	@GetMapping("/usuario/{id}")
 	public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable int id){
 		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
-
-
 
 		if (usuario==null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Credenciales inválidas");
@@ -84,6 +83,12 @@ public class UsuarioController {
 
 		usuario.setAuditUpdated(LocalDateTime.now());
 		usuario.setAuditUpdater("admi");
+
+		//encriptamos la contraseña
+		// Generar una contraseña encriptada
+		String hashedPassword = BCrypt.hashpw(usuario.getClave(), BCrypt.gensalt());
+		//se la asignamos al usuario
+		usuario.setClave(hashedPassword);
 
 		usuarioRepositorio.save(usuario);
 
@@ -148,9 +153,11 @@ public class UsuarioController {
 			return ResponseEntity.notFound().build(); // Si no se encuentra el usuario, devolver una respuesta de estado 404 (no encontrado)
 		}
 
-		// Verificar si la contraseña proporcionada coincide con la contraseña del usuario
-		if (!usuario.getClave().equals(clave)) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas"); // Si las contraseñas no coinciden, devolver una respuesta de estado 401 (no autorizado)
+		// Verificar la contraseña
+		boolean isPasswordCorrect = BCrypt.checkpw(clave, usuario.getClave());
+
+		if (!isPasswordCorrect) {
+			return ResponseEntity.status(401).body("Contraseña incorrecta");
 		}
 
 		// Devolver una respuesta exitosa con los detalles del usuario (excluyendo la contraseña)
