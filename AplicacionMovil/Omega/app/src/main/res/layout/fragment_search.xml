@@ -28,8 +28,8 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.SearchView
-                    android:id="@+id/searchView"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtSearchView"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:iconifiedByDefault="false"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -39,12 +39,6 @@
 
                 </androidx.appcompat.widget.SearchView>
 
-
-                <ImageView
-                    android:id="@+id/imgTipoResult"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/baseline_more_horiz_black" />
 
             </LinearLayout>
 

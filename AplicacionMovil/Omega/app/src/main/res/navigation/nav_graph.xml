@@ -87,7 +87,11 @@
         android:id="@+id/startAppFragment"
         android:name="es.veronica.alvarez.omega.StartAppFragment"
         android:label="fragment_start_app"
-        tools:layout="@layout/fragment_start_app" />
+        tools:layout="@layout/fragment_start_app" >
+        <action
+            android:id="@+id/action_startAppFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="es.veronica.alvarez.omega.SearchFragment"
@@ -119,9 +123,6 @@
         <action
             android:id="@+id/action_settingsAppFragment_to_personalDetailsFragment"
             app:destination="@id/personalDetailsFragment" />
-        <action
-            android:id="@+id/action_settingsAppFragment_to_changePasswordFragment"
-            app:destination="@id/changePasswordFragment" />
         <action
             android:id="@+id/action_settingsAppFragment_to_logginFragment"
             app:destination="@id/logginFragment" />
@@ -163,24 +164,10 @@
         android:label="fragment_edit_personal_details"
         tools:layout="@layout/fragment_edit_personal_details" />
     <fragment
-        android:id="@+id/changePasswordFragment"
-        android:name="es.veronica.alvarez.omega.Settings.ChangePasswordFragment"
-        android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" />
-    <fragment
         android:id="@+id/seeBookFragment"
         android:name="es.veronica.alvarez.omega.Books.SeeBookFragment"
         android:label="fragment_see_book"
-        tools:layout="@layout/fragment_see_book" >
-        <action
-            android:id="@+id/action_seeBookFragment_to_editBookFragment"
-            app:destination="@id/editBookFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editBookFragment"
-        android:name="es.veronica.alvarez.omega.Books.EditBookFragment"
-        android:label="fragment_edit_book"
-        tools:layout="@layout/fragment_edit_book" />
+        tools:layout="@layout/fragment_see_book" />
     <fragment
         android:id="@+id/libraryBooksFragment"
         android:name="es.veronica.alvarez.omega.Librarys.LibraryBooksFragment"
