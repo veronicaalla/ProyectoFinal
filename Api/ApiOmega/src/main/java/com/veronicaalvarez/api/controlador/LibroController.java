@@ -1,8 +1,10 @@
 package com.veronicaalvarez.api.controlador;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.veronicaalvarez.api.modelo.Usuario;
 import com.veronicaalvarez.api.repositorio.UsuarioRepositorio;
@@ -42,6 +44,19 @@ public class LibroController {
         return ResponseEntity.ok(libros);
     }
 
+    @GetMapping("/librosaleatorios")
+    public ResponseEntity<?> obtenerLibrosAleatorios() {
+        List<Libro> libros = libroRepositorio.findAll();
+        if (libros.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Barajar la lista de libros y seleccionar los primeros 20
+        Collections.shuffle(libros);
+        List<Libro> randomLibros = libros.stream().limit(20).collect(Collectors.toList());
+
+        return ResponseEntity.ok(randomLibros);
+    }
 
     @GetMapping("/id/{id}")
     public ResponseEntity<?> obtenerLibrosPorId(@PathVariable int id) {
@@ -53,6 +68,18 @@ public class LibroController {
 
         return ResponseEntity.ok(libro);
     }
+
+    @GetMapping("/titulo/{titulo}")
+    public ResponseEntity<?> obtenerLibrosPorTitulo(@PathVariable String titulo) {
+        List<Libro> libros = libroRepositorio.findByTitulo(titulo);
+
+        if (libros.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(libros);
+    }
+
 
 
     @GetMapping("/genero/{generoId}")

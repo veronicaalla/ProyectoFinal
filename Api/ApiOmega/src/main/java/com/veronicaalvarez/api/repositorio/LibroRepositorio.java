@@ -8,4 +8,5 @@ import com.veronicaalvarez.api.modelo.Libro;
 
 public interface LibroRepositorio extends JpaRepository<Libro, Integer>{
     List<Libro> findByGenero(int generoId);
+    List<Libro> findByTitulo(String titulo);
 }
