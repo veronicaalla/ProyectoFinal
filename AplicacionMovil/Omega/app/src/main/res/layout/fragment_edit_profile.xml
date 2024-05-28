@@ -30,7 +30,7 @@
                 app:title=" ">
 
                 <ImageView
-                    android:id="@+id/menuChat"
+                    android:id="@+id/menuAtras"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -74,7 +74,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/txtTipoIncidencia"
+                        android:id="@+id/txtNombreUsuario"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -95,7 +95,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/txtfechaCreacion"
+                        android:id="@+id/txtUsername"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -134,7 +134,9 @@
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:visibility="gone"
+                tools:visibility="gone" />
 
             <TextView
                 android:id="@+id/txtCambiarPrivacidad"
@@ -143,13 +145,17 @@
                 android:paddingLeft="30dp"
                 android:text="Cambiar a cuenta profesional"
                 android:textColor="@color/blue_medium"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="gone" />
 
             <View
                 android:id="@+id/divider3"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="?android:attr/listDivider" />
+                android:background="?android:attr/listDivider"
+                android:visibility="gone"
+                tools:visibility="gone" />
 
             <TextView
                 android:id="@+id/txtCambiarInformacion"
@@ -159,7 +165,9 @@
                 android:paddingTop="5dp"
                 android:text="Configuracion de la informacion personal"
                 android:textColor="@color/blue_medium"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="gone" />
 
             <Button
                 android:id="@+id/btnGuardar"
@@ -172,16 +180,5 @@
 
     </ScrollView>
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        app:labelVisibilityMode="selected"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_inferior" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

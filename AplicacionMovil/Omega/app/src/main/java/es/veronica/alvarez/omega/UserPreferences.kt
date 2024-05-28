@@ -10,6 +10,7 @@ class UserPreferences (context : Context) {
 
     private val userIdKey = "idUsuario"
     private val username = "usuario"
+    private val privacidad = "publico"
 
     private val prefs: SharedPreferences =
         context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
@@ -25,4 +26,8 @@ class UserPreferences (context : Context) {
     var _username: String?
         get() = prefs.getString(username, "")
         set(value) = prefs.edit().putString(username, value).apply()
+
+    var _privacidad : Boolean
+        get() = prefs.getBoolean(privacidad, false)
+        set(value) = prefs.edit().putBoolean(privacidad, value).apply()
 }

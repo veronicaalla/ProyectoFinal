@@ -3,14 +3,14 @@ package es.veronica.alvarez.omega.RecyclerComents
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import es.veronica.alvarez.omega.Model.ComentResponse
+import es.veronica.alvarez.omega.Model.ComentarioResponse
 import es.veronica.alvarez.omega.R
 
 class ComentAdapter(
-    var listaComentarios : List<ComentResponse> = emptyList()
+    var listaComentarios : List<ComentarioResponse> = emptyList()
 ) : RecyclerView.Adapter<ComentViewHolder>(){
 
-    fun updateComents(list: List<ComentResponse>){
+    fun updateComents(list: List<ComentarioResponse>){
         listaComentarios = list
         notifyDataSetChanged()
     }

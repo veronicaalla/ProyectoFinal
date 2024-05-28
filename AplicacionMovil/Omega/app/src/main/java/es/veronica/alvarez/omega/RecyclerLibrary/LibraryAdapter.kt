@@ -3,15 +3,15 @@ package es.veronica.alvarez.omega.RecyclerLibrary
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import es.veronica.alvarez.omega.Model.LibraryResponse
+import es.veronica.alvarez.omega.Model.BibliotecaResponse
 import es.veronica.alvarez.omega.R
 
 class LibraryAdapter (
-    var listaBibliotecas: List<LibraryResponse> = emptyList(),
-    private val onItemSelected : (LibraryResponse) -> Unit
+    var listaBibliotecas: List<BibliotecaResponse> = emptyList(),
+    private val onItemSelected : (BibliotecaResponse) -> Unit
 ): RecyclerView.Adapter<LibraryViewHolder>(){
 
-    fun updateLibrary (list: List<LibraryResponse>){
+    fun updateLibrary (list: List<BibliotecaResponse>){
         listaBibliotecas = list
         notifyDataSetChanged()
     }

@@ -30,12 +30,12 @@
         android:padding="10dp"
         android:text="Biblioteca Preferente" />
 
-        <TextView
-            android:id="@+id/numLibrosAlmacenados"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="200dp"
-            android:text="0" />
+            <Switch
+                android:id="@+id/switchPublica"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
 
         </LinearLayout>
 

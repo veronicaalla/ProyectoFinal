@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import es.veronica.alvarez.omega.DataApi.Api
-import es.veronica.alvarez.omega.Model.BookResponse
+import es.veronica.alvarez.omega.Model.LibroResponse
 import es.veronica.alvarez.omega.databinding.FragmentSearchBinding
-import com.google.gson.Gson
 import androidx.appcompat.widget.SearchView
+import androidx.navigation.findNavController
 import es.veronica.alvarez.omega.RecyclerBook.BookAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +24,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private var bottomNavigationView: BottomNavigationView? = null
-    private lateinit var listaLibros: List<BookResponse>
+    private lateinit var listaLibros: List<LibroResponse>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,15 +69,29 @@ class SearchFragment : Fragment() {
         })
 
         //endregion
+
+        //region Menu de navegacion
+        bottomNavigationView = binding.bottomNavigationView
+
+        // Establecer el listener
+        bottomNavigationView!!.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.opcCasa -> view.findNavController().navigate(R.id.action_startAppFragment_to_searchFragment)
+
+                R.id.opcPerfil -> view.findNavController().navigate(R.id.action_searchFragment_to_profileUserFragment)
+            }
+            false
+        })
+        //endregion
     }
 
     private fun mostrarLibrosAleatorios() {
         context?.let { Api.initialize(it.applicationContext) }
         context?.applicationContext?.let {
-            Api.retrofitService.obtenerLibros().enqueue(object : Callback<List<BookResponse>> {
+            Api.retrofitService.obtenerLibros().enqueue(object : Callback<List<LibroResponse>> {
                 override fun onResponse(
-                    call: Call<List<BookResponse>>,
-                    response: Response<List<BookResponse>>
+                    call: Call<List<LibroResponse>>,
+                    response: Response<List<LibroResponse>>
                 ) {
                     var libros = response.body()
                     Log.i("Libros aleatorios", libros.toString())
@@ -88,7 +102,7 @@ class SearchFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<List<BookResponse>>, t: Throwable) {
+                override fun onFailure(call: Call<List<LibroResponse>>, t: Throwable) {
                     Log.i("Error login", t.toString())
                     Log.i("error", t.printStackTrace().toString())
                 }
@@ -107,7 +121,7 @@ class SearchFragment : Fragment() {
         //endregion
     }
 
-    private fun onItemSelected(it: BookResponse) {
+    private fun onItemSelected(it: LibroResponse) {
         Toast.makeText(requireContext(), "Libro ${it.titulo}", Toast.LENGTH_LONG).show()
     }
 

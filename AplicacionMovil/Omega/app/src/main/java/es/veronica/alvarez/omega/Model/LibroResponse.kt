@@ -1,9 +1,8 @@
 package es.veronica.alvarez.omega.Model
 
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDate
 
-data class BookResponse (
+data class LibroResponse (
     @SerializedName("id")
     val id: Int,
 

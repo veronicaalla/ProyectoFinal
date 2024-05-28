@@ -4,8 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import es.veronica.alvarez.omega.DataApi.Api
-import es.veronica.alvarez.omega.Model.BookResponse
-import es.veronica.alvarez.omega.Model.ValoracionLibroResponse
+import es.veronica.alvarez.omega.Model.LibroResponse
 import es.veronica.alvarez.omega.databinding.ItemBookBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,15 +15,15 @@ class BookViewHolder (view: View): RecyclerView.ViewHolder(view){
     private val binding = ItemBookBinding.bind(view)
 
     fun bind(
-        bookResponse : BookResponse,
-        onItemSelected: (BookResponse) -> Unit
+        libroResponse : LibroResponse,
+        onItemSelected: (LibroResponse) -> Unit
     ){
-        binding.txtTitulo.text = bookResponse.titulo
-        binding.txtSinopsis.text = obtenerDescripcionCorta(bookResponse.descripcion)
-        binding.txtAutor.text = "Autor: ${bookResponse.autor}"
-        obtenerValoracionLibro(bookResponse.id)
+        binding.txtTitulo.text = libroResponse.titulo
+        binding.txtSinopsis.text = obtenerDescripcionCorta(libroResponse.descripcion)
+        binding.txtAutor.text = "Autor: ${libroResponse.autor}"
+        obtenerValoracionLibro(libroResponse.id)
 
-        binding.root.setOnClickListener { onItemSelected(bookResponse) }
+        binding.root.setOnClickListener { onItemSelected(libroResponse) }
     }
 
     fun obtenerDescripcionCorta(descripcion: String, maxPalabras: Int = 15): String {

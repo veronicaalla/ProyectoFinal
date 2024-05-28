@@ -91,12 +91,22 @@
         <action
             android:id="@+id/action_startAppFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_startAppFragment_to_profileUserFragment"
+            app:destination="@id/profileUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="es.veronica.alvarez.omega.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_startAppFragment"
+            app:destination="@id/startAppFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_profileUserFragment"
+            app:destination="@id/profileUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileUserFragment"
         android:name="es.veronica.alvarez.omega.ProfileUserFragment"
@@ -108,6 +118,9 @@
         <action
             android:id="@+id/action_profileUserFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileUserFragment_to_libraryBooksFragment"
+            app:destination="@id/libraryBooksFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsAppFragment"
@@ -138,6 +151,12 @@
         <action
             android:id="@+id/action_editProfileFragment_to_personalDetailsFragment"
             app:destination="@id/personalDetailsFragment" />
+        <argument
+            android:name="perfil"
+            app:argType="es.veronica.alvarez.omega.Model.PerfilUsuarioResponse" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileUserFragment"
+            app:destination="@id/profileUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountPrivacyFragment"
@@ -172,5 +191,9 @@
         android:id="@+id/libraryBooksFragment"
         android:name="es.veronica.alvarez.omega.Librarys.LibraryBooksFragment"
         android:label="fragment_library_books"
-        tools:layout="@layout/fragment_library_books" />
+        tools:layout="@layout/fragment_library_books" >
+        <argument
+            android:name="biblioteca"
+            app:argType="es.veronica.alvarez.omega.Model.BibliotecaResponse" />
+    </fragment>
 </navigation>
