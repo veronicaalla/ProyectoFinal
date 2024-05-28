@@ -63,7 +63,7 @@ public class PerfilUsuarioController {
         perfilExistente.setInformacion(perfilUsuarioNuevo.getInformacion());
 
 
-       perfilUsuarioRepository.save(perfilExistente);
+        perfilUsuarioRepository.save(perfilExistente);
         return ResponseEntity.ok("Perfil actualizado correctamente");
     }
 
