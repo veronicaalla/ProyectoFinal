@@ -121,6 +121,12 @@
         <action
             android:id="@+id/action_profileUserFragment_to_libraryBooksFragment"
             app:destination="@id/libraryBooksFragment" />
+        <action
+            android:id="@+id/action_profileUserFragment_to_startAppFragment"
+            app:destination="@id/startAppFragment" />
+        <action
+            android:id="@+id/action_profileUserFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsAppFragment"

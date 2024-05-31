@@ -66,6 +66,8 @@ class EditProfileFragment : Fragment() {
                         val message = response.body()?.toString() ?: "Perfil actualizado correctamente"
                         Toast.makeText(requireContext(), "Perfil modificado", Toast.LENGTH_LONG).show()
                         //Log.i("Respuesta", message)
+
+
                     }
                 }
 
@@ -74,7 +76,10 @@ class EditProfileFragment : Fragment() {
                 }
 
             })
+            //Volvemos a el perfil
+            requireView().findNavController().navigate(R.id.action_editProfileFragment_to_profileUserFragment)
         }
+
     }
 
     private fun guardamosDatosEnPerfil() {

@@ -40,6 +40,7 @@ class StartAppFragment : Fragment() {
 
         obtenerGenerosUsuario()
 
+        //region funcionalidad a futuro
         binding.menuChat.setOnClickListener {
 
         }
@@ -47,6 +48,7 @@ class StartAppFragment : Fragment() {
         binding.menuNotificaciones.setOnClickListener {
 
         }
+        //endregion
 
         //region Menu de navegacion
         bottomNavigationView = binding.bottomNavigationView
@@ -54,7 +56,7 @@ class StartAppFragment : Fragment() {
         // Establecer el listener
         bottomNavigationView!!.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.opcBuscar -> view.findNavController().navigate(R.id.action_searchFragment_to_startAppFragment)
+                R.id.opcBuscar -> view.findNavController().navigate(R.id.action_startAppFragment_to_searchFragment)
 
                 R.id.opcPerfil -> view.findNavController().navigate(R.id.action_startAppFragment_to_profileUserFragment)
             }

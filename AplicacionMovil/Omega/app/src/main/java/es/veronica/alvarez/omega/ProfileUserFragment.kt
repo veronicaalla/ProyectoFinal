@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -41,6 +42,11 @@ class ProfileUserFragment : Fragment() {
 
         obtenerPerfil(userPreferences.userId)
 
+        //region funcionalidad del toolBar
+        binding.settings.setOnClickListener {
+            view.findNavController().navigate(R.id.action_profileUserFragment_to_settingsAppFragment)
+        }
+        //endregion
         binding.btnEditarPerfil.setOnClickListener {
             //view.findNavController().navigate(R.id.action_profileUserFragment_to_editProfileFragment)
 
@@ -48,6 +54,21 @@ class ProfileUserFragment : Fragment() {
                 .actionProfileUserFragmentToEditProfileFragment(perfil)
             findNavController().navigate(action)
         }
+
+
+        //region Menu de navegacion
+        bottomNavigationView = binding.bottomNavigationView
+
+        // Establecer el listener
+        bottomNavigationView!!.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.opcBuscar -> view.findNavController().navigate(R.id.action_profileUserFragment_to_searchFragment)
+
+                R.id.opcCasa -> view.findNavController().navigate(R.id.action_profileUserFragment_to_startAppFragment)
+            }
+            false
+        })
+        //endregion
     }
 
     private fun obtenerBibliotecas() {

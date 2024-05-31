@@ -3,6 +3,7 @@ package es.veronica.alvarez.omega.DataApi
 import es.veronica.alvarez.omega.Model.BibliotecaResponse
 import es.veronica.alvarez.omega.Model.GeneroUsuarioResponse
 import es.veronica.alvarez.omega.Model.LibroResponse
+import es.veronica.alvarez.omega.Model.LibrosBibliotecaResponse
 import es.veronica.alvarez.omega.Model.PerfilUsuarioResponse
 import es.veronica.alvarez.omega.Model.UsuarioResponse
 import retrofit2.Call
@@ -35,6 +36,10 @@ interface ApiService {
 
     @GET("bibliotecas/usuario/{usuarioId}")
     fun obtenerBibliotecas(@Path("usuarioId") usuarioId: Int): Call<List<BibliotecaResponse>>
+
+    @GET("librosBiblioteca/biblioteca/{bibliotecaId}")
+    fun obtenerLibrosPorBiblioteca(@Path("bibliotecaId") bibliotecaId: Int): Call<List<LibrosBibliotecaResponse>>
+
 
     @GET("generosUsuario/{idUsuario}")
     fun obtenerGenerosPorUsuario(@Path("idUsuario") idUsuario: Int): Call<List<GeneroUsuarioResponse>>

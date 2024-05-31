@@ -25,8 +25,7 @@ public class LibrosBibliotecaController {
 
 
     @GetMapping("/biblioteca/{bibliotecaId}")
-    public ResponseEntity<?>  obtenerLibrosPorBiblioteca(Integer bibliotecaId) {
-
+    public ResponseEntity<?> obtenerLibrosPorBiblioteca(@PathVariable Integer bibliotecaId) {
         List<LibrosBiblioteca> librosBiblioteca = librosBibliotecaRepository.findByBibliotecaId(bibliotecaId);
 
         if (librosBiblioteca.isEmpty()) {
