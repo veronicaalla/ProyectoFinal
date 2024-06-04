@@ -27,6 +27,11 @@ public class LibroErroneoController {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
+
+    /**
+     * Obtiene todos los libros erróneos.
+     * @return ResponseEntity con la lista de todos los libros erróneos o un 204 NO CONTENT si no hay libros erróneos.
+     */
     @GetMapping
     public ResponseEntity<?> obtenerLibrosErroneos() {
         List<LibroErroneo> librosErroneos = libroErroneoRepositorio.findAll();
@@ -36,6 +41,11 @@ public class LibroErroneoController {
         return ResponseEntity.ok(librosErroneos);
     }
 
+
+    /**
+     * Obtiene todos los libros erróneos sin resolver.
+     * @return ResponseEntity con la lista de libros erróneos sin resolver o un 204 NO CONTENT si no hay libros erróneos sin resolver.
+     */
     @GetMapping("/sin-resolver")
     public ResponseEntity<?> obtenerLibrosErroneosSinResolver() {
         List<LibroErroneo> librosErroneosSinResolver = libroErroneoRepositorio.findByResueltoIsNull();
@@ -45,6 +55,12 @@ public class LibroErroneoController {
         return ResponseEntity.ok(librosErroneosSinResolver);
     }
 
+
+    /**
+     * Obtiene un libro erróneo por su ID, es decir, un libro que ha sido indicado como que, alguno de sus campos no son correctos
+     * @param id El ID del libro erróneo.
+     * @return ResponseEntity con el libro erróneo encontrado o un 404 NOT FOUND si no se encuentra.
+     */
     @GetMapping("/id/{id}")
     public ResponseEntity<?> obtenerLibrosErroneosId(@PathVariable Integer id) {
         LibroErroneo erroneo = libroErroneoRepositorio.findById(id).orElse(null);
@@ -55,6 +71,12 @@ public class LibroErroneoController {
         return ResponseEntity.ok(erroneo);
     }
 
+    /**
+     * Crea un nuevo libro erróneo.
+     * @param idLibro El ID del libro.
+     * @param idReportante El ID del usuario que reporta.
+     * @return ResponseEntity con un mensaje de éxito o un 400 BAD REQUEST si el libro o el usuario no existen.
+     */
     @PostMapping("/crear")
     public ResponseEntity<?> crearLibroErroneo(@RequestParam("idLibro") int idLibro,
                                                @RequestParam("idReportante") int idReportante) {
@@ -82,6 +104,13 @@ public class LibroErroneoController {
         return ResponseEntity.ok("LibroErroneo creado correctamente");
     }
 
+
+    /**
+     * Edita un libro erróneo existente.
+     * @param libroErroneoNuevo El libro erróneo con los datos actualizados.
+     * @param idUsuario El ID del usuario que realiza la actualización.
+     * @return ResponseEntity con un mensaje de éxito o un 404 NOT FOUND si el libro erróneo o el usuario no se encuentran.
+     */
     @PutMapping("/editar/{id}")
     public ResponseEntity<?> editarLibroErroneo(@RequestBody LibroErroneo libroErroneoNuevo,
                                                 @RequestParam("idUsuario") int idUsuario) {
