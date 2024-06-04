@@ -10,19 +10,31 @@ using System.Windows.Forms;
 
 namespace Omega
 {
+
+    /// <summary>
+    /// Formulario que muestra información de un libro reportado como erróneo.
+    /// </summary>
     public partial class InfoReportedBook : Form
     {
 		
 		LibroErroneo libro;
 		Controlador controlador;
-		
+
+  	/// <summary>
+        /// Constructor vacío.
+        /// </summary>
         public InfoReportedBook()
         {
             InitializeComponent();
 			libro = new LibroErroneo();
 			controlador = new Controlador();
         }
-		
+
+  /// <summary>
+        /// Constructor que recibe un libro erróneo.
+        /// </summary>
+        /// <param name="libroErroneo">El libro erróneo a mostrar.</param>
+        
 		public InfoReportedBook( LibroErroneo libroErroneo):this()
         {
             this.libro = libroErroneo;
@@ -44,6 +56,10 @@ namespace Omega
 		
 		
 		//Métodos auxiliares
+  /// <summary>
+        /// Muestra un mensaje de error.
+        /// </summary>
+        /// <param name="mensaje">El mensaje de error a mostrar.</param>
 		 public void mensajeError(string mensaje)
         {
             MessageBox.Show(mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
