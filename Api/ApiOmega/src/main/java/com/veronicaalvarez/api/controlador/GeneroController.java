@@ -21,12 +21,21 @@ public class GeneroController {
 		this.generoRepositorio = generoRepositorio;
 	}
 	
-	//Usamoe el método GetMapping para obtener toda la lista de usuarios 
+	/**
+	 * Obtiene todos los géneros.
+	 * @return Lista de todos los géneros.
+	 */
 	@GetMapping
 	public List<Genero> obtenerGeneros(){
 		return generoRepositorio.findAll();
 	}
 
+	
+	/**
+	 * Obtiene un género por su ID.
+	 * @param id El ID del género.
+	 * @return ResponseEntity con el género encontrado o un 404 NOT FOUND si no se encuentra.
+	 */
 	@GetMapping("id/{id}")
 	public ResponseEntity<?> obtenerGeneroPorId(@PathVariable int id){
 		Genero genero = generoRepositorio.findById(id).orElse(null);
@@ -38,6 +47,12 @@ public class GeneroController {
 		return ResponseEntity.ok(genero);
 	}
 
+	
+	/**
+	 * Obtiene el ID de un género por su nombre.
+	 * @param nombre El nombre del género.
+	 * @return ResponseEntity con el ID del género encontrado o un 404 NOT FOUND si no se encuentra.
+	 */
 	@GetMapping("/nombre/{nombre}")
 	public ResponseEntity<?> obtenerIdGeneroPorNombre(@PathVariable String nombre) {
 		Genero genero = generoRepositorio.findByNombre(nombre);
