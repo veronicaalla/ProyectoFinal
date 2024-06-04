@@ -32,6 +32,12 @@ public class PerfilUsuarioController {
         return ResponseEntity.ok(perfiles);
     }*/
 
+
+    /**
+     * Obtiene el perfil de un usuario por su ID.
+     * @param idUsuario El ID del usuario.
+     * @return ResponseEntity con el perfil del usuario o un 404 NOT FOUND si no se encuentra.
+     */
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<?> obtenerPerfilPorIdUsuario(@PathVariable int idUsuario) {
         PerfilUsuario perfil = perfilUsuarioRepository.findByIdUsuario(idUsuario);
@@ -43,6 +49,12 @@ public class PerfilUsuarioController {
     }
 
 
+    /**
+     * Modifica el perfil de un usuario.
+     * @param idUsuario El ID del usuario.
+     * @param perfilUsuarioNuevo El perfil actualizado del usuario.
+     * @return ResponseEntity con un mensaje de éxito o un 404 NOT FOUND si el usuario o el perfil no existen.
+     */
     @PutMapping("modificar/{idUsuario}")
     public ResponseEntity<?> modificarPerfil(@PathVariable int idUsuario, @RequestBody PerfilUsuario perfilUsuarioNuevo) {
 
