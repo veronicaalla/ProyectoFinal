@@ -9,10 +9,23 @@ import java.util.Base64;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
+/**
+ * Clase que proporciona métodos para encriptar y desencriptar datos utilizando el algoritmo AES.
+ */
 public class Seguridad {
+
+    /**
+     * Clave secreta utilizada para encriptar y desencriptar los datos.
+     */
     private static final String key = "Dcnpzt5dJqcYXu7X";
 
-  
+  /**
+     * Encripta un mapa de datos en una cadena encriptada utilizando la clave proporcionada.
+     * 
+     * @param data    Mapa de datos a encriptar
+     * @param encryptKey Clave utilizada para encriptar los datos
+     * @return Cadena encriptada
+     */
     public String encrypt(Map<String, Object> data, String encryptKey) {
         try {
             StringBuilder objeto = new StringBuilder();
@@ -48,6 +61,13 @@ public class Seguridad {
         }
     }
 
+    /**
+     * Genera una clave secreta a partir de una contraseña utilizando el algoritmo SHA-256.
+     * 
+     * @param password Contraseña utilizada para generar la clave secreta
+     * @return Clave secreta generada
+     * @throws NoSuchAlgorithmException Si no se encuentra el algoritmo SHA-256
+     */
     private SecretKeySpec generateKey(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] bytes = password.getBytes();
@@ -56,6 +76,14 @@ public class Seguridad {
         return new SecretKeySpec(key, "AES");
     }
 
+
+    /**
+     * Desencripta una cadena encriptada utilizando la clave proporcionada.
+     * 
+     * @param strToDecrypt Cadena encriptada a desencriptar
+     * @param encryptKey Clave utilizada para desencriptar los datos
+     * @return Cadena desencriptada
+     */
     public String decrypt(String strToDecrypt, String encryptKey) {
         try {
             byte[] cipherText = Base64.getDecoder().decode(strToDecrypt);
@@ -79,10 +107,22 @@ public class Seguridad {
     }
 
 
+    /**
+     * Desencripta una cadena encriptada utilizando la clave secreta predeterminada.
+     * 
+     * @param codigo Cadena encriptada a desencriptar
+     * @return Cadena desencriptada
+     */
     public String desencriptado(String codigo) {
         return decrypt(codigo, key);
     }
 
+    /**
+     * Encripta un mapa de datos en una cadena encriptada utilizando la clave secreta predeterminada.
+     * 
+     * @param map Mapa de datos a encriptar
+     * @return Cadena encriptada
+     */
     public String encriptado (Map<String, Object> map){
         return encrypt( map, key);
     }
