@@ -24,6 +24,11 @@ public class LibrosBibliotecaController {
     }
 
 
+    /**
+     * Obtiene los libros asociados a una biblioteca por su ID.
+     * @param bibliotecaId El ID de la biblioteca.
+     * @return ResponseEntity con la lista de libros asociados a la biblioteca o un 404 NOT FOUND si no se encuentran libros asociados.
+     */
     @GetMapping("/biblioteca/{bibliotecaId}")
     public ResponseEntity<?> obtenerLibrosPorBiblioteca(@PathVariable Integer bibliotecaId) {
         List<LibrosBiblioteca> librosBiblioteca = librosBibliotecaRepository.findByBibliotecaId(bibliotecaId);
@@ -35,7 +40,12 @@ public class LibrosBibliotecaController {
     }
 
 
-
+    /**
+     * Agrega un libro a una biblioteca.
+     * @param bibliotecaId El ID de la biblioteca.
+     * @param libroId El ID del libro a agregar.
+     * @return ResponseEntity con un mensaje de éxito o un 500 INTERNAL SERVER ERROR si ocurre un error.
+     */
     @PostMapping("/{bibliotecaId}/libro/{libroId}")
     public ResponseEntity<String> agregarLibroABiblioteca(@PathVariable("bibliotecaId") int bibliotecaId, @PathVariable("libroId") int libroId) {
         try {
@@ -58,6 +68,13 @@ public class LibrosBibliotecaController {
         }
     }
 
+
+    /**
+     * Elimina un libro de una biblioteca.
+     * @param bibliotecaId El ID de la biblioteca.
+     * @param libroId El ID del libro a eliminar.
+     * @return ResponseEntity con un mensaje de éxito, un 404 NOT FOUND si el libro no existe en la biblioteca o un 500 INTERNAL SERVER ERROR si ocurre un error.
+     */
     @DeleteMapping("/{bibliotecaId}/libro/{libroId}")
     public ResponseEntity<String> eliminarLibroDeBiblioteca(@PathVariable("bibliotecaId") int bibliotecaId, @PathVariable("libroId") int libroId) {
         try {
@@ -79,6 +96,13 @@ public class LibrosBibliotecaController {
     }
 
 
+    /**
+     * Mueve un libro de una biblioteca a otra.
+     * @param bibliotecaOrigenId El ID de la biblioteca de origen.
+     * @param libroId El ID del libro a mover.
+     * @param bibliotecaDestinoId El ID de la biblioteca de destino.
+     * @return ResponseEntity con un mensaje de éxito, un 404 NOT FOUND si el libro no existe en la biblioteca de origen o un 500 INTERNAL SERVER ERROR si ocurre un error.
+     */
     @PutMapping("/{bibliotecaOrigenId}/libro/{libroId}/mover/{bibliotecaDestinoId}")
     public ResponseEntity<String> moverLibroEntreBibliotecas(@PathVariable("bibliotecaOrigenId") int bibliotecaOrigenId,
                                                              @PathVariable("libroId") int libroId,
