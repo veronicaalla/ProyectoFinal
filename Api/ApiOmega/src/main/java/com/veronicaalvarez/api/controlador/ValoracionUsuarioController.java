@@ -27,6 +27,10 @@ public class ValoracionUsuarioController {
         this.libroRepository = libroRepository;
     }
 
+    /**
+     * Obtiene todas las valoraciones de usuarios.
+     * @return ResponseEntity con la lista de valoraciones o un 404 NOT FOUND si no hay valoraciones.
+     */
     @GetMapping
     public ResponseEntity<?> obtenerValoracionUsuarios() {
         List<ValoracionUsuario> valoracionUsuarios = valoracionUsuarioRepository.findAll();
@@ -36,6 +40,13 @@ public class ValoracionUsuarioController {
         return ResponseEntity.ok(valoracionUsuarios);
     }
 
+
+    /**
+     * Obtiene la valoración de un libro por un usuario específico.
+     * @param idLibro El ID del libro.
+     * @param idUsuario El ID del usuario.
+     * @return ResponseEntity con la valoración del usuario para el libro especificado o un 404 NOT FOUND si no se encuentra la valoración.
+     */
     @GetMapping("/libro/{idLibro}/usuario/{idUsuario}")
     public ResponseEntity<?> obtenerValoracionLibroPorUsuario(@PathVariable("idLibro") int idLibro, @PathVariable("idUsuario") int idUsuario) {
         Optional<ValoracionUsuario> valoracionUsuarioOptional = valoracionUsuarioRepository.findByLibroIdAndUsuarioId(idLibro, idUsuario);
@@ -48,7 +59,13 @@ public class ValoracionUsuarioController {
         }
     }
 
-
+    /**
+     * Crea una nueva valoración de un usuario para un libro específico.
+     * @param idUsuario El ID del usuario.
+     * @param idLibro El ID del libro.
+     * @param valoracionUsuario La valoración del usuario para el libro.
+     * @return ResponseEntity con un mensaje de éxito y la valoración creada, o un error 500 INTERNAL SERVER ERROR si ocurre algún problema.
+     */
     @PostMapping("/usuarios/{idUsuario}/libros/{idLibro}/valoraciones")
     public ResponseEntity<?> crearValoracionUsuario(@PathVariable int idUsuario, @PathVariable int idLibro, @RequestBody ValoracionUsuario valoracionUsuario) {
         try {
@@ -68,48 +85,4 @@ public class ValoracionUsuarioController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear la valoración. Por favor, inténtalo de nuevo más tarde.");
         }
     }
-
-    /*
-    {
-  "id": 0,
-  "libro": {
-  "id": 2,
-  "auditCreated": "2024-04-27T19:13:49",
-  "auditCreator": "admi",
-  "auditUpdated": "2024-04-27T19:13:49",
-  "auditUpdater": "admi",
-  "titulo": "Un sueño real",
-  "autor": "Alice Kellen",
-  "descripcion": "La vida real no es un cuento de hadas, pero a veces lo parece...",
-  "genero": 3,
-  "fechaPublicacion": "2016-07-07",
-  "paginas": 352,
-  "isbn": "9788408192299"
-},
-  "usuario": {
-  "id": 1,
-  "auditCreated": "2024-04-27T19:11:40",
-  "auditCreator": "admi",
-  "auditUpdated": "2024-04-27T19:11:40",
-  "auditUpdater": "admi",
-  "user": "juanpe",
-  "nombre": "Juan",
-  "apellidos": "Pérez",
-  "fechaNacimiento": "1990-01-01",
-  "correo": "juan@example.com",
-  "clave": "clave123",
-  "telefono": "123456789",
-  "tipo": 3,
-  "publico": false
-},
-  "playList": "string",
-  "recomendacion": true,
-  "opinion": "string",
-  "puntuacion": 7,
-  "fechaValoracion": "2024-05-12T12:07:16.123Z",
-  "personaje_odiado": "string",
-  "personaje_fav": "string",
-  "frase_iconica": "string"
-}
-     */
 }
