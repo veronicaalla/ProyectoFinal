@@ -19,6 +19,10 @@ public class ValoracionLibroController {
         this.valoracionLibroRepository = valoracionLibroRepository;
     }
 
+    /**
+     * Obtiene todas las valoraciones de libros.
+     * @return ResponseEntity con la lista de valoraciones o un 404 NOT FOUND si no hay valoraciones.
+     */
     @GetMapping
     public ResponseEntity<?> obtenerValoraciones() {
         List<ValoracionLibro> valoraciones = valoracionLibroRepository.findAll();
@@ -29,6 +33,11 @@ public class ValoracionLibroController {
         return ResponseEntity.ok(valoraciones);
     }
 
+    /**
+     * Obtiene la valoración total de un libro por su ID.
+     * @param idLibro El ID del libro.
+     * @return ResponseEntity con la valoración total del libro o un 404 NOT FOUND si no se encuentra la valoración.
+     */
     @GetMapping("/valoracion/{idLibro}")
     public ResponseEntity<?> obtenerValoracionLibro(@PathVariable("idLibro") int idLibro) {
         Optional<ValoracionLibro> valoracionLibroOptional = valoracionLibroRepository.findByIdLibro(idLibro);
@@ -41,6 +50,13 @@ public class ValoracionLibroController {
         }
     }
 
+
+    /**
+     * Actualiza la valoración total de un libro por su ID.
+     * @param idLibro El ID del libro.
+     * @param nuevaValoracion La nueva valoración del libro.
+     * @return ResponseEntity con un mensaje de éxito o un error 500 INTERNAL SERVER ERROR si ocurre algún problema.
+     */
     @PutMapping("/valoracion/{idLibro}")
     public ResponseEntity<?> actualizarValoracionLibro(@PathVariable("idLibro") int idLibro, @RequestBody ValoracionLibro nuevaValoracion) {
         try {
