@@ -34,6 +34,10 @@ public class LibroController {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
+    /**
+     * Obtiene todos los libros.
+     * @return ResponseEntity con la lista de todos los libros o un 404 NOT FOUND si no hay libros.
+     */
     @GetMapping
     public ResponseEntity<?> obtenerLibros() {
         List<Libro> libros = libroRepositorio.findAll();
@@ -44,6 +48,10 @@ public class LibroController {
         return ResponseEntity.ok(libros);
     }
 
+    /**
+     * Obtiene una lista de libros aleatorios.
+     * @return ResponseEntity con una lista de hasta 20 libros aleatorios o un 404 NOT FOUND si no hay libros.
+     */
     @GetMapping("/librosaleatorios")
     public ResponseEntity<?> obtenerLibrosAleatorios() {
         List<Libro> libros = libroRepositorio.findAll();
@@ -58,6 +66,12 @@ public class LibroController {
         return ResponseEntity.ok(randomLibros);
     }
 
+
+    /**	
+     * Obtiene un libro por su ID.
+     * @param id El ID del libro.
+     * @return ResponseEntity con el libro encontrado o un 404 NOT FOUND si no se encuentra.
+     */
     @GetMapping("/id/{id}")
     public ResponseEntity<?> obtenerLibrosPorId(@PathVariable int id) {
         Libro libro = libroRepositorio.findById(id).orElse(null);
@@ -69,6 +83,12 @@ public class LibroController {
         return ResponseEntity.ok(libro);
     }
 
+
+    /**
+     * Obtiene libros por su título.
+     * @param titulo El título del libro.
+     * @return ResponseEntity con la lista de libros encontrados o un 404 NOT FOUND si no se encuentran libros.
+     */
     @GetMapping("/titulo/{titulo}")
     public ResponseEntity<?> obtenerLibrosPorTitulo(@PathVariable String titulo) {
         List<Libro> libros = libroRepositorio.findByTitulo(titulo);
@@ -81,7 +101,11 @@ public class LibroController {
     }
 
 
-
+    /**
+     * Obtiene libros por su género.
+     * @param generoId El ID del género.
+     * @return ResponseEntity con la lista de libros encontrados para el género especificado o un 404 NOT FOUND si no se encuentran libros.
+     */
     @GetMapping("/genero/{generoId}")
     public ResponseEntity<?> obtenerLibrosPorGenero(@PathVariable("generoId") int generoId) {
         List<Libro> librosPorGenero = libroRepositorio.findByGenero(generoId);
@@ -93,6 +117,12 @@ public class LibroController {
         }
     }
 
+
+    /**
+     * Crea un nuevo libro.
+     * @param nuevoLibro El libro a crear.
+     * @return ResponseEntity con el libro creado o un 500 INTERNAL SERVER ERROR si hay un error al crear el libro.
+     */
     @PostMapping
     public ResponseEntity<?> crearLibro(@RequestBody Libro nuevoLibro) {
         try {
@@ -103,6 +133,12 @@ public class LibroController {
         }
     }
 
+    /**
+     * Edita un libro existente.
+     * @param id El ID del libro a editar.
+     * @param libroActualizado El libro con todos los datos actualizados.
+     * @return ResponseEntity con un mensaje de éxito o un 404 NOT FOUND si el libro o el usuario no se encuentran.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<?> editarLibro(@PathVariable("id") int id, @RequestBody Libro libroActualizado) {
 
@@ -134,6 +170,11 @@ public class LibroController {
 
     }
 
+    /**
+     * Elimina un libro por su ID.
+     * @param id El ID del libro a eliminar.
+     * @return ResponseEntity con un 200 OK si se elimina correctamente o un 500 INTERNAL SERVER ERROR si hay un error al eliminar el libro.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarLibro(@PathVariable("id") int id) {
         try {
