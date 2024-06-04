@@ -21,7 +21,11 @@ public class ComentarioController {
 	public ComentarioController (ComentarioRepositorio comentarioRepositorio) {
 		this.comentarioRepositorio = comentarioRepositorio;
 	}
-	
+
+	/**
+	 * Obtiene todos los comentarios.
+	 * @return ResponseEntity Devuelve la lista de comentarios o un 404 si no hay comentarios.
+	 */
 	@GetMapping
 	public ResponseEntity<?> obtenerComentarios(){
 		List<Comentario> comentarios = comentarioRepositorio.findAll();
@@ -33,6 +37,11 @@ public class ComentarioController {
 		return ResponseEntity.ok(comentarios);
 	}
 
+	/**
+	 * Obtiene un comentario por su ID.
+	 * @param id El ID del comentario.
+	 * @return ResponseEntity Devuelve el comentario encontrado o un 404 si no se encuentra.
+	 */
 	@GetMapping("/comentario/{id}")
 	public ResponseEntity<?> obtenerComentarioPorId(@PathVariable int id){
 		Comentario comentario = comentarioRepositorio.findById(id).orElse(null);
@@ -44,6 +53,12 @@ public class ComentarioController {
 		return ResponseEntity.ok(comentario);
 	}
 
+
+	/**
+	 * Obtiene todos los comentarios asociados a un libro específico.
+	 * @param idLibro El ID del libro.
+	 * @return ResponseEntity Devuelve la lista de comentarios del libro espeficio o un 404 si no hay comentarios asociados.
+	 */
 	@GetMapping("/libro/{idLibro}")
 	public ResponseEntity<?> obtenerComentariosPorLibro(@PathVariable("idLibro") int idLibro) {
 		List<Comentario> comentarios = comentarioRepositorio.findByIdLibro(idLibro);
@@ -55,6 +70,13 @@ public class ComentarioController {
 		return ResponseEntity.ok(comentarios);
 	}
 
+	/**
+	 * Crea un nuevo comentario.
+	 * @param idLibro El ID del libro al que se asocia el comentario.
+	 * @param idUsuario El ID del usuario que hace el comentario.
+	 * @param comentario El contenido del comentario.
+	 * @return ResponseEntity con el comentario creado.
+	 */
 	@PostMapping("/crear")
 	public ResponseEntity<?> crearComentario(@RequestParam int idLibro, @RequestParam int idUsuario, @RequestParam String comentario) {
 		Comentario nuevoComentario = new Comentario();
@@ -68,6 +90,13 @@ public class ComentarioController {
 		return ResponseEntity.ok(comentarioGuardado);
 	}
 
+
+	/**
+	 * Modifica un comentario existente.
+	 * @param id El ID del comentario a modificar.
+	 * @param comentarioModificado La información del comentario modificada.
+	 * @return ResponseEntity con el comentario actualizado o un 404 si no se encuentra.
+	 */
 	@PutMapping("/modificar/{id}")
 	public ResponseEntity<?> modificarComentario(@PathVariable int id, @RequestBody Comentario comentarioModificado) {
 		Optional<Comentario> comentarioOptional = comentarioRepositorio.findById(id);
@@ -83,6 +112,12 @@ public class ComentarioController {
 		}
 	}
 
+
+	/**
+	 * Elimina un comentario por su ID.
+	 * @param id El ID del comentario a eliminar.
+	 * @return ResponseEntity con un 200 OK si se elimina correctamente o un 404 si no se encuentra.
+	 */
 	@DeleteMapping("/eliminar/{id}")
 	public ResponseEntity<?> eliminarComentario(@PathVariable int id) {
 		Optional<Comentario> comentarioOptional = comentarioRepositorio.findById(id);
