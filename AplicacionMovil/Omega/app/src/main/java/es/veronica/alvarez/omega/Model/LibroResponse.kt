@@ -1,6 +1,7 @@
 package es.veronica.alvarez.omega.Model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class LibroResponse (
     @SerializedName("id")
@@ -26,4 +27,4 @@ data class LibroResponse (
 
     @SerializedName("paginas")
     val paginas: Int
-)
+):Serializable

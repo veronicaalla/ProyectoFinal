@@ -114,7 +114,7 @@
                 </TableRow>
 
                 <TableRow
-                    android:id="@+id/filaDetosPersonales"
+                    android:id="@+id/filaDatosPersonales"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

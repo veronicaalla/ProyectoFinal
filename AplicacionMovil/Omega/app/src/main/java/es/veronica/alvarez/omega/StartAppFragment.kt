@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import es.veronica.alvarez.omega.DataApi.Api
@@ -147,7 +148,12 @@ class StartAppFragment : Fragment() {
     }
 
     private fun onItemSelected(it: LibroResponse) {
-        Toast.makeText(requireContext(), "Libro ${it.titulo}", Toast.LENGTH_LONG).show()
+        //Toast.makeText(requireContext(), "Libro ${it.titulo}", Toast.LENGTH_LONG).show()
+
+        val action = StartAppFragmentDirections
+            .actionStartAppFragmentToSeeBookFragment(it)
+        findNavController().navigate(action)
+
     }
 
 

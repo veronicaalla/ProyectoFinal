@@ -5,8 +5,6 @@ import java.sql.Date
 import java.time.LocalDateTime;
 
 
-
-
 data class DatosUsuarioResponse(
     @SerializedName("id") val id: String,
     @SerializedName("auditCreated") val auditCreated: String,

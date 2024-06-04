@@ -1,6 +1,8 @@
 package es.veronica.alvarez.omega.DataApi
 
 import es.veronica.alvarez.omega.Model.BibliotecaResponse
+import es.veronica.alvarez.omega.Model.ComentarioResponse
+import es.veronica.alvarez.omega.Model.GeneroResponse
 import es.veronica.alvarez.omega.Model.GeneroUsuarioResponse
 import es.veronica.alvarez.omega.Model.LibroResponse
 import es.veronica.alvarez.omega.Model.LibrosBibliotecaResponse
@@ -19,8 +21,10 @@ import retrofit2.http.Path
  * Interfaz para interactuar con la API de Omega.
  */
 interface ApiService {
-    /*@GET("usuarios/usuario/{id}")
-    fun obtenerUsuarioPorId(@Path("id") id: Int): Call<String>*/
+
+    @GET("usuarios/usuario/{id}")
+    fun obtenerUsuarioPorId(@Path("id") id: Int): Call<UsuarioResponse>
+
 
     /**
      * Realiza el login de un usuario.
@@ -114,4 +118,28 @@ interface ApiService {
      */
     @GET("libros/genero/{generoId}")
     fun obtenerLibrosPorGenero(@Path("generoId") generoId: Int): Call<List<LibroResponse>>
+
+
+    /**
+     * Obtiene todos los libros para realizar su filtrado por busqueda
+     */
+    @GET("libros")
+    fun obtenerTotalLibros(): Call<List<LibroResponse>>
+
+
+    @GET("generos/id/{id}")
+    fun obtenerGeneroPorId(@Path("id") id: Int): Call<GeneroResponse>
+
+
+    @GET("comentarios/libro/{idLibro}")
+    fun obtenerComentariosPorLibro(@Path("idLibro") idLibro: Int): Call<List<ComentarioResponse>>
+
+
+    @FormUrlEncoded
+    @POST("/crear")
+    fun crearComentario(
+        @Field("idLibro") idLibro: Int,
+        @Field("idUsuario") idUsuario: Int,
+        @Field("comentario") comentario: String
+    ): Call<ComentarioResponse>
 }

@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import es.veronica.alvarez.omega.Model.ComentarioResponse
+import es.veronica.alvarez.omega.Model.LibroResponse
 import es.veronica.alvarez.omega.R
 
 class ComentAdapter(
-    var listaComentarios : List<ComentarioResponse> = emptyList()
+    var listaComentarios : List<ComentarioResponse> = emptyList(),
+    private val onItemSelected: (ComentarioResponse) -> Unit
 ) : RecyclerView.Adapter<ComentViewHolder>(){
 
     fun updateComents(list: List<ComentarioResponse>){
@@ -22,7 +24,7 @@ class ComentAdapter(
     }
 
     override fun onBindViewHolder(holder: ComentViewHolder, position: Int) {
-       holder.bind(listaComentarios[position])
+       holder.bind(listaComentarios[position], onItemSelected)
     }
 
     override fun getItemCount() = listaComentarios.size

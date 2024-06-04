@@ -25,6 +25,7 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private var bottomNavigationView: BottomNavigationView? = null
     private lateinit var listaLibros: List<LibroResponse>
+    private lateinit var listaTotalLibros: List<LibroResponse>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +39,7 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mostrarLibrosAleatorios()
+        todosLosLibros()
 
         //region BUSQUEDAS USUARIO
         binding.txtSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -56,7 +58,7 @@ class SearchFragment : Fragment() {
                 //Al realizar la busqueda, sacamos todos los libros
 
                 // Filtrar la lista de patrocinadores para obtener aquellos que contienen el texto de búsqueda en el nombre
-                val filteredList = listaLibros.filter { libro ->
+                val filteredList = listaTotalLibros.filter { libro ->
                     libro.titulo.contains(searchText, ignoreCase = true)
                 }
 
@@ -76,7 +78,7 @@ class SearchFragment : Fragment() {
         // Establecer el listener
         bottomNavigationView!!.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.opcCasa -> view.findNavController().navigate(R.id.action_startAppFragment_to_searchFragment)
+                R.id.opcCasa -> view.findNavController().navigate(R.id.action_searchFragment_to_startAppFragment)
 
                 R.id.opcPerfil -> view.findNavController().navigate(R.id.action_searchFragment_to_profileUserFragment)
             }
@@ -85,10 +87,36 @@ class SearchFragment : Fragment() {
         //endregion
     }
 
-    private fun mostrarLibrosAleatorios() {
+    private fun todosLosLibros() {
         context?.let { Api.initialize(it.applicationContext) }
         context?.applicationContext?.let {
             Api.retrofitService.obtenerLibros().enqueue(object : Callback<List<LibroResponse>> {
+                override fun onResponse(
+                    call: Call<List<LibroResponse>>,
+                    response: Response<List<LibroResponse>>
+                ) {
+                    var libros = response.body()
+                    Log.i("Todos los libros", libros.toString())
+
+                    if (libros!!.isNotEmpty()) {
+                        listaTotalLibros = libros
+                    }
+                }
+
+                override fun onFailure(call: Call<List<LibroResponse>>, t: Throwable) {
+                    Log.i("Error login", t.toString())
+                    Log.i("error", t.printStackTrace().toString())
+                }
+            })
+        }
+    }
+
+
+    private fun mostrarLibrosAleatorios(){
+        //listaTotalLibros
+        context?.let { Api.initialize(it.applicationContext) }
+        context?.applicationContext?.let {
+            Api.retrofitService.obtenerTotalLibros().enqueue(object : Callback <List<LibroResponse>>{
                 override fun onResponse(
                     call: Call<List<LibroResponse>>,
                     response: Response<List<LibroResponse>>
@@ -103,14 +131,13 @@ class SearchFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<List<LibroResponse>>, t: Throwable) {
-                    Log.i("Error login", t.toString())
-                    Log.i("error", t.printStackTrace().toString())
+                    TODO("Not yet implemented")
                 }
-
 
             })
         }
     }
+
 
     private fun adjudicamosFuncionalidad() {
         //RecyclerView de libros aleatorios

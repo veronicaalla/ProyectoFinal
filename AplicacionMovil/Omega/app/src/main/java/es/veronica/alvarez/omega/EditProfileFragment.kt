@@ -65,6 +65,7 @@ class EditProfileFragment : Fragment() {
                     if (response.isSuccessful){
                         val message = response.body()?.toString() ?: "Perfil actualizado correctamente"
                         Toast.makeText(requireContext(), "Perfil modificado", Toast.LENGTH_LONG).show()
+                        Log.i("Perfil actualizado", message)
                         //Log.i("Respuesta", message)
 
 

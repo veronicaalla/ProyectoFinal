@@ -35,6 +35,7 @@ class ProfileUserFragment : Fragment() {
     }
 
 
+    //baseline_lock_open_24_black -> candado abierto
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,9 +48,9 @@ class ProfileUserFragment : Fragment() {
             view.findNavController().navigate(R.id.action_profileUserFragment_to_settingsAppFragment)
         }
         //endregion
-        binding.btnEditarPerfil.setOnClickListener {
-            //view.findNavController().navigate(R.id.action_profileUserFragment_to_editProfileFragment)
 
+
+        binding.btnEditarPerfil.setOnClickListener {
             val action = ProfileUserFragmentDirections
                 .actionProfileUserFragmentToEditProfileFragment(perfil)
             findNavController().navigate(action)

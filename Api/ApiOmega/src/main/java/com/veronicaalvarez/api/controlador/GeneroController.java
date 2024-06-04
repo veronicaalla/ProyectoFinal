@@ -12,7 +12,7 @@ import com.veronicaalvarez.api.modelo.Genero;
 import com.veronicaalvarez.api.repositorio.GeneroRepositorio;
 
 @RestController
-@RequestMapping("/omega/generos")
+@RequestMapping("/omega/generos/")
 public class GeneroController {
 
 	private final GeneroRepositorio generoRepositorio;
