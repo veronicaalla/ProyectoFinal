@@ -27,6 +27,10 @@ public class ComentarioReportadoController {
         this.usuarioRepository = usuarioRepository;
     }
 
+    /**
+     * Obtiene todos los comentarios reportados.
+     * @return ResponseEntity con la lista de comentarios reportados o un 204 NO CONTENT si no hay comentarios reportados.
+     */
     @GetMapping
     public ResponseEntity<?> obtenerComentariosReportados() {
         List<ComentarioReportado> comentariosReportados = reportadoRepositorio.findAll();
@@ -37,6 +41,10 @@ public class ComentarioReportadoController {
 
     }
 
+     /**
+     * Obtiene todos los comentarios reportados sin resolver.
+     * @return ResponseEntity con la lista de comentarios reportados sin resolver o un 204 NO CONTENT si no hay comentarios sin resolver.
+     */
     @GetMapping("/sin-resolver")
     public ResponseEntity<?> obtenerComentariosReportadosSinResolver() {
 
@@ -47,6 +55,12 @@ public class ComentarioReportadoController {
         return ResponseEntity.ok(librosErroneosSinResolver);
     }
 
+	
+    /**
+     * Obtiene un comentario reportado por su ID.
+     * @param id El ID del comentario reportado.
+     * @return ResponseEntity con el comentario reportado encontrado o un 404 NOT FOUND si no se encuentra.
+     */
     @GetMapping("/comentario/{id}")
     public ResponseEntity<?> obtenerComentarioReportadoPorId(@PathVariable int id) {
         ComentarioReportado comentarioReportado = reportadoRepositorio.findById(id).orElse(null);
@@ -58,6 +72,13 @@ public class ComentarioReportadoController {
         return ResponseEntity.ok(comentarioReportado);
     }
 
+
+    /**
+     * Reporta un comentario, es decir, se indica que el comentario es ofensivo 
+     * @param comentarioId El ID del comentario a reportar.
+     * @param usuarioId El ID del usuario que reporta el comentario.
+     * @return ResponseEntity con un mensaje de éxito o un 400 BAD REQUEST si el comentario o el usuario no se encuentran.
+     */
     @PostMapping("/crear")
     public ResponseEntity<?> reportarComentario(@RequestParam int comentarioId, @RequestParam int usuarioId) {
 
@@ -82,6 +103,13 @@ public class ComentarioReportadoController {
         return ResponseEntity.ok("Comentario reportado creado correctamente");
     }
 
+    /**
+    * Actualiza un comentario reportado con nueva información.
+    *
+    * @param idUsuario el ID del usuario que realiza la actualización
+    * @param comentarioReportadoNuevo los nuevos detalles del comentario reportado
+    * @return una respuesta HTTP indicando el resultado de la operación
+    */
     @PutMapping("/editar/{idUsuario}")
     public ResponseEntity<?> editarComentarioReportado(@PathVariable int idUsuario,
                                                        @RequestBody ComentarioReportado comentarioReportadoNuevo) {
