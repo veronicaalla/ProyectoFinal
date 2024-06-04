@@ -21,6 +21,10 @@ public class GrupoController {
         this.grupoRepository = grupoRepository;
     }
 
+    /**
+     * Obtiene todos los grupos.
+     * @return ResponseEntity con la lista de todos los grupos o un 404 NOT FOUND si no hay grupos.
+     */
     @GetMapping
     public ResponseEntity<?>  obtenerGrupos() {
         List<Grupo> grupos = grupoRepository.findAll();
@@ -31,6 +35,11 @@ public class GrupoController {
         return ResponseEntity.ok(grupos);
     }
 
+    /**
+     * Obtiene un grupo por su ID.
+     * @param id El ID del grupo.
+     * @return ResponseEntity con el grupo encontrado o un 404 NOT FOUND si no se encuentra.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?>  obtenerGrupo(@PathVariable Integer id) {
         Grupo grupo = grupoRepository.findById(id).orElse(null);
