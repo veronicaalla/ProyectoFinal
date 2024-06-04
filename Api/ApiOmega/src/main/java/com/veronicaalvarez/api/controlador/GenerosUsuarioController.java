@@ -18,6 +18,11 @@ public class GenerosUsuarioController {
     @Autowired
     private GenerosUsuarioRepository generosUsuarioRepository;
 
+    /**
+     * Obtiene todos los géneros asociados a un usuario específico.
+     * @param idUsuario El ID del usuario.
+     * @return ResponseEntity con la lista de géneros del usuario o un 404 NOT FOUND si no hay géneros asociados.
+     */
     @GetMapping("/{idUsuario}")
     public ResponseEntity<List<GeneroUsuario>> obtenerGenerosPorUsuario(@PathVariable int idUsuario) {
         List<GeneroUsuario> generosUsuario = generosUsuarioRepository.findByIdUsuario(idUsuario);
