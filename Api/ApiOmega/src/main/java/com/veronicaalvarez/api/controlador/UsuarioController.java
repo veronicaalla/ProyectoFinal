@@ -32,7 +32,10 @@ public class UsuarioController {
 		this.usuarioRepositorio = usuarioRepositorio;
 	}
 
-
+	/**
+	 * Obtiene todos los usuarios.
+	 * @return ResponseEntity con la lista de usuarios o un 404 NOT FOUND si no se encuentran usuarios.
+	 */
 	@GetMapping
 	public ResponseEntity<?> obtenerUsuario(){
 		List <Usuario> usuarios = usuarioRepositorio.findAll();
@@ -42,7 +45,12 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarios);
 	}
 
-	
+
+	/**
+	 * Obtiene un usuario por su ID.
+	 * @param id El ID del usuario.
+	 * @return ResponseEntity con el usuario o un 404 NOT FOUND si no se encuentra.
+	 */
 	@GetMapping("/usuario/{id}")
 	public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable int id){
 		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
@@ -63,6 +71,11 @@ public class UsuarioController {
 
 
 
+	/**
+	 * Busca un usuario por su nombre de usuario.
+	 * @param user El nombre de usuario a buscar.
+	 * @return ResponseEntity con el usuario o un 404 NOT FOUND si no se encuentra.
+	 */
 	@GetMapping("/usuarios/{user}")
 	public ResponseEntity<Usuario> buscarUsuarioPorUser(@PathVariable String user) {
 		Usuario usuario = usuarioRepositorio.findByAlias(user);
@@ -75,6 +88,11 @@ public class UsuarioController {
 
 
 
+	/**
+	 * Crea un nuevo usuario.
+	 * @param usuario El usuario a crear.
+	 * @return ResponseEntity con un mensaje de éxito.
+	 */
 	@PostMapping
 	public ResponseEntity<String> createUsuario(@RequestBody Usuario usuario) {
 
@@ -96,6 +114,12 @@ public class UsuarioController {
 	}
 
 
+	/**
+	 * Modifica un usuario existente.
+	 * @param id El ID del usuario a modificar.
+	 * @param usuarioModificado El usuario modificado.
+	 * @return ResponseEntity con el usuario modificado o un 404 NOT FOUND si el usuario no existe.
+	 */
 	@PutMapping("/modificar/{id}")
 	public ResponseEntity<?> modificarUsuario(@PathVariable int id, @RequestBody Usuario usuarioModificado) {
 
@@ -126,6 +150,12 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuarioExistente);
 	}
 
+
+	/**
+	 * Elimina un usuario por su ID.
+	 * @param id El ID del usuario a eliminar.
+	 * @return ResponseEntity con un mensaje de éxito o un 404 NOT FOUND si el usuario no existe.
+	 */
 	@DeleteMapping("/usuario/{id}")
 	public ResponseEntity<?> eliminarUsuario(@PathVariable int id) {
 		// Verificar si el usuario existe en la base de datos
@@ -143,6 +173,12 @@ public class UsuarioController {
 	}
 
 
+	/**
+	 * Inicia sesión de un usuario.
+	 * @param usuarioOEmail El nombre de usuario o correo electrónico del usuario.
+	 * @param clave La contraseña del usuario.
+	 * @return ResponseEntity con el usuario si la autenticación es exitosa o un 401 UNAUTHORIZED si la contraseña es incorrecta.
+	 */
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUsuario(@RequestParam String usuarioOEmail, @RequestParam String clave) {
 		// Buscar al usuario por nombre de usuario o correo electrónico
