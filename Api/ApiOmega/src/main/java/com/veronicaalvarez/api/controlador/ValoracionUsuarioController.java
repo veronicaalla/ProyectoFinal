@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,6 +77,7 @@ public class ValoracionUsuarioController {
             // Establecer el usuario y el libro en la valoración
             valoracionUsuario.setUsuario(usuario);
             valoracionUsuario.setLibro(libro);
+            valoracionUsuario.setFechaValoracion(LocalDateTime.now());
 
             // Guardar la valoración
             ValoracionUsuario valoracionUsuarioSalva = valoracionUsuarioRepository.save(valoracionUsuario);

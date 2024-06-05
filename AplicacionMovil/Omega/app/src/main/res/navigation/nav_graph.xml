@@ -199,6 +199,9 @@
         <argument
             android:name="libro"
             app:argType="es.veronica.alvarez.omega.Model.LibroResponse" />
+        <action
+            android:id="@+id/action_seeBookFragment_to_userRatingFragment"
+            app:destination="@id/userRatingFragment" />
     </fragment>
     <fragment
         android:id="@+id/libraryBooksFragment"
@@ -211,5 +214,14 @@
         <action
             android:id="@+id/action_libraryBooksFragment_to_seeBookFragment"
             app:destination="@id/seeBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userRatingFragment"
+        android:name="es.veronica.alvarez.omega.UserRatingFragment"
+        android:label="fragment_user_rating"
+        tools:layout="@layout/fragment_user_rating" >
+        <argument
+            android:name="libro"
+            app:argType="es.veronica.alvarez.omega.Model.LibroResponse" />
     </fragment>
 </navigation>

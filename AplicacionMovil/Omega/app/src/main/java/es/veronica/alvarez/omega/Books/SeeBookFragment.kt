@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.veronica.alvarez.omega.DataApi.Api
 import es.veronica.alvarez.omega.Model.ComentarioResponse
@@ -14,6 +15,7 @@ import es.veronica.alvarez.omega.Model.GeneroResponse
 import es.veronica.alvarez.omega.Model.LibroResponse
 import es.veronica.alvarez.omega.RecyclerBook.BookAdapter
 import es.veronica.alvarez.omega.RecyclerComents.ComentAdapter
+import es.veronica.alvarez.omega.StartAppFragmentDirections
 import es.veronica.alvarez.omega.UserPreferences
 import es.veronica.alvarez.omega.databinding.FragmentSeeBookBinding
 import retrofit2.Call
@@ -70,13 +72,15 @@ class SeeBookFragment : Fragment() {
                  crearComentario (comentario);
             }
         }
+
+        binding.btnValoracionUsuario.setOnClickListener {
+            val action = SeeBookFragmentDirections
+                .actionSeeBookFragmentToUserRatingFragment(libro)
+            findNavController().navigate(action)
+        }
     }
 
     private fun crearComentario(comentario: String) {
-        /*@Field("idLibro") idLibro: Int,
-        @Field("idUsuario") idUsuario: Int,
-        @Field("comentario") comentario: String*/
-
         val idLibro = libro.id
         val userPreferences = UserPreferences(requireContext())
         val idUsario = userPreferences.userId
@@ -85,11 +89,15 @@ class SeeBookFragment : Fragment() {
                 call: Call<ComentarioResponse>,
                 response: Response<ComentarioResponse>
             ) {
-                TODO("Not yet implemented")
+                if (response.isSuccessful){
+
+                }else{
+                    Log.i("No succesful", response.message().toString())
+                }
             }
 
             override fun onFailure(call: Call<ComentarioResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.i("onFailure", t.message.toString())
             }
 
         })
@@ -121,7 +129,7 @@ class SeeBookFragment : Fragment() {
 
     private fun obtenerComentarios() {
 
-        Api.retrofitService.obtenerComentariosPorLibro(1).enqueue(object : Callback <List<ComentarioResponse>>{
+        Api.retrofitService.obtenerComentariosPorLibro(libro.id).enqueue(object : Callback <List<ComentarioResponse>>{
             override fun onResponse(
                 call: Call<List<ComentarioResponse>>,
                 response: Response<List<ComentarioResponse>>

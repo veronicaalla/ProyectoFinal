@@ -52,7 +52,7 @@ public class UsuarioController {
 	 * @return ResponseEntity con el usuario o un 404 NOT FOUND si no se encuentra.
 	 */
 	@GetMapping("/usuario/{id}")
-	public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable int id){
+	public ResponseEntity<?> Usu(@PathVariable int id){
 		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
 
 		if (usuario==null) {
@@ -199,4 +199,18 @@ public class UsuarioController {
 		// Devolver una respuesta exitosa con los detalles del usuario (excluyendo la contraseña)
 		return ResponseEntity.ok(usuario);
 	}
+
+	@PutMapping("privacidad/{idUsuario}")
+	public ResponseEntity<?> modificarPrivacidad(@PathVariable("idUsuario") int id, @RequestParam("publico") boolean publico) {
+		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
+
+		if (usuario == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario no se ha encontrado");
+		}
+
+		usuario.setPublico(publico);
+		usuarioRepositorio.save(usuario);
+		return ResponseEntity.ok(usuario);
+	}
+
 }

@@ -8,6 +8,7 @@ import es.veronica.alvarez.omega.Model.LibroResponse
 import es.veronica.alvarez.omega.Model.LibrosBibliotecaResponse
 import es.veronica.alvarez.omega.Model.PerfilUsuarioResponse
 import es.veronica.alvarez.omega.Model.UsuarioResponse
+import es.veronica.alvarez.omega.Model.ValoracionUsuarioResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -16,6 +17,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * Interfaz para interactuar con la API de Omega.
@@ -136,10 +138,34 @@ interface ApiService {
 
 
     @FormUrlEncoded
-    @POST("/crear")
+    @POST("comentarios/crear")
     fun crearComentario(
         @Field("idLibro") idLibro: Int,
         @Field("idUsuario") idUsuario: Int,
         @Field("comentario") comentario: String
     ): Call<ComentarioResponse>
+
+
+    @PUT("usuarios/privacidad/{idUsuario}")
+    fun modificarPrivacidad(
+        @Path("idUsuario") idUsuario: Int,
+        @Query("publico") privacidad: Boolean
+    ): Call<UsuarioResponse>
+
+
+    //region VALORACIONES USUARIO
+    @GET("valoracionesUsuarios/libro/{idLibro}/usuario/{idUsuario}")
+    fun obtenerValoracionLibroPorUsuario(
+        @Path("idLibro") idLibro: Int,
+        @Path("idUsuario") idUsuario: Int
+    ): Call<ValoracionUsuarioResponse>
+
+    @POST("valoracionesUsuarios/usuarios/{idUsuario}/libros/{idLibro}/valoraciones")
+    fun crearValoracionUsuario(
+        @Path("idUsuario") idUsuario: Int,
+        @Path("idLibro") idLibro: Int,
+        @Body valoracionUsuario: ValoracionUsuarioResponse
+    ): Call<ValoracionUsuarioResponse>
+
+    //endregion
 }

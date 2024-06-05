@@ -143,17 +143,12 @@ class StartAppFragment : Fragment() {
         binding.rvLibros.adapter = BookAdapter(listaLibros) {
             onItemSelected(it)
         }
-        //endregion
-
     }
 
     private fun onItemSelected(it: LibroResponse) {
-        //Toast.makeText(requireContext(), "Libro ${it.titulo}", Toast.LENGTH_LONG).show()
-
         val action = StartAppFragmentDirections
             .actionStartAppFragmentToSeeBookFragment(it)
         findNavController().navigate(action)
-
     }
 
 

@@ -66,11 +66,11 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cuenta privada"
+                    android:text="Cuenta publica"
                     android:textStyle="bold" />
 
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/switchPrivacidad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

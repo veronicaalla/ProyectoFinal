@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Books.SeeBookFragment">
+    tools:context=".UserRatingFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -35,9 +35,10 @@
                     android:layout_height="wrap_content"
                     android:background="@color/tema1"
                     android:padding="10sp"
-                    android:textSize="18dp"
+                    android:backgroundTint="@color/tema2"
                     android:text="Todo lo que nunca fuimos"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -53,15 +54,18 @@
                             android:id="@+id/textView5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Autor: "
+                            android:text="Personaje Favorito: "
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/txtAutorLibro"
+
+                        <EditText
+                            android:id="@+id/editPersonajeFav"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:text="Alice Kellen" />
+                            android:ems="10"
+                            android:textSize="14dp"
+                            android:inputType="text"
+                            android:text="Name" />
 
                     </TableRow>
 
@@ -74,17 +78,19 @@
                             android:id="@+id/textView7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ISBN"
+                            android:text="Personaje Odiado: "
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/txtLibroIsbn"
+                        <EditText
+                            android:id="@+id/editPersonajeOdiado"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="5656565656" />
+                            android:ems="10"
+                            android:textSize="14dp"
+                            android:inputType="text"
+                            android:text="Name" />
 
                     </TableRow>
-
 
 
                     <TableRow
@@ -96,15 +102,19 @@
                             android:id="@+id/textView8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Género: "
+                            android:text="Frase Iconica: "
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/txtGeneroLibro"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="" />
                     </TableRow>
+
+                    <EditText
+                        android:id="@+id/editFraseIconica"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:textSize="14dp"
+                        android:inputType="text"
+                        android:text="Name" />
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -115,17 +125,19 @@
                             android:id="@+id/textView9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Descripción"
+                            android:text="Play List"
                             android:textStyle="bold" />
 
                     </TableRow>
 
-                    <TextView
-                        android:id="@+id/txtDescripcionLibro"
+                    <EditText
+                        android:id="@+id/editPlayList"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Descripción llibro"
-                         />
+                        android:ems="10"
+                        android:textSize="14dp"
+                        android:inputType="text"
+                        android:text="Name" />
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -136,15 +148,18 @@
                             android:id="@+id/textView6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Páginas"
+                            android:text="Puntuación: "
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/txtPaginasLibro"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="351" />
                     </TableRow>
+
+                    <RatingBar
+                        android:id="@+id/ratinValoracion"
+                        android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="0"
+                        android:stepSize="0.5" />
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -155,20 +170,20 @@
                             android:id="@+id/textView10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Fecha Publicacion"
+                            android:text="Opinion"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/txtFechaPublicacion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="  Fecha" />
+
                     </TableRow>
 
-                    <RatingBar
-                        android:id="@+id/ratinValoracion"
+                    <EditText
+                        android:id="@+id/editOpinion"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:textSize="14dp"
+                        android:gravity="start|top"
+                        android:inputType="textMultiLine" />
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -176,62 +191,42 @@
                         android:layout_marginTop="20dp">
 
                         <TextView
-                            android:id="@+id/textViewComentarios"
+                            android:id="@+id/textView20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Comentarios:"
+                            android:text="Le recomendarias:"
                             android:textStyle="bold" />
 
+                        <Switch
+                            android:id="@+id/switchRecomendacion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             />
 
 
                     </TableRow>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvComentarios"
+                    <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp" />
+                        android:gravity="center"
+                        android:layout_marginTop="20dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <EditText
-                                android:id="@+id/editTextComentario"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:gravity="start|top"
-                                android:hint="Comentario..."
-                                android:inputType="textMultiLine" />
-
-                            <ImageView
-                                android:id="@+id/imgEnviarComentario"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/baseline_send_24" />
-
-
-                        </LinearLayout>
 
                         <Button
-                            android:id="@+id/btnValoracionUsuario"
-                            android:layout_margin="25dp"
-                            android:layout_width="match_parent"
+                            android:id="@+id/btnCancelar"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/tema1"
-                            android:text="Valorar libro" />
+                            android:backgroundTint="@color/tema2"
+                            android:text="Cancelar" />
 
-
-                    </LinearLayout>
+                        <Button
+                            android:id="@+id/btnGuardar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/tema2"
+                            android:text="Guardar" />
+                    </TableRow>
 
                 </TableLayout>
 
