@@ -52,7 +52,7 @@ public class UsuarioController {
 	 * @return ResponseEntity con el usuario o un 404 NOT FOUND si no se encuentra.
 	 */
 	@GetMapping("/usuario/{id}")
-	public ResponseEntity<?> Usu(@PathVariable int id){
+	public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable int id){
 		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
 
 		if (usuario==null) {
