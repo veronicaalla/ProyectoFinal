@@ -59,7 +59,7 @@ class LibraryBooksFragment : Fragment() {
 
         context?.let { Api.initialize(it.applicationContext) }
         context?.applicationContext?.let {
-            Api.retrofitService.obtenerLibrosPorBiblioteca(4)
+            Api.retrofitService.obtenerLibrosPorBiblioteca(bibliotecaId)
                 .enqueue(object : Callback<List<LibrosBibliotecaResponse>> {
 
                     override fun onResponse(

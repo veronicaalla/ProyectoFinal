@@ -97,6 +97,9 @@
         <action
             android:id="@+id/action_startAppFragment_to_seeBookFragment"
             app:destination="@id/seeBookFragment" />
+        <action
+            android:id="@+id/action_startAppFragment_to_createBookFragment"
+            app:destination="@id/createBookFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -109,6 +112,9 @@
         <action
             android:id="@+id/action_searchFragment_to_profileUserFragment"
             app:destination="@id/profileUserFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_seeBookFragment"
+            app:destination="@id/seeBookFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileUserFragment"
@@ -224,4 +230,9 @@
             android:name="libro"
             app:argType="es.veronica.alvarez.omega.Model.LibroResponse" />
     </fragment>
+    <fragment
+        android:id="@+id/createBookFragment"
+        android:name="es.veronica.alvarez.omega.CreateBookFragment"
+        android:label="fragment_create_book"
+        tools:layout="@layout/fragment_create_book" />
 </navigation>

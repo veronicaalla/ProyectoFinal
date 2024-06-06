@@ -61,6 +61,26 @@ class SeeBookFragment : Fragment() {
         obtenerGenero()
         obtenerComentarios()
 
+        binding.imgLibroErroneo.setOnClickListener {
+            val idUsuario = UserPreferences(requireContext()).userId
+            Api.retrofitService.crearLibroErroneo(libro.id, idUsuario).enqueue(object : Callback<Void>{
+
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful){
+                        Log.i("Libro reportado", "Libro reportado correctamente")
+                        Toast.makeText(requireContext(), "El libro ha sido reportado correctamente", Toast.LENGTH_LONG).show()
+                    }else{
+                        Log.i("Libro noSuccesful", "El libro reportado no succed")
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.i("onFailure", t.message.toString())
+                }
+
+            })
+        }
+
         binding.imgEnviarComentario.setOnClickListener {
             //Comprobamos que el campo no este vacio
             if (binding.editTextComentario.text.toString().isEmpty()){

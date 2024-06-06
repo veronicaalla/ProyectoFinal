@@ -47,7 +47,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:paddingLeft="190dp"
-                    android:src="@drawable/outline_add_circle_outline_black" />
+                    android:src="@drawable/outline_add_circle_outline_black"
+                    android:visibility="invisible"
+                    tools:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/settings"

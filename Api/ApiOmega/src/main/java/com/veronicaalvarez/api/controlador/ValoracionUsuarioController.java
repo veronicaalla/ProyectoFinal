@@ -87,4 +87,32 @@ public class ValoracionUsuarioController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear la valoración. Por favor, inténtalo de nuevo más tarde.");
         }
     }
+
+
+    @PutMapping("/actualizar/{idUsuario}/{idLibro}")
+    public ResponseEntity<?> actualizarValoracion(
+            @PathVariable int idUsuario,
+            @PathVariable int idLibro,
+            @RequestBody ValoracionUsuario valoracionUsuario) {
+
+        Optional<ValoracionUsuario> valoracionUsuarioOptional = valoracionUsuarioRepository.findByLibroIdAndUsuarioId(idLibro, idUsuario);
+
+        if (valoracionUsuarioOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var valoracion = valoracionUsuarioOptional.get();
+        valoracion.setPlayList(valoracionUsuario.getPlayList());
+        valoracion.setPersonajeFav(valoracionUsuario.getPersonajeFav());
+        valoracion.setPersonajeOdiado(valoracionUsuario.getPersonajeOdiado());
+        valoracion.setRecomendacion(valoracionUsuario.getRecomendacion());
+        valoracion.setFraseIconica(valoracionUsuario.getFraseIconica());
+        valoracion.setOpinion(valoracionUsuario.getOpinion());
+        valoracion.setPuntuacion(valoracionUsuario.getPuntuacion());
+
+        valoracionUsuarioRepository.save(valoracion);
+
+        return ResponseEntity.ok("Valloracion actualizada correctamente");
+
+    }
 }

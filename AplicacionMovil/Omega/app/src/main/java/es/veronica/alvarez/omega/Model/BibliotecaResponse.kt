@@ -5,11 +5,11 @@ import java.io.Serializable
 
 data class BibliotecaResponse (
     @SerializedName("id")
-    val id: Int,
+    val id: Int=0,
 
     @SerializedName("nombre")
-    val nombre: String,
+    var nombre: String = "",
 
     @SerializedName("publica")
-    val publica: Boolean
+    val publica: Boolean = false
 ):Serializable

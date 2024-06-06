@@ -3,6 +3,7 @@ package com.veronicaalvarez.api.modelo;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -25,16 +26,17 @@ public class ValoracionUsuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "id_libro", referencedColumnName = "id", foreignKey = @ForeignKey(name = "valoraciones_usuarios_ibfk_2"))
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Libro libro;
 
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id", foreignKey = @ForeignKey(name = "valoraciones_usuarios_ibfk_2"))
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Usuario usuario;
 
 
@@ -51,7 +53,7 @@ public class ValoracionUsuario {
 	@Column(name = "recomendacion", nullable = false)
 	private Boolean recomendacion;
 
-	@Column(name = "frase_iconica", length = 45)
+	@Column(name = "frase_iconica", length = 200)
 	private String fraseIconica;
 
 	@Column(name = "opinion", length = 100)
@@ -63,6 +65,7 @@ public class ValoracionUsuario {
 	//@ColumnDefault("CURRENT_TIMESTAMP")
 	@Column(name = "fecha_valoracion")
 	private LocalDateTime fechaValoracion;
+
 
 
 	//Métodos Setters y Getters

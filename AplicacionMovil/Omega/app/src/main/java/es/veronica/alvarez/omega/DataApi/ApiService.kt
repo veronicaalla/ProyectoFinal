@@ -24,6 +24,8 @@ import retrofit2.http.Query
  */
 interface ApiService {
 
+
+    //region Usuario
     @GET("usuarios/usuario/{id}")
     fun obtenerUsuarioPorId(@Path("id") id: Int): Call<UsuarioResponse>
 
@@ -42,6 +44,9 @@ interface ApiService {
         @Field("clave") clave: String
     ): Call<UsuarioResponse>
 
+    //endregion
+
+    //region Perfil usuario
     /**
      * Obtiene el perfil de un usuario por su ID.
      *
@@ -66,6 +71,9 @@ interface ApiService {
     ): Call<Any>
 
 
+    //endregion
+
+    //region Bibliotecas
     /**
      * Obtiene las bibliotecas de un usuario.
      *
@@ -86,6 +94,11 @@ interface ApiService {
     fun obtenerLibrosPorBiblioteca(@Path("bibliotecaId") bibliotecaId: Int): Call<List<LibrosBibliotecaResponse>>
 
 
+    @POST("bibliotecas/usuario/{usuarioId}/biblioteca")
+    fun crearBiblioteca(@Path("usuarioId") usuarioId: Int, @Body biblioteca: BibliotecaResponse): Call<BibliotecaResponse>
+
+    //endregion
+
     /**
      * Obtiene los géneros de un usuario.
      *
@@ -94,6 +107,8 @@ interface ApiService {
      */
     @GET("generosUsuario/{idUsuario}")
     fun obtenerGenerosPorUsuario(@Path("idUsuario") idUsuario: Int): Call<List<GeneroUsuarioResponse>>
+
+    //endregion
 
      /**
      * Obtiene una lista de libros aleatorios.
@@ -129,10 +144,22 @@ interface ApiService {
     fun obtenerTotalLibros(): Call<List<LibroResponse>>
 
 
+    /**
+     * Método para indicar que un libro es erroneo
+     */
+    @FormUrlEncoded
+    @POST("libroerroneno/crear")
+    fun crearLibroErroneo(
+        @Field("idLibro") idLibro: Int,
+        @Field("idReportante") idReportante: Int
+    ): Call<Void>
+
+
     @GET("generos/id/{id}")
     fun obtenerGeneroPorId(@Path("id") id: Int): Call<GeneroResponse>
 
 
+    //region COMENTARIOS
     @GET("comentarios/libro/{idLibro}")
     fun obtenerComentariosPorLibro(@Path("idLibro") idLibro: Int): Call<List<ComentarioResponse>>
 
@@ -146,6 +173,14 @@ interface ApiService {
     ): Call<ComentarioResponse>
 
 
+    @FormUrlEncoded
+    @POST("comentarioreportado/crear")
+    fun reportarComentario(
+        @Field("comentarioId") comentarioId: Int,
+        @Field("usuarioId") usuarioId: Int
+    ): Call<Void>
+
+    //endregion
     @PUT("usuarios/privacidad/{idUsuario}")
     fun modificarPrivacidad(
         @Path("idUsuario") idUsuario: Int,
@@ -166,6 +201,13 @@ interface ApiService {
         @Path("idLibro") idLibro: Int,
         @Body valoracionUsuario: ValoracionUsuarioResponse
     ): Call<ValoracionUsuarioResponse>
+
+    @PUT("valoracionesUsuarios/actualizar/{idUsuario}/{idLibro}")
+    fun actualizarValoracion(
+        @Path("idUsuario") idUsuario: Int,
+        @Path("idLibro") idLibro: Int,
+        @Body valoracionUsuario: ValoracionUsuarioResponse
+    ): Call<Any>
 
     //endregion
 }

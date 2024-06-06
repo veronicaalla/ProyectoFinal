@@ -7,11 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import es.veronica.alvarez.omega.DataApi.Api
+import es.veronica.alvarez.omega.Model.BibliotecaResponse
 import es.veronica.alvarez.omega.Model.LibroResponse
 import es.veronica.alvarez.omega.Model.GeneroUsuarioResponse
 import es.veronica.alvarez.omega.RecyclerBook.BookAdapter
@@ -51,6 +54,42 @@ class StartAppFragment : Fragment() {
         }
         //endregion
 
+        //region Funcionalidad de añadir
+        var visible = false;
+        binding.addElement.setOnClickListener {
+            if (visible){
+                //Ocultamos los elementos
+                binding.btnCrearLibro.visibility = View.GONE
+                binding.btnCrearBiblioteca.visibility = View.GONE
+                visible = false
+            }else{
+                binding.btnCrearLibro.visibility = View.VISIBLE
+                binding.btnCrearBiblioteca.visibility = View.VISIBLE
+                visible = true
+            }
+        }
+
+        binding.btnCrearLibro.setOnClickListener {
+            //Ocultamos los elementos
+            binding.btnCrearLibro.visibility = View.GONE
+            binding.btnCrearBiblioteca.visibility = View.GONE
+            visible = false
+
+            //Redireccionamos la navegación
+            view.findNavController().navigate(R.id.action_startAppFragment_to_createBookFragment)
+        }
+
+
+        binding.btnCrearBiblioteca.setOnClickListener {
+            //Ocultamos los elementos
+            binding.btnCrearLibro.visibility = View.GONE
+            binding.btnCrearBiblioteca.visibility = View.GONE
+            visible = false
+
+            mostrarDialogo()
+        }
+        //endregion
+
         //region Menu de navegacion
         bottomNavigationView = binding.bottomNavigationView
 
@@ -65,6 +104,47 @@ class StartAppFragment : Fragment() {
         })
         //endregion
 
+    }
+
+    private fun mostrarDialogo() {
+        val inputEditTextField = EditText(requireContext())
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Nueva biblioteca")
+            .setMessage("Introduce el nombre de la nueva biblioteca")
+            .setView(inputEditTextField)
+            .setPositiveButton("Añadir"){ _,_ ->
+                val nombreBiblioteca = inputEditTextField .text.toString()
+                crearBiblioteca (nombreBiblioteca)
+            }
+            .setNegativeButton("Cancelar", null)
+            .create()
+        dialog.show()
+
+    }
+
+    private fun crearBiblioteca(nombreBiblioteca: String) {
+        var idUsuario = UserPreferences(requireContext()).userId
+
+        var bibliotecaResponse = BibliotecaResponse()
+        bibliotecaResponse.nombre = nombreBiblioteca
+
+        Api.retrofitService.crearBiblioteca(idUsuario, bibliotecaResponse).enqueue(object : Callback<BibliotecaResponse>{
+            override fun onResponse(
+                call: Call<BibliotecaResponse>, response: Response<BibliotecaResponse>
+            ) {
+                if (response.isSuccessful){
+                    Log.i("Crear biblioteca", response.body().toString())
+                    Toast.makeText(requireContext(), "Biblioteca creada correctamente", Toast.LENGTH_LONG).show()
+                }else{
+                    Log.i("Crear noSucces", response.message().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<BibliotecaResponse>, t: Throwable) {
+                Log.i("onFailure", t.message.toString())
+            }
+
+        })
     }
 
     private fun obtenerGenerosUsuario() {

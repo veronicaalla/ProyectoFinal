@@ -14,6 +14,7 @@ import es.veronica.alvarez.omega.Model.LibroResponse
 import es.veronica.alvarez.omega.databinding.FragmentSearchBinding
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import es.veronica.alvarez.omega.RecyclerBook.BookAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -149,7 +150,9 @@ class SearchFragment : Fragment() {
     }
 
     private fun onItemSelected(it: LibroResponse) {
-        Toast.makeText(requireContext(), "Libro ${it.titulo}", Toast.LENGTH_LONG).show()
+        val action = SearchFragmentDirections
+            .actionSearchFragmentToSeeBookFragment(it)
+        findNavController().navigate(action)
     }
 
 }
