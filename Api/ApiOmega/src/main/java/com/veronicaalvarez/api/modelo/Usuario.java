@@ -47,7 +47,7 @@ public class Usuario {
 	@Column(name = "apellidos", nullable = false, length = 45)
 	private String apellidos;
 
-	@Column(name = "fecha_nacimiento", nullable = false)
+	@Column(name = "fecha_nacimiento")
 	private LocalDate fechaNacimiento;
 
 	@Column(name = "correo", nullable = false, length = 100)

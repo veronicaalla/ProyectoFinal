@@ -87,14 +87,30 @@ public class UsuarioController {
 	}
 
 
+	@GetMapping("/usuarios/correo/{correo}")
+	public ResponseEntity<Usuario> buscarUsuarioPorCorreo(@PathVariable String correo) {
+		Usuario usuario = usuarioRepositorio.findByCorreo(correo);
+		if (usuario != null) {
+			return ResponseEntity.ok(usuario);
+		}
+		return ResponseEntity.notFound().build();
+	}
 
 	/**
 	 * Crea un nuevo usuario.
 	 * @param usuario El usuario a crear.
 	 * @return ResponseEntity con un mensaje de éxito.
 	 */
-	@PostMapping
+	@PostMapping("/crearUsuario")
 	public ResponseEntity<String> createUsuario(@RequestBody Usuario usuario) {
+
+		//Debemos comprobar que el correo no esta usandose
+		Usuario usuarioExistente = usuarioRepositorio.findByCorreo(usuario.getCorreo());
+		Usuario usuarioExistente2 = usuarioRepositorio.findByAlias(usuario.getAlias());
+
+		if (usuarioExistente2 != null && usuarioExistente != null){
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Usuario ya existe");
+		}
 
 		usuario.setAuditCreated(LocalDateTime.now());
 		usuario.setAuditCreator("admi");

@@ -234,5 +234,9 @@
         android:id="@+id/createBookFragment"
         android:name="es.veronica.alvarez.omega.CreateBookFragment"
         android:label="fragment_create_book"
-        tools:layout="@layout/fragment_create_book" />
+        tools:layout="@layout/fragment_create_book" >
+        <action
+            android:id="@+id/action_createBookFragment_to_startAppFragment"
+            app:destination="@id/startAppFragment" />
+    </fragment>
 </navigation>

@@ -32,13 +32,11 @@ class LogginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Comprobamos si el usuario esta logeado
-        var userPreferences = context?.let { UserPreferences(it) }
-        if (userPreferences != null) {
-            if (userPreferences.isLoggedIn){
-                //Navegamos hasta la página principal
-                view?.findNavController()
-                    ?.navigate(R.id.action_logginFragment_to_startAppFragment)
-            }
+        var userPreferences = UserPreferences(requireContext())
+        if (userPreferences.isLoggedIn){
+            //Navegamos hasta la página principal
+            view?.findNavController()
+                ?.navigate(R.id.action_logginFragment_to_startAppFragment)
         }
 
         //------------------- INICIO DE SESIÓN ------------------
@@ -112,12 +110,13 @@ class LogginFragment : Fragment() {
     }
 
     private fun almacenamosUsuario(usuario: UsuarioResponse?) {
-        val userPreferences = context?.let { UserPreferences(it) }
+        val userPreferences = UserPreferences(requireContext())
 
-        if (userPreferences != null && usuario != null) {
+        if (usuario != null) {
             userPreferences.isLoggedIn = true
-            userPreferences.userId = usuario.id
+            userPreferences.userId = usuario.id!!
             userPreferences._username = usuario.alias
+            userPreferences._privacidad = usuario.publico!!
         }
     }
 
@@ -151,11 +150,5 @@ class LogginFragment : Fragment() {
             dialog.show()
         }
     }
-
-    /*region MÉTODOS AUXILIARES
-    private fun loginUsuario(usuario: String, clave: String) {
-
-    }
-   endregion*/
 
 }

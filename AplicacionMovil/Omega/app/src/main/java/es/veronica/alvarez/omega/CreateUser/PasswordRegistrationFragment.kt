@@ -2,25 +2,32 @@ package es.veronica.alvarez.omega.CreateUser
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import es.veronica.alvarez.omega.DataApi.Api
+import es.veronica.alvarez.omega.Model.UsuarioResponse
 import es.veronica.alvarez.omega.R
 import es.veronica.alvarez.omega.databinding.FragmentPasswordRegistrationBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PasswordRegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentPasswordRegistrationBinding
+    private val viewModelCompartido: UsuarioViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        // return inflater.inflate(R.layout.fragment_password_registration, container, false)
+
         binding = FragmentPasswordRegistrationBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -28,13 +35,8 @@ class PasswordRegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val password = binding.txtPassword.text
-        val password2 = binding.txtPassword2.text
-
         binding.btnFinalizar.setOnClickListener {
-
             if (validarDatos()) {
-
                 if (verificarPassword()) {
                     //Llamamos al método de la api
                     crearUsuario()
@@ -45,29 +47,75 @@ class PasswordRegistrationFragment : Fragment() {
 
     private fun crearUsuario() {
         //Llamamos al método de la api
+        val usuario = UsuarioResponse(
+            id = null,
+            nombre = viewModelCompartido.nombre.value,
+            apellidos = viewModelCompartido.apellidos.value,
+            correo = viewModelCompartido.email.value,
+            alias = viewModelCompartido.username.value,
+            clave = viewModelCompartido.password.value,
+        )
 
-        //Si todo ha salido bien
-        view?.findNavController()
-            ?.navigate(R.id.action_passwordRegistrationFragment_to_literarySelectionFragment)
+        context?.let { Api.initialize(it.applicationContext) }
+        //Llamamos al metodo api
+        Api.retrofitService.crearUsuario(usuario).enqueue(object : Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+               if (response.isSuccessful){
+                   Log.i("Succesful", response.body().toString())
+
+                     }else{
+                   Log.i("noSucces", response.message().toString())
+               }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.i("onFailure", t.message.toString())
+            }
+
+        })
+
+
+
+        existeUsuario(usuario.alias)
+
+
+
+    }
+
+    private fun existeUsuario(alias: String?) {
+        context?.let { Api.initialize(it.applicationContext) }
+        Api.retrofitService.buscarUsuarioPorUser(alias!!).enqueue(object : Callback<UsuarioResponse> {
+            override fun onResponse(call: Call<UsuarioResponse>, response: Response<UsuarioResponse>) {
+
+                val usuario = response.body()
+                Log.d("API Response", "Usuario: $usuario")
+                Toast.makeText(requireContext(), "Usuario creado correctamente", Toast.LENGTH_SHORT).show()
+                // Navegar a la siguiente pantalla si es necesario
+                view?.findNavController()?.navigate(R.id.action_passwordRegistrationFragment_to_literarySelectionFragment)
+            }
+
+            override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
+                Toast.makeText(requireContext(), "Error al crear el usuario", Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
 
 
     private fun verificarPassword(): Boolean {
-
+        //Comprobamos que las contraseñas sean iguales
         if (binding.txtPassword.text.contentEquals(binding.txtPassword2.text)) {
-            //si las contraseñas son iguales
-            //Comprobamos que cumplan con la seguridad adecuada
-            /*if (isValidPassword(binding.txtPassword.text)) {
-                return true
-            }*/
+            val username = binding.txtUsername.text.toString()
+            val password = binding.txtPassword.text.toString()
+
+            viewModelCompartido.setUsename(username)
+            viewModelCompartido.setPassword(password)
 
         } else {
             Toast.makeText(context, "Las contraseñas no son iguales", Toast.LENGTH_SHORT)
                 .show()
-
             return false
         }
-
         return true
     }
 
@@ -93,7 +141,3 @@ class PasswordRegistrationFragment : Fragment() {
     }
 }
 
-    /*fun isValidPassword(password: Editable): Boolean {
-        val regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}\\]:;',?/*~$^+=<>]).{8,20}$"
-        return password.matches(regex.toRegex())
-    }*/

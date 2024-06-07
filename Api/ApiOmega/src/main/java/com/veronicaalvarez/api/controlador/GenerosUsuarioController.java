@@ -4,12 +4,10 @@ import com.veronicaalvarez.api.modelo.GeneroUsuario;
 import com.veronicaalvarez.api.repositorio.GenerosUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/omega/generosUsuario")
@@ -32,5 +30,21 @@ public class GenerosUsuarioController {
         }
 
         return ResponseEntity.ok(generosUsuario);
+    }
+
+    // Nuevo método para asociar géneros a un usuario
+    @PostMapping("/asociarGeneros")
+    public ResponseEntity<Void> asociarGenerosAUsuario(@RequestBody Map<String, Object> payload) {
+        int idUsuario = (Integer) payload.get("idUsuario");
+        List<Integer> idGeneros = (List<Integer>) payload.get("idGeneros");
+
+        for (Integer idGenero : idGeneros) {
+            GeneroUsuario generoUsuario = new GeneroUsuario();
+            generoUsuario.setIdUsuario(idUsuario);
+            generoUsuario.setIdGenero(idGenero);
+            generosUsuarioRepository.save(generoUsuario);
+        }
+
+        return ResponseEntity.ok().build();
     }
 }

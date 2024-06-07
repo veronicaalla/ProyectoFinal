@@ -123,15 +123,25 @@ public class LibroController {
      * @param nuevoLibro El libro a crear.
      * @return ResponseEntity con el libro creado o un 500 INTERNAL SERVER ERROR si hay un error al crear el libro.
      */
-    @PostMapping
-    public ResponseEntity<?> crearLibro(@RequestBody Libro nuevoLibro) {
+    @PostMapping("/usuarios/{usuarioId}/libros")
+    public ResponseEntity<?> crearLibro(@PathVariable int usuarioId, @RequestBody Libro nuevoLibro) {
         try {
+            // Aquí puedes asociar el libro con el usuario usando el ID del usuario
+            Usuario usuario = usuarioRepositorio.findById(usuarioId).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+            String idUsuario = usuario.getId()+ "";
+            nuevoLibro.setAuditCreated(LocalDateTime.now());
+            nuevoLibro.setAuditCreator(idUsuario);
+            nuevoLibro.setAuditUpdated(LocalDateTime.now());
+            nuevoLibro.setAuditUpdater(idUsuario);
+
             Libro libroCreado = libroRepositorio.save(nuevoLibro);
             return ResponseEntity.status(HttpStatus.CREATED).body(libroCreado);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear el libro. Por favor, inténtalo de nuevo más tarde.");
         }
     }
+
 
     /**
      * Edita un libro existente.

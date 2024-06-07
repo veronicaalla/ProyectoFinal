@@ -1,5 +1,6 @@
 package es.veronica.alvarez.omega.Books
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.veronica.alvarez.omega.DataApi.Api
+import es.veronica.alvarez.omega.Model.BibliotecaResponse
 import es.veronica.alvarez.omega.Model.ComentarioResponse
 import es.veronica.alvarez.omega.Model.GeneroResponse
 import es.veronica.alvarez.omega.Model.LibroResponse
@@ -61,9 +63,40 @@ class SeeBookFragment : Fragment() {
         obtenerGenero()
         obtenerComentarios()
 
+
+        //region acciones del toolbar
+
+        binding.imgBiblioteca.setOnClickListener {
+            Toast.makeText(requireContext(), "Bibliotecas", Toast.LENGTH_LONG).show()
+            /*Debemos mostrar las bibliotecas que tiene el usuario
+            var bibliotecas: List<BibliotecaResponse>? = null
+
+            Api.retrofitService.obtenerBibliotecas(UserPreferences(requireContext()).userId).enqueue(object : Callback<List<BibliotecaResponse>>{
+
+                override fun onResponse(
+                    call: Call<List<BibliotecaResponse>>, response: Response<List<BibliotecaResponse>>
+                ) {
+                    if (response.isSuccessful){
+                        Log.i("Lista biblioteca", response.body().toString())
+                        bibliotecas= response.body()
+                    }else{
+                        Log.i("Error", "No satisfactorio ${response.message()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<BibliotecaResponse>>, t: Throwable) {
+                    Log.i("Error", "Error de conexion")
+                }
+
+            })
+
+            //Una vez que obtenemos las bibliotecas, debemos crear el dialogo
+            //mostrarAlertDialog(bibliotecas)*/
+        }
+
         binding.imgLibroErroneo.setOnClickListener {
             val idUsuario = UserPreferences(requireContext()).userId
-            Api.retrofitService.crearLibroErroneo(libro.id, idUsuario).enqueue(object : Callback<Void>{
+            Api.retrofitService.crearLibroErroneo(libro.id!!, idUsuario).enqueue(object : Callback<Void>{
 
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful){
@@ -81,6 +114,7 @@ class SeeBookFragment : Fragment() {
             })
         }
 
+        //endregion
         binding.imgEnviarComentario.setOnClickListener {
             //Comprobamos que el campo no este vacio
             if (binding.editTextComentario.text.toString().isEmpty()){
@@ -100,11 +134,12 @@ class SeeBookFragment : Fragment() {
         }
     }
 
+
     private fun crearComentario(comentario: String) {
         val idLibro = libro.id
         val userPreferences = UserPreferences(requireContext())
         val idUsario = userPreferences.userId
-        Api.retrofitService.crearComentario(idLibro, idUsario, comentario).enqueue(object : Callback<ComentarioResponse> {
+        Api.retrofitService.crearComentario(idLibro!!, idUsario, comentario).enqueue(object : Callback<ComentarioResponse> {
             override fun onResponse(
                 call: Call<ComentarioResponse>,
                 response: Response<ComentarioResponse>
@@ -124,7 +159,7 @@ class SeeBookFragment : Fragment() {
     }
 
     private fun obtenerGenero (){
-        Api.retrofitService.obtenerGeneroPorId(libro.genero).enqueue(object : Callback<GeneroResponse>{
+        Api.retrofitService.obtenerGeneroPorId(libro.genero!!).enqueue(object : Callback<GeneroResponse>{
 
             override fun onResponse(
                 call: Call<GeneroResponse>,response: Response<GeneroResponse>
@@ -149,7 +184,7 @@ class SeeBookFragment : Fragment() {
 
     private fun obtenerComentarios() {
 
-        Api.retrofitService.obtenerComentariosPorLibro(libro.id).enqueue(object : Callback <List<ComentarioResponse>>{
+        Api.retrofitService.obtenerComentariosPorLibro(libro.id!!).enqueue(object : Callback <List<ComentarioResponse>>{
             override fun onResponse(
                 call: Call<List<ComentarioResponse>>,
                 response: Response<List<ComentarioResponse>>

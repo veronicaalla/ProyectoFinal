@@ -2,6 +2,9 @@ package es.veronica.alvarez.omega
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import es.veronica.alvarez.omega.Model.GeneroResponse
 
 class UserPreferences (context : Context) {
 
@@ -11,6 +14,15 @@ class UserPreferences (context : Context) {
     private val userIdKey = "idUsuario"
     private val username = "usuario"
     private val privacidad = "publico"
+    private val generosFavoritosKey = "generosFavoritos"
+
+    // MutableLiveData for list of GeneroResponse
+    private val _lista = MutableLiveData<List<GeneroResponse>>()
+    val lista: LiveData<List<GeneroResponse>> = _lista
+    // Example function to update the list
+    fun setLista(generos: List<GeneroResponse>) {
+        _lista.value = generos
+    }
 
     private val prefs: SharedPreferences =
         context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
@@ -30,4 +42,15 @@ class UserPreferences (context : Context) {
     var _privacidad : Boolean
         get() = prefs.getBoolean(privacidad, false)
         set(value) = prefs.edit().putBoolean(privacidad, value).apply()
+
+    var generosFavoritos: Set<Int>
+        get() {
+            val generosFavoritosSet = prefs.getStringSet(generosFavoritosKey, setOf()) ?: setOf()
+            return generosFavoritosSet.map { it.toInt() }.toSet()
+        }
+        set(value) {
+            val generosFavoritosSet = value.map { it.toString() }.toSet()
+            prefs.edit().putStringSet(generosFavoritosKey, generosFavoritosSet).apply()
+        }
+
 }

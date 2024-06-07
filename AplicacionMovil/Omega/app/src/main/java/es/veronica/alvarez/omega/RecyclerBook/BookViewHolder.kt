@@ -19,9 +19,9 @@ class BookViewHolder (view: View): RecyclerView.ViewHolder(view){
         onItemSelected: (LibroResponse) -> Unit
     ){
         binding.txtTitulo.text = libroResponse.titulo
-        binding.txtSinopsis.text = obtenerDescripcionCorta(libroResponse.descripcion)
+        binding.txtSinopsis.text = obtenerDescripcionCorta(libroResponse.descripcion!!)
         binding.txtAutor.text = "Autor: ${libroResponse.autor}"
-        obtenerValoracionLibro(libroResponse.id)
+        obtenerValoracionLibro(libroResponse.id!!)
 
         binding.root.setOnClickListener { onItemSelected(libroResponse) }
     }

@@ -1,59 +1,170 @@
 package es.veronica.alvarez.omega
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
+import androidx.navigation.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import es.veronica.alvarez.omega.DataApi.Api
+import es.veronica.alvarez.omega.Model.GeneroResponse
+import es.veronica.alvarez.omega.Model.LibroResponse
+import es.veronica.alvarez.omega.databinding.FragmentCreateBookBinding
+import es.veronica.alvarez.omega.databinding.FragmentSeeBookBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateBookFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CreateBookFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var binding: FragmentCreateBookBinding
+    private var libro = LibroResponse()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_book, container, false)
+
+        binding = FragmentCreateBookBinding.inflate(inflater, container, false)
+        return binding.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CreateBookFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CreateBookFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        cargarSpinner()
+        //La unica funcion con la que cuenta el usuario, es la de crear la biblioteca
+        binding.btnCrear.setOnClickListener {
+            if (validarDatos()){
+                asignamosDatos()
+                crearLibro()
+            }
+
+        }
+
+        binding.btnCancelar.setOnClickListener {
+            view.findNavController().navigate(R.id.action_createBookFragment_to_startAppFragment)
+        }
+
+
+        binding.spinnerGenero.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: android.view.View?, position: Int, id: Long) {
+                val selectedGenero = parent.getItemAtPosition(position) as GeneroResponse
+                val idGenero = selectedGenero.id
+                // Utiliza el idGenero según sea necesario
+                println("Seleccionado: ${selectedGenero.nombre} con ID: $idGenero")
+
+                //Le asignamos a el libro el generoId
+                libro.genero = idGenero
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // No hacer nada
+            }
+        }
+    }
+
+    private fun validarDatos(): Boolean {
+
+        if (binding.ediTextTitulo.text.isEmpty() || binding.ediTextTitulo.text.contentEquals("")){
+            MensajeValidaciones("Debe introducir un titulo")
+            return false
+        }
+
+        if (binding.ediTextAutor.text.isEmpty() || binding.ediTextAutor.text.contentEquals("")){
+            MensajeValidaciones("Debe indicar el autor")
+            return false
+        }
+
+        if (binding.ediTextIsbn.text.isEmpty() || binding.ediTextIsbn.text.contentEquals("")){
+            MensajeValidaciones("Debe indicar su ISBN")
+            return false
+        }
+
+        if (binding.editTextDescripcion.text.isEmpty() || binding.editTextDescripcion.text.contentEquals("")){
+            MensajeValidaciones("Debe introducir la sinopsis del libro")
+            return false
+        }
+
+
+        if (binding.ediTextPaginas.text.isEmpty() || binding.ediTextPaginas.text.contentEquals("")){
+            MensajeValidaciones("Debe indicar cuantas páginas tiene el libro")
+            return false
+        }
+
+
+        return true
+    }
+    private fun MensajeValidaciones(mensaje: String) {
+        // Creamos la ventana emergente
+        val dialog = context?.let {
+            MaterialAlertDialogBuilder(it).setTitle("ERROR").setMessage(mensaje)
+                .setNegativeButton("OK", null).create()
+
+        }
+        if (dialog != null) {
+            dialog.show()
+        }
+    }
+
+    private fun crearLibro() {
+        //obtenemos el usuario que esta registrado
+        //y por consiguiente esta realizando la creacion del libro
+        val idUsuario = UserPreferences(requireContext()).userId
+
+        Api.retrofitService.crearLibro(idUsuario, libro).enqueue(object : Callback<LibroResponse>{
+
+            override fun onResponse(call: Call<LibroResponse>, response: Response<LibroResponse>) {
+
+                if (response.isSuccessful){
+                    Log.i("isSuccesful", response.body().toString())
+                    Toast.makeText(requireContext(), "Libro creado correctamente", Toast.LENGTH_LONG).show()
+                }else{
+                    Log.i("notSuccesful", response.message().toString())
                 }
             }
+
+            override fun onFailure(call: Call<LibroResponse>, t: Throwable) {
+                Log.i("onFailure", t.message.toString())
+            }
+
+        })
     }
+
+    private fun cargarSpinner() {
+        Api.retrofitService.obtenerGeneros().enqueue(object : Callback<List<GeneroResponse>> {
+            override fun onResponse(call: Call<List<GeneroResponse>>, response: Response<List<GeneroResponse>>) {
+                if (response.isSuccessful) {
+                    val generos = response.body()
+                    Log.i("Succesful", generos.toString())
+                    if (generos != null) {
+                        val adapter = GeneroAdapter(requireContext(), generos)
+                        binding.spinnerGenero.adapter = adapter
+                    }
+                } else {
+                    Log.i("noSucces", response.message().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<List<GeneroResponse>>, t: Throwable) {
+                Log.i("onFailure", t.message.toString())
+            }
+        })
+    }
+
+    private fun asignamosDatos() {
+        libro.titulo = binding.ediTextTitulo.text.toString()
+        libro.autor = binding.ediTextAutor.text.toString()
+        libro.isbn = binding.ediTextIsbn.text.toString()
+        libro.descripcion = binding.editTextDescripcion.text.toString()
+        libro.paginas = binding.ediTextPaginas.text.toString().toInt()
+        libro.fechaPublicacion = binding.editTextDate.text.toString()
+        Log.i("Nuevo libro", libro.toString())
+    }
+
 }

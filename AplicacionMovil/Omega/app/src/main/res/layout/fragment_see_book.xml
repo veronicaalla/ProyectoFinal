@@ -43,6 +43,13 @@
                     android:text="Todo lo que nunca fuimos"
                     android:textColor="@color/white" />
 
+                    <ImageView
+                        android:id="@+id/imgBiblioteca"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icono_biblioteca" />
+
                 <ImageView
                     android:id="@+id/imgLibroErroneo"
                     android:layout_width="match_parent"

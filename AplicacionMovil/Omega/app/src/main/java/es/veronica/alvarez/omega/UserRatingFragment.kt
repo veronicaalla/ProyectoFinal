@@ -83,7 +83,7 @@ class UserRatingFragment : Fragment() {
     private fun creamosValoracion() {
         val idLibro = libro.id
         val idUsuario = UserPreferences(requireContext()).userId
-        Api.retrofitService.crearValoracionUsuario(idUsuario, idLibro, valoracionUsuario!!)
+        Api.retrofitService.crearValoracionUsuario(idUsuario, idLibro!!, valoracionUsuario)
             .enqueue(object : Callback<ValoracionUsuarioResponse> {
                 override fun onResponse(
                     call: Call<ValoracionUsuarioResponse>,
@@ -108,7 +108,7 @@ class UserRatingFragment : Fragment() {
         val idLibro = libro.id
         val idUsuario = UserPreferences(requireContext()).userId
 
-        Api.retrofitService.actualizarValoracion(idUsuario, idLibro, valoracionUsuario).enqueue(object : Callback<Any>{
+        Api.retrofitService.actualizarValoracion(idUsuario, idLibro!!, valoracionUsuario).enqueue(object : Callback<Any>{
 
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 if (response.isSuccessful){
@@ -133,7 +133,7 @@ class UserRatingFragment : Fragment() {
     private fun obtenerValoracionUsuario() {
         val idLibro = libro.id
         val idUsuario = UserPreferences(requireContext()).userId
-        Api.retrofitService.obtenerValoracionLibroPorUsuario(idLibro, idUsuario)
+        Api.retrofitService.obtenerValoracionLibroPorUsuario(idLibro!!, idUsuario)
             .enqueue(object : Callback<ValoracionUsuarioResponse> {
 
                 override fun onResponse(

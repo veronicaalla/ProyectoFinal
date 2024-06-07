@@ -6,32 +6,29 @@ import java.time.LocalDateTime
 
 data class UsuarioResponse(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?=null,
 
     @SerializedName("alias")
-    val alias: String?,
+    val alias: String?=null,
 
     @SerializedName("nombre")
-    val nombre: String,
+    val nombre: String?=null,
 
     @SerializedName("apellidos")
-    val apellidos: String,
-
-    @SerializedName("fecha_nacimiento")
-    val fechaNacimiento: LocalDate,
+    val apellidos: String?=null,
 
     @SerializedName("correo")
-    val correo: String,
+    val correo: String?=null,
 
     @SerializedName("clave")
-    val clave: String,
+    val clave: String?=null,
 
     @SerializedName("telefono")
-    val telefono: String?,
+    val telefono: String?=null,
 
     @SerializedName("tipo")
-    val tipo: Int,
+    val tipo: Int = 3,
 
     @SerializedName("publico")
-    val publico: Boolean?
+    val publico: Boolean= false
 )

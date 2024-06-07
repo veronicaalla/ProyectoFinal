@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
     Usuario findByAliasOrCorreo(String alias, String correo);
     Usuario findByAlias(String alias);
+    Usuario findByCorreo(String correo);;
+
 
     @Modifying
     @Transactional

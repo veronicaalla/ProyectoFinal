@@ -10,6 +10,7 @@ import es.veronica.alvarez.omega.Model.PerfilUsuarioResponse
 import es.veronica.alvarez.omega.Model.UsuarioResponse
 import es.veronica.alvarez.omega.Model.ValoracionUsuarioResponse
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -210,4 +211,24 @@ interface ApiService {
     ): Call<Any>
 
     //endregion
+
+
+    @POST("libros/usuarios/{usuarioId}/libros")
+    fun crearLibro(@Path("usuarioId") usuarioId: Int, @Body nuevoLibro: LibroResponse): Call<LibroResponse>
+
+
+    @GET("generos/")
+    fun obtenerGeneros(): Call<List<GeneroResponse>>
+
+
+    @GET("usuarios/usuarios/{user}")
+    fun buscarUsuarioPorUser(@Path("user") user: String): Call<UsuarioResponse>
+
+
+    @POST("usuarios/crearUsuario")
+    fun crearUsuario(@Body usuario: UsuarioResponse): Call<String>
+
+
+    @POST("generosUsuario/asociarGeneros")
+    fun asociarGenerosAUsuario(@Body payload: Map<String, Any>): Call<Void>
 }

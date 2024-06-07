@@ -5,26 +5,26 @@ import java.io.Serializable
 
 data class LibroResponse (
     @SerializedName("id")
-    val id: Int,
+    val id: Int?=null,
 
     @SerializedName("isbn")
-    val isbn: String,
+    var isbn: String?=null,
 
     @SerializedName("titulo")
-    val titulo: String,
+    var titulo: String?=null,
 
     @SerializedName("autor")
-    val autor: String,
+    var autor: String?=null,
 
     @SerializedName("descripcion")
-    val descripcion: String,
+    var descripcion: String?=null,
 
     @SerializedName("genero")
-    val genero: Int,
+    var genero: Int?=null,
 
     @SerializedName("fecha_publicacion")
-    val fechaPublicacion: String?,  // Usa String o LocalDate si lo necesitas
+    var fechaPublicacion: String?=null,  // Usa String o LocalDate si lo necesitas
 
     @SerializedName("paginas")
-    val paginas: Int
+    var paginas: Int?=null
 ):Serializable

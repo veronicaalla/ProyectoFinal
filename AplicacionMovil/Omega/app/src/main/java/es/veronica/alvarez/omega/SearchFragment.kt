@@ -60,7 +60,7 @@ class SearchFragment : Fragment() {
 
                 // Filtrar la lista de patrocinadores para obtener aquellos que contienen el texto de búsqueda en el nombre
                 val filteredList = listaTotalLibros.filter { libro ->
-                    libro.titulo.contains(searchText, ignoreCase = true)
+                    libro.titulo!!.contains(searchText, ignoreCase = true)
                 }
 
                 // Ahora puedes hacer lo que necesites con la lista filtrada, como actualizar el RecyclerView

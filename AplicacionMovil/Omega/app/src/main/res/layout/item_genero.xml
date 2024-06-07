@@ -23,18 +23,22 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/nombreBiblioteca"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Biblioteca Preferente" />
 
-            <Switch
-                android:id="@+id/switchPublica"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/nombreGenero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Genero" />
+
+                <ImageView
+                    android:id="@+id/imgIcono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/icono_no_fav" />
 
 
         </LinearLayout>

@@ -8,11 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import es.veronica.alvarez.omega.R
 import es.veronica.alvarez.omega.databinding.FragmentRegistrationNameBinding
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -21,6 +24,7 @@ class RegistrationNameFragment : Fragment() {
 
     private lateinit var binding: FragmentRegistrationNameBinding
     private val calendar = Calendar.getInstance()
+    private val viewModelCompartido: UsuarioViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,11 +48,17 @@ class RegistrationNameFragment : Fragment() {
 
             //Validamos que los datos no esten vacios
             if (Validar()) {
+                
                 //Si los datos son validos, se los pasamos al view model
+                viewModelCompartido.setNombre(binding.txtNombre.text.toString())
+                viewModelCompartido.setApellidos(binding.txtApellidos.text.toString())
+                viewModelCompartido.setEmail(binding.txtEmail.text.toString())
 
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd") // Ajusta el patrón según tu formato
+                var fechaNacimiento = LocalDate.parse(binding.txtFechaNacimiento.text.toString(), formatter)
+                viewModelCompartido.setFecha(fechaNacimiento)
 
                 // seguimos con el registro
-
                 view.findNavController()
                     .navigate(R.id.action_registrationNameFragment_to_passwordRegistrationFragment)
             }
@@ -115,7 +125,7 @@ class RegistrationNameFragment : Fragment() {
     }
 
     private fun isValidEmail(email:String): Boolean {
-        val emailRegex = Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|es)")
+        val emailRegex = Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|es|org)")
         return emailRegex.matches(email)
     }
 
