@@ -79,8 +79,8 @@ namespace Omega
                 this.libro.fechaPublicacion = dtpFechaPublicacion.Value;
                 this.libro.paginas = int.Parse(txtPaginas.Text);
 
-
-                var resultado = await controlador.EditarLibroAsync(1, libro);
+                int idUsuario = guardarUsuario.numeroGuardado;
+                var resultado = await controlador.EditarLibroAsync(idUsuario, libro);
                 MessageBox.Show(resultado, "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }

@@ -36,8 +36,6 @@
             this.txtApellidos = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dtpFechaNac = new System.Windows.Forms.DateTimePicker();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.TextBox();
@@ -120,26 +118,9 @@
             this.txtUsuario.Size = new System.Drawing.Size(171, 20);
             this.txtUsuario.TabIndex = 7;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(39, 229);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(116, 16);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Fecha Nacimiento";
-            // 
-            // dtpFechaNac
-            // 
-            this.dtpFechaNac.Location = new System.Drawing.Point(161, 225);
-            this.dtpFechaNac.Name = "dtpFechaNac";
-            this.dtpFechaNac.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaNac.TabIndex = 9;
-            // 
             // txtCorreo
             // 
-            this.txtCorreo.Location = new System.Drawing.Point(103, 264);
+            this.txtCorreo.Location = new System.Drawing.Point(103, 219);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(171, 20);
             this.txtCorreo.TabIndex = 11;
@@ -148,7 +129,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(43, 268);
+            this.label6.Location = new System.Drawing.Point(43, 223);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 16);
             this.label6.TabIndex = 10;
@@ -156,7 +137,7 @@
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(416, 264);
+            this.txtTelefono.Location = new System.Drawing.Point(416, 219);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(171, 20);
             this.txtTelefono.TabIndex = 13;
@@ -166,7 +147,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(349, 268);
+            this.label7.Location = new System.Drawing.Point(349, 223);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 16);
             this.label7.TabIndex = 12;
@@ -199,7 +180,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptar.Location = new System.Drawing.Point(224, 344);
+            this.btnAceptar.Location = new System.Drawing.Point(200, 291);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(93, 28);
             this.btnAceptar.TabIndex = 16;
@@ -210,7 +191,7 @@
             // btnCancelar
             // 
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(341, 344);
+            this.btnCancelar.Location = new System.Drawing.Point(317, 291);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(93, 28);
             this.btnCancelar.TabIndex = 17;
@@ -222,7 +203,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 409);
+            this.ClientSize = new System.Drawing.Size(652, 358);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.cmbTipoUsuario);
@@ -231,8 +212,6 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.dtpFechaNac);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtApellidos);
@@ -241,6 +220,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InfoUser";
             this.Text = "Información Usuario";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -259,8 +239,6 @@
         private System.Windows.Forms.TextBox txtApellidos;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtUsuario;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dtpFechaNac;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTelefono;

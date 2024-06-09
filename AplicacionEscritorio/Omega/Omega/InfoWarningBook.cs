@@ -82,8 +82,9 @@ namespace Omega
                 this.libroErroneo.resuelto = false;
             }
 
+            int idUsuario = guardarUsuario.numeroGuardado;
             //Llamamos a el método de modificar
-            string result = await controlador.EditarLibroErroneoAsync(libroErroneo, 2);
+            string result = await controlador.EditarLibroErroneoAsync(libroErroneo, idUsuario);
             MessageBox.Show(result, "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             this.Close();

@@ -63,6 +63,26 @@ namespace Omega.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap comentarios {
+            get {
+                object obj = ResourceManager.GetObject("comentarios", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap libros {
+            get {
+                object obj = ResourceManager.GetObject("libros", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Logo_Omega_PC {
             get {
                 object obj = ResourceManager.GetObject("Logo Omega PC", resourceCulture);
@@ -76,6 +96,16 @@ namespace Omega.Properties {
         internal static System.Drawing.Bitmap logo_redondo {
             get {
                 object obj = ResourceManager.GetObject("logo_redondo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap personas {
+            get {
+                object obj = ResourceManager.GetObject("personas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

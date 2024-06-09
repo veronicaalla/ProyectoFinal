@@ -116,6 +116,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Login";
             this.Text = "OMEGA";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

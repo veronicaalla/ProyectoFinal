@@ -175,7 +175,7 @@ namespace Omega
                     nuevoItem = lvwUsuarios.Items.Add(u.alias);
                     nuevoItem.SubItems.Add(u.nombre);
                     nuevoItem.SubItems.Add(u.apellidos);
-                    nuevoItem.SubItems.Add(formatoFecha(u.fechaNacimiento.ToString()));
+                    //nuevoItem.SubItems.Add(formatoFecha(u.fechaNacimiento.ToString()));
                     nuevoItem.SubItems.Add(u.correo);
                     nuevoItem.SubItems.Add(u.telefono);
                     nuevoItem.SubItems.Add(obtenerTipoUsuario(u.tipo));

@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiService\Controlador.cs" />
+    <Compile Include="ApiService\guardarUsuario.cs" />
     <Compile Include="ApiService\Seguridad.cs" />
     <Compile Include="InfoBook.cs">
       <SubType>Form</SubType>
@@ -198,6 +199,10 @@
   <ItemGroup>
     <None Include="Resources\Logo Omega PC.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\comentarios.png" />
+    <None Include="Resources\libros.png" />
+    <Content Include="Resources\personas.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -38,13 +38,15 @@
             this.cmsComentarios = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsVer = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.cmsComentarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFiltrado
             // 
-            this.btnFiltrado.Location = new System.Drawing.Point(630, 21);
+            this.btnFiltrado.Location = new System.Drawing.Point(680, 49);
             this.btnFiltrado.Name = "btnFiltrado";
             this.btnFiltrado.Size = new System.Drawing.Size(137, 23);
             this.btnFiltrado.TabIndex = 10;
@@ -54,9 +56,9 @@
             // 
             // txtFiltrado
             // 
-            this.txtFiltrado.Location = new System.Drawing.Point(85, 24);
+            this.txtFiltrado.Location = new System.Drawing.Point(230, 52);
             this.txtFiltrado.Name = "txtFiltrado";
-            this.txtFiltrado.Size = new System.Drawing.Size(530, 20);
+            this.txtFiltrado.Size = new System.Drawing.Size(435, 20);
             this.txtFiltrado.TabIndex = 9;
             // 
             // lvwComentarios
@@ -70,10 +72,10 @@
             this.lvwComentarios.FullRowSelect = true;
             this.lvwComentarios.GridLines = true;
             this.lvwComentarios.HideSelection = false;
-            this.lvwComentarios.Location = new System.Drawing.Point(0, 63);
+            this.lvwComentarios.Location = new System.Drawing.Point(0, 120);
             this.lvwComentarios.MultiSelect = false;
             this.lvwComentarios.Name = "lvwComentarios";
-            this.lvwComentarios.Size = new System.Drawing.Size(962, 403);
+            this.lvwComentarios.Size = new System.Drawing.Size(973, 403);
             this.lvwComentarios.TabIndex = 8;
             this.lvwComentarios.UseCompatibleStateImageBehavior = false;
             this.lvwComentarios.View = System.Windows.Forms.View.Details;
@@ -93,7 +95,7 @@
             // chOfensivo
             // 
             this.chOfensivo.Text = "Ofensivo";
-            this.chOfensivo.Width = 191;
+            this.chOfensivo.Width = 229;
             // 
             // cmsComentarios
             // 
@@ -112,18 +114,29 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Omega.Properties.Resources.Logo_Omega_PC;
-            this.pictureBox1.Location = new System.Drawing.Point(850, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(837, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(123, 62);
+            this.pictureBox1.Size = new System.Drawing.Size(136, 112);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Omega.Properties.Resources.comentarios;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 2);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(136, 112);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 12;
+            this.pictureBox2.TabStop = false;
             // 
             // ListOfReportedCommets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(962, 466);
+            this.ClientSize = new System.Drawing.Size(973, 523);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFiltrado);
             this.Controls.Add(this.txtFiltrado);
@@ -133,6 +146,7 @@
             this.Text = "Mantenimiento de Comentarios Reportados";
             this.cmsComentarios.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,5 +163,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ContextMenuStrip cmsComentarios;
         private System.Windows.Forms.ToolStripMenuItem cmsVer;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

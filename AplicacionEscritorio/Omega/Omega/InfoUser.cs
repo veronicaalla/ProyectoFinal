@@ -52,14 +52,13 @@ namespace Omega
             txtNombre.Text = usuario.nombre;
             txtApellidos.Text = usuario.apellidos;
             txtUsuario.Text = usuario.alias;
-            dtpFechaNac.Text = usuario.fechaNacimiento.ToString();
+            //dtpFechaNac.Text = usuario.fechaNacimiento.ToString();
             txtCorreo.Text = usuario.correo;
             txtTelefono.Text = usuario.telefono;
             cmbTipoUsuario.Text = obtenerTipoUsuario(usuario.tipo);
 
             //La fecha de nacimiento y el tipo de usuario no se pueden modificar
             cmbTipoUsuario.Enabled = false;
-            dtpFechaNac.Enabled = false;
 
             btnAceptar.Text = "Modificar";
 
@@ -84,10 +83,6 @@ namespace Omega
                 //El tipo de usuario tampoco, seria de forma automatica en un futuro caso. 
                 if (usuario.id == 0)
                 {
-                    //Se le debe asignar la fecha de nacimiento y su tipo de usuario
-
-                    DateTime fechaSeleccionada = dtpFechaNac.Value;
-                    this.usuario.fechaNacimiento = fechaSeleccionada.Date;
                  
                     this.usuario.clave = "1234567890";
                     this.usuario.tipo = tipoUsuario(cmbTipoUsuario.Text);
@@ -106,8 +101,11 @@ namespace Omega
                     return;
                 }
 
+               
+                //recuperamos el id del usuario que ha accedido
+                int idUsuario = guardarUsuario.numeroGuardado;
                 // Llamar al método de la API para modificar el usuario
-                bool resultado = await controlador.ModificarUsuarioAsync(usuario.id, usuario);
+                bool resultado = await controlador.ModificarUsuarioAsync(idUsuario, usuario);
 
                 if (resultado)
                 {

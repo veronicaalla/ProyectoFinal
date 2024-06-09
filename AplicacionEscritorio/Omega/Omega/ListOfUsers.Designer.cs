@@ -36,7 +36,6 @@
             this.chUsuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNombre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chApellidos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chFechaNac = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chCorreo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chTelefono = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chTipoUsuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -46,9 +45,11 @@
             this.cmsEliminar = new System.Windows.Forms.ToolStripMenuItem();
             this.txtFiltrado = new System.Windows.Forms.TextBox();
             this.btnFiltrado = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.cmsUsuarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             this.tsmiUsuarios});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(962, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1115, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -83,7 +84,6 @@
             this.chUsuario,
             this.chNombre,
             this.chApellidos,
-            this.chFechaNac,
             this.chCorreo,
             this.chTelefono,
             this.chTipoUsuario});
@@ -92,10 +92,10 @@
             this.lvwUsuarios.FullRowSelect = true;
             this.lvwUsuarios.GridLines = true;
             this.lvwUsuarios.HideSelection = false;
-            this.lvwUsuarios.Location = new System.Drawing.Point(0, 86);
+            this.lvwUsuarios.Location = new System.Drawing.Point(0, 124);
             this.lvwUsuarios.MultiSelect = false;
             this.lvwUsuarios.Name = "lvwUsuarios";
-            this.lvwUsuarios.Size = new System.Drawing.Size(962, 380);
+            this.lvwUsuarios.Size = new System.Drawing.Size(1115, 380);
             this.lvwUsuarios.TabIndex = 4;
             this.lvwUsuarios.UseCompatibleStateImageBehavior = false;
             this.lvwUsuarios.View = System.Windows.Forms.View.Details;
@@ -110,17 +110,12 @@
             // chNombre
             // 
             this.chNombre.Text = "Nombre";
-            this.chNombre.Width = 127;
+            this.chNombre.Width = 175;
             // 
             // chApellidos
             // 
             this.chApellidos.Text = "Apellidos";
-            this.chApellidos.Width = 147;
-            // 
-            // chFechaNac
-            // 
-            this.chFechaNac.Text = "Fecha Nacimiento";
-            this.chFechaNac.Width = 128;
+            this.chApellidos.Width = 221;
             // 
             // chCorreo
             // 
@@ -130,12 +125,12 @@
             // chTelefono
             // 
             this.chTelefono.Text = "Telefono";
-            this.chTelefono.Width = 125;
+            this.chTelefono.Width = 197;
             // 
             // chTipoUsuario
             // 
             this.chTipoUsuario.Text = "Tipo Usuario";
-            this.chTipoUsuario.Width = 102;
+            this.chTipoUsuario.Width = 167;
             // 
             // cmsUsuarios
             // 
@@ -169,14 +164,14 @@
             // 
             // txtFiltrado
             // 
-            this.txtFiltrado.Location = new System.Drawing.Point(56, 44);
+            this.txtFiltrado.Location = new System.Drawing.Point(198, 44);
             this.txtFiltrado.Name = "txtFiltrado";
             this.txtFiltrado.Size = new System.Drawing.Size(530, 20);
             this.txtFiltrado.TabIndex = 5;
             // 
             // btnFiltrado
             // 
-            this.btnFiltrado.Location = new System.Drawing.Point(592, 44);
+            this.btnFiltrado.Location = new System.Drawing.Point(734, 44);
             this.btnFiltrado.Name = "btnFiltrado";
             this.btnFiltrado.Size = new System.Drawing.Size(137, 23);
             this.btnFiltrado.TabIndex = 6;
@@ -184,12 +179,22 @@
             this.btnFiltrado.UseVisualStyleBackColor = true;
             this.btnFiltrado.Click += new System.EventHandler(this.btnFiltrado_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Omega.Properties.Resources.personas;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(178, 91);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Omega.Properties.Resources.Logo_Omega_PC;
-            this.pictureBox2.Location = new System.Drawing.Point(850, 27);
+            this.pictureBox2.Location = new System.Drawing.Point(934, 27);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(123, 62);
+            this.pictureBox2.Size = new System.Drawing.Size(181, 91);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
@@ -198,7 +203,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(962, 466);
+            this.ClientSize = new System.Drawing.Size(1115, 504);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnFiltrado);
             this.Controls.Add(this.txtFiltrado);
@@ -210,6 +216,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.cmsUsuarios.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -224,7 +231,6 @@
         private System.Windows.Forms.ColumnHeader chUsuario;
         private System.Windows.Forms.ColumnHeader chNombre;
         private System.Windows.Forms.ColumnHeader chApellidos;
-        private System.Windows.Forms.ColumnHeader chFechaNac;
         private System.Windows.Forms.ColumnHeader chCorreo;
         private System.Windows.Forms.ColumnHeader chTelefono;
         private System.Windows.Forms.ColumnHeader chTipoUsuario;
@@ -235,5 +241,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmsVer;
         private System.Windows.Forms.ToolStripMenuItem cmsEliminar;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

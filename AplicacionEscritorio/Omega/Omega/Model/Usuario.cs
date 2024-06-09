@@ -21,7 +21,7 @@ namespace Omega.Model
         public string alias { get; set; }
         public string nombre { get; set; }
         public string apellidos { get; set; }
-        public DateTime fechaNacimiento { get; set; }
+        //public DateTime fechaNacimiento { get; set; }
         public string correo {  get; set; }
         public string clave { get; set; }
         public string telefono { get; set; }

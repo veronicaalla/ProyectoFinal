@@ -267,14 +267,6 @@ namespace Omega.ApiService
             return null;
         }
 
-        /// <summary>
-        /// Edita un comentario reportado en la API.
-        /// </summary>
-        /// <param name="idUsuario">El ID del usuario que reportó el comentario.</param>
-        /// <param name="comentarioReportadoNuevo">El nuevo objeto ComentarioReportado con los datos actualizados.</param>
-        /// <returns>Una cadena que representa la respuesta JSON de la API después de editar el comentario reportado.</returns>
-        /// <exception cref="ArgumentNullException">Si el parámetro <paramref name="comentarioReportadoNuevo"/> es nulo.</exception>
-        /// <exception cref="HttpRequestException">Si ocurre un error al enviar la solicitud HTTP.</exception>
         public  async Task<string> EditarComentarioReportadoAsync(int idUsuario, ComentarioReportado comentarioReportadoNuevo)
         {
 
@@ -396,11 +388,6 @@ namespace Omega.ApiService
         }
 
 
-        /// <summary>
-        /// Obtiene el ID de género por su nombre.
-        /// </summary>
-        /// <param name="nombre">El nombre del género.</param>
-        /// <returns>El ID del género como un entero opcional. Si el género no se encuentra, se devuelve null.</returns>
         public async Task<int?> ObtenerIdGeneroPorNombreAsync(string nombre)
         {
             try
@@ -468,13 +455,6 @@ namespace Omega.ApiService
             }
         }
 
-
-        /// <summary>
-        /// Edita un libro erróneo en la base de datos.
-        /// </summary>
-        /// <param name="libroErroneo">El objeto libro erróneo con los nuevos datos.</param>
-        /// <param name="idUsuario">El ID del usuario que está editando el libro erróneo.</param>
-        /// <returns>Un mensaje de éxito o error como una cadena.</returns>
         public async Task<string> EditarLibroErroneoAsync(LibroErroneo libroErroneo, int idUsuario)
         {
             try

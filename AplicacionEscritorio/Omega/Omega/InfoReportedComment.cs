@@ -97,7 +97,8 @@ namespace Omega
         /// </summary>
         private async void actualizarComentario()
         {
-            var cambioEfectuado = await controlador.EditarComentarioReportadoAsync(2, comentarioReportado);
+            int idUsuario = guardarUsuario.numeroGuardado;
+            var cambioEfectuado = await controlador.EditarComentarioReportadoAsync(idUsuario, comentarioReportado);
 
             MessageBox.Show(cambioEfectuado, "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 

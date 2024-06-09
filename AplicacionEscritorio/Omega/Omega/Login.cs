@@ -37,6 +37,11 @@ namespace Omega
                 {
                     //Comprobamos que el usuario sea de tipo administrador 
                     if (usuarioAcceso.tipo == 1 || usuarioAcceso.tipo == 2) {
+                        // Crear una instancia de la clase que almacena el id del usuario que esta registrado
+
+                        // Asignar un valor al entero guardado
+                        guardarUsuario.numeroGuardado = usuarioAcceso.id;
+
                         //Vamos a comprobar que la ventana, no este ya activa
                         foreach (Form form in Application.OpenForms)
                         {

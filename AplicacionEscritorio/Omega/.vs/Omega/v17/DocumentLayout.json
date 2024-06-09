@@ -1,14 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Alumno\\Desktop\\Omega\\",
+  "WorkspaceRootPath": "C:\\Users\\Alumno\\Desktop\\ds\\Omega\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\omega\\omega\\mainactivity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\mainactivity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\ds\\omega\\omega\\listofreportedcommets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\listofreportedcommets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\omega\\omega\\mainactivity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\mainactivity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\ds\\omega\\omega\\listofreportedbooks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\listofreportedbooks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|c:\\users\\alumno\\desktop\\ds\\omega\\omega\\listofusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{66640F56-08BB-4E53-A8D3-F5582084F5CB}|Omega\\Omega.csproj|solutionrelative:omega\\listofusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -79,26 +83,37 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainActivity.cs",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\MainActivity.cs",
-              "RelativeDocumentMoniker": "Omega\\MainActivity.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\MainActivity.cs",
-              "RelativeToolTip": "Omega\\MainActivity.cs",
-              "ViewState": "AQIAAEkAAAAAAAAAAAAAAE4AAAANAAAA",
+              "Title": "ListOfReportedCommets.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ds\\Omega\\Omega\\ListOfReportedCommets.cs",
+              "RelativeDocumentMoniker": "Omega\\ListOfReportedCommets.cs",
+              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ds\\Omega\\Omega\\ListOfReportedCommets.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Omega\\ListOfReportedCommets.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-25T10:58:46.826Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-09T12:18:19.087Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MainActivity.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\MainActivity.cs",
-              "RelativeDocumentMoniker": "Omega\\MainActivity.cs",
-              "ToolTip": "C:\\Users\\Alumno\\Desktop\\Omega\\Omega\\MainActivity.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Omega\\MainActivity.cs [Dise\u00F1o]",
+              "Title": "ListOfReportedBooks.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ds\\Omega\\Omega\\ListOfReportedBooks.cs",
+              "RelativeDocumentMoniker": "Omega\\ListOfReportedBooks.cs",
+              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ds\\Omega\\Omega\\ListOfReportedBooks.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Omega\\ListOfReportedBooks.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-25T10:55:54.049Z",
+              "WhenOpened": "2024-06-09T12:16:04.594Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ListOfUsers.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Alumno\\Desktop\\ds\\Omega\\Omega\\ListOfUsers.cs",
+              "RelativeDocumentMoniker": "Omega\\ListOfUsers.cs",
+              "ToolTip": "C:\\Users\\Alumno\\Desktop\\ds\\Omega\\Omega\\ListOfUsers.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Omega\\ListOfUsers.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T12:08:52.025Z",
               "EditorCaption": " [Dise\u00F1o]"
             }
           ]
