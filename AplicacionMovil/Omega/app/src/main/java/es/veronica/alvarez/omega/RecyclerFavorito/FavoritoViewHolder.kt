@@ -10,11 +10,24 @@ import es.veronica.alvarez.omega.R
 import es.veronica.alvarez.omega.UserPreferences
 import es.veronica.alvarez.omega.databinding.ItemGeneroBinding
 
+
+/**
+ * ViewHolder para mostrar un género en un RecyclerView de géneros favoritos.
+ *
+ * @param view La vista que representa el elemento del RecyclerView.
+ */
 class FavoritoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemGeneroBinding.bind(view)
     private val preferenciasUsuario = UserPreferences(view.context)
 
+
+    /**
+     * Vincula los datos de un género a la vista del ViewHolder.
+     *
+     * @param genero El objeto GeneroResponse que contiene los datos del género.
+     * @param onItemSelected La función de devolución de llamada que se llama cuando se selecciona un género.
+     */
     fun bind(genero: GeneroResponse, onItemSelected: (GeneroResponse) -> Unit) {
         binding.nombreGenero.text = genero.nombre
 
@@ -38,7 +51,6 @@ class FavoritoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
             // Actualizar la lista de géneros favoritos en UserPreferences
             preferenciasUsuario.generosFavoritos = generosFavoritos
-            Log.i("Generos seleccionados", preferenciasUsuario.generosFavoritos.toString())
         }
     }
 }

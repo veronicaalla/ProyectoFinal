@@ -23,6 +23,11 @@ import javax.mail.*
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
+
+/**
+ * Fragmento para la pantalla de inicio de sesión.
+ * Este fragmento maneja la lógica relacionada con el inicio de sesión de los usuarios.
+ */
 class LogginFragment : Fragment() {
 
     private lateinit var binding: FragmentLogginBinding
@@ -57,9 +62,9 @@ class LogginFragment : Fragment() {
 
         //region CONTRASEÑA OLVIDADA
         binding.txtOlvidoPassword.setOnClickListener {
-            sendEmail()
-            /*view.findNavController()
-                .navigate(R.id.action_logginFragment_to_passwordRecoveryFragment)*/
+            //sendEmail()
+            view.findNavController()
+                .navigate(R.id.action_logginFragment_to_passwordRecoveryFragment)
         }
 
         //endregion
@@ -76,8 +81,8 @@ class LogginFragment : Fragment() {
 
     // Función para enviar correo electrónico
     fun sendEmail() {
-        val username = "omegaconfia@gmail.com" // Cambiar al correo electrónico de la empresa
-        val password = "33xc3#^0E^dqz" // Cambiar a tu contraseña de aplicación
+        val username = "omegaconfia@gmail.com"
+        val password = "....." //Debemos introducir la "contraseña de aplicación"
 
         val props = Properties()
         props["mail.smtp.host"] = "smtp.gmail.com"
@@ -108,12 +113,15 @@ class LogginFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Método donde se comprueban las credenciales que ha introducido un usuario
+     * para poder acceder a la propia aplicacion
+     */
     private fun comprobarCredenciales() {
         //Obtenemos los datos
         val usuario = binding.txtNombreUsuario.text.toString()
-        Log.i("Usuario", usuario)
         val password = binding.txtPassword.text.toString()
-        Log.i("Contraseña", password)
 
         context?.let { Api.initialize(it.applicationContext) }
         context?.applicationContext?.let {
@@ -126,7 +134,6 @@ class LogginFragment : Fragment() {
                     ) {
 
                         if (response.isSuccessful) {
-                            Log.i("Login succesful", response.body().toString());
                             //Debemos comprobar que el usuario no sea administrador
                             var tipoUsuario = response.body()?.tipo
 
@@ -143,14 +150,17 @@ class LogginFragment : Fragment() {
                     }
 
                     override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
-                        Log.i("Error login", t.toString())
-                        Log.i("error", t.printStackTrace().toString())
+                        Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
                     }
                 })
         }
 
     }
 
+
+    /**
+     * Método en el que se almacenan los datos en las UserPreferences
+     */
     private fun almacenamosUsuario(usuario: UsuarioResponse?) {
         val userPreferences = UserPreferences(requireContext())
 
@@ -162,6 +172,10 @@ class LogginFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Método que verifica que los campos no están vacios
+     */
     private fun ValidarDatos(): Boolean {
         val usuario = binding.txtNombreUsuario.text
         val password = binding.txtPassword.text
@@ -181,6 +195,10 @@ class LogginFragment : Fragment() {
     }
 
 
+    /**
+     * Método que muestra un mensaje al usuario en caso de que los
+     * datos requeridos sean erroneos
+     */
     private fun MensajeValidaciones(mensaje: String) {
         // Creamos la ventana emergente
         val dialog = context?.let {

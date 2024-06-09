@@ -23,7 +23,6 @@ import java.util.Locale
 class RegistrationNameFragment : Fragment() {
 
     private lateinit var binding: FragmentRegistrationNameBinding
-    private val calendar = Calendar.getInstance()
     private val viewModelCompartido: UsuarioViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -50,13 +49,16 @@ class RegistrationNameFragment : Fragment() {
                 viewModelCompartido.setEmail(binding.txtEmail.text.toString())
 
                 // seguimos con el registro
-                view.findNavController()
-                    .navigate(R.id.action_registrationNameFragment_to_passwordRegistrationFragment)
+                view.findNavController().navigate(R.id.action_registrationNameFragment_to_passwordRegistrationFragment)
             }
         }
 
     }
 
+
+    /**
+     * Método que verifica que todos los datos han sido introducidos de forma correcta
+     */
     private fun Validar(): Boolean {
         if (binding.txtNombre.text.isEmpty()) {
             Toast.makeText(context, "Introduce el nombre", Toast.LENGTH_LONG).show()
@@ -66,7 +68,6 @@ class RegistrationNameFragment : Fragment() {
             Toast.makeText(context, "Introduce los apellidos", Toast.LENGTH_LONG).show()
             return false
         }
-
 
         var email = binding.txtEmail.text.toString()
         if (email.isEmpty()) {
@@ -81,22 +82,17 @@ class RegistrationNameFragment : Fragment() {
         return true
     }
 
+
+    /**
+     * Verifica si una cadena de texto representa una dirección de correo electrónico válida.
+     *
+     * @param email La cadena de texto que se va a verificar como dirección de correo electrónico.
+     * @return Boolean True si la cadena de texto es una dirección de correo electrónico válida, false de lo contrario.
+     */
     private fun isValidEmail(email:String): Boolean {
         val emailRegex = Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|es|org)")
         return emailRegex.matches(email)
     }
 
-    private fun mensajeError(mensaje: String) {
-        val dialog = context?.let {
-            MaterialAlertDialogBuilder(it)
-                .setTitle("ERROR")
-                .setMessage(mensaje)
-
-                //Accion de okey
-                .setNegativeButton("Ok", null)
-                .create()
-        }
-        dialog?.show()
-    }
 
 }

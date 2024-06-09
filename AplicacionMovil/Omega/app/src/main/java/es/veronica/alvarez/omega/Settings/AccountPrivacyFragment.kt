@@ -6,12 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.findNavController
 import es.veronica.alvarez.omega.DataApi.Api
 import es.veronica.alvarez.omega.Model.UsuarioResponse
 import es.veronica.alvarez.omega.R
 import es.veronica.alvarez.omega.UserPreferences
 import es.veronica.alvarez.omega.databinding.FragmentAccountPrivacyBinding
-import es.veronica.alvarez.omega.databinding.FragmentSeeBookBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,13 +29,6 @@ class AccountPrivacyFragment : Fragment() {
         binding = FragmentAccountPrivacyBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-    //_privacidad
-    /*
-    * fun modificarPrivacidad(
-        @Path("idUsuario") idUsuario: Int,
-        @Query("privacidad") privacidad: Boolean
-        * */
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,18 +50,22 @@ class AccountPrivacyFragment : Fragment() {
                 ) {
                     if (response.isSuccessful){
                         //Efectuamos el cambio en las userPreferences, para que se mantenga
-                        Log.i("Modificar privacidad", response.body().toString())
                         userPreferences._privacidad = priv
                     }else{
-                        Log.i("is not succesful", response.message().toString())
+                       Toast.makeText(requireContext(), "Hubo un error inesperado", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
-                    Log.i("onFailure", t.message.toString())
+                    Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_SHORT).show()
                 }
 
             })
+        }
+
+
+        binding.menuAtras.setOnClickListener {
+            view.findNavController().navigate(R.id.action_accountPrivacyFragment_to_settingsAppFragment)
         }
     }
 

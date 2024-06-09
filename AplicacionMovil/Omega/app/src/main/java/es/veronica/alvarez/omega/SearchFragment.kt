@@ -27,6 +27,8 @@ class SearchFragment : Fragment() {
     private var bottomNavigationView: BottomNavigationView? = null
     private lateinit var listaLibros: List<LibroResponse>
     private lateinit var listaTotalLibros: List<LibroResponse>
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,12 +54,7 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 val searchText = newText ?: ""  // Si el nuevo texto es nulo, asigna una cadena vacía
 
-                // Ahora puedes hacer lo que necesites con el texto, como filtrar la lista de patrocinadores
-                // o realizar cualquier otra acción basada en el texto de búsqueda
-                Log.d("Texto de búsqueda", searchText)
-
                 //Al realizar la busqueda, sacamos todos los libros
-
                 // Filtrar la lista de patrocinadores para obtener aquellos que contienen el texto de búsqueda en el nombre
                 val filteredList = listaTotalLibros.filter { libro ->
                     libro.titulo!!.contains(searchText, ignoreCase = true)
@@ -88,6 +85,10 @@ class SearchFragment : Fragment() {
         //endregion
     }
 
+
+    /**
+     * Método que devuelve todos los libros existentes en la base de datos
+     */
     private fun todosLosLibros() {
         context?.let { Api.initialize(it.applicationContext) }
         context?.applicationContext?.let {
@@ -97,7 +98,6 @@ class SearchFragment : Fragment() {
                     response: Response<List<LibroResponse>>
                 ) {
                     var libros = response.body()
-                    Log.i("Todos los libros", libros.toString())
 
                     if (libros!!.isNotEmpty()) {
                         listaTotalLibros = libros
@@ -113,6 +113,9 @@ class SearchFragment : Fragment() {
     }
 
 
+    /**
+     * Método que devuelve y muestra 20 libros de forma aleatoria al usuario
+     */
     private fun mostrarLibrosAleatorios(){
         //listaTotalLibros
         context?.let { Api.initialize(it.applicationContext) }
@@ -123,7 +126,6 @@ class SearchFragment : Fragment() {
                     response: Response<List<LibroResponse>>
                 ) {
                     var libros = response.body()
-                    Log.i("Libros aleatorios", libros.toString())
 
                     if (libros!!.isNotEmpty()) {
                         listaLibros = libros
@@ -140,6 +142,9 @@ class SearchFragment : Fragment() {
     }
 
 
+    /**
+     * Método que asigna los libros a el Recycler y su adaptador correspondiente
+     */
     private fun adjudicamosFuncionalidad() {
         //RecyclerView de libros aleatorios
         binding.rvBusqueda.layoutManager = LinearLayoutManager(context)
@@ -149,6 +154,11 @@ class SearchFragment : Fragment() {
         //endregion
     }
 
+
+    /**
+     * Método que asigna la funcionalidad al hacer click sobre el
+     * item de el Recycler
+     */
     private fun onItemSelected(it: LibroResponse) {
         val action = SearchFragmentDirections
             .actionSearchFragmentToSeeBookFragment(it)

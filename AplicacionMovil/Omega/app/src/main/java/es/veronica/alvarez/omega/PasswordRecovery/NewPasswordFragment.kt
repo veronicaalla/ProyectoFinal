@@ -25,7 +25,6 @@ class NewPasswordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentNewPasswordBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,10 +39,9 @@ class NewPasswordFragment : Fragment() {
             if (binding.editTxtPassword.text.isNotEmpty() || binding.editTxtPassword2.text.isEmpty()) {
 
                 if (binding.editTxtPassword.text.contentEquals(binding.editTxtPassword2.text)) {
-                    //Enviamos la contraseña encriptada con MD5
-                    val clave = encryptToMD5(binding.editTxtPassword2.text.toString())
-                    //Hacemos una llamada a la Api y actualizamos la nueva contraseña
 
+                    //La encriptación de la contraseña se realiza desde el método api
+                    val clave = binding.editTxtPassword2.text.toString()
                     view.findNavController()
                         .navigate(R.id.action_newPasswordFragment_to_logginFragment)
                 } else {
@@ -56,14 +54,5 @@ class NewPasswordFragment : Fragment() {
 
     }
 
-    //Método auxiliar
-    fun encryptToMD5(text: String): String {
-        val md = MessageDigest.getInstance("MD5")
-        val byteArray = md.digest(text.toByteArray())
-        val bigInt = BigInteger(1, byteArray)
-        val hashText = bigInt.toString(16)
-        // Completa el hash con ceros a la izquierda si es necesario
-        return hashText.padStart(32, '0')
-    }
 
 }

@@ -45,16 +45,13 @@ class LiterarySelectionFragment : Fragment() {
             val lista = userPreferences.generosFavoritos.toList()
             val idUsuario = userPreferences.userId
 
-            /* Construct the payload explicitly
-            val payload = mutableMapOf<String, Any>()
-            payload["idUsuario"] = idUsuario
-            payload["idGeneros"] = lista*/
 
             Api.retrofitService.asociarGenerosAUsuario(idUsuario, lista).enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
                         Toast.makeText(requireContext(), "Géneros asociados correctamente!", Toast.LENGTH_SHORT).show()
-                        // Navegar a la siguiente pantalla si es necesario
+
+                        //Navegamos hacia la pantalla inicial
                         view?.findNavController()?.navigate(R.id.action_literarySelectionFragment_to_startAppFragment)
                     } else {
                         Toast.makeText(requireContext(), "Hubo un fallo en la solicutud", Toast.LENGTH_SHORT).show()
@@ -69,6 +66,10 @@ class LiterarySelectionFragment : Fragment() {
 
     }
 
+
+    /**
+     * Método que devuelve todos los géneros existentes
+     */
     private fun obtenerGeneros() {
         Api.retrofitService.obtenerGeneros().enqueue(object : Callback<List<GeneroResponse>>{
             override fun onResponse(
@@ -76,7 +77,6 @@ class LiterarySelectionFragment : Fragment() {
                 response: Response<List<GeneroResponse>>
             ) {
                 var generos = response.body()
-                Log.i("generos", generos.toString())
 
                 if (generos!!.isNotEmpty()) {
                     listaGeneros = generos
@@ -85,23 +85,28 @@ class LiterarySelectionFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<GeneroResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+                Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
             }
 
         })
     }
 
+
+    /**
+     * Método que asigna a el Recycler la lista de géneros y su respectivo Adaptador
+     */
     private fun adjudicamosFuncionalidad() {
-        //RecyclerView de libros aleatorios
+
         binding.rvGenerosLiterarios.layoutManager = LinearLayoutManager(context)
         binding.rvGenerosLiterarios.adapter = FavoritoAdapter(listaGeneros) {
             onItemSelected(it)
         }
-        //endregion
+
     }
 
+
     private fun onItemSelected(it: GeneroResponse) {
-        Log.i("Genero", it.toString())
+
     }
 }
 

@@ -181,7 +181,11 @@
         android:id="@+id/accountPrivacyFragment"
         android:name="es.veronica.alvarez.omega.Settings.AccountPrivacyFragment"
         android:label="fragment_account_privacy"
-        tools:layout="@layout/fragment_account_privacy" />
+        tools:layout="@layout/fragment_account_privacy" >
+        <action
+            android:id="@+id/action_accountPrivacyFragment_to_settingsAppFragment"
+            app:destination="@id/settingsAppFragment" />
+    </fragment>
     <fragment
         android:id="@+id/informationAccountFragment"
         android:name="es.veronica.alvarez.omega.Settings.InformationAccountFragment"

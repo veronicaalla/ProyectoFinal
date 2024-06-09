@@ -27,15 +27,12 @@ class CreateBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentCreateBookBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         cargarSpinner()
         //La unica funcion con la que cuenta el usuario, es la de crear la biblioteca
@@ -56,8 +53,6 @@ class CreateBookFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>, view: android.view.View?, position: Int, id: Long) {
                 val selectedGenero = parent.getItemAtPosition(position) as GeneroResponse
                 val idGenero = selectedGenero.id
-                // Utiliza el idGenero según sea necesario
-                println("Seleccionado: ${selectedGenero.nombre} con ID: $idGenero")
 
                 //Le asignamos a el libro el generoId
                 libro.genero = idGenero
@@ -69,6 +64,10 @@ class CreateBookFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Método que valida que todos los campos sean correctos
+     */
     private fun validarDatos(): Boolean {
 
         if (binding.ediTextTitulo.text.isEmpty() || binding.ediTextTitulo.text.contentEquals("")){
@@ -100,6 +99,12 @@ class CreateBookFragment : Fragment() {
 
         return true
     }
+
+
+    /**
+     * Método que muestra un mensaje de error en caso de que algun
+     * atributo este vacio o mal formado
+     */
     private fun MensajeValidaciones(mensaje: String) {
         // Creamos la ventana emergente
         val dialog = context?.let {
@@ -112,6 +117,10 @@ class CreateBookFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Método que crea un libro llamando su método API
+     */
     private fun crearLibro() {
         //obtenemos el usuario que esta registrado
         //y por consiguiente esta realizando la creacion del libro
@@ -122,20 +131,22 @@ class CreateBookFragment : Fragment() {
             override fun onResponse(call: Call<LibroResponse>, response: Response<LibroResponse>) {
 
                 if (response.isSuccessful){
-                    Log.i("isSuccesful", response.body().toString())
                     Toast.makeText(requireContext(), "Libro creado correctamente", Toast.LENGTH_LONG).show()
                 }else{
-                    Log.i("notSuccesful", response.message().toString())
+                    Toast.makeText(requireContext(), "Error al crear el libro", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<LibroResponse>, t: Throwable) {
-                Log.i("onFailure", t.message.toString())
+                Toast.makeText(requireContext(), "Error en la conexión del servidor", Toast.LENGTH_LONG).show()
             }
 
         })
     }
 
+    /**
+     * Método que carga en el spinner los géneros que hay almacenados en la base de datos
+     */
     private fun cargarSpinner() {
         Api.retrofitService.obtenerGeneros().enqueue(object : Callback<List<GeneroResponse>> {
             override fun onResponse(call: Call<List<GeneroResponse>>, response: Response<List<GeneroResponse>>) {
@@ -157,6 +168,11 @@ class CreateBookFragment : Fragment() {
         })
     }
 
+
+    /**
+     * Método que asigna los datos que ha introducido el usuario
+     * en el propio libro
+     */
     private fun asignamosDatos() {
         libro.titulo = binding.ediTextTitulo.text.toString()
         libro.autor = binding.ediTextAutor.text.toString()
@@ -164,7 +180,6 @@ class CreateBookFragment : Fragment() {
         libro.descripcion = binding.editTextDescripcion.text.toString()
         libro.paginas = binding.ediTextPaginas.text.toString().toInt()
         libro.fechaPublicacion = binding.editTextDate.text.toString()
-        Log.i("Nuevo libro", libro.toString())
     }
 
 }

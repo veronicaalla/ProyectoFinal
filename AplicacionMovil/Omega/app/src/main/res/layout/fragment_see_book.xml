@@ -48,7 +48,9 @@
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/icono_biblioteca" />
+                        android:src="@drawable/icono_biblioteca"
+                        android:visibility="gone"
+                        tools:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/imgLibroErroneo"

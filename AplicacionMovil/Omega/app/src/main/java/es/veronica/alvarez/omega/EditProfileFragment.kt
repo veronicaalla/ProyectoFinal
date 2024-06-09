@@ -31,7 +31,11 @@ class EditProfileFragment : Fragment() {
         return binding.root
     }
 
-    //Debemos recoger el valor
+
+    /**
+     * Método del ciclo de vida del Fragment
+     * que recoge el valor que se les pasó por parametro
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -55,6 +59,9 @@ class EditProfileFragment : Fragment() {
         }
     }
 
+    /**
+     * Método donde se actualiza los datos de perfil del usuario
+     */
     private fun actualizamosDatos() {
         context?.let { Api.initialize(it.applicationContext) }
         context?.applicationContext?.let {
@@ -65,15 +72,11 @@ class EditProfileFragment : Fragment() {
                     if (response.isSuccessful){
                         val message = response.body()?.toString() ?: "Perfil actualizado correctamente"
                         Toast.makeText(requireContext(), "Perfil modificado", Toast.LENGTH_LONG).show()
-                        Log.i("Perfil actualizado", message)
-                        //Log.i("Respuesta", message)
-
-
                     }
                 }
 
                 override fun onFailure(call: Call<Any>, t: Throwable) {
-                    Log.e("API Error", "Error: ${t.message}", t)
+                    Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
                 }
 
             })
@@ -83,11 +86,19 @@ class EditProfileFragment : Fragment() {
 
     }
 
+
+    /**
+     * Método que guarda los datos del perfil
+     */
     private fun guardamosDatosEnPerfil() {
         perfil.nombre = binding.txtNombreUsuario.text.toString()
         perfil.informacion = binding.txtDescripcion.text.toString()
     }
 
+
+    /**
+     * Método que asigna a los elementos los propios valores del perfil
+     */
     private fun asignamosDatos() {
         binding.txtNombreUsuario.setText(perfil.nombre)
 
@@ -96,6 +107,5 @@ class EditProfileFragment : Fragment() {
 
         binding.txtDescripcion.setText(perfil.informacion)
     }
-
 
 }

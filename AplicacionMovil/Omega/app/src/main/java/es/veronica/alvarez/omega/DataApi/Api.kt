@@ -11,6 +11,8 @@ object Api {
      * Propiedad privada que almacenará la instancia de Retrofit
      */
     private lateinit var retrofit: Retrofit
+
+
      /**
      * Propiedad que almacenará la instancia de ApiService
      */

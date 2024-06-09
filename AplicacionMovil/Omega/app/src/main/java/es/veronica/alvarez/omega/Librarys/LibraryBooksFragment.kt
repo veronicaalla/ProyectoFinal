@@ -37,13 +37,18 @@ class LibraryBooksFragment : Fragment() {
 
     }
 
-    //Debemos recoger el valor
+
+    /**
+     * Método del ciclo de vida del Fragment
+     * que recoge el valor que se les pasó por parametro
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             biblioteca = it.getSerializable("biblioteca") as BibliotecaResponse
         }
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,6 +58,10 @@ class LibraryBooksFragment : Fragment() {
         obtenerLibrosBiblioteca()
     }
 
+
+    /**
+     * Método que obtiene los libros que están guardados en la biblioteca seleccionada
+     */
     private fun obtenerLibrosBiblioteca() {
         //Log.i("nombre biblioteca", biblioteca.nombre)
         var bibliotecaId = biblioteca.id
@@ -89,19 +98,25 @@ class LibraryBooksFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Método que asigna la lista de libros al Recycler y su Adaptador correspondiente
+     */
     private fun adjudicamosFuncionalidad() {
-        //RecyclerView de libros aleatorios
+
         binding.rvLibros.layoutManager = LinearLayoutManager(context)
         binding.rvLibros.adapter = BookAdapter(listaLibros) {
             onItemSelected(it)
         }
-        //endregion
 
     }
 
+
+    /**
+     * Método que asigna la funcionalidad al clicar sobre un item del RecylcerView
+     */
     private fun onItemSelected(it: LibroResponse) {
         Toast.makeText(requireContext(), "Libro ${it.titulo}", Toast.LENGTH_LONG).show()
     }
-
 
 }

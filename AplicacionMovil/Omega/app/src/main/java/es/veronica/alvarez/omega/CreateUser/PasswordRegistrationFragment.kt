@@ -48,6 +48,10 @@ class PasswordRegistrationFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Método que realiza la llamada a la API y crea el usuario
+     */
     private fun crearUsuario() {
         //Llamamos al método de la api
         val usuario = UsuarioResponse(
@@ -61,30 +65,29 @@ class PasswordRegistrationFragment : Fragment() {
 
         context?.let { Api.initialize(it.applicationContext) }
         //Llamamos al metodo api
-        Api.retrofitService.crearUsuario(usuario).enqueue(object : Callback<String>{
+        Api.retrofitService.crearUsuario(usuario).enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
-               if (response.isSuccessful){
-                   Log.i("Succesful", response.body().toString())
-
-                     }else{
-                   Log.i("noSucces", response.message().toString())
-               }
+                if (response.isSuccessful) {
+                    Log.i("", "")
+                }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.i("onFailure", t.message.toString())
+                Log.i("", "")
             }
 
         })
 
-
-
         usuario.alias?.let { existeUsuario(it) }
-
 
 
     }
 
+
+    /**
+     * Método que verifica si el usuario existe
+     * Antes de realizarse el método, se espera 10seg para que el usuario se cree de forma exitosa
+     */
     private fun existeUsuario(alias: String) {
         // Crear un Handler
         val handler = Handler(Looper.getMainLooper())
@@ -93,33 +96,42 @@ class PasswordRegistrationFragment : Fragment() {
         handler.postDelayed({
             // El código dentro de esta función se ejecutará después de 10 segundos
             context?.let { Api.initialize(it.applicationContext) }
-            Api.retrofitService.buscarUsuarioPorUser(alias).enqueue(object : Callback<UsuarioResponse> {
-                override fun onResponse(call: Call<UsuarioResponse>, response: Response<UsuarioResponse>) {
-                    val usuario = response.body()
-                    Log.d("API Response", "Usuario: $usuario")
-                    Toast.makeText(requireContext(), "Usuario creado correctamente", Toast.LENGTH_SHORT).show()
+            Api.retrofitService.buscarUsuarioPorUser(alias)
+                .enqueue(object : Callback<UsuarioResponse> {
+                    override fun onResponse(
+                        call: Call<UsuarioResponse>,
+                        response: Response<UsuarioResponse>
+                    ) {
+                        val usuario = response.body()
 
-                    //Le asignamos el id al userPreferences
-                    var userPreferences = UserPreferences(requireContext())
-                    if (usuario != null) {
-                        userPreferences.userId = usuario.id!!
-                        userPreferences._username = usuario.alias
-                        userPreferences._privacidad = usuario.publico
+                        Toast.makeText(requireContext(),"Usuario creado correctamente",Toast.LENGTH_SHORT).show()
+
+                        //Le asignamos el id al userPreferences
+                        var userPreferences = UserPreferences(requireContext())
+                        if (usuario != null) {
+                            userPreferences.userId = usuario.id!!
+                            userPreferences._username = usuario.alias
+                            userPreferences._privacidad = usuario.publico
+                            userPreferences.isLoggedIn = true
+                        }
+
+                        // Navegar a la siguiente pantalla si es necesario
+                        view?.findNavController()
+                            ?.navigate(R.id.action_passwordRegistrationFragment_to_literarySelectionFragment)
                     }
 
+                    override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
+                        Toast.makeText(requireContext(),"Error al crear el usuario",Toast.LENGTH_SHORT).show()
+                    }
 
-                    // Navegar a la siguiente pantalla si es necesario
-                    view?.findNavController()?.navigate(R.id.action_passwordRegistrationFragment_to_literarySelectionFragment)
-                }
-
-                override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
-                    Toast.makeText(requireContext(), "Error al crear el usuario", Toast.LENGTH_SHORT).show()
-                }
-            })
+                })
         }, 10000) // 10000 ms = 10 segundos
     }
 
 
+    /**
+     * Método que verifica si las contraseñas introducidas son iguales
+     */
     private fun verificarPassword(): Boolean {
         //Comprobamos que las contraseñas sean iguales
         if (binding.txtPassword.text.contentEquals(binding.txtPassword2.text)) {
@@ -130,13 +142,16 @@ class PasswordRegistrationFragment : Fragment() {
             viewModelCompartido.setPassword(password)
 
         } else {
-            Toast.makeText(context, "Las contraseñas no son iguales", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(context, "Las contraseñas no son iguales", Toast.LENGTH_SHORT).show()
             return false
         }
         return true
     }
 
+
+    /**
+     * Método que verifica que los datos introducidos son correctos
+     */
     private fun validarDatos(): Boolean {
 
         if (binding.txtUsername.text.isEmpty()) {
@@ -157,5 +172,6 @@ class PasswordRegistrationFragment : Fragment() {
 
         return true
     }
+
 }
 

@@ -32,7 +32,10 @@ class UserRatingFragment : Fragment() {
         return binding.root
     }
 
-    //Debemos recoger el valor
+    /**
+     * Método del ciclo de vida del Fragment
+     * que recoge el valor que se les pasó por parametro
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -53,7 +56,6 @@ class UserRatingFragment : Fragment() {
             if (valorado) {
                 actualizamosValoracion()
             } else {
-                Log.i("Valoracion libro", "No creado")
                 creamosValoracion()
             }
         }
@@ -70,12 +72,8 @@ class UserRatingFragment : Fragment() {
         valoracionUsuario.fraseIconica = binding.editFraseIconica.text.toString()
         valoracionUsuario.opinion = binding.editOpinion.text.toString()
         valoracionUsuario.puntuacion = binding.ratinValoracion.rating.toDouble()
-
-        Log.i("Puntuacion " , valoracionUsuario.puntuacion.toString())
-        Log.i("Puntuacion fragment", binding.ratinValoracion.rating.toString())
-        Log.i("Valoracion actualizada", valoracionUsuario.toString())
-
     }
+
 
     /**
      * Método que crea la valoracion, cuando el usuario no tiene ninguna asociada
@@ -90,20 +88,23 @@ class UserRatingFragment : Fragment() {
                     response: Response<ValoracionUsuarioResponse>
                 ) {
                     if (response.isSuccessful) {
-                        Log.i("Succesful", "Creado correctamente")
-                        Log.i("Valoracion", response.body().toString())
+                        Toast.makeText(requireContext(), "Valoración creada exitosamente", Toast.LENGTH_LONG).show()
                     } else {
-                        Log.i("No succesful", response.message().toString())
+                        Toast.makeText(requireContext(), "Error al crear la valoración", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ValoracionUsuarioResponse>, t: Throwable) {
-                    Log.i("onFailure", t.message.toString())
+                    Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
                 }
 
             })
     }
 
+
+    /**
+     * Método en el que se actualiza la valoración individual de un libro
+     */
     private fun actualizamosValoracion() {
         val idLibro = libro.id
         val idUsuario = UserPreferences(requireContext()).userId
@@ -112,19 +113,19 @@ class UserRatingFragment : Fragment() {
 
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 if (response.isSuccessful){
-                    Log.i("Valoracion usuario", valoracionUsuario.toString())
                     Toast.makeText(requireContext(), "Valoración actualizada", Toast.LENGTH_LONG).show()
                 }else{
-                    Log.i("Not succesful", response.message().toString())
+                    Toast.makeText(requireContext(), "Error al actualizar la valoración", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
-                Log.i("onFailure", t.message.toString())
+                Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
             }
 
         })
     }
+
 
     /**
      * Método mediante el cual obtenemos la valoración personal del usuario
@@ -142,33 +143,32 @@ class UserRatingFragment : Fragment() {
                 ) {
                     if (response.isSuccessful) {
                         valorado = true
-                        Log.i("Succes", response.body().toString())
                         valoracionUsuario = response.body()!!
                         asignamosDatos()
                     } else {
-                        Log.i("Not succesful", response.message().toString())
+                        Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ValoracionUsuarioResponse>, t: Throwable) {
-                    Log.i("onFailure", t.message.toString())
+                    Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
                 }
-
             })
     }
+
 
     /**
      * Método mediante el cual asignamos a los EditText
      * la 'Valoración del Usuario'
      */
     private fun asignamosDatos() {
-        binding.editPersonajeFav.setText(valoracionUsuario!!.personajeFav)
-        binding.editPersonajeOdiado.setText(valoracionUsuario!!.personajeOdiado)
-        binding.editFraseIconica.setText(valoracionUsuario!!.fraseIconica)
-        binding.editPlayList.setText(valoracionUsuario!!.playList)
-        binding.ratinValoracion.rating = valoracionUsuario!!.puntuacion.toFloat()
-        binding.editOpinion.setText(valoracionUsuario!!.opinion)
-        binding.switchRecomendacion.isChecked = valoracionUsuario!!.recomendacion
+        binding.editPersonajeFav.setText(valoracionUsuario.personajeFav)
+        binding.editPersonajeOdiado.setText(valoracionUsuario.personajeOdiado)
+        binding.editFraseIconica.setText(valoracionUsuario.fraseIconica)
+        binding.editPlayList.setText(valoracionUsuario.playList)
+        binding.ratinValoracion.rating = valoracionUsuario.puntuacion.toFloat()
+        binding.editOpinion.setText(valoracionUsuario.opinion)
+        binding.switchRecomendacion.isChecked = valoracionUsuario.recomendacion
     }
 
 }

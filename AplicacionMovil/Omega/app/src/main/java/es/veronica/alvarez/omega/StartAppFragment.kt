@@ -106,6 +106,11 @@ class StartAppFragment : Fragment() {
 
     }
 
+
+    /**
+     * Método que muestra un dialogo para que el usuario pueda crear
+     * una nueva biblioteca
+     */
     private fun mostrarDialogo() {
         val inputEditTextField = EditText(requireContext())
         val dialog = MaterialAlertDialogBuilder(requireContext())
@@ -122,6 +127,11 @@ class StartAppFragment : Fragment() {
 
     }
 
+
+    /**
+     * Método que llama a la Api para la creación de la biblioteca
+     * correspondiente
+     */
     private fun crearBiblioteca(nombreBiblioteca: String) {
         var idUsuario = UserPreferences(requireContext()).userId
 
@@ -133,20 +143,24 @@ class StartAppFragment : Fragment() {
                 call: Call<BibliotecaResponse>, response: Response<BibliotecaResponse>
             ) {
                 if (response.isSuccessful){
-                    Log.i("Crear biblioteca", response.body().toString())
                     Toast.makeText(requireContext(), "Biblioteca creada correctamente", Toast.LENGTH_LONG).show()
                 }else{
-                    Log.i("Crear noSucces", response.message().toString())
+                    Toast.makeText(requireContext(), "Hubo un error al crear la biblioteca", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<BibliotecaResponse>, t: Throwable) {
-                Log.i("onFailure", t.message.toString())
+                Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
             }
 
         })
     }
 
+
+    /**
+     * Métpdp que obtiene los géneros que el usuario ha indicando
+     * anteriormente como favoritos
+     */
     private fun obtenerGenerosUsuario() {
         context?.let { Api.initialize(it.applicationContext) }
         context?.applicationContext?.let {
@@ -160,11 +174,9 @@ class StartAppFragment : Fragment() {
                         if (response.isSuccessful) {
                             //Convertimos la lista a generos
                             var listaResponse: List<GeneroUsuarioResponse>? = response.body()
-                            //Log.i("Lista", listaResponse.toString())
 
                             //Obtenemos solo los id
                             val idsGenero: List<Int> = listaResponse!!.map { it.idGenero }
-                            Log.i("Generos", idsGenero.toString())
 
                             for (idGenero in idsGenero) {
                                 // Haz algo con idGenero
@@ -182,11 +194,16 @@ class StartAppFragment : Fragment() {
 
     }
 
+
+    /**
+     * Método que obtiene los libros cuyo genero corresponde con los
+     * favoritos del usuario
+     */
     private fun obtenerLibrosGenero(idGenero: Int) {
 
         context?.let { Api.initialize(it.applicationContext) }
         context?.applicationContext?.let {
-            Log.i("Lista id", idGenero.toString())
+
             Api.retrofitService.obtenerLibrosPorGenero(idGenero)
                 .enqueue(object : Callback<List<LibroResponse>> {
 
@@ -205,18 +222,21 @@ class StartAppFragment : Fragment() {
                                 listaLibros.add(libro)
                             }
                             adjudicamosFuncionalidad()
-                        } else {
-                            // Maneja el caso de respuesta no exitosa
                         }
                     }
 
                     override fun onFailure(call: Call<List<LibroResponse>>, t: Throwable) {
-                        // Maneja el fallo en la llamada
+                        Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
                     }
                 })
         }
     }
 
+
+    /**
+     * Método donde se asignla la lista de libros con los generos favoritos
+     * a el Recycler y adapter determinado
+     */
     private fun adjudicamosFuncionalidad() {
         //RecyclerView de libros aleatorios
         binding.rvLibros.layoutManager = LinearLayoutManager(context)
@@ -225,6 +245,11 @@ class StartAppFragment : Fragment() {
         }
     }
 
+
+    /**
+     * Método que asigna la funcionalidad a un item del recylcer
+     * cuando ha sido seleccionado
+     */
     private fun onItemSelected(it: LibroResponse) {
         val action = StartAppFragmentDirections
             .actionStartAppFragmentToSeeBookFragment(it)

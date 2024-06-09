@@ -45,7 +45,6 @@ class SettingsAppFragment : Fragment() {
 
         binding.filaCerrarSesion.setOnClickListener{
             //A la hora de cerrar sesion, debemos eliminar todos los datos del usuario
-
             var userPreferences = UserPreferences(requireContext())
             //Modificamos los datos
             userPreferences.userId = -1

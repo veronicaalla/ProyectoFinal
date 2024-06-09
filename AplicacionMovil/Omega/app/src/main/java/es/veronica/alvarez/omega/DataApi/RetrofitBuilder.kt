@@ -13,6 +13,15 @@ import java.util.Properties
 
 class RetrofitBuilder {
 
+
+    /**
+     * Obtiene el endpoint de la API desde el archivo api.properties en la carpeta res/raw.
+     *
+     * @param context El contexto de la aplicación.
+     * @return String El endpoint de la API.
+     * @throws Resources.NotFoundException Si el archivo api.properties no se encuentra en la carpeta res/raw.
+     * @throws IllegalStateException Si la propiedad 'Api.endpoint' no está definida en el archivo api.properties.
+     */
     fun getApiEndpoint(context: Context): String {
         val resourceId = context.resources.getIdentifier("api", "raw", context.packageName)
         if (resourceId == 0) {

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -35,7 +36,6 @@ class ProfileUserFragment : Fragment() {
     }
 
 
-    //baseline_lock_open_24_black -> candado abierto
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -72,6 +72,10 @@ class ProfileUserFragment : Fragment() {
         //endregion
     }
 
+
+    /**
+     * Método que obtiene las bibliotecas que el usuario tiene asignadas
+     */
     private fun obtenerBibliotecas() {
         Api.retrofitService.obtenerBibliotecas(perfil.idUsuario).enqueue(object : Callback<List<BibliotecaResponse>>{
 
@@ -79,20 +83,24 @@ class ProfileUserFragment : Fragment() {
                 call: Call<List<BibliotecaResponse>>, response: Response<List<BibliotecaResponse>>
             ) {
                if (response.isSuccessful){
-                    Log.i("Lista biblioteca", response.body().toString())
                     mostrarBibliotecas(response.body())
                }else{
-                   Log.i("Error", "No satisfactorio ${response.message()}")
+                   Toast.makeText(requireContext(), "Hubo un error en la sollicitud", Toast.LENGTH_LONG).show()
                }
             }
 
             override fun onFailure(call: Call<List<BibliotecaResponse>>, t: Throwable) {
-                Log.i("Error", "Error de conexion")
+                Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
             }
 
         })
     }
 
+
+    /**
+     * Método que asigna las bibliotecas al Recycler y su adaptador correspondiente
+     * junto a su evento click
+     */
     private fun mostrarBibliotecas(listaBibliotecas: List<BibliotecaResponse>?) {
         //RecyclerView de libros aleatorios
         binding.rvBibliotecas.layoutManager = LinearLayoutManager(context)
@@ -104,14 +112,21 @@ class ProfileUserFragment : Fragment() {
         //endregion
     }
 
+
+    /**
+     * Método que asigna la funcionalidad al dar click sobre un item del Recycler
+     */
     private fun onItemSelected(it: BibliotecaResponse) {
         val action = ProfileUserFragmentDirections
             .actionProfileUserFragmentToLibraryBooksFragment(it)
         findNavController().navigate(action)
     }
 
+
+    /**
+     * Método que obtiene el perfil del usuario determinado
+     */
     private fun obtenerPerfil(userId: Int) {
-        Log.i("Id del usuario", userId.toString())
         context?.let { Api.initialize(it.applicationContext) }
         context?.applicationContext?.let {
             Api.retrofitService.obtenerPerfilPorIdUsuario(userId)
@@ -122,28 +137,38 @@ class ProfileUserFragment : Fragment() {
                     ) {
                         if (response.isSuccessful){
                             //Obtenemos el perfil
-                            Log.i("Perfil usuario", response.body().toString())
-
                             perfil = response.body()!!
                             asignamosPerfil(perfil)
                         }else{
-                            Log.i("Error", "No satisfactorio ${response.message()}")
+                            Toast.makeText(requireContext(), "Hubo un error en la sollicitud", Toast.LENGTH_LONG).show()
                         }
                     }
 
                     override fun onFailure(call: Call<PerfilUsuarioResponse>, t: Throwable) {
-                        Log.i("Error", "Error de conexion")
+                        Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
                     }
-
                 })
         }
     }
 
+
+    /**
+     * Método donde se asigna los datos del perfil
+     */
     private fun asignamosPerfil(perfil: PerfilUsuarioResponse?) {
 
         var userPreferences = UserPreferences(requireContext())
         binding.txtUser.text = userPreferences._username
-        //binding.imgPrivacidad.setImageDrawable(R.drawable.) -> dependiendo de si es privado o no, se una uno u otro
+
+        //Dependiendo de su privacidad, se usa una imagen u otra
+        if (userPreferences._privacidad){
+            //Publico = true
+            binding.imgPrivacidad.setImageResource(R.drawable.baseline_lock_open_24_black)
+        }else{
+            //Privado = false
+            binding.imgPrivacidad.setImageResource(R.drawable.baseline_lock_outline_black)
+        }
+
         if (perfil != null) {
             binding.txtNombre.text = perfil.nombre
             binding.txtDescripcion.text = perfil.informacion

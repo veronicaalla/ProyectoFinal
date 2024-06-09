@@ -18,14 +18,6 @@ class UserPreferences (context : Context) {
 
     private val generosFavoritosKey = "generosFavoritos"
 
-    /*MutableLiveData for list of GeneroResponse
-    private val _lista = MutableLiveData<List<GeneroResponse>>()
-    val lista: LiveData<List<GeneroResponse>> = _lista
-    // Example function to update the list
-    fun setLista(generos: List<GeneroResponse>) {
-        _lista.value = generos
-    }*/
-
 
     private val prefs: SharedPreferences =
         context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)

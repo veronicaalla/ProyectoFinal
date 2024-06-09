@@ -11,6 +11,12 @@ class BookAdapter(
     private val onItemSelected: (LibroResponse) -> Unit
 ): RecyclerView.Adapter<BookViewHolder>() {
 
+
+    /**
+     * Actualiza la lista de libros mostrada en el adaptador.
+     *
+     * @param list La nueva lista de libros.
+     */
     fun updateBooks(list: List<LibroResponse>){
         listaLibros = list
         notifyDataSetChanged()

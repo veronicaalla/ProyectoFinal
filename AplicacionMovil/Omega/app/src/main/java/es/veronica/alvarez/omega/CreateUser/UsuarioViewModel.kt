@@ -10,7 +10,6 @@ class UsuarioViewModel : ViewModel() {
 
     private val _nombre = MutableLiveData<String>()
     private val _apellidos = MutableLiveData<String>()
-    private val _fecha = MutableLiveData<LocalDate>()
     private val _email = MutableLiveData<String>()
     private val _password = MutableLiveData<String>()
     private val _username = MutableLiveData<String>()
@@ -19,7 +18,6 @@ class UsuarioViewModel : ViewModel() {
 
     val nombre: LiveData<String> = _nombre
     val apellidos: LiveData<String> = _apellidos
-    val fecha: LiveData<LocalDate> = _fecha
     val email: LiveData<String> = _email
     val password: LiveData<String> = _password
     val username: LiveData<String> = _username
@@ -35,9 +33,6 @@ class UsuarioViewModel : ViewModel() {
     fun setApellidos(tipo: String) {
         _apellidos.value = tipo
     }
-    fun setFecha(tipo: LocalDate) {
-        _fecha.value = tipo
-    }
     fun setEmail(tipo: String) {
         _email.value = tipo
     }
@@ -48,7 +43,6 @@ class UsuarioViewModel : ViewModel() {
     fun getUsername():String{
         return _username.toString()
     }
-
 
 
 }

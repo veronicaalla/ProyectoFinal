@@ -2,6 +2,7 @@ package es.veronica.alvarez.omega.RecyclerComents
 
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import es.veronica.alvarez.omega.DataApi.Api
 import es.veronica.alvarez.omega.Model.ComentarioResponse
@@ -14,10 +15,22 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
+/**
+ * ViewHolder para un comentario en un RecyclerView.
+ *
+ * @param view La vista raíz del elemento de comentario.
+ */
 class ComentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemComentBinding.bind(view)
 
+
+    /**
+     * Vincula los datos de un comentario a la vista.
+     *
+     * @param comentarioResponse El comentario que se va a mostrar.
+     * @param onItemSelected La función de devolución de llamada que se llama cuando se selecciona un comentario.
+     */
     fun bind(
         comentarioResponse: ComentarioResponse,
         onItemSelected: (ComentarioResponse) -> Unit
@@ -56,9 +69,7 @@ class ComentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 .enqueue(object : Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         if (response.isSuccessful) {
-                            Log.i("is Succesful", "Comentario reportado")
-                        } else {
-                            Log.i("not Succesful", "Comentario no creado")
+                            Toast.makeText(it.context, "Comentario reportado correctamente", Toast.LENGTH_LONG).show()
                         }
                     }
 
@@ -71,7 +82,6 @@ class ComentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         binding.root.setOnClickListener{ onItemSelected(comentarioResponse) }
     }
-
 
 }
 
