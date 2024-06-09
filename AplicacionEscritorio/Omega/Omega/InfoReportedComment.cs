@@ -28,6 +28,7 @@ namespace Omega
         {
             InitializeComponent();
             controlador = new Controlador();
+
             //los campos no se pueden modificar, solo visualizar
             txtUsuario.Enabled = false;
             txtComentario.Enabled = false;
@@ -35,6 +36,7 @@ namespace Omega
             //Inicializamos el comentario
             comentarioReportado = new ComentarioReportado();
         }
+
 
         /// <summary>
         /// Constructor sobrecargado de la clase InfoReportedComment que recibe un comentario reportado para mostrar su información.
@@ -44,6 +46,7 @@ namespace Omega
         {
             asignamosValores(comentario);
         }
+
 
         /// <summary>
         /// Asigna los valores del comentario reportado a los controles del formulario.
@@ -69,12 +72,13 @@ namespace Omega
             }
         }
 
+
         /// <summary>
         /// Evento que se dispara al hacer clic en el botón "Aceptar". Actualiza el comentario reportado.
         /// </summary>
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            //Recogemos el valor del ComboBox (lo unico a modificar)
+            //Recogemos el valor del ComboBox
             if (cmbOfensivo.Text == "SI")
             {
                 comentarioReportado.ofensivo = true;
@@ -84,13 +88,12 @@ namespace Omega
                 comentarioReportado.ofensivo = false;
             }
 
-            //Le debemos asignar el id del usuario que se ha logueado 
-            //comentarioReportado.AuditUpdater = 
-
+       
             actualizarComentario();
             this.Close();
 
         }
+
 
         /// <summary>
         /// Actualiza el listView donde se ven los comentarios reportados almacenados en la base de datos.
@@ -103,6 +106,7 @@ namespace Omega
             MessageBox.Show(cambioEfectuado, "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
         }
+
 
         /// <summary>
         /// Evento que se dispara al hacer clic en el botón "Cancelar". Cierra el formulario.

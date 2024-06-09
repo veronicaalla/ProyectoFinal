@@ -18,7 +18,6 @@ namespace Omega
     public partial class ListOfUsers : Form
     {
 
-        //Llamamos al método API
         Controlador controlador;
 
         /// <summary>
@@ -31,6 +30,7 @@ namespace Omega
             actualizarLista();
         }
 
+
         /// <summary>
         /// Evento que se dispara al hacer clic en el elemento del menú contextual "Nuevo". Abre el formulario para crear un nuevo usuario.
         /// </summary>
@@ -38,6 +38,7 @@ namespace Omega
         {
             crearUsuario();
         }
+
 
         /// <summary>
         /// Evento que se dispara cuando se selecciona un usuario en la lista. Habilita las opciones de ver, editar y eliminar mediante el menú contextual.
@@ -112,10 +113,7 @@ namespace Omega
             actualizarLista();
         }
 
-        private void btnFiltrado_ClickAsync(object sender, EventArgs e)
-        {
-            
-        }
+        
             
 
         // ---------------- Métodos auxiliares ------------
@@ -125,15 +123,11 @@ namespace Omega
         /// </summary>
         private void crearUsuario()
         {
-            //Creamos un usuario vacio y se lo pasamos como parametro
-            //Usuario usuario = new Usuario();
-
             InfoUser newUser = new InfoUser();
             newUser.ShowDialog();
 
             //Actualizamos la lista 
             actualizarLista();
-
         }
 
 
@@ -175,7 +169,6 @@ namespace Omega
                     nuevoItem = lvwUsuarios.Items.Add(u.alias);
                     nuevoItem.SubItems.Add(u.nombre);
                     nuevoItem.SubItems.Add(u.apellidos);
-                    //nuevoItem.SubItems.Add(formatoFecha(u.fechaNacimiento.ToString()));
                     nuevoItem.SubItems.Add(u.correo);
                     nuevoItem.SubItems.Add(u.telefono);
                     nuevoItem.SubItems.Add(obtenerTipoUsuario(u.tipo));
@@ -202,22 +195,6 @@ namespace Omega
                 case 4: return "escritor";
             }
             return "";
-        }
-
-
-        /// <summary>
-        /// Método para formatear la fecha en formato "dd/MM/yyyy".
-        /// </summary>
-        private string formatoFecha (string fecha)
-        {
-            bool exito = DateTime.TryParse(fecha, out DateTime fechaFormateada);
-
-            if (exito)
-            {
-                string fechaFinal = fechaFormateada.ToString("dd/MM/yyyy");
-                return fechaFinal;
-            }
-            return null;
         }
 
 

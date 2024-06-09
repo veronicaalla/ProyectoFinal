@@ -33,6 +33,7 @@ namespace Omega
             controlador = new Controlador();
         }
 
+
         /// <summary>
         /// Constructor sobrecargado de la clase InfoUser que recibe la información de un usuario para mostrarla.
         /// </summary>
@@ -52,12 +53,11 @@ namespace Omega
             txtNombre.Text = usuario.nombre;
             txtApellidos.Text = usuario.apellidos;
             txtUsuario.Text = usuario.alias;
-            //dtpFechaNac.Text = usuario.fechaNacimiento.ToString();
             txtCorreo.Text = usuario.correo;
             txtTelefono.Text = usuario.telefono;
             cmbTipoUsuario.Text = obtenerTipoUsuario(usuario.tipo);
 
-            //La fecha de nacimiento y el tipo de usuario no se pueden modificar
+            //El campo tipo usuario no se puede modificar
             cmbTipoUsuario.Enabled = false;
 
             btnAceptar.Text = "Modificar";
@@ -79,8 +79,7 @@ namespace Omega
                 this.usuario.correo = txtCorreo.Text;
                 this.usuario.telefono= txtTelefono.Text;
 
-                //La fecha de nacimiento no se puede modificar por terminos legales a futuro.
-                //El tipo de usuario tampoco, seria de forma automatica en un futuro caso. 
+                
                 if (usuario.id == 0)
                 {
                  
@@ -104,6 +103,7 @@ namespace Omega
                
                 //recuperamos el id del usuario que ha accedido
                 int idUsuario = guardarUsuario.numeroGuardado;
+
                 // Llamar al método de la API para modificar el usuario
                 bool resultado = await controlador.ModificarUsuarioAsync(idUsuario, usuario);
 
@@ -120,6 +120,7 @@ namespace Omega
             }
         }
 
+
         /// <summary>
         /// Evento que se dispara al hacer clic en el botón "Cancelar". Cierra el formulario.
         /// </summary>
@@ -128,7 +129,8 @@ namespace Omega
             this.Close();
         }
 
-        //Métodos auxiliares
+
+        //------------------------------ Métodos auxiliares ------------------------
 
         /// <summary>
         /// Valida los datos ingresados por el usuario en los campos del formulario.
@@ -178,8 +180,9 @@ namespace Omega
                 txtCorreo.Focus();
                 return false;
             }
-            //Comprobacion de si el correo introducido es valido o no 
 
+
+            //Comprobacion de si el correo introducido es valido o no 
             if (!correoValido())
             {
                 mensajeError("Introduce un correo valido");
@@ -194,9 +197,6 @@ namespace Omega
                 txtTelefono.Focus();
                 return false;
             }
-
-            //Comprobar que al menos el usuarios tiene 15 años
-
 
             return true;
         }
@@ -222,6 +222,7 @@ namespace Omega
             }
         }
 
+
         /// <summary>
         /// Valida el formato de una dirección de correo electrónico.
         /// </summary>
@@ -241,6 +242,7 @@ namespace Omega
             }
         }
 
+
         /// <summary>
         /// Muestra un mensaje de error en una ventana emergente.
         /// </summary>
@@ -249,6 +251,7 @@ namespace Omega
         {
             MessageBox.Show(mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
 
         /// <summary>
         /// Evento que se dispara al presionar una tecla en el campo de teléfono. Permite solo la entrada de dígitos.
@@ -260,6 +263,7 @@ namespace Omega
                 e.Handled = true;
             }
         }
+
 
         /// <summary>
         /// Obtiene el tipo de usuario en formato de texto a partir de su valor numérico.
@@ -277,6 +281,7 @@ namespace Omega
             }
             return "";
         }
+
 
         /// <summary>
         /// Obtiene el valor numérico del tipo de usuario a partir de su descripción en texto.

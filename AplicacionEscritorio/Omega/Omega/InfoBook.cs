@@ -28,13 +28,15 @@ namespace Omega
         {
             InitializeComponent();
 			controlador = new Controlador();
-            //cargarGeneros();
+
+            //Creamos la instancia de los libros
             libro = new Libro();
             
 
             // Inicia la carga de géneros de manera asíncrona
             _ = InitAsync();
         }
+
 
         /// <summary>
         /// Constructor sobrecargado de la clase InfoBook que recibe un libro para mostrar su información.
@@ -50,8 +52,6 @@ namespace Omega
             txtAutor.Text = libro.autor;
             txtDescripcion.Text = libro.descripcion;
 
-            //Debemos obtener el genero
-            //AsignamosGenero();
             // Debemos obtener el género
             _ = AsignamosGenero();
 
@@ -59,6 +59,7 @@ namespace Omega
             dtpFechaPublicacion.Text = libro.fechaPublicacion.Value.ToString();
             txtPaginas.Text = libro.paginas.ToString();
         }
+
 
         /// <summary>
         /// Método para inicializar de manera asíncrona.
@@ -72,6 +73,7 @@ namespace Omega
             }
         }
 
+
         /// <summary>
         /// Método para asignar el género del libro al ComboBox de género.
         /// </summary>
@@ -80,6 +82,7 @@ namespace Omega
             string genero = (await controlador.ObtenerGeneroPorId(libro.genero)).nombre;
             cmbGenero.Text = genero;
         }
+
 
         /// <summary>
         /// Manejador de eventos para el botón "Aceptar". Valida los datos y edita el libro.
@@ -104,6 +107,7 @@ namespace Omega
             }
         }
 
+
         /// <summary>
         /// Manejador de eventos para el botón "Cancelar". Cierra el formulario.
         /// </summary>
@@ -113,7 +117,7 @@ namespace Omega
         }
 
 
-        //Métodos auxiliares
+        //------------------------- Métodos auxiliares -------------------------
 
 
         /// <summary>
@@ -156,6 +160,7 @@ namespace Omega
             return true;
         }
 
+
         /// <summary>
         /// Muestra un mensaje de error.
         /// </summary>
@@ -164,6 +169,7 @@ namespace Omega
         {
             MessageBox.Show(mensaje, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
 
         /// <summary>
         /// Carga los géneros disponibles en el ComboBox de géneros.
@@ -180,6 +186,7 @@ namespace Omega
             }
         }
 
+
         /// <summary>
         /// Evento que se dispara al presionar una tecla en el campo de texto ISBN. Solo permite dígitos.
         /// </summary>
@@ -190,6 +197,7 @@ namespace Omega
                 e.Handled = true;
             }
         }
+
 
         /// <summary>
         /// Evento que se dispara al presionar una tecla en el campo de texto Páginas. Solo permite dígitos.

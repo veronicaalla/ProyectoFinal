@@ -19,6 +19,7 @@ namespace Omega
     {
 
         Controlador controlador;
+
         /// <summary>
         /// Constructor por defecto de la clase ListOfReportedCommets.
         /// </summary>
@@ -29,6 +30,7 @@ namespace Omega
             actualizarLista();
         }
 
+
         /// <summary>
         /// Evento que se dispara cuando se selecciona un comentario en la lista. Habilita la opción de ver detalles del comentario mediante el menú contextual.
         /// </summary>
@@ -37,6 +39,7 @@ namespace Omega
             cmsVer.Enabled = true;
         }
 
+
         /// <summary>
         /// Evento que se dispara al hacer clic en el elemento del menú contextual "Ver". Muestra información detallada del comentario reportado seleccionado.
         /// </summary>
@@ -44,6 +47,7 @@ namespace Omega
         {
             verComentario();
         }
+
 
         /// <summary>
         /// Evento que se dispara al hacer doble clic en un comentario en la lista. Muestra información detallada del comentario reportado seleccionado.
@@ -56,14 +60,13 @@ namespace Omega
             }
         }
 
+
         /// <summary>
         /// Método para actualizar la lista de comentarios reportados.
         /// </summary>
         private async void actualizarLista()
         {
-            //Método api que devuelve el listado de usuarios
-            //y se asigna a el ListView
-
+            //Llamamos a la Api para obtener los comentarios reportados
             List<ComentarioReportado> comentarios = await controlador.getComentariosReportados();
 
             if (comentarios != null)
@@ -97,6 +100,7 @@ namespace Omega
             }
         }
 
+
         /// <summary>
         /// Determina si un comentario reportado es ofensivo o no.
         /// </summary>
@@ -127,12 +131,6 @@ namespace Omega
             actualizarLista();
         }
 
-        /// <summary>
-        /// Evento que se dispara al hacer clic en el botón "Filtrado". Realiza una acción de filtrado, pero el método aún no está implementado.
-        /// </summary>
-        private void btnFiltrado_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

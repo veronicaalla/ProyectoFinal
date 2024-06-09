@@ -12,13 +12,26 @@ using System.Windows.Forms;
 
 namespace Omega
 {
+    /// <summary>
+    /// Formulario para el inicio de sesión.
+    /// </summary>
     public partial class Login : Form
     {
+
+        /// <summary>
+        /// Constructor de la clase Login.
+        /// </summary>
         public Login()
         {
             InitializeComponent();
         }
 
+
+        /// <summary>
+        /// Método llamado cuando se hace clic en el botón de iniciar sesión.
+        /// </summary>
+        /// <param name="sender">Objeto que desencadenó el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         private async void btnIniciarSesion_Click(object sender, EventArgs e)
         {
             if (validarDatos())
@@ -28,9 +41,7 @@ namespace Omega
                 var usuario = txtUsuario.Text;
                 var password = txtPassword.Text;
 
-                //Llamamos al método API
                 Controlador controlador = new Controlador();
-
                 Usuario usuarioAcceso = await controlador.LoginUsuario(usuario, password);
 
                 if (usuarioAcceso != null)
@@ -71,6 +82,10 @@ namespace Omega
         }
 
 
+        /// <summary>
+        /// Validar si los campos de usuario y contraseña están llenos.
+        /// </summary>
+        /// <returns>Verdadero si los campos están llenos; de lo contrario, falso.</returns>
         private bool validarDatos()
         {
             if (string.IsNullOrEmpty(txtUsuario.Text))

@@ -41,6 +41,7 @@ namespace Omega
             asignarDatos();
         }
 
+
         /// <summary>
         /// Asigna los datos del libro erróneo a los campos del formulario.
         /// </summary>
@@ -67,6 +68,7 @@ namespace Omega
                 }
             }
         }
+
 
         /// <summary>
         /// Evento que se dispara al hacer clic en el botón de Aceptar. 
@@ -98,6 +100,7 @@ namespace Omega
         {
             this.Close();
         }
+
 
         /// <summary>
         /// Evento que se dispara al hacer clic en el botón "Ver Libro". Muestra información detallada del libro erróneo.

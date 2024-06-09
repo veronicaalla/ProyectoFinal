@@ -25,6 +25,7 @@ namespace Omega.ApiService
             seguridad = new Seguridad();
         }
 
+
         /// <summary>
         /// Autentica un usuario mediante su nombre de usuario o correo electrónico y su clave.
         /// </summary>
@@ -62,6 +63,7 @@ namespace Omega.ApiService
             return null;
         }
 
+
         /// <summary>
         /// Obtiene una lista de todos los usuarios.
         /// </summary>
@@ -79,6 +81,7 @@ namespace Omega.ApiService
             return usuarios;
 
         }
+
 
         /// <summary>
         /// Obtiene un usuario por su ID.
@@ -131,6 +134,7 @@ namespace Omega.ApiService
             }
         }
 
+
         /// <summary>
         /// Modifica un usuario existente.
         /// </summary>
@@ -180,6 +184,7 @@ namespace Omega.ApiService
             }
         }
 
+
         /// <summary>
         /// Obtiene una lista de todos los comentarios reportados.
         /// </summary>
@@ -207,6 +212,7 @@ namespace Omega.ApiService
 
             return null;
         }
+
 
         /// <summary>
         /// Obtiene un comentario por su ID.
@@ -267,7 +273,16 @@ namespace Omega.ApiService
             return null;
         }
 
-        public  async Task<string> EditarComentarioReportadoAsync(int idUsuario, ComentarioReportado comentarioReportadoNuevo)
+
+        /// <summary>
+        /// Edita un comentario reportado de manera asíncrona.
+        /// </summary>
+        /// <param name="idUsuario">Identificador del usuario que realiza la edición.</param>
+        /// <param name="comentarioReportadoNuevo">Objeto ComentarioReportado que contiene la información actualizada del comentario reportado.</param>
+        /// <returns>
+        /// Cadena que representa la respuesta del servidor después de editar el comentario reportado.
+        /// </returns>
+        public async Task<string> EditarComentarioReportadoAsync(int idUsuario, ComentarioReportado comentarioReportadoNuevo)
         {
 
             string url = $"{rutaBasica}comentarioreportado/editar/{idUsuario}";
@@ -308,6 +323,7 @@ namespace Omega.ApiService
             return librosErroneos;
         }
 
+
         /// <summary>
         /// Obtiene un libro erróneo por su ID.
         /// </summary>
@@ -328,6 +344,7 @@ namespace Omega.ApiService
 
             return libroErroneo;
         }
+
 
         /// <summary>
         /// Obtiene un libro por su ID.
@@ -350,6 +367,7 @@ namespace Omega.ApiService
             return libro;
         }
 
+
         /// <summary>
         /// Obtiene una lista de todos los géneros.
         /// </summary>
@@ -365,6 +383,7 @@ namespace Omega.ApiService
 
             return generos;
         }
+
 
         /// <summary>
         /// Obtiene un género por su ID.
@@ -388,6 +407,13 @@ namespace Omega.ApiService
         }
 
 
+        /// <summary>
+        /// Obtiene el identificador de un género por su nombre de manera asíncrona.
+        /// </summary>
+        /// <param name="nombre">Nombre del género.</param>
+        /// <returns>
+        /// El identificador del género si se encuentra, o null si no se encuentra o hay un error.
+        /// </returns>
         public async Task<int?> ObtenerIdGeneroPorNombreAsync(string nombre)
         {
             try
@@ -455,6 +481,15 @@ namespace Omega.ApiService
             }
         }
 
+
+        /// <summary>
+        /// Edita un libro erróneo de manera asíncrona.
+        /// </summary>
+        /// <param name="libroErroneo">Objeto LibroErroneo que contiene la información actualizada del libro erróneo.</param>
+        /// <param name="idUsuario">Identificador del usuario que realiza la edición.</param>
+        /// <returns>
+        /// Un mensaje que indica el resultado de la operación de edición.
+        /// </returns>
         public async Task<string> EditarLibroErroneoAsync(LibroErroneo libroErroneo, int idUsuario)
         {
             try

@@ -10,22 +10,34 @@ using System.Windows.Forms;
 
 namespace Omega
 {
+
+    /// <summary>
+    /// Clase principal de la aplicación.
+    /// </summary>
     public partial class MainActivity : Form
     {
+
+        /// <summary>
+        /// Constructor de la clase MainActivity.
+        /// </summary>
         public MainActivity()
         {
             InitializeComponent();
         }
 
+
+        /// <summary>
+        /// Método invocado cuando se hace clic en el menú "Salir".
+        /// </summary>
         private void tsmiSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
 
-
-
-
+        /// <summary>
+        /// Método invocado cuando se hace clic en el menú "Usuarios".
+        /// </summary>
         private void tsmiUsuarios_Click(object sender, EventArgs e)
         {
             //Vamos a comprobar que la ventana, no este ya activa
@@ -33,7 +45,7 @@ namespace Omega
             {
                 if (typeof(ListOfUsers) == form.GetType())
                 {
-                    form.Activate(); //Nos muestra por formulario (nos lo superpone)
+                    form.Activate(); //Nos muestra por formulario y lo superpone en caso de que este abierto
                     return;
                 }
             }
@@ -45,7 +57,9 @@ namespace Omega
         }
 
 
-
+        /// <summary>
+        /// Método invocado cuando se hace clic en el menú "Libros Reportados".
+        /// </summary>
         private void tsmiLibrosR_Click(object sender, EventArgs e)
         {
             //Vamos a comprobar que la ventana, no este ya activa
@@ -65,7 +79,9 @@ namespace Omega
         }
 
 
-
+        /// <summary>
+        /// Método invocado cuando se hace clic en el menú "Comentarios Reportados".
+        /// </summary>
         private void tsmiComentariosR_Click(object sender, EventArgs e)
         {
             //Vamos a comprobar que la ventana, no este ya activa
@@ -100,6 +116,10 @@ namespace Omega
             this.LayoutMdi(MdiLayout.TileVertical);
         }
 
+
+        /// <summary>
+        /// Método invocado cuando se cierra el formulario principal.
+        /// </summary>
         private void MainActivity_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();

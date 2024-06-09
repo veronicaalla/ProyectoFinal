@@ -31,20 +31,13 @@ namespace Omega
 
 
         /// <summary>
-        /// Evento que se dispara al hacer clic en el botón "Filtrado". Realiza una acción de filtrado, pero el método aún no está implementado.
-        /// </summary>
-        private void btnFiltrado_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
         /// Evento que se dispara al hacer clic en el elemento del menú contextual "Ver". Muestra información detallada del libro reportado seleccionado.
         /// </summary>
         private void cmsVer_Click(object sender, EventArgs e)
         {
             verLibro();
         }
+
 
         /// <summary>
         /// Evento que se dispara cuando se selecciona un elemento en la lista de libros reportados. Habilita la opción de ver detalles del libro mediante el menú contextual.
@@ -53,6 +46,7 @@ namespace Omega
         {
             cmsVer.Enabled = true;
         }
+
 
         /// <summary>
         /// Evento que se dispara al hacer doble clic en un elemento de la lista de libros reportados. Muestra información detallada del libro reportado seleccionado.
@@ -64,6 +58,7 @@ namespace Omega
                 verLibro();
             }
         }
+
 
         /// <summary>
         /// Método para mostrar información detallada de un libro reportado seleccionado.
@@ -82,6 +77,7 @@ namespace Omega
 
             }
         }
+
 
         /// <summary>
         /// Método para actualizar la lista de libros reportados.
@@ -114,7 +110,6 @@ namespace Omega
 
                     nuevoItem.Tag = e.id;
 
-                   
                 }
             }
             else
@@ -122,6 +117,7 @@ namespace Omega
                 MessageBox.Show("No hay libros erroneos", "INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+
 
         /// <summary>
         /// Determina si un libro reportado está resuelto o no.
