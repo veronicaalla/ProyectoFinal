@@ -60,6 +60,7 @@ public class ValoracionUsuarioController {
         }
     }
 
+
     /**
      * Crea una nueva valoración de un usuario para un libro específico.
      * @param idUsuario El ID del usuario.
@@ -89,6 +90,14 @@ public class ValoracionUsuarioController {
     }
 
 
+    /**
+     * Actualiza la valoración de un usuario sobre un libro.
+     *
+     * @param idUsuario El ID del usuario que realiza la valoración.
+     * @param idLibro El ID del libro sobre el que se realiza la valoración.
+     * @param valoracionUsuario La nueva valoración del usuario sobre el libro.
+     * @return ResponseEntity<?> Un ResponseEntity que indica el resultado de la operación.
+     */
     @PutMapping("/actualizar/{idUsuario}/{idLibro}")
     public ResponseEntity<?> actualizarValoracion(
             @PathVariable int idUsuario,

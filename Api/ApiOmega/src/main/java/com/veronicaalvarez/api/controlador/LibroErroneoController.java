@@ -71,6 +71,7 @@ public class LibroErroneoController {
         return ResponseEntity.ok(erroneo);
     }
 
+
     /**
      * Crea un nuevo libro erróneo.
      * @param idLibro El ID del libro.

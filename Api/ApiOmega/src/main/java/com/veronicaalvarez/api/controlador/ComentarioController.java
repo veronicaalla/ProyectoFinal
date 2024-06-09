@@ -22,6 +22,7 @@ public class ComentarioController {
 		this.comentarioRepositorio = comentarioRepositorio;
 	}
 
+
 	/**
 	 * Obtiene todos los comentarios.
 	 * @return ResponseEntity Devuelve la lista de comentarios o un 404 si no hay comentarios.
@@ -36,6 +37,7 @@ public class ComentarioController {
 		
 		return ResponseEntity.ok(comentarios);
 	}
+
 
 	/**
 	 * Obtiene un comentario por su ID.
@@ -70,6 +72,7 @@ public class ComentarioController {
 		return ResponseEntity.ok(comentarios);
 	}
 
+
 	/**
 	 * Crea un nuevo comentario.
 	 * @param idLibro El ID del libro al que se asocia el comentario.
@@ -100,13 +103,17 @@ public class ComentarioController {
 	@PutMapping("/modificar/{id}")
 	public ResponseEntity<?> modificarComentario(@PathVariable int id, @RequestBody Comentario comentarioModificado) {
 		Optional<Comentario> comentarioOptional = comentarioRepositorio.findById(id);
+
 		if (comentarioOptional.isPresent()) {
+
 			Comentario comentarioExistente = comentarioOptional.get();
 			comentarioExistente.setComentario(comentarioModificado.getComentario());
-			comentarioExistente.setFecha(LocalDateTime.now()); // Actualizar la fecha al modificar el comentario
+			// Actualizar la fecha al modificar el comentario
+			comentarioExistente.setFecha(LocalDateTime.now());
 
 			Comentario comentarioActualizado = comentarioRepositorio.save(comentarioExistente);
 			return ResponseEntity.ok(comentarioActualizado);
+
 		} else {
 			return ResponseEntity.notFound().build();
 		}
@@ -121,9 +128,12 @@ public class ComentarioController {
 	@DeleteMapping("/eliminar/{id}")
 	public ResponseEntity<?> eliminarComentario(@PathVariable int id) {
 		Optional<Comentario> comentarioOptional = comentarioRepositorio.findById(id);
+
 		if (comentarioOptional.isPresent()) {
+
 			comentarioRepositorio.deleteById(id);
 			return ResponseEntity.ok().build();
+
 		} else {
 			return ResponseEntity.notFound().build();
 		}

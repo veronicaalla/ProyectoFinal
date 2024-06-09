@@ -32,7 +32,14 @@ public class GenerosUsuarioController {
         return ResponseEntity.ok(generosUsuario);
     }
 
-    // Nuevo método para asociar géneros a un usuario
+
+    /**
+     * Asocia uno o más géneros a un usuario.
+     *
+     * @param idUsuario El ID del usuario al que se van a asociar los géneros.
+     * @param idGeneros La lista de IDs de los géneros que se van a asociar al usuario.
+     * @return ResponseEntity<Void> Un ResponseEntity que indica el resultado de la operación.
+     */
     @PostMapping("/asociarGeneros")
     public ResponseEntity<Void> asociarGenerosAUsuario(@RequestParam("idUsuario") int idUsuario, @RequestParam("idGeneros") List<Integer> idGeneros) {
 

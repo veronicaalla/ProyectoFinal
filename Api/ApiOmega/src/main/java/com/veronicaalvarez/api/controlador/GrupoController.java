@@ -35,6 +35,7 @@ public class GrupoController {
         return ResponseEntity.ok(grupos);
     }
 
+
     /**
      * Obtiene un grupo por su ID.
      * @param id El ID del grupo.

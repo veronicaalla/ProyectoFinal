@@ -34,6 +34,7 @@ public class ComentarioReportadoController {
     @GetMapping
     public ResponseEntity<?> obtenerComentariosReportados() {
         List<ComentarioReportado> comentariosReportados = reportadoRepositorio.findAll();
+
         if (comentariosReportados.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -41,14 +42,15 @@ public class ComentarioReportadoController {
 
     }
 
+
      /**
      * Obtiene todos los comentarios reportados sin resolver.
      * @return ResponseEntity con la lista de comentarios reportados sin resolver o un 204 NO CONTENT si no hay comentarios sin resolver.
      */
     @GetMapping("/sin-resolver")
     public ResponseEntity<?> obtenerComentariosReportadosSinResolver() {
-
         List<ComentarioReportado> librosErroneosSinResolver = reportadoRepositorio.findByOfensivoIsNull();
+
         if (librosErroneosSinResolver.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -86,7 +88,7 @@ public class ComentarioReportadoController {
         Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
 
         if (comentario == null || usuario == null) {
-            return ResponseEntity.badRequest().build(); // O cualquier otro manejo de error
+            return ResponseEntity.badRequest().build();
         }
 
         ComentarioReportado nuevoReporte = new ComentarioReportado();
@@ -102,6 +104,7 @@ public class ComentarioReportadoController {
         reportadoRepositorio.save(nuevoReporte);
         return ResponseEntity.ok("Comentario reportado creado correctamente");
     }
+
 
     /**
     * Actualiza un comentario reportado con nueva información.
@@ -124,7 +127,8 @@ public class ComentarioReportadoController {
 
         // Actualizar los campos del reporte
         comentarioReportado.setOfensivo(comentarioReportadoNuevo.getOfensivo());
-        comentarioReportado.setAuditUpdated(LocalDateTime.now()); // Actualizar la fecha de actualización
+        // Actualizar la fecha de actualización
+        comentarioReportado.setAuditUpdated(LocalDateTime.now());
 		comentarioReportado.setAuditUpdater(String.valueOf(usuario.getId()));
 
         // Guardar los cambios en la base de datos

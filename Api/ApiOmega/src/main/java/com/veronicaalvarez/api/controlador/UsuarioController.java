@@ -32,6 +32,7 @@ public class UsuarioController {
 		this.usuarioRepositorio = usuarioRepositorio;
 	}
 
+
 	/**
 	 * Obtiene todos los usuarios.
 	 * @return ResponseEntity con la lista de usuarios o un 404 NOT FOUND si no se encuentran usuarios.
@@ -59,7 +60,8 @@ public class UsuarioController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Credenciales inválidas");
 		}
 
-		/*
+		/* USANDO ENCRIPTACIÓN
+
 		Seguridad seguridad = new Seguridad();
 		Map<String, Object> map = new HashMap<>();
 		map.put("usuario", usuario);
@@ -68,7 +70,6 @@ public class UsuarioController {
 
 		return ResponseEntity.ok(usuario);
 	}
-
 
 
 	/**
@@ -87,6 +88,12 @@ public class UsuarioController {
 	}
 
 
+	/**
+	 * Busca un usuario por su dirección de correo electrónico.
+	 *
+	 * @param correo La dirección de correo electrónico del usuario a buscar.
+	 * @return ResponseEntity<Usuario> Un ResponseEntity que contiene el usuario encontrado o un estado de "no encontrado".
+	 */
 	@GetMapping("/usuarios/correo/{correo}")
 	public ResponseEntity<Usuario> buscarUsuarioPorCorreo(@PathVariable String correo) {
 		Usuario usuario = usuarioRepositorio.findByCorreo(correo);
@@ -95,6 +102,7 @@ public class UsuarioController {
 		}
 		return ResponseEntity.notFound().build();
 	}
+
 
 	/**
 	 * Crea un nuevo usuario.
@@ -180,7 +188,8 @@ public class UsuarioController {
 		boolean existeUsuario = usuarioRepositorio.existsById(id);
 
 		if (!existeUsuario) {
-			return ResponseEntity.notFound().build(); // Si el usuario no existe, devolver una respuesta de estado 404 (no encontrado)
+			// Si el usuario no existe, devolver una respuesta de estado 404 (no encontrado)
+			return ResponseEntity.notFound().build();
 		}
 
 		// Eliminar el usuario de la base de datos
@@ -204,7 +213,8 @@ public class UsuarioController {
 
 		// Verificar si se encontró un usuario
 		if (usuario == null) {
-			return ResponseEntity.notFound().build(); // Si no se encuentra el usuario, devolver una respuesta de estado 404 (no encontrado)
+			// Si no se encuentra el usuario, devolver una respuesta de estado 404 (no encontrado)
+			return ResponseEntity.notFound().build();
 		}
 
 		// Verificar la contraseña
@@ -218,6 +228,14 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuario);
 	}
 
+
+	/**
+	 * Modifica la configuración de privacidad de un usuario.
+	 *
+	 * @param id El ID del usuario cuya privacidad se va a modificar.
+	 * @param publico Booleano que indica si el perfil del usuario es público o no.
+	 * @return ResponseEntity<?> Un ResponseEntity que indica el resultado de la operación.
+	 */
 	@PutMapping("privacidad/{idUsuario}")
 	public ResponseEntity<?> modificarPrivacidad(@PathVariable("idUsuario") int id, @RequestParam("publico") boolean publico) {
 		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);

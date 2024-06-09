@@ -1,42 +1,37 @@
 package com.veronicaalvarez.api.repositorio;
 
-import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.veronicaalvarez.api.modelo.Usuario;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-
-//Es un integer, debido a que el id es un int
+/**
+ * Repositorio para la entidad Usuario.
+ */
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
+
+    /**
+     * Busca un usuario por su alias o correo electrónico.
+     *
+     * @param alias El alias del usuario a buscar.
+     * @param correo El correo electrónico del usuario a buscar.
+     * @return Usuario El usuario encontrado que coincida con el alias o correo electrónico especificado.
+     */
     Usuario findByAliasOrCorreo(String alias, String correo);
+
+    /**
+     * Busca un usuario por su alias.
+     *
+     * @param alias El alias del usuario a buscar.
+     * @return Usuario El usuario encontrado que coincida con el alias especificado.
+     */
     Usuario findByAlias(String alias);
+
+    /**
+     * Busca un usuario por su correo electrónico.
+     *
+     * @param correo El correo electrónico del usuario a buscar.
+     * @return Usuario El usuario encontrado que coincida con el correo electrónico especificado.
+     */
     Usuario findByCorreo(String correo);;
 
-
-    @Modifying
-    @Transactional
-    @Query(value = "INSERT INTO usuarios (audit_created, audit_creator, audit_updated, audit_updater, alias, nombre, apellidos, fecha_nacimiento, correo, clave, telefono, tipo, publico) " +
-            "VALUES (:auditCreated, :auditCreator, :auditUpdated, :auditUpdater, :alias, :nombre, :apellidos, :fechaNacimiento, :correo, :clave, :telefono, :tipo, :publico)", nativeQuery = true)
-    void insertUsuario(
-            @Param("auditCreated") LocalDateTime auditCreated,
-            @Param("auditCreator") String auditCreator,
-            @Param("auditUpdated") LocalDateTime auditUpdated,
-            @Param("auditUpdater") String auditUpdater,
-            @Param("alias") String alias,
-            @Param("nombre") String nombre,
-            @Param("apellidos") String apellidos,
-            @Param("fechaNacimiento") LocalDate fechaNacimiento,
-            @Param("correo") String correo,
-            @Param("clave") String clave,
-            @Param("telefono") String telefono,
-            @Param("tipo") int tipo,
-            @Param("publico") Boolean publico
-    );
 }
 

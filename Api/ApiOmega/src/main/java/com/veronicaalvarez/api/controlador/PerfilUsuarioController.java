@@ -22,16 +22,6 @@ public class PerfilUsuarioController {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
-   /* @GetMapping
-    public ResponseEntity<?> obtenerPerfilesUsuarios() {
-        List<PerfilUsuario> perfiles = perfilUsuarioRepository.findAll();
-
-        if (perfiles.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(perfiles);
-    }*/
-
 
     /**
      * Obtiene el perfil de un usuario por su ID.

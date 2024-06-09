@@ -15,6 +15,7 @@ import com.veronicaalvarez.api.modelo.Libro;
  * Además, se definen dos métodos personalizados para encontrar libros por género o título.
  */
 public interface LibroRepositorio extends JpaRepository<Libro, Integer>{
+
     /**
      * Encuentra todos los libros que pertenezcan a un género específico.
      * 

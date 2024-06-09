@@ -52,10 +52,10 @@ public class LibrosBibliotecaController {
             // Crear una nueva instancia de LibrosBiblioteca
             LibrosBiblioteca librosBiblioteca = new LibrosBiblioteca();
             Biblioteca biblioteca = new Biblioteca();
-            biblioteca.setId(bibliotecaId); // Suponiendo que ya tienes un método para buscar la biblioteca por ID
+            biblioteca.setId(bibliotecaId);
             librosBiblioteca.setBiblioteca(biblioteca);
             Libro libro = new Libro();
-            libro.setId(libroId); // Suponiendo que ya tienes un método para buscar el libro por ID
+            libro.setId(libroId);
             librosBiblioteca.setLibro(libro);
 
             // Guardar la nueva instancia en la base de datos
@@ -87,7 +87,8 @@ public class LibrosBibliotecaController {
                 librosBibliotecaRepository.delete(librosBibliotecaOptional.get());
                 return ResponseEntity.ok("Libro eliminado de la biblioteca exitosamente.");
             } else {
-                return ResponseEntity.notFound().build(); // Si el libro no existe en la biblioteca, devolver una respuesta 404
+                // Si el libro no existe en la biblioteca, devolver una respuesta 404
+                return ResponseEntity.notFound().build();
             }
         } catch (Exception e) {
             // Si ocurre un error, devuelve una respuesta de error al cliente
@@ -111,17 +112,18 @@ public class LibrosBibliotecaController {
             // Eliminar el libro de la biblioteca original
             Optional<LibrosBiblioteca> libroEnBibliotecaOrigenOptional = librosBibliotecaRepository.findByBibliotecaIdAndLibroId(bibliotecaOrigenId, libroId);
             if (!libroEnBibliotecaOrigenOptional.isPresent()) {
-                return ResponseEntity.notFound().build(); // Si el libro no existe en la biblioteca original, devolver una respuesta 404 (No encontrado)
+                // Si el libro no existe en la biblioteca original, devolver una respuesta 404 (No encontrado)
+                return ResponseEntity.notFound().build();
             }
             librosBibliotecaRepository.delete(libroEnBibliotecaOrigenOptional.get());
 
             // Agregar el libro a la nueva biblioteca
             LibrosBiblioteca nuevoLibroEnBibliotecaDestino = new LibrosBiblioteca();
             Biblioteca bibliotecaDestino = new Biblioteca();
-            bibliotecaDestino.setId(bibliotecaDestinoId); // Suponiendo que ya tienes un método para buscar la biblioteca por ID
+            bibliotecaDestino.setId(bibliotecaDestinoId);
             nuevoLibroEnBibliotecaDestino.setBiblioteca(bibliotecaDestino);
             Libro libro = new Libro();
-            libro.setId(libroId); // Suponiendo que ya tienes un método para buscar el libro por ID
+            libro.setId(libroId);
             nuevoLibroEnBibliotecaDestino.setLibro(libro);
             librosBibliotecaRepository.save(nuevoLibroEnBibliotecaDestino);
 

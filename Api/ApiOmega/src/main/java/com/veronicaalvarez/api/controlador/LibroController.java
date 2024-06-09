@@ -48,6 +48,7 @@ public class LibroController {
         return ResponseEntity.ok(libros);
     }
 
+
     /**
      * Obtiene una lista de libros aleatorios.
      * @return ResponseEntity con una lista de hasta 20 libros aleatorios o un 404 NOT FOUND si no hay libros.
@@ -160,7 +161,6 @@ public class LibroController {
             return ResponseEntity.notFound().build();
         }
 
-
         // Actualizar los campos del libro existente con los datos del libro actualizado
         libro.setTitulo(libroActualizado.getTitulo());
         libro.setAutor(libroActualizado.getAutor());
@@ -177,8 +177,8 @@ public class LibroController {
          libroRepositorio.save(libro);
 
         return ResponseEntity.ok("El libro se ha modificado correctamente");
-
     }
+
 
     /**
      * Elimina un libro por su ID.

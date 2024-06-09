@@ -33,6 +33,7 @@ public class ValoracionLibroController {
         return ResponseEntity.ok(valoraciones);
     }
 
+
     /**
      * Obtiene la valoración total de un libro por su ID.
      * @param idLibro El ID del libro.
@@ -76,4 +77,5 @@ public class ValoracionLibroController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar la valoración del libro. Por favor, inténtalo de nuevo más tarde.");
         }
     }
+
 }
