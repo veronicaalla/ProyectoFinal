@@ -34,9 +34,7 @@ public class GenerosUsuarioController {
 
     // Nuevo método para asociar géneros a un usuario
     @PostMapping("/asociarGeneros")
-    public ResponseEntity<Void> asociarGenerosAUsuario(@RequestBody Map<String, Object> payload) {
-        int idUsuario = (Integer) payload.get("idUsuario");
-        List<Integer> idGeneros = (List<Integer>) payload.get("idGeneros");
+    public ResponseEntity<Void> asociarGenerosAUsuario(@RequestParam("idUsuario") int idUsuario, @RequestParam("idGeneros") List<Integer> idGeneros) {
 
         for (Integer idGenero : idGeneros) {
             GeneroUsuario generoUsuario = new GeneroUsuario();

@@ -2,6 +2,7 @@ package es.veronica.alvarez.omega.DataApi
 
 import android.content.Context
 import android.content.res.Resources
+import com.google.gson.GsonBuilder
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -45,7 +46,7 @@ class RetrofitBuilder {
     }
 
     //StringConverterFactory.create()
-
+    val gson = GsonBuilder().create()
     fun build(context: Context): Retrofit =
         Retrofit.Builder()
             .baseUrl(getApiEndpoint(context))

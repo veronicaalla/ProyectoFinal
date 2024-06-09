@@ -230,5 +230,8 @@ interface ApiService {
 
 
     @POST("generosUsuario/asociarGeneros")
-    fun asociarGenerosAUsuario(@Body payload: Map<String, Any>): Call<Void>
+    fun asociarGenerosAUsuario(
+        @Query("idUsuario") idUsuario: Int,
+        @Query("idGeneros") idGeneros: List<Int>
+    ): Call<Void>
 }

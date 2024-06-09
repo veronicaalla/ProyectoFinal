@@ -38,11 +38,6 @@ class RegistrationNameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //region Mostramos el calendario en el campo de fecha de nacimiento
-        binding.txtFechaNacimiento.setOnClickListener {
-            mostrarDatePickerDialog()
-        }
-        //endregion
 
         binding.btnSiguiente.setOnClickListener {
 
@@ -53,10 +48,6 @@ class RegistrationNameFragment : Fragment() {
                 viewModelCompartido.setNombre(binding.txtNombre.text.toString())
                 viewModelCompartido.setApellidos(binding.txtApellidos.text.toString())
                 viewModelCompartido.setEmail(binding.txtEmail.text.toString())
-
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd") // Ajusta el patrón según tu formato
-                var fechaNacimiento = LocalDate.parse(binding.txtFechaNacimiento.text.toString(), formatter)
-                viewModelCompartido.setFecha(fechaNacimiento)
 
                 // seguimos con el registro
                 view.findNavController()
@@ -76,10 +67,6 @@ class RegistrationNameFragment : Fragment() {
             return false
         }
 
-        if (binding.txtFechaNacimiento.text.isEmpty()){
-            Toast.makeText(context, "Introduce la fecha de nacimiento", Toast.LENGTH_LONG).show()
-            return false
-        }
 
         var email = binding.txtEmail.text.toString()
         if (email.isEmpty()) {
@@ -92,36 +79,6 @@ class RegistrationNameFragment : Fragment() {
             }
         }
         return true
-    }
-
-    private fun mostrarDatePickerDialog() {
-        val datePicker = DatePickerDialog(
-            requireContext(),
-            { _, year, month, dayOfMonth ->
-                calendar.set(year, month, dayOfMonth)
-                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                binding.txtFechaNacimiento.setText(sdf.format(calendar.time))
-
-
-                val minimumAgeDate = Calendar.getInstance()
-                minimumAgeDate.add(Calendar.YEAR, -14)
-
-                try {
-                    val selectedDate = sdf.parse(binding.txtFechaNacimiento.text.toString())
-                    if (selectedDate.after(minimumAgeDate.time)) {
-                        Toast.makeText(context, "Debes tener al menos 14 años", Toast.LENGTH_SHORT).show()
-                        binding.txtFechaNacimiento.setText("")
-                    }
-                } catch (e: Exception) {
-                    Toast.makeText(context, "Ingrese una fecha valida", Toast.LENGTH_SHORT).show()
-                }
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        )
-        datePicker.show()
-
     }
 
     private fun isValidEmail(email:String): Boolean {

@@ -82,7 +82,11 @@
         android:id="@+id/literarySelectionFragment"
         android:name="es.veronica.alvarez.omega.CreateUser.LiterarySelectionFragment"
         android:label="fragment_literary_selection"
-        tools:layout="@layout/fragment_literary_selection" />
+        tools:layout="@layout/fragment_literary_selection" >
+        <action
+            android:id="@+id/action_literarySelectionFragment_to_startAppFragment"
+            app:destination="@id/startAppFragment" />
+    </fragment>
     <fragment
         android:id="@+id/startAppFragment"
         android:name="es.veronica.alvarez.omega.StartAppFragment"

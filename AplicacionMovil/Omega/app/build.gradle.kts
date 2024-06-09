@@ -41,9 +41,9 @@ android {
 }
 
 dependencies {
-    implementation ("com.fasterxml.jackson.core:jackson-databind:2.15.3")
-    implementation ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3")
-    implementation ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.3")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
 
     implementation("androidx.core:core-ktx:1.13.1")
@@ -56,28 +56,32 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //---------------- Fragments & Navegacion -------------------
-    implementation ("androidx.navigation:navigation-fragment:2.7.7")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
-    implementation ("androidx.fragment:fragment-ktx:1.7.1")
+    implementation("androidx.navigation:navigation-fragment:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.fragment:fragment-ktx:1.7.1")
 
     //Retrofit2
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.google.code.gson:gson:2.10.1")
-    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
 
 
     // LiveData
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
-    implementation ("androidx.activity:activity-ktx:1.9.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
+    implementation("androidx.activity:activity-ktx:1.9.0")
     // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.0")
 
 
     //-------- IMAGENES -------------
-    implementation ("com.squareup.picasso:picasso:2.8")
+    implementation("com.squareup.picasso:picasso:2.8")
     implementation("io.coil-kt:coil:1.2.2")
 
+    //------- RECUPERACIÓN CONTRASEÑAS ---------
 
+    implementation("com.sun.mail:android-mail:1.6.2") {
+        exclude(group = "javax.mail", module = "javax.mail")
+    }
 }

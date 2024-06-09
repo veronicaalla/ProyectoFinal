@@ -1,6 +1,8 @@
 package es.veronica.alvarez.omega.CreateUser
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +15,7 @@ import androidx.navigation.findNavController
 import es.veronica.alvarez.omega.DataApi.Api
 import es.veronica.alvarez.omega.Model.UsuarioResponse
 import es.veronica.alvarez.omega.R
+import es.veronica.alvarez.omega.UserPreferences
 import es.veronica.alvarez.omega.databinding.FragmentPasswordRegistrationBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -76,29 +79,44 @@ class PasswordRegistrationFragment : Fragment() {
 
 
 
-        existeUsuario(usuario.alias)
+        usuario.alias?.let { existeUsuario(it) }
 
 
 
     }
 
-    private fun existeUsuario(alias: String?) {
-        context?.let { Api.initialize(it.applicationContext) }
-        Api.retrofitService.buscarUsuarioPorUser(alias!!).enqueue(object : Callback<UsuarioResponse> {
-            override fun onResponse(call: Call<UsuarioResponse>, response: Response<UsuarioResponse>) {
+    private fun existeUsuario(alias: String) {
+        // Crear un Handler
+        val handler = Handler(Looper.getMainLooper())
 
-                val usuario = response.body()
-                Log.d("API Response", "Usuario: $usuario")
-                Toast.makeText(requireContext(), "Usuario creado correctamente", Toast.LENGTH_SHORT).show()
-                // Navegar a la siguiente pantalla si es necesario
-                view?.findNavController()?.navigate(R.id.action_passwordRegistrationFragment_to_literarySelectionFragment)
-            }
+        // Debemos esperar a que se cree el usuario
+        handler.postDelayed({
+            // El código dentro de esta función se ejecutará después de 10 segundos
+            context?.let { Api.initialize(it.applicationContext) }
+            Api.retrofitService.buscarUsuarioPorUser(alias).enqueue(object : Callback<UsuarioResponse> {
+                override fun onResponse(call: Call<UsuarioResponse>, response: Response<UsuarioResponse>) {
+                    val usuario = response.body()
+                    Log.d("API Response", "Usuario: $usuario")
+                    Toast.makeText(requireContext(), "Usuario creado correctamente", Toast.LENGTH_SHORT).show()
 
-            override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
-                Toast.makeText(requireContext(), "Error al crear el usuario", Toast.LENGTH_SHORT).show()
-            }
-        })
+                    //Le asignamos el id al userPreferences
+                    var userPreferences = UserPreferences(requireContext())
+                    if (usuario != null) {
+                        userPreferences.userId = usuario.id!!
+                        userPreferences._username = usuario.alias
+                        userPreferences._privacidad = usuario.publico
+                    }
 
+
+                    // Navegar a la siguiente pantalla si es necesario
+                    view?.findNavController()?.navigate(R.id.action_passwordRegistrationFragment_to_literarySelectionFragment)
+                }
+
+                override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
+                    Toast.makeText(requireContext(), "Error al crear el usuario", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }, 10000) // 10000 ms = 10 segundos
     }
 
 

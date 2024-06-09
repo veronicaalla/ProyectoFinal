@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.veronica.alvarez.omega.DataApi.Api
 import es.veronica.alvarez.omega.Model.GeneroResponse
+import es.veronica.alvarez.omega.R
 import es.veronica.alvarez.omega.RecyclerBook.BookAdapter
 import es.veronica.alvarez.omega.RecyclerFavorito.FavoritoAdapter
 import es.veronica.alvarez.omega.UserPreferences
@@ -39,10 +42,29 @@ class LiterarySelectionFragment : Fragment() {
 
         binding.btnGuardar.setOnClickListener {
             val userPreferences = UserPreferences(requireContext())
-            val lista = userPreferences.lista
-            var idUsuario = userPreferences.userId
+            val lista = userPreferences.generosFavoritos.toList()
+            val idUsuario = userPreferences.userId
 
-           Log.i("Generos usuario", lista.value.toString())
+            /* Construct the payload explicitly
+            val payload = mutableMapOf<String, Any>()
+            payload["idUsuario"] = idUsuario
+            payload["idGeneros"] = lista*/
+
+            Api.retrofitService.asociarGenerosAUsuario(idUsuario, lista).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(requireContext(), "Géneros asociados correctamente!", Toast.LENGTH_SHORT).show()
+                        // Navegar a la siguiente pantalla si es necesario
+                        view?.findNavController()?.navigate(R.id.action_literarySelectionFragment_to_startAppFragment)
+                    } else {
+                        Toast.makeText(requireContext(), "Hubo un fallo en la solicutud", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
 
     }
@@ -83,23 +105,3 @@ class LiterarySelectionFragment : Fragment() {
     }
 }
 
-/*
-val payload = mapOf(
-    "idUsuario" to 123,  // reemplaza 123 con el ID de usuario real
-    "idGeneros" to listOf(1, 2, 3)  // reemplaza estos ID de géneros con los reales
-)
-
-RetrofitClient.instance.asociarGenerosAUsuario(payload).enqueue(object : Callback<Void> {
-    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-        if (response.isSuccessful) {
-            println("Géneros asociados correctamente!")
-        } else {
-            println("Falló la solicitud: ${response.errorBody()?.string()}")
-        }
-    }
-
-    override fun onFailure(call: Call<Void>, t: Throwable) {
-        println("Error: ${t.message}")
-    }
-})
-* */

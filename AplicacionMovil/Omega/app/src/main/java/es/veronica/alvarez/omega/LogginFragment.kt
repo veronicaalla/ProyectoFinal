@@ -14,7 +14,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
+import java.util.Properties
 
+import android.os.AsyncTask
+import android.widget.Toast
+import java.util.*
+import javax.mail.*
+import javax.mail.internet.InternetAddress
+import javax.mail.internet.MimeMessage
 
 class LogginFragment : Fragment() {
 
@@ -50,8 +57,9 @@ class LogginFragment : Fragment() {
 
         //region CONTRASEÑA OLVIDADA
         binding.txtOlvidoPassword.setOnClickListener {
-            view.findNavController()
-                .navigate(R.id.action_logginFragment_to_passwordRecoveryFragment)
+            sendEmail()
+            /*view.findNavController()
+                .navigate(R.id.action_logginFragment_to_passwordRecoveryFragment)*/
         }
 
         //endregion
@@ -64,6 +72,40 @@ class LogginFragment : Fragment() {
 
         //endregion
 
+    }
+
+    // Función para enviar correo electrónico
+    fun sendEmail() {
+        val username = "omegaconfia@gmail.com" // Cambiar al correo electrónico de la empresa
+        val password = "33xc3#^0E^dqz" // Cambiar a tu contraseña de aplicación
+
+        val props = Properties()
+        props["mail.smtp.host"] = "smtp.gmail.com"
+        props["mail.smtp.socketFactory.port"] = "465"
+        props["mail.smtp.socketFactory.class"] = "javax.net.ssl.SSLSocketFactory"
+        props["mail.smtp.auth"] = "true"
+        props["mail.smtp.port"] = "465"
+
+        val session = Session.getDefaultInstance(props,
+            object : javax.mail.Authenticator() {
+                override fun getPasswordAuthentication(): PasswordAuthentication {
+                    return PasswordAuthentication(username, password)
+                }
+            })
+
+        try {
+            val message = MimeMessage(session)
+            message.setFrom(InternetAddress(username))
+            message.addRecipient(Message.RecipientType.TO, InternetAddress("veronicaalla2003@gmail.com"))
+            message.subject = "Recuperacion contraseña"
+            message.setText("Buenos Pol!\n\nHas solicitado recuperar la contraseña, su codigo de recuperacion es 23424\nSi no has sido tu, pongase en contacto con este correo omegaconfia@gmail.com\n\nUn saludo,\nOMEGA")
+
+            Transport.send(message)
+
+            println("Correo electrónico enviado correctamente")
+        } catch (e: MessagingException) {
+            e.printStackTrace()
+        }
     }
 
     private fun comprobarCredenciales() {
