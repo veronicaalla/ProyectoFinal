@@ -139,9 +139,11 @@ public class UsuarioController {
 	@PutMapping("/modificar/{id}")
 	public ResponseEntity<?> modificarUsuario(@PathVariable int id, @RequestBody Usuario usuarioModificado) {
 
-		Usuario usuarioExistente = usuarioRepositorio.findById(id).orElse(null);
+		Usuario usuarioExistente = usuarioRepositorio.findById(usuarioModificado.getId()).orElse(null);
 
-		if (usuarioExistente == null) {
+		//Necesitamos ver si el usuario que ha realizado la modificacion existe
+		Usuario usuModif = usuarioRepositorio.findById(id).orElse(null);
+		if (usuarioExistente == null || usuModif == null) {
 			return ResponseEntity.notFound().build();
 		}
 
@@ -158,7 +160,7 @@ public class UsuarioController {
 
 		//Actualizamos los campos de auditoria
 		usuarioExistente.setAuditUpdated(LocalDateTime.now());
-		//Se debe adjudicar al hacerse la mod -> usuarioExistente.setAuditUpdater(String.valueOf(usuarioModificado.getId()));
+		usuarioExistente.setAuditUpdater(String.valueOf(id));
 
 		// Guardar los cambios en la base de datos
 		usuarioRepositorio.save(usuarioExistente);
