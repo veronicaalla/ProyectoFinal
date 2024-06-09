@@ -356,7 +356,7 @@ namespace Omega.ApiService
         /// <returns>Una lista de objetos Genero.</returns>
         public async Task<List<Genero>> ObtenerGeneros()
         {
-            var url = $"{rutaBasica}generos";
+            var url = $"{rutaBasica}generos/";
             HttpResponseMessage response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
 

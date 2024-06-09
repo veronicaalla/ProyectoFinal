@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnFiltrado = new System.Windows.Forms.Button();
-            this.txtFiltrado = new System.Windows.Forms.TextBox();
             this.lvwLibros = new System.Windows.Forms.ListView();
             this.chLibro = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chUsuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -39,27 +37,11 @@
             this.cmsVer = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.cmsLibros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnFiltrado
-            // 
-            this.btnFiltrado.Location = new System.Drawing.Point(691, 43);
-            this.btnFiltrado.Name = "btnFiltrado";
-            this.btnFiltrado.Size = new System.Drawing.Size(137, 23);
-            this.btnFiltrado.TabIndex = 15;
-            this.btnFiltrado.Text = "Filtrado";
-            this.btnFiltrado.UseVisualStyleBackColor = true;
-            this.btnFiltrado.Click += new System.EventHandler(this.btnFiltrado_Click);
-            // 
-            // txtFiltrado
-            // 
-            this.txtFiltrado.Location = new System.Drawing.Point(207, 46);
-            this.txtFiltrado.Name = "txtFiltrado";
-            this.txtFiltrado.Size = new System.Drawing.Size(469, 20);
-            this.txtFiltrado.TabIndex = 14;
             // 
             // lvwLibros
             // 
@@ -71,10 +53,10 @@
             this.lvwLibros.FullRowSelect = true;
             this.lvwLibros.GridLines = true;
             this.lvwLibros.HideSelection = false;
-            this.lvwLibros.Location = new System.Drawing.Point(0, 123);
+            this.lvwLibros.Location = new System.Drawing.Point(0, 85);
             this.lvwLibros.MultiSelect = false;
             this.lvwLibros.Name = "lvwLibros";
-            this.lvwLibros.Size = new System.Drawing.Size(1027, 377);
+            this.lvwLibros.Size = new System.Drawing.Size(1027, 415);
             this.lvwLibros.TabIndex = 13;
             this.lvwLibros.UseCompatibleStateImageBehavior = false;
             this.lvwLibros.View = System.Windows.Forms.View.Details;
@@ -115,7 +97,7 @@
             this.pictureBox2.Image = global::Omega.Properties.Resources.libros;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(146, 117);
+            this.pictureBox2.Size = new System.Drawing.Size(115, 79);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 17;
             this.pictureBox2.TabStop = false;
@@ -123,22 +105,31 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Omega.Properties.Resources.Logo_Omega_PC;
-            this.pictureBox1.Location = new System.Drawing.Point(881, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(895, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(146, 117);
+            this.pictureBox1.Size = new System.Drawing.Size(132, 79);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(382, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(233, 33);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Libros erroneos";
             // 
             // ListOfReportedBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1027, 500);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnFiltrado);
-            this.Controls.Add(this.txtFiltrado);
             this.Controls.Add(this.lvwLibros);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ListOfReportedBooks";
@@ -154,8 +145,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnFiltrado;
-        private System.Windows.Forms.TextBox txtFiltrado;
         private System.Windows.Forms.ListView lvwLibros;
         private System.Windows.Forms.ContextMenuStrip cmsLibros;
         private System.Windows.Forms.ToolStripMenuItem cmsVer;
@@ -163,5 +152,6 @@
         private System.Windows.Forms.ColumnHeader chUsuario;
         private System.Windows.Forms.ColumnHeader chResuelto;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label1;
     }
 }

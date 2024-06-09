@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnFiltrado = new System.Windows.Forms.Button();
-            this.txtFiltrado = new System.Windows.Forms.TextBox();
             this.lvwComentarios = new System.Windows.Forms.ListView();
             this.chUsuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chComentario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -39,27 +37,11 @@
             this.cmsVer = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.cmsComentarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnFiltrado
-            // 
-            this.btnFiltrado.Location = new System.Drawing.Point(680, 49);
-            this.btnFiltrado.Name = "btnFiltrado";
-            this.btnFiltrado.Size = new System.Drawing.Size(137, 23);
-            this.btnFiltrado.TabIndex = 10;
-            this.btnFiltrado.Text = "Filtrado";
-            this.btnFiltrado.UseVisualStyleBackColor = true;
-            this.btnFiltrado.Click += new System.EventHandler(this.btnFiltrado_Click);
-            // 
-            // txtFiltrado
-            // 
-            this.txtFiltrado.Location = new System.Drawing.Point(230, 52);
-            this.txtFiltrado.Name = "txtFiltrado";
-            this.txtFiltrado.Size = new System.Drawing.Size(435, 20);
-            this.txtFiltrado.TabIndex = 9;
             // 
             // lvwComentarios
             // 
@@ -72,10 +54,10 @@
             this.lvwComentarios.FullRowSelect = true;
             this.lvwComentarios.GridLines = true;
             this.lvwComentarios.HideSelection = false;
-            this.lvwComentarios.Location = new System.Drawing.Point(0, 120);
+            this.lvwComentarios.Location = new System.Drawing.Point(0, 84);
             this.lvwComentarios.MultiSelect = false;
             this.lvwComentarios.Name = "lvwComentarios";
-            this.lvwComentarios.Size = new System.Drawing.Size(973, 403);
+            this.lvwComentarios.Size = new System.Drawing.Size(973, 439);
             this.lvwComentarios.TabIndex = 8;
             this.lvwComentarios.UseCompatibleStateImageBehavior = false;
             this.lvwComentarios.View = System.Windows.Forms.View.Details;
@@ -114,9 +96,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Omega.Properties.Resources.Logo_Omega_PC;
-            this.pictureBox1.Location = new System.Drawing.Point(837, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(861, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(136, 112);
+            this.pictureBox1.Size = new System.Drawing.Size(112, 84);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
@@ -124,22 +106,31 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Omega.Properties.Resources.comentarios;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 2);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(136, 112);
+            this.pictureBox2.Size = new System.Drawing.Size(98, 66);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(300, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(334, 33);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Comentarios ofensivos";
             // 
             // ListOfReportedCommets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(973, 523);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnFiltrado);
-            this.Controls.Add(this.txtFiltrado);
             this.Controls.Add(this.lvwComentarios);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ListOfReportedCommets";
@@ -153,9 +144,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnFiltrado;
-        private System.Windows.Forms.TextBox txtFiltrado;
         private System.Windows.Forms.ListView lvwComentarios;
         private System.Windows.Forms.ColumnHeader chUsuario;
         private System.Windows.Forms.ColumnHeader chComentario;
@@ -164,5 +152,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsComentarios;
         private System.Windows.Forms.ToolStripMenuItem cmsVer;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label1;
     }
 }

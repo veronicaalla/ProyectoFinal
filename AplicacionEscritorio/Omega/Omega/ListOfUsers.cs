@@ -112,11 +112,11 @@ namespace Omega
             actualizarLista();
         }
 
-        private void btnFiltrado_Click(object sender, EventArgs e)
+        private void btnFiltrado_ClickAsync(object sender, EventArgs e)
         {
-
+            
         }
-
+            
 
         // ---------------- Métodos auxiliares ------------
 

@@ -43,10 +43,9 @@
             this.cmsNuevo = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsVer = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsEliminar = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtFiltrado = new System.Windows.Forms.TextBox();
-            this.btnFiltrado = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.cmsUsuarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -92,10 +91,10 @@
             this.lvwUsuarios.FullRowSelect = true;
             this.lvwUsuarios.GridLines = true;
             this.lvwUsuarios.HideSelection = false;
-            this.lvwUsuarios.Location = new System.Drawing.Point(0, 124);
+            this.lvwUsuarios.Location = new System.Drawing.Point(0, 98);
             this.lvwUsuarios.MultiSelect = false;
             this.lvwUsuarios.Name = "lvwUsuarios";
-            this.lvwUsuarios.Size = new System.Drawing.Size(1115, 380);
+            this.lvwUsuarios.Size = new System.Drawing.Size(1115, 406);
             this.lvwUsuarios.TabIndex = 4;
             this.lvwUsuarios.UseCompatibleStateImageBehavior = false;
             this.lvwUsuarios.View = System.Windows.Forms.View.Details;
@@ -162,29 +161,12 @@
             this.cmsEliminar.Text = "Eliminar";
             this.cmsEliminar.Click += new System.EventHandler(this.cmsEliminar_Click);
             // 
-            // txtFiltrado
-            // 
-            this.txtFiltrado.Location = new System.Drawing.Point(198, 44);
-            this.txtFiltrado.Name = "txtFiltrado";
-            this.txtFiltrado.Size = new System.Drawing.Size(530, 20);
-            this.txtFiltrado.TabIndex = 5;
-            // 
-            // btnFiltrado
-            // 
-            this.btnFiltrado.Location = new System.Drawing.Point(734, 44);
-            this.btnFiltrado.Name = "btnFiltrado";
-            this.btnFiltrado.Size = new System.Drawing.Size(137, 23);
-            this.btnFiltrado.TabIndex = 6;
-            this.btnFiltrado.Text = "Filtrado";
-            this.btnFiltrado.UseVisualStyleBackColor = true;
-            this.btnFiltrado.Click += new System.EventHandler(this.btnFiltrado_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Omega.Properties.Resources.personas;
             this.pictureBox1.Location = new System.Drawing.Point(0, 27);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(178, 91);
+            this.pictureBox1.Size = new System.Drawing.Size(161, 65);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
@@ -192,22 +174,31 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Omega.Properties.Resources.Logo_Omega_PC;
-            this.pictureBox2.Location = new System.Drawing.Point(934, 27);
+            this.pictureBox2.Location = new System.Drawing.Point(973, 27);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(181, 91);
+            this.pictureBox2.Size = new System.Drawing.Size(142, 65);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(474, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(139, 33);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Usuarios";
             // 
             // ListOfUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1115, 504);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.btnFiltrado);
-            this.Controls.Add(this.txtFiltrado);
             this.Controls.Add(this.lvwUsuarios);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -234,13 +225,12 @@
         private System.Windows.Forms.ColumnHeader chCorreo;
         private System.Windows.Forms.ColumnHeader chTelefono;
         private System.Windows.Forms.ColumnHeader chTipoUsuario;
-        private System.Windows.Forms.TextBox txtFiltrado;
-        private System.Windows.Forms.Button btnFiltrado;
         private System.Windows.Forms.ContextMenuStrip cmsUsuarios;
         private System.Windows.Forms.ToolStripMenuItem cmsNuevo;
         private System.Windows.Forms.ToolStripMenuItem cmsVer;
         private System.Windows.Forms.ToolStripMenuItem cmsEliminar;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
     }
 }

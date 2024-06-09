@@ -28,8 +28,12 @@ namespace Omega
         {
             InitializeComponent();
 			controlador = new Controlador();
-            cargarGeneros();
+            //cargarGeneros();
             libro = new Libro();
+            
+
+            // Inicia la carga de géneros de manera asíncrona
+            _ = InitAsync();
         }
 
         /// <summary>
@@ -47,7 +51,9 @@ namespace Omega
             txtDescripcion.Text = libro.descripcion;
 
             //Debemos obtener el genero
-            AsignamosGenero();
+            //AsignamosGenero();
+            // Debemos obtener el género
+            _ = AsignamosGenero();
 
 
             dtpFechaPublicacion.Text = libro.fechaPublicacion.Value.ToString();
@@ -55,9 +61,21 @@ namespace Omega
         }
 
         /// <summary>
+        /// Método para inicializar de manera asíncrona.
+        /// </summary>
+        private async Task InitAsync()
+        {
+            await cargarGeneros();
+            if (libro != null)
+            {
+                await AsignamosGenero();
+            }
+        }
+
+        /// <summary>
         /// Método para asignar el género del libro al ComboBox de género.
         /// </summary>
-        public async void AsignamosGenero()
+        public async Task AsignamosGenero()
         {
             string genero = (await controlador.ObtenerGeneroPorId(libro.genero)).nombre;
             cmbGenero.Text = genero;
@@ -150,7 +168,7 @@ namespace Omega
         /// <summary>
         /// Carga los géneros disponibles en el ComboBox de géneros.
         /// </summary>
-        public async void cargarGeneros()
+        public async Task cargarGeneros()
         {
             List<Genero> generos = await controlador.ObtenerGeneros();
 
