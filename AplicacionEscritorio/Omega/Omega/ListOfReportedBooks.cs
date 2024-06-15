@@ -76,6 +76,8 @@ namespace Omega
                 infoLibro.ShowDialog();
 
             }
+
+            actualizarLista();
         }
 
 

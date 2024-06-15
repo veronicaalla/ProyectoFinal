@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainActivity));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiArchivo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSalir = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,7 +98,7 @@
             // 
             this.tsmiLibrosR.Name = "tsmiLibrosR";
             this.tsmiLibrosR.Size = new System.Drawing.Size(205, 22);
-            this.tsmiLibrosR.Text = "Libros Reportados";
+            this.tsmiLibrosR.Text = "Libros Erroneos";
             this.tsmiLibrosR.Click += new System.EventHandler(this.tsmiLibrosR_Click);
             // 
             // tsmiComentariosR
@@ -144,6 +145,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainActivity";

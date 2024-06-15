@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListOfUsers));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tsmiUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNuevo = new System.Windows.Forms.ToolStripMenuItem();
@@ -202,6 +203,7 @@
             this.Controls.Add(this.lvwUsuarios);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ListOfUsers";
             this.Text = "Mantenimiento de Usuarios";
             this.menuStrip1.ResumeLayout(false);

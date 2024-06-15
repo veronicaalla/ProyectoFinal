@@ -115,7 +115,7 @@ namespace Omega.ApiService
         /// <returns>El contenido de la respuesta de la API si la creación es exitosa; lanza una excepción en caso de error.</returns>
         public async Task<string> CreateUsuarioAsync(Usuario usuario)
         {
-            string url = $"{rutaBasica}usuarios"; // Cambia esto a la URL correcta de tu API
+            string url = $"{rutaBasica}usuarios/crearUsuario"; // Cambia esto a la URL correcta de tu API
 
             var jsonContent = JsonConvert.SerializeObject(usuario);
             var contentString = new StringContent(jsonContent, Encoding.UTF8, "application/json");

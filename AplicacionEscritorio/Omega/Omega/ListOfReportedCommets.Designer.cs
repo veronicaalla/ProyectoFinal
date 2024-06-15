@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListOfReportedCommets));
             this.lvwComentarios = new System.Windows.Forms.ListView();
             this.chUsuario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chComentario = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -133,6 +134,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lvwComentarios);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ListOfReportedCommets";
             this.Text = "Mantenimiento de Comentarios Reportados";
             this.cmsComentarios.ResumeLayout(false);
