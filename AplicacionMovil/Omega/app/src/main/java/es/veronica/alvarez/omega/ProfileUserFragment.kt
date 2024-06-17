@@ -145,7 +145,8 @@ class ProfileUserFragment : Fragment() {
                     }
 
                     override fun onFailure(call: Call<PerfilUsuarioResponse>, t: Throwable) {
-                        Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
+                        Log.i("Error en el servidor", t.message.toString())
+                    //Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
                     }
                 })
         }

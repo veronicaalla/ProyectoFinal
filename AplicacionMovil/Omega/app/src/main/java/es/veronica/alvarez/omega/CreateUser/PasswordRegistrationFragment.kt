@@ -89,11 +89,15 @@ class PasswordRegistrationFragment : Fragment() {
      * Antes de realizarse el método, se espera 10seg para que el usuario se cree de forma exitosa
      */
     private fun existeUsuario(alias: String) {
-        // Crear un Handler
+
+        // Mostrar el ProgressBar
+        binding.progressBar.visibility = View.VISIBLE
         val handler = Handler(Looper.getMainLooper())
 
+        // Crear un Handler
         // Debemos esperar a que se cree el usuario
         handler.postDelayed({
+
             // El código dentro de esta función se ejecutará después de 10 segundos
             context?.let { Api.initialize(it.applicationContext) }
             Api.retrofitService.buscarUsuarioPorUser(alias)
@@ -114,7 +118,7 @@ class PasswordRegistrationFragment : Fragment() {
                             userPreferences._privacidad = usuario.publico
                             userPreferences.isLoggedIn = true
                         }
-
+                        binding.progressBar.visibility = View.GONE
                         // Navegar a la siguiente pantalla si es necesario
                         view?.findNavController()
                             ?.navigate(R.id.action_passwordRegistrationFragment_to_literarySelectionFragment)

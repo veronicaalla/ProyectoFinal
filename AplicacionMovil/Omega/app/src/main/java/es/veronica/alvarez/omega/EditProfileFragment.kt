@@ -1,6 +1,7 @@
 package es.veronica.alvarez.omega
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -76,10 +77,19 @@ class EditProfileFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<Any>, t: Throwable) {
-                    Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
+                    Log.i("Error en el servidor", t.message.toString())
+                //Toast.makeText(requireContext(), "Error en el servidor", Toast.LENGTH_LONG).show()
                 }
 
             })
+
+            // Mostrar el ProgressBar
+            binding.progressBar.visibility = View.VISIBLE
+
+            // Ocultar el ProgressBar después de 5 segundos
+            Handler().postDelayed({
+                binding.progressBar.visibility = View.GONE
+            }, 9000) //
             //Volvemos a el perfil
             requireView().findNavController().navigate(R.id.action_editProfileFragment_to_profileUserFragment)
         }
